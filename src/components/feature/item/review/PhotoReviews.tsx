@@ -14,7 +14,7 @@ export default function PhotoReviews({ reviewImages }: { reviewImages: string[] 
         {imagesArray.map((image, index) => (
           <div
             key={index}
-            className={`relative overflow-hidden basis-1/4 ${index === 0 ? 'rounded-l-lg' : ''} ${
+            className={`relative overflow-hidden aspect-square basis-1/4 ${index === 0 ? 'rounded-l-lg' : ''} ${
               index === imagesArray.length - 1 ? 'rounded-r-lg' : ''
             }`}
           >

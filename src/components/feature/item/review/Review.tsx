@@ -36,7 +36,7 @@ export default function Review({ review, itemId }: { review: reviewsType; itemId
       <span className="text-body-xs font-normal text-grayscale-300">
         [하기스] 2023 네이처썸머 팬티형 기저귀 6단계 공용
       </span>
-      <div className="h-[86px] w-[86px] rounded-lg overflow-hidden relative">
+      <div className="aspect-square w-1/4 rounded-lg overflow-hidden relative">
         <Image
           alt="review image"
           // src={image}
