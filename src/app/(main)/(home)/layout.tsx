@@ -1,7 +1,7 @@
 import React from 'react'
 
 import HomeHeader from '@/components/feature/home/HomeHeader'
-import HomeTabs from '@/components/feature/home/homeTabs'
+import HomeTabs from '@/components/feature/home/HomeTabs'
 
 export default function HomeLayout({ children }: { children: React.ReactNode }) {
   return (
