@@ -18,20 +18,3 @@ export async function fetchLogin(body: ILoginParams) {
 
   return await res.json()
 }
-
-export async function fetchAuthenticate() {
-  const res = await fetch(`http://3.36.91.126:8080/login`, {
-    method: 'GET',
-    headers: {
-      ...commonHeader,
-    },
-    // body: JSON.stringify({ redirect_url: 'http://localhost:3000/additional-login' }),
-  })
-
-  if (res.status !== 200) {
-    const errorMsg = await res.text()
-    return { errorMessage: errorMsg }
-  }
-
-  return await res.json()
-}
