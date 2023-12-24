@@ -20,10 +20,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
         <Link className={`${segment === '(search)' ? 'text-brand-primary-500' : 'text-black'}`} href={'/search'}>
           <Search width={'1.5rem'} height={'1.5rem'} className="" fill="transparent" />
         </Link>
-        <Link
-          className={`${segment === '(myPage)' ? 'text-brand-primary-500' : 'text-black'}`}
-          href={'/recommendations'}
-        >
+        <Link className={`${segment === '(myPage)' ? 'text-brand-primary-500' : 'text-black'}`} href={'/myPage'}>
           <User width={'1.5rem'} height={'1.5rem'} fill="transparent" />
         </Link>
       </nav>
