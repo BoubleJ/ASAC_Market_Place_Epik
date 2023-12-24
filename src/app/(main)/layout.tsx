@@ -14,10 +14,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
         <Link className={`${segment === '(home)' ? 'text-brand-primary-500' : 'text-black'}`} href={'/recommendations'}>
           <Home width={'1.5rem'} height={'1.5rem'} fill="transparent" />
         </Link>
-        <Link
-          className={`${segment === '(category)' ? 'text-brand-primary-500' : 'text-black'}`}
-          href={'/recommendations'}
-        >
+        <Link className={`${segment === '(category)' ? 'text-brand-primary-500' : 'text-black'}`} href={'/category'}>
           <Menu width={'1.5rem'} height={'1.5rem'} className="" fill="transparent" />
         </Link>
         <Link className={`${segment === '(search)' ? 'text-brand-primary-500' : 'text-black'}`} href={'/search'}>

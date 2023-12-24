@@ -1,6 +1,6 @@
 import React from 'react'
 
-import HomeTab from './HomeTab'
+import HomeTab from '@/components/feature/home/HomeTab'
 
 const navLinks = [
   { href: '/recommendations', tabLabel: '추천' },
