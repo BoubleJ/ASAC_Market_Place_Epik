@@ -6,6 +6,8 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
+import { fetchLogin } from '@/api/resource/login'
+import { encodeLoginForm } from '@/api/service/login'
 import { Button } from '@/components/ui/button'
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
@@ -18,12 +20,14 @@ export default function LoginForm() {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      userId: '',
+      loginId: '',
       password: '',
     },
   })
-  function onSubmit(data: z.infer<typeof FormSchema>) {
+  async function onSubmit(data: z.infer<typeof FormSchema>) {
     console.log(data)
+    const dd = await fetchLogin(encodeLoginForm(data))
+    console.log(dd)
   }
   return (
     <section className="py-8">
@@ -32,7 +36,7 @@ export default function LoginForm() {
           <div className="space-y-3">
             <FormField
               control={form.control}
-              name="userId"
+              name="loginId"
               render={({ field }) => (
                 <FormItem className="">
                   <FormControl>

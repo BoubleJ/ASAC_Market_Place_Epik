@@ -45,8 +45,12 @@ export default function SignupForm() {
   async function onSubmit(data: z.infer<typeof FormSchema>) {
     console.log(data)
     const res = await fetchSignUp(encodeSignUpForm({ form: data }))
-    const dd = await res.json()
-    console.log(dd)
+    console.log(res)
+    if (res.errorMessage) {
+      openCheckModal(res.errorMessage)
+      return
+    }
+    router.push('/login')
   }
 
   const openCheckModal = (content: string) => {
@@ -61,7 +65,7 @@ export default function SignupForm() {
       openCheckModal(ErrorMsg.vaildate.userid)
       form.clearErrors('userId')
     } else {
-      form.setError('email', { message: '중복된 아이디입니다' }, { shouldFocus: false })
+      form.setError('userId', { message: '중복된 아이디입니다' }, { shouldFocus: false })
     }
   }
 

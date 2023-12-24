@@ -31,7 +31,7 @@ export async function fetchIsEmpty(searchWord: string) {
 }
 
 export async function fetchFilterData(params: string) {
-  const res = await fetch(`${baseURL}/counts?name=${params}`)
+  const res = await fetch(`${baseURL}/search/counts?name=${params}`)
   //localhost:8080/api/search/counts?name=아
 
   if (!res.ok) {

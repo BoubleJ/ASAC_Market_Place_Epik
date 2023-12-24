@@ -44,7 +44,7 @@ export async function fetchSignUp(body: ISignUpPrams) {
   })
 
   if (res.status === 409) {
-    const errorMsg = res.json()
+    const errorMsg = await res.text()
     return { errorMessage: errorMsg }
   }
 

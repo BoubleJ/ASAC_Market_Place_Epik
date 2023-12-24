@@ -1,5 +1,3 @@
-import React from 'react'
-
 import SignupForm from '@/components/feature/signup/signupForm'
 import SignupHeader from '@/components/feature/signup/signupHeader'
 

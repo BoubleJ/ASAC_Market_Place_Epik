@@ -1,8 +1,8 @@
 import React from 'react'
 
 import EventBanner from '@/components/feature/recommendations/EventBanner'
-import LastSale from '@/components/feature/recommendations/lastSale'
-import WeekendSale from '@/components/feature/recommendations/weekendSale'
+import LastSale from '@/components/feature/recommendations/LastSale'
+import WeekendSale from '@/components/feature/recommendations/WeekendSale'
 
 export default function RecommendationsPage() {
   return (
