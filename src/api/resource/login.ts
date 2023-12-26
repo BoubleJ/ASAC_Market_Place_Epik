@@ -34,7 +34,7 @@ export async function fetchVerifyAndUpdateSocialLogin(body: IVerifyAndUpdateSoci
 
 export async function fetchKakaoLogin() {
   const res = await fetch(`/api/oauth/callback/kakao`)
-
+  
   // if (res.status !== 200) {
   //   const errorMsg = await res.json()
   //   return { errorMessage: errorMsg.msg }
