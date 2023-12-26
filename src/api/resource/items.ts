@@ -19,9 +19,7 @@ export async function fetchReviews(itemId: number) {
 export async function fetchHelpfulCount(itemId: number, reviewId: number) {
   const res = await fetch(`${baseURL}/items/reviews/helpful?itemId=${itemId}&reviewId=${reviewId}`, {
     method: 'POST',
-    headers: {
-      ...commonHeader,
-    },
+    headers: commonHeader,
   })
 
   if (!res.ok) {
@@ -34,9 +32,7 @@ export async function fetchHelpfulCount(itemId: number, reviewId: number) {
 export async function fetchLessHelpCount(itemId: number, reviewId: number) {
   const res = await fetch(`${baseURL}/items/reviews/helpless?itemId=${itemId}&reviewId=${reviewId}`, {
     method: 'POST',
-    headers: {
-      ...commonHeader,
-    },
+    headers: commonHeader,
   })
 
   if (!res.ok) {
