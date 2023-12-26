@@ -3,9 +3,9 @@ import { NextRequest, NextResponse } from 'next/server'
 
 // export async function GET(req: NextRequest) {
 //   try {
-//     return NextResponse.redirect(`${process.env.AUTH_LOGIN}`)
+//     return NextResponse.redirect(`${process.env.NEXT_PUBLIC_AUTH_LOGIN}`)
 //   } catch (error) {
-//     return NextResponse.redirect('/recomandations')
+//     return NextResponse.redirect('/login')
 //   }
 // }
 
@@ -15,7 +15,7 @@ export async function POST(req: NextRequest) {
     console.log('req cookie', dd)
 
     const authToken = cookies().get('Authorization')
-    console.log('auth cookie', dd)
+    console.log('auth cookie', authToken)
 
     if (authToken) {
       return NextResponse.redirect(`/login/connect`)
