@@ -5,10 +5,15 @@ import React, { useEffect, useState } from 'react'
 import { fetchCategoryItems } from '@/api/resource/category'
 import CommonProductList from '@/components/common/product/commonProductList'
 
-export default function CategoryItemsList() {
+export default function CategoryItemsList({ categoryName }: { categoryName: string }) {
+  const decodeCategoryName = decodeURIComponent(categoryName).split('-')
+  const mainCategory = decodeCategoryName[0]
+
+  const subCategory = decodeCategoryName[1]
+
   const params = useSearchParams()
-  const subCategory = params.get('sub') || ''
-  const mainCategory = params.get('main') || ''
+  // const subCategory = params.get('sub') || ''
+  // const mainCategory = params.get('main') || ''
   const categoryNameParam = subCategory === '전체보기' ? mainCategory : subCategory
   const [productList, setProductList] = useState([])
 
