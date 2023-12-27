@@ -15,17 +15,19 @@ export default function CategoryItemsList({ categoryName }: { categoryName: stri
   // const subCategory = params.get('sub') || ''
   // const mainCategory = params.get('main') || ''
   const categoryNameParam = subCategory === '전체보기' ? mainCategory : subCategory
+  const brandParams = params.get('브랜드')
+  const priceParams = params.get('가격')
   const [productList, setProductList] = useState([])
 
   useEffect(() => {
-    fetchCategoryItems(categoryNameParam)
+    fetchCategoryItems(categoryNameParam, brandParams, priceParams)
       .then((data) => {
         setProductList(data.items.content)
       })
       .catch((error) => {
         console.error('상품들을 불러오기 실패', error)
       })
-  }, [categoryNameParam])
+  }, [categoryNameParam, brandParams, priceParams])
 
   return (
     <div>
