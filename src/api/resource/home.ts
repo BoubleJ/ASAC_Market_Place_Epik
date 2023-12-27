@@ -5,20 +5,17 @@ export async function fetchBestItemsData(
   brandParams: string | null,
   priceParams: string | null,
 ) {
-  // const res = await fetch(`/dummyData/searchResult.json`)
   const res = await fetch(
-    `${baseURL}/search/complexitem?status=BESTSELLER${categoryParams ? `&categoryName=${categoryParams}` : ''}${
-      brandParams ? `&brand=${brandParams}` : ''
-    }${priceParams ? `&price=${priceParams}` : ''}`,
+    `http://localhost:3000/api/search/complexitem?status=BESTSELLER${
+      categoryParams ? `&categoryName=${categoryParams}` : ''
+    }${brandParams ? `&brand=${brandParams}` : ''}${priceParams ? `&price=${priceParams}` : ''}`,
   )
+
   if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
     throw new Error('Failed to fetch data')
   }
 
-  //filter data with params~
-  const bestItems = await res.json()
-  return bestItems
+  return await res.json()
 }
 
 export async function fetchNewArrivalsData(
@@ -29,7 +26,7 @@ export async function fetchNewArrivalsData(
   // const res = await fetch(`/dummyData/searchResult.json`)
   // const res = await fetch(`${baseURL}/search/complexitem?promotionType=NEW_ARRIVAL`)
   const res = await fetch(
-    `${baseURL}/search/complexitem?promotionType=NEW_ARRIVAL&${
+    `http://localhost:3000/api/search/complexitem?promotionType=NEW_ARRIVAL&${
       categoryParams ? `&categoryName=${categoryParams}` : ''
     }${brandParams ? `&brand=${brandParams}` : ''}${priceParams ? `&price=${priceParams}` : ''}`,
   )
