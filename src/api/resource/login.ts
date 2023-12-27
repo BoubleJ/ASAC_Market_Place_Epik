@@ -1,6 +1,6 @@
 import { commonHeader } from '@/api/util/instance'
 import { baseURL } from '@/api/util/instance'
-import { ILoginParams, IVerifyAndUpdateSocialLoginParams } from '@/types/login'
+import { ILoginParams, ISocialRegisterParams, IVerifyAndUpdateSocialLoginParams } from '@/types/login'
 
 export async function fetchLogin(body: ILoginParams) {
   const res = await fetch(`${baseURL}/members/authenticate`, {
@@ -32,11 +32,17 @@ export async function fetchVerifyAndUpdateSocialLogin(body: IVerifyAndUpdateSoci
   return await res.json()
 }
 
-export async function fetchKakaoLogin() {
-  const res = await fetch(`/api/oauth/callback/kakao`)
-  
-  // if (res.status !== 200) {
-  //   const errorMsg = await res.json()
-  //   return { errorMessage: errorMsg.msg }
-  // }
+export async function fetchSocialRegister(body: ISocialRegisterParams) {
+  const res = await fetch(`${baseURL}/members/socialRegister`, {
+    method: 'POST',
+    headers: commonHeader,
+    body: JSON.stringify(body),
+  })
+
+  if (res.status !== 200) {
+    const errorMsg = await res.json()
+    return { errorMessage: errorMsg.msg }
+  }
+
+  return await res.json()
 }

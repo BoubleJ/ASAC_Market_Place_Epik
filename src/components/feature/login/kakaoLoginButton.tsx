@@ -40,8 +40,6 @@ export default function KakaoLoginButton() {
   const state = useModalState()
 
   const handleKakaoLogin = async () => {
-    // fetchKakaoLogin()
-
     window.location.href = `${process.env.NEXT_PUBLIC_AUTH_LOGIN}`
     // state.setModal(<TestModal />)
     // state.modalRef.current?.showModal()
