@@ -8,6 +8,12 @@ export async function fetchCheckLoginId(body: ICheckUserIdParams): Promise<boole
     headers: commonHeader,
     body: JSON.stringify(body),
   })
+  const res2 = await fetch(`/api/members/check-loginId`, {
+    method: 'POST',
+    headers: commonHeader,
+    body: JSON.stringify(body),
+  })
+  console.log(await res2.json)
 
   if (!res.ok) {
     throw new Error('Failed to check login id')

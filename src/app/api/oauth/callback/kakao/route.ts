@@ -1,13 +1,14 @@
 import { cookies } from 'next/headers'
 import { NextRequest, NextResponse } from 'next/server'
 
-// export async function GET(req: NextRequest) {
-//   try {
-//     return NextResponse.redirect(`${process.env.NEXT_PUBLIC_AUTH_LOGIN}`)
-//   } catch (error) {
-//     return NextResponse.redirect('/login')
-//   }
-// }
+export async function GET(req: NextRequest) {
+  try {
+    return NextResponse.redirect(`${process.env.NEXT_PUBLIC_AUTH_LOGIN}`)
+    return NextResponse.redirect(new URL('/'))
+  } catch (error) {
+    return NextResponse.redirect('/login')
+  }
+}
 
 export async function POST(req: NextRequest) {
   try {
