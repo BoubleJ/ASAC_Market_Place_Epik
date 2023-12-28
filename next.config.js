@@ -33,6 +33,18 @@ const nextConfig = withBundleAnalyzer({
       },
     ]
   },
+  // async rewrites() {
+  //   return [
+  //     {
+  //       source: '/api/:path*',
+  //       destination: 'http://43.201.27.83:8080/api/:path*',
+  //     },
+  //     {
+  //       source: '/login/:path*',
+  //       destination: 'http://43.201.27.83:8080/login/:path*',
+  //     },
+  //   ]
+  // },
   images: {
     remotePatterns: [
       {

@@ -52,7 +52,7 @@ export default function SocialRegisterForm() {
       openCheckModal(res.errorMessage)
       return
     }
-    router.push('/recommandations')
+    router.push('/recommendations')
   }
 
   const openCheckModal = (content: string) => {
