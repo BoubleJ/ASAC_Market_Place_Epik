@@ -40,8 +40,8 @@ const nextConfig = withBundleAnalyzer({
   //       destination: 'http://43.201.27.83:8080/api/:path*',
   //     },
   //     {
-  //       source: '/login/:path*',
-  //       destination: 'http://43.201.27.83:8080/login/:path*',
+  //       source: '/oauth2/authorization/kakao',
+  //       destination: 'http://43.201.27.83:8080/oauth2/authorization/kakao',
   //     },
   //   ]
   // },
