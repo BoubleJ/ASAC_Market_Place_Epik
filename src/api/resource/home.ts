@@ -6,9 +6,9 @@ export async function fetchBestItemsData(
   priceParams: string | null,
 ) {
   const res = await fetch(
-    `http://localhost:3000/api/search/complexitem?status=BESTSELLER${
-      categoryParams ? `&categoryName=${categoryParams}` : ''
-    }${brandParams ? `&brand=${brandParams}` : ''}${priceParams ? `&price=${priceParams}` : ''}`,
+    `${baseURL}/search/complexitem?status=BESTSELLER${categoryParams ? `&categoryName=${categoryParams}` : ''}${
+      brandParams ? `&brand=${brandParams}` : ''
+    }${priceParams ? `&price=${priceParams}` : ''}`,
   )
 
   if (!res.ok) {
@@ -26,7 +26,7 @@ export async function fetchNewArrivalsData(
   // const res = await fetch(`/dummyData/searchResult.json`)
   // const res = await fetch(`${baseURL}/search/complexitem?promotionType=NEW_ARRIVAL`)
   const res = await fetch(
-    `http://localhost:3000/api/search/complexitem?promotionType=NEW_ARRIVAL&${
+    `${baseURL}/search/complexitem?promotionType=NEW_ARRIVAL&${
       categoryParams ? `&categoryName=${categoryParams}` : ''
     }${brandParams ? `&brand=${brandParams}` : ''}${priceParams ? `&price=${priceParams}` : ''}`,
   )

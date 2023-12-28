@@ -1,7 +1,7 @@
 import { baseURL, commonHeader } from '../util/instance'
 
 export async function fetchItemDetails(itemId: number) {
-  const res = await fetch(`http://localhost:3000/api/items?itemId=${itemId}`)
+  const res = await fetch(`${baseURL}/items?itemId=${itemId}`)
   if (!res.ok) {
     throw new Error('Failed to fetch item details Data')
   }
@@ -9,7 +9,7 @@ export async function fetchItemDetails(itemId: number) {
 }
 
 export async function fetchReviews(itemId: number) {
-  const res = await fetch(`http://localhost:3000/api/items/reviews?itemId=${itemId}`)
+  const res = await fetch(`${baseURL}/items/reviews?itemId=${itemId}`)
   if (!res.ok) {
     throw new Error(`failed to fetch review data${baseURL}/items/reviews?itemId=${itemId}`)
   }
@@ -17,7 +17,7 @@ export async function fetchReviews(itemId: number) {
 }
 
 export async function fetchHelpfulCount(itemId: number, reviewId: number) {
-  const res = await fetch(`http://localhost:3000/api/items/reviews/helpful?itemId=${itemId}&reviewId=${reviewId}`, {
+  const res = await fetch(`${baseURL}/items/reviews/helpful?itemId=${itemId}&reviewId=${reviewId}`, {
     method: 'POST',
     headers: commonHeader,
   })
@@ -30,7 +30,7 @@ export async function fetchHelpfulCount(itemId: number, reviewId: number) {
 }
 
 export async function fetchLessHelpCount(itemId: number, reviewId: number) {
-  const res = await fetch(`http://localhost:3000/api/items/reviews/helpless?itemId=${itemId}&reviewId=${reviewId}`, {
+  const res = await fetch(`${baseURL}/items/reviews/helpless?itemId=${itemId}&reviewId=${reviewId}`, {
     method: 'POST',
     headers: commonHeader,
   })
@@ -43,7 +43,7 @@ export async function fetchLessHelpCount(itemId: number, reviewId: number) {
 }
 
 export async function addWish(itemId: number) {
-  const res = await fetch(`http://localhost:3000/api/items/yeswish?itemId=${itemId}`, {
+  const res = await fetch(`${baseURL}/items/yeswish?itemId=${itemId}`, {
     method: 'POST',
     headers: {
       ...commonHeader,

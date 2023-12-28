@@ -1,7 +1,9 @@
 // import { baseURL } from '../util/instance'
 
+import { baseURL } from '../util/instance'
+
 export async function fetchCategory() {
-  const res = await fetch(`http://localhost:3000/api/items/category`)
+  const res = await fetch(`${baseURL}/items/category`)
 
   if (!res.ok) {
     throw new Error('category fetch failed')
@@ -12,9 +14,9 @@ export async function fetchCategory() {
 
 export async function fetchCategoryItems(categoryName: string, brandParams: string | null, priceParams: string | null) {
   const res = await fetch(
-    `http://localhost:3000/api/search/complexitem?categoryName=${categoryName}${
-      brandParams ? `&brand=${brandParams}` : ''
-    }${priceParams ? `&price=${priceParams}` : ''}`,
+    `${baseURL}/search/complexitem?categoryName=${categoryName}${brandParams ? `&brand=${brandParams}` : ''}${
+      priceParams ? `&price=${priceParams}` : ''
+    }`,
   )
 
   // if (!res.ok) {
@@ -28,7 +30,7 @@ export async function fetchCategoryItems(categoryName: string, brandParams: stri
 }
 
 export async function fetchCategoryFilterData(categoryName: string) {
-  const res = await fetch(`http://localhost:3000/api/search/counts?categoryName=${categoryName}`)
+  const res = await fetch(`${baseURL}/search/counts?categoryName=${categoryName}`)
 
   if (!res.ok) {
     throw new Error('category items fetch failed')
