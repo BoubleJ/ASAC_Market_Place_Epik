@@ -17,12 +17,12 @@ export default async function Itemlayout({
   return (
     <>
       <div className="fixed top-0 bg-white w-96 flex flex-col gap-2 z-10">
-        <ItemHeader itemName={itemDetails.itemName} />
+        <ItemHeader itemName={itemDetails.data.itemName} />
         <ItemTabs itemId={params.itemId} />
       </div>
       <div className="pt-28 py-20 min-h-screen">{children}</div>
       <div className="fixed bottom-0 h-20 w-96">
-        <BottomTab wished={itemDetails.wished} />
+        <BottomTab wished={itemDetails.wished} itemId={params.itemId} />
       </div>
     </>
   )

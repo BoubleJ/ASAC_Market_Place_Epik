@@ -12,8 +12,7 @@ export default function CategoryItemsList({ categoryName }: { categoryName: stri
   const subCategory = decodeCategoryName[1]
 
   const params = useSearchParams()
-  // const subCategory = params.get('sub') || ''
-  // const mainCategory = params.get('main') || ''
+
   const categoryNameParam = subCategory === '전체보기' ? mainCategory : subCategory
   const brandParams = params.get('브랜드')
   const priceParams = params.get('가격')

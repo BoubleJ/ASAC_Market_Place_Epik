@@ -6,7 +6,15 @@ import { fetchHelpfulCount, fetchLessHelpCount } from '@/api/resource/items'
 import SvgThumbsUp from '@/components/icons/thumbs-up'
 import { reviewsType } from '@/types/review'
 
-export default function Review({ review, itemId }: { review: reviewsType; itemId: number }) {
+export default function Review({
+  review,
+  itemId,
+  itemName,
+}: {
+  review: reviewsType
+  itemId: number
+  itemName: string
+}) {
   const [helpfulCount, setHelpfulCount] = useState(review.helpful)
   const [isHelpful, setIsHelpful] = useState(false)
   // const [isHelpful, setIsHelpful] = useState(review.checked)
@@ -33,9 +41,7 @@ export default function Review({ review, itemId }: { review: reviewsType; itemId
         <span className="text-body-sm font-normal">{review.memberName}</span>
       </div>
       {/* <span className=" text-body-xs font-normal text-grayscale-300">{review.itemName}</span> */}
-      <span className="text-body-xs font-normal text-grayscale-300">
-        [하기스] 2023 네이처썸머 팬티형 기저귀 6단계 공용
-      </span>
+      <span className="text-body-xs font-normal text-grayscale-300">{itemName}</span>
       <div className="aspect-square w-1/4 rounded-lg overflow-hidden relative">
         <Image
           alt="review image"

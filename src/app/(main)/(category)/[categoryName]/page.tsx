@@ -7,7 +7,7 @@ export default function CategoryItemsPage({ params }: { params: { categoryName: 
 
   return (
     <div>
-      {decodedcategoryName} <CategoryItemsList categoryName={params.categoryName} />
+      <CategoryItemsList categoryName={decodedcategoryName} />
     </div>
   )
 }
