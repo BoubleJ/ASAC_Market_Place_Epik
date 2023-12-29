@@ -22,7 +22,7 @@ export async function GET(req: NextRequest) {
 
     return NextResponse.json(await res.json())
   } catch (error) {
-    return NextResponse.redirect(`/signup`)
+    return NextResponse.redirect(`http://localhost:3000/signup`)
   }
 }
 // Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrZGhnYnlAbmF2ZXIuY29tIiwibWVtYmVySWQiOjI1MiwibG9naW5JZCI6Imx1Y3k0NTYiLCJhdXRoIjoiUk9MRV9VU0VSIiwiZXhwIjoxNzAzMDUwMTE5fQ.iWBf_4-mWKiqxKTCQD987OR_oyrOgcIfHG9jUOc3QAR1A4TBZ7jKXHkKcndJcGHVFd-uS0jkruw__5oS2j7E8A
