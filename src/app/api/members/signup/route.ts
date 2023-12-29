@@ -20,9 +20,9 @@ export async function POST(req: NextRequest) {
     if (!res.ok) {
       throw new Error('Failed to signup')
     }
-    // console.log('req cookie', req.cookies.getAll())
-    // console.log('req header', requestHeaders)
-    return NextResponse.json(res)
+    
+    const response = await res.json()
+    return NextResponse.json({ response })
   } catch (error) {
     return NextResponse.redirect(`/signup`)
   }

@@ -2,8 +2,11 @@ export const baseURL = process.env.NEXT_PUBLIC_BASE_API_PATH
 // export const baseURL = 'http://localhost:3000/api'
 
 export const commonHeader: Headers = new Headers()
-commonHeader.append('Accept', 'application/json')
-commonHeader.append('withCredentials', 'include')
-commonHeader.append('Content-Type', 'application/json;charset=utf-8')
+commonHeader.set('Accept', 'application/json')
+commonHeader.set('withCredentials', 'include')
+commonHeader.set('Content-Type', 'application/json;charset=utf-8')
+// commonHeader.append('Accept', 'application/json')
+// commonHeader.append('withCredentials', 'include')
+// commonHeader.append('Content-Type', 'application/json;charset=utf-8')
 
 // export const baseAPI = FetchWrapper.create(`${baseURL}`, commonHeader)

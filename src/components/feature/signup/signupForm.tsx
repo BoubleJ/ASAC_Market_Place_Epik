@@ -59,8 +59,9 @@ export default function SignupForm() {
   }
 
   async function handleValidateUserId(userId: string) {
-    console.log(userId)
     const isValidId = await fetchCheckLoginId(encodeCheckUserId(userId))
+    console.log(isValidId)
+
     if (isValidId) {
       openCheckModal(ErrorMsg.vaildate.userid)
       form.clearErrors('userId')

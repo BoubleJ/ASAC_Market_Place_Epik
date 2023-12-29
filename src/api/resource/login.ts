@@ -9,10 +9,9 @@ export async function fetchLogin(body: ILoginParams) {
   })
 
   if (res.status !== 200) {
-    const errorMsg = await res.text()
-    return { errorMessage: errorMsg }
+    const errorMsg = await res.json()
+    return { errorMessage: errorMsg.msg }
   }
-
   return await res.json()
 }
 
@@ -42,6 +41,7 @@ export async function fetchSocialRegister(body: ISocialRegisterParams) {
     const errorMsg = await res.json()
     return { errorMessage: errorMsg.msg }
   }
-
-  return await res.json()
+  const respnse = await res.json()
+  return respnse
+  // return await res.json()
 }
