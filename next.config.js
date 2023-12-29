@@ -33,18 +33,19 @@ const nextConfig = withBundleAnalyzer({
       },
     ]
   },
-  // async rewrites() {
-  //   return [
-  //     {
-  //       source: '/api/:path*',
-  //       destination: 'http://43.201.27.83:8080/api/:path*',
-  //     },
-  //     {
-  //       source: '/oauth2/authorization/kakao',
-  //       destination: 'http://43.201.27.83:8080/oauth2/authorization/kakao',
-  //     },
-  //   ]
-  // },
+  async rewrites() {
+    return [
+      {
+        // source: '/api/:path*',
+        source: '/local/api/:path*',
+        destination: 'http://43.201.27.83:8080/api/:path*',
+      },
+      // {
+      //   source: '/oauth2/authorization/kakao',
+      //   destination: 'http://43.201.27.83:8080/oauth2/authorization/kakao',
+      // },
+    ]
+  },
   images: {
     remotePatterns: [
       {

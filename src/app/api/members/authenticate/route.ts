@@ -29,7 +29,7 @@ export async function POST(req: NextRequest) {
         path: 'http://localhost:3000',
       })
     }
-    console.log(cookies().getAll())
+    console.log('authenticate route.ts:', cookies().getAll())
     return NextResponse.json(true)
   } catch (error) {
     return NextResponse.redirect(`http://localhost:3000/signup`)
