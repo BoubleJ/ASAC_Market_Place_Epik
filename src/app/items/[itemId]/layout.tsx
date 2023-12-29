@@ -5,6 +5,10 @@ import BottomTab from '@/components/feature/item/BottomTab'
 import ItemHeader from '@/components/feature/item/ItemHeader'
 import ItemTabs from '@/components/feature/item/ItemTabs'
 
+export interface itemIdParam {
+  itemId: number
+}
+
 export default async function Itemlayout({
   children,
   params,
