@@ -8,6 +8,8 @@ import { z } from 'zod'
 
 import { fetchLogin } from '@/api/resource/login'
 import { encodeLoginForm } from '@/api/service/login'
+import CheckModal from '@/components/common/modal/checkModal'
+import { useModalState } from '@/components/provider/modalProvider'
 import { Button } from '@/components/ui/button'
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
@@ -17,6 +19,8 @@ const FormSchema = LoginFormSchema
 
 export default function LoginForm() {
   const router = useRouter()
+  const state = useModalState()
+
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -24,10 +28,19 @@ export default function LoginForm() {
       password: '',
     },
   })
+
+  const openCheckModal = (content: string) => {
+    state.setModal(<CheckModal content={content} />)
+    state.modalRef.current?.showModal()
+  }
   async function onSubmit(data: z.infer<typeof FormSchema>) {
     console.log(data)
-    const dd = await fetchLogin(encodeLoginForm(data))
-    console.log(dd)
+    const isValidLogin = await fetchLogin(encodeLoginForm(data))
+    if (isValidLogin === true) {
+      router.push('/recommendations')
+    } else {
+      openCheckModal(`${isValidLogin}`)
+    }
   }
   return (
     <section className="py-8">

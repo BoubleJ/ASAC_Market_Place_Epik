@@ -7,7 +7,7 @@ export async function POST(req: NextRequest) {
     const body = await req.json()
     const requestHeaders = new Headers(req.headers)
 
-    const res = await fetch(`${baseURL}/members/check-email`, {
+    const res = await fetch(`${baseURL}/orders/payment`, {
       method: 'POST',
       headers: requestHeaders,
       body: JSON.stringify(body),
@@ -17,9 +17,10 @@ export async function POST(req: NextRequest) {
       throw new Error('Failed to check email')
     }
 
-    const response = await res.json()
-    return NextResponse.json(response.data)
+    // console.log('req cookie', req.cookies.getAll())
+    // console.log('req header', requestHeaders)
+    return NextResponse.json(res)
   } catch (error) {
-    return NextResponse.redirect(`http://localhost:3000/signup`)
+    return NextResponse.redirect(`/signup`)
   }
 }
