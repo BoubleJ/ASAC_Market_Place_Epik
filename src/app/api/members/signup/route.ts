@@ -7,10 +7,6 @@ export async function POST(req: NextRequest) {
     const body = await req.json()
     const requestHeaders = new Headers(req.headers)
 
-    if (req.cookies.has('auth-token')) {
-      requestHeaders.set('Authorization', `Bearer ${req.cookies.get('auth-token')}`)
-    }
-
     const res = await fetch(`${baseURL}/members/signup`, {
       method: 'POST',
       headers: requestHeaders,
@@ -20,10 +16,10 @@ export async function POST(req: NextRequest) {
     if (!res.ok) {
       throw new Error('Failed to signup')
     }
-    
+
     const response = await res.json()
     return NextResponse.json({ response })
   } catch (error) {
-    return NextResponse.redirect(`/signup`)
+    return NextResponse.redirect(`http://localhost:3000/signup`)
   }
 }
