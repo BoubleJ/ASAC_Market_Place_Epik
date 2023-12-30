@@ -17,8 +17,8 @@ export async function POST(req: NextRequest) {
     console.log(itemId.itemId, '!!!')
     const res = await fetch(`${baseURL}/items/yeswish?itemId=${itemId.itemId}`, {
       method: 'POST',
-      // headers: requestHeaders,
-      headers: commonHeader,
+      headers: requestHeaders,
+      // headers: commonHeader,
       body: JSON.stringify(req.body),
     })
     const resoense = await res.json()
