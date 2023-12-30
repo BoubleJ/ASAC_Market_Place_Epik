@@ -20,6 +20,6 @@ export async function POST(req: NextRequest) {
     const response = await res.json()
     return NextResponse.json({ response })
   } catch (error) {
-    return NextResponse.redirect(`/signup`)
+    return NextResponse.redirect(`http://localhost:3000/signup`)
   }
 }
