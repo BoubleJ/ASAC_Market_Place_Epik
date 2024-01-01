@@ -5,7 +5,9 @@ import { fetchItemDetails } from '@/api/resource/items'
 import SvgShare from '@/components/icons/share'
 
 export default async function ItemMainInfo({ itemId }: { itemId: number }) {
-  const itemDetails = await fetchItemDetails(itemId)
+  const itemData = await fetchItemDetails(itemId)
+  const itemDetails = itemData.data
+  console.log(itemDetails.data, '!!')
 
   return (
     <div className="h-screen">

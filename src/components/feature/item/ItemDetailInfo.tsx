@@ -4,7 +4,8 @@ import React from 'react'
 import { fetchItemDetails } from '@/api/resource/items'
 
 export default async function ItemReview({ itemId }: { itemId: number }) {
-  const itemDetails = await fetchItemDetails(itemId)
+  const itemData = await fetchItemDetails(itemId)
+  const itemDetails = itemData.data
 
   return (
     <div className=" flex flex-col px-4">

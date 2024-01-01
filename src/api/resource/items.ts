@@ -1,7 +1,10 @@
-import { baseURL, commonHeader } from '../util/instance'
+import { itemIdParam } from '@/app/items/[itemId]/layout'
+import { deleteWishParams } from '@/types/wish'
+
+import { baseLocalURL, commonHeader } from '../util/instance'
 
 export async function fetchItemDetails(itemId: number) {
-  const res = await fetch(`${baseURL}/items?itemId=${itemId}`)
+  const res = await fetch(`${baseLocalURL}/items?itemId=${itemId}`)
   if (!res.ok) {
     throw new Error('Failed to fetch item details Data')
   }
@@ -9,15 +12,15 @@ export async function fetchItemDetails(itemId: number) {
 }
 
 export async function fetchReviews(itemId: number) {
-  const res = await fetch(`${baseURL}/items/reviews?itemId=${itemId}`)
+  const res = await fetch(`${baseLocalURL}/items/reviews?itemId=${itemId}`)
   if (!res.ok) {
-    throw new Error(`failed to fetch review data${baseURL}/items/reviews?itemId=${itemId}`)
+    throw new Error(`failed to fetch review data${baseLocalURL}/items/reviews?itemId=${itemId}`)
   }
   return res.json()
 }
 
 export async function fetchHelpfulCount(itemId: number, reviewId: number) {
-  const res = await fetch(`${baseURL}/items/reviews/helpful?itemId=${itemId}&reviewId=${reviewId}`, {
+  const res = await fetch(`${baseLocalURL}/items/reviews/helpful?itemId=${itemId}&reviewId=${reviewId}`, {
     method: 'POST',
     headers: commonHeader,
   })
@@ -30,7 +33,7 @@ export async function fetchHelpfulCount(itemId: number, reviewId: number) {
 }
 
 export async function fetchLessHelpCount(itemId: number, reviewId: number) {
-  const res = await fetch(`${baseURL}/items/reviews/helpless?itemId=${itemId}&reviewId=${reviewId}`, {
+  const res = await fetch(`${baseLocalURL}/items/reviews/helpless?itemId=${itemId}&reviewId=${reviewId}`, {
     method: 'POST',
     headers: commonHeader,
   })
@@ -40,4 +43,59 @@ export async function fetchLessHelpCount(itemId: number, reviewId: number) {
   }
 
   return res
+}
+
+export async function addWish(itemId: number) {
+  const res = await fetch(`${baseLocalURL}/items/yeswish?itemId=${itemId}`, {
+    method: 'POST',
+    headers: {
+      ...commonHeader,
+    },
+  })
+  return res
+}
+
+export async function addToWishList(body: itemIdParam) {
+  const res = await fetch('/api/items/wish', {
+    method: 'POST',
+    headers: commonHeader,
+    body: JSON.stringify(body),
+  })
+  if (!res.ok) {
+    throw new Error('Failed')
+  }
+  const state = await res.json()
+  console.log(state.msg, 'ㅎㅂㅎ')
+  console.log('ㅎㅂㅎ')
+  return state.msg
+}
+
+export async function deleteFromWishList(body: deleteWishParams) {
+  const res = await fetch('/api/items/deleteWish', {
+    method: 'POST',
+    headers: commonHeader,
+    body: JSON.stringify(body),
+  })
+  if (!res.ok) {
+    throw new Error('Failed')
+  }
+  const state = await res.json()
+  console.log(state.msg, 'ㅎㅂㅎ')
+  console.log('ㅎㅂㅎ')
+  return state.msg
+}
+
+export async function fetchWishList() {
+  console.log('fetchWishList')
+  const res = await fetch(`/api/items/wishList`, {
+    method: 'GET',
+    headers: commonHeader,
+  })
+
+  if (!res.ok) {
+    throw new Error('Failed!!!!!!!')
+  }
+  const response = await res.json()
+  console.log('웅답은', response)
+  return response
 }

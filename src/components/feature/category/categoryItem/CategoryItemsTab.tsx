@@ -1,15 +1,20 @@
 'use client'
 import Link from 'next/link'
-import { useSearchParams } from 'next/navigation'
 import React from 'react'
 
 import { CategoryList } from '@/types/category'
 
-export default function CategoryItemsTab({ categories }: { categories: CategoryList }) {
-  const params = useSearchParams()
-
-  const currentMainCategory = params.get('main')
-  const selectedSubCategory = params.get('sub')
+export default function CategoryItemsTab({
+  categories,
+  mainCategory,
+  subCategory,
+}: {
+  categories: CategoryList
+  mainCategory: string
+  subCategory: string
+}) {
+  const currentMainCategory = mainCategory
+  const selectedSubCategory = subCategory
 
   const currentSubCategories = categories.find((category) => category.name === currentMainCategory)
   const subCategories = currentSubCategories ? [{ name: '전체보기' }, ...currentSubCategories.subCategories] : []
@@ -24,7 +29,7 @@ export default function CategoryItemsTab({ categories }: { categories: CategoryL
               ? 'text-brand-primary-500 border-b-2 border-brand-primary-500'
               : 'text-grayscale-400'
           }`}
-          href={`/categoryItems?main=${currentMainCategory}&sub=${subCategory.name}`}
+          href={`/${currentMainCategory}-${subCategory.name}`}
           replace
         >
           <div>{subCategory.name}</div>

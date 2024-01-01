@@ -1,4 +1,4 @@
-import { baseURL } from '@/api/util/instance'
+import { baseLocalURL } from '@/api/util/instance'
 
 export async function fetchSearchItemsData(
   searchWord: string,
@@ -7,7 +7,7 @@ export async function fetchSearchItemsData(
   priceParams: string | null,
 ) {
   const res = await fetch(
-    `${baseURL}/search/complexitem?name=${searchWord}${categoryParams ? `&categoryName=${categoryParams}` : ''}${
+    `${baseLocalURL}/search/complexitem?name=${searchWord}${categoryParams ? `&categoryName=${categoryParams}` : ''}${
       brandParams ? `&brand=${brandParams}` : ''
     }${priceParams ? `&price=${priceParams}` : ''}`,
   )
@@ -19,7 +19,7 @@ export async function fetchSearchItemsData(
 }
 
 export async function fetchIsEmpty(searchWord: string) {
-  const res = await fetch(`${baseURL}/search/complexitem?name=${searchWord}`)
+  const res = await fetch(`${baseLocalURL}/search/complexitem?name=${searchWord}`)
 
   if (!res.ok) {
     throw new Error('Failed to fetch data')
@@ -31,7 +31,7 @@ export async function fetchIsEmpty(searchWord: string) {
 }
 
 export async function fetchFilterData(params: string) {
-  const res = await fetch(`${baseURL}/search/counts?name=${params}`)
+  const res = await fetch(`${baseLocalURL}/search/counts?name=${params}`)
   //localhost:8080/api/search/counts?name=아
 
   if (!res.ok) {
@@ -44,7 +44,7 @@ export async function fetchFilterData(params: string) {
 
 export async function fetchAutoCompleteWords(searchingWord: string) {
   // const res = await fetch(`/api/search/autokeyword?keyword=${searchingWord}`)
-  const res = await fetch(`${baseURL}/search/autokeyword?keyword=${searchingWord}&limit=5`)
+  const res = await fetch(`${baseLocalURL}/search/autokeyword?keyword=${searchingWord}&limit=5`)
   if (!res.ok) {
     throw new Error('Failed to fetch')
   }
