@@ -19,15 +19,15 @@ export async function POST(req: NextRequest) {
 
     console.log('route post')
 
-    const itemId = await req.json()
-    console.log(itemId.itemId, '!!!')
+    const deleteParams = await req.json()
+    console.log(deleteParams, '!!!')
     // const body = await req.json()
     // console.log(requestHeaders)
-    const res = await fetch(`${baseURL}/items/yeswish?itemId=${itemId.itemId}`, {
+    const res = await fetch(`${baseURL}/items/nowish?loginId=${deleteParams.loginId}&itemId=${deleteParams.itemId}`, {
       method: 'POST',
       headers: requestHeaders,
       // headers: commonHeader,
-      body: JSON.stringify(itemId),
+      body: JSON.stringify(deleteParams),
     })
     const resoense = await res.json()
     console.log(resoense, 'ㅎㅎㅎ')

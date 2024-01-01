@@ -1,18 +1,20 @@
 'use client'
-import React from 'react'
+import React, { useState } from 'react'
 
-import { commonHeader } from '@/api/util/instance'
+import { addToWishList, deleteFromWishList } from '@/api/resource/items'
 import { itemIdParam } from '@/app/items/[itemId]/layout'
 import CheckModal from '@/components/common/modal/checkModal'
 import SvgHeart from '@/components/icons/heart'
 import { useModalState } from '@/components/provider/modalProvider'
 import { Button } from '@/components/ui/button'
 
-export default function BottomTab({ wished, itemId }: { wished: boolean; itemId: number }) {
+// state 추가하기!
+export default function BottomTab({ wished, itemId, loginId }: { wished: boolean; itemId: number; loginId: string }) {
   const itemIdParam = {
     itemId: itemId,
   }
   const state = useModalState()
+  const [isWished, setIsWished] = useState(wished)
 
   const openCheckModal = (content: string) => {
     state.setModal(<CheckModal content={content} />)
@@ -20,16 +22,17 @@ export default function BottomTab({ wished, itemId }: { wished: boolean; itemId:
   }
 
   async function handleWish(body: itemIdParam) {
-    const res = await fetch('http://localhost:3000/api/items/wish', {
-      method: 'POST',
-      headers: commonHeader,
-      body: JSON.stringify(body),
-    })
-    const state = await res.json()
-    console.log(state.msg, 'ㅎㅂㅎ')
-    console.log('ㅎㅂㅎ')
+    let msg = ''
+    if (isWished) {
+      msg = await deleteFromWishList({ loginId: loginId, itemId: itemId })
+      openCheckModal(msg)
+      setIsWished(false)
 
-    openCheckModal(state.msg)
+      return
+    }
+    msg = await addToWishList(body)
+    openCheckModal(msg)
+    setIsWished(true)
   }
   return (
     // 찜하기 api, wished 필드 추가되면 찜하기 기능 구현 예정
@@ -40,10 +43,10 @@ export default function BottomTab({ wished, itemId }: { wished: boolean; itemId:
         className="h-full w-[15%] p-3"
         onClick={async () => handleWish(itemIdParam)}
       >
-        <SvgHeart fill={wished ? 'currentColor' : 'transparent'} width={'1.5rem'} height={'1.5rem'} />
+        <SvgHeart fill={isWished ? 'currentColor' : 'transparent'} width={'1.5rem'} height={'1.5rem'} />
       </Button>
       <Button variant={'primary'} size={'sm'} className="h-full w-4/5">
-        <span className=" text-button-base">구매하기</span>
+        <span className=" text-button-base">구매하기{wished}</span>
       </Button>
     </div>
   )
