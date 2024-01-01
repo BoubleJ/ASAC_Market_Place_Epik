@@ -26,7 +26,7 @@ export async function POST(req: NextRequest) {
         name: 'auth-token',
         value: `${loginTokenData.data.token}`,
         httpOnly: true,
-        path: 'http://localhost:3000',
+        path: '/',
       })
     }
     console.log('authenticate route.ts:', cookies().getAll())
