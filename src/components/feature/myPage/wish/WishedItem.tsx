@@ -8,15 +8,18 @@ import { useModalState } from '@/components/provider/modalProvider'
 import { Button } from '@/components/ui/button'
 import { deleteWishParams, WishedItemType } from '@/types/wish'
 
-export default function WishedItem({ loginId }: { loginId: string }) {
+export default function WishedItem() {
   const [wishList, setWishList] = useState([])
 
   const state = useModalState()
 
   useEffect(() => {
-    fetchWishList().then((data: any) => {
-      setWishList(data.data)
-    })
+    async function getWishList() {
+      const res = await fetchWishList()
+      console.log(res, 'res!!!')
+      setWishList(res.data)
+    }
+    getWishList()
   }, [state])
 
   const openCheckModal = (content: string) => {
@@ -28,9 +31,6 @@ export default function WishedItem({ loginId }: { loginId: string }) {
     const msg = await deleteFromWishList(body)
 
     openCheckModal(msg)
-    fetchWishList().then((data: any) => {
-      setWishList(data.data)
-    })
   }
 
   console.log('위시리스트으으', wishList)
@@ -62,7 +62,7 @@ export default function WishedItem({ loginId }: { loginId: string }) {
               <div className="flex justify-between gap-2 w-full">
                 <Button
                   onClick={async () => {
-                    deleteWish({ loginId: loginId, itemId: wishedItem.itemId })
+                    deleteWish({ itemId: wishedItem.itemId })
                   }}
                   variant={'ghost'}
                   className="w-full text-black font-normal text-xs"
