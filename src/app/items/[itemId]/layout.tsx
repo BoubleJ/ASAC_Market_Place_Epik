@@ -8,8 +8,8 @@ import ItemHeader from '@/components/feature/item/ItemHeader'
 import ItemTabs from '@/components/feature/item/ItemTabs'
 
 async function fetchItemDetail(itemId: number) {
-  if (cookies().has('auth-token')) {
-    commonHeader.set('Authorization', `Bearer ${cookies().get('auth-token')?.value}`)
+  if (cookies().has('AUTH_TOKEN')) {
+    commonHeader.set('Authorization', `Bearer ${cookies().get('AUTH_TOKEN')?.value}`)
   }
   const res = await fetch(`${baseLocalURL}/items?itemId=${itemId}`, {
     method: 'GET',
@@ -31,8 +31,8 @@ export interface itemIdParam {
 
 async function fetchMembers() {
   console.log(cookies().getAll())
-  if (cookies().has('auth-token')) {
-    commonHeader.set('Authorization', `Bearer ${cookies().get('auth-token')?.value}`)
+  if (cookies().has('AUTH_TOKEN')) {
+    commonHeader.set('Authorization', `Bearer ${cookies().get('AUTH_TOKEN')?.value}`)
   }
   const res = await fetch(`${baseLocalURL}/members/mypage`, {
     method: 'GET',

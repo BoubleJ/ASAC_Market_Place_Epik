@@ -1,5 +1,4 @@
 export interface deleteWishParams {
-  loginId: string
   itemId: number
 }
 

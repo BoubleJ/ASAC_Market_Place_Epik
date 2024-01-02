@@ -24,7 +24,7 @@ export default function BottomTab({ wished, itemId, loginId }: { wished: boolean
   async function handleWish(body: itemIdParam) {
     let msg = ''
     if (isWished) {
-      msg = await deleteFromWishList({ loginId: loginId, itemId: itemId })
+      msg = await deleteFromWishList({ itemId: itemId })
       openCheckModal(msg)
       setIsWished(false)
 

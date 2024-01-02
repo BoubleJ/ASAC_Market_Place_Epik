@@ -7,10 +7,10 @@ export async function GET(req: NextRequest) {
   try {
     const requestHeaders = new Headers(req.headers)
 
-    if (!cookies().has('auth-token')) {
+    if (!cookies().has('AUTH_TOKEN')) {
       return NextResponse.json({ data: {} })
     }
-    requestHeaders.set('Authorization', `Bearer ${cookies().get('auth-token')?.value}`)
+    requestHeaders.set('Authorization', `Bearer ${cookies().get('AUTH_TOKEN')?.value}`)
 
     const res = await fetch(`${baseURL}/orders/payment`, {
       headers: requestHeaders,
