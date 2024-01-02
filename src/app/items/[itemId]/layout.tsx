@@ -7,11 +7,7 @@ import BottomTab from '@/components/feature/item/BottomTab'
 import ItemHeader from '@/components/feature/item/ItemHeader'
 import ItemTabs from '@/components/feature/item/ItemTabs'
 
-export interface itemIdParam {
-  itemId: number
-}
-// 수정 필요!
-export async function fetchItemDetail(itemId: number) {
+async function fetchItemDetail(itemId: number) {
   if (cookies().has('auth-token')) {
     commonHeader.set('Authorization', `Bearer ${cookies().get('auth-token')?.value}`)
   }
@@ -28,7 +24,12 @@ export async function fetchItemDetail(itemId: number) {
   return await res.json()
 }
 
-export async function fetchMembers() {
+export interface itemIdParam {
+  itemId: number
+}
+// 수정 필요!
+
+async function fetchMembers() {
   console.log(cookies().getAll())
   if (cookies().has('auth-token')) {
     commonHeader.set('Authorization', `Bearer ${cookies().get('auth-token')?.value}`)
