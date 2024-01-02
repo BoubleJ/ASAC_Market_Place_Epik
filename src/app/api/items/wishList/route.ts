@@ -4,12 +4,14 @@ import { NextRequest, NextResponse } from 'next/server'
 import { baseURL } from '@/api/util/instance'
 
 export async function GET(req: NextRequest) {
+  const authToken = cookies().get('AUTH_TOKEN')?.value
+  const hasCookies = cookies().has('AUTH_TOKEN')
   try {
     const requestHeaders = new Headers(req.headers)
     // console.log('cookie', cookies().getAll())
     console.log('---------!----------!--------')
-    if (cookies().has('auth-token')) {
-      requestHeaders.set('Authorization', `Bearer ${cookies().get('auth-token')?.value}`)
+    if (hasCookies) {
+      requestHeaders.set('Authorization', `Bearer ${authToken}`)
     }
     console.log('찜목록 !! Authorization', requestHeaders)
 
@@ -26,7 +28,7 @@ export async function GET(req: NextRequest) {
 
     // return res
   } catch (error) {
-    console.log('ㅔㅇㅔ러', error)
+    console.log('wishlist에러', error)
     return NextResponse.json({ msg: 'error' })
   }
 }
