@@ -8,8 +8,8 @@ export async function POST(req: NextRequest) {
     const requestHeaders = new Headers(req.headers)
     console.log('cookie', cookies().getAll())
 
-    if (cookies().has('auth-token')) {
-      requestHeaders.set('Authorization', `Bearer ${cookies().get('auth-token')?.value}`)
+    if (cookies().has('AUTH_TOKEN')) {
+      requestHeaders.set('Authorization', `Bearer ${cookies().get('AUTH_TOKEN')?.value}`)
     }
     console.log('Authorization', requestHeaders)
     // console.log('리퀘헤더', requestHeaders)
@@ -35,7 +35,7 @@ export async function POST(req: NextRequest) {
 
     // return res
   } catch (error) {
-    console.log('ㅔㅇㅔ러', error)
+    console.log('addwish list 에러', error)
     return NextResponse.json({ msg: 'error' })
   }
 }
