@@ -9,7 +9,15 @@ export interface ProductType {
   reviewCount: number
 }
 
-export interface CartItem extends ProductType {
+export interface CartItem {
+  id: number
+  name: string
+  brand?: string
+  discountRate: number
+  discountedPrice: number
+  itemPrice: number
+  promotionUrl: string
+  reviewCount?: number
   count: number
   selected: boolean
 }
@@ -25,12 +33,10 @@ export interface cartItemDto {
   promotionImageUrl: string
 }
 
-export interface Cart {
-  data: {
-    cartId: number
-    amount: number
-    salesTotalAmount: number
-    totalAmount: number
-    cartItemDtos: cartItemDto[]
-  }
+export interface Order {
+  cartId: number
+  amount: number
+  salesTotalAmount: number
+  totalAmount: number
+  cartItemDtos: cartItemDto[]
 }

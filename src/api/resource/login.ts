@@ -12,7 +12,8 @@ export async function fetchLogin(body: ILoginParams) {
     const errorMsg = await res.json()
     return { errorMessage: errorMsg.msg }
   }
-  return await res.json()
+  const respnse = await res.json()
+  return respnse
 }
 
 export async function fetchVerifyAndUpdateSocialLogin(body: IVerifyAndUpdateSocialLoginParams) {
@@ -27,7 +28,8 @@ export async function fetchVerifyAndUpdateSocialLogin(body: IVerifyAndUpdateSoci
     return { errorMessage: errorMsg.msg }
   }
 
-  return await res.json()
+  const respnse = await res.json()
+  return respnse
 }
 
 export async function fetchSocialRegister(body: ISocialRegisterParams) {
@@ -43,5 +45,4 @@ export async function fetchSocialRegister(body: ISocialRegisterParams) {
   }
   const respnse = await res.json()
   return respnse
-  // return await res.json()
 }
