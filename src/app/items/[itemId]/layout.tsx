@@ -17,7 +17,7 @@ async function fetchItemDetail(itemId: number) {
     // headers: commonHeader,
   })
   if (!res.ok) {
-    throw Error('fail to fatch itemDetail!')
+    throw Error(`fail to fetch itemDetail!`)
   }
 
   console.log('ㅎㅂㅎ')
@@ -29,22 +29,6 @@ export interface itemIdParam {
 }
 // 수정 필요!
 
-async function fetchMembers() {
-  console.log(cookies().getAll())
-  if (cookies().has('AUTH_TOKEN')) {
-    commonHeader.set('Authorization', `Bearer ${cookies().get('AUTH_TOKEN')?.value}`)
-  }
-  const res = await fetch(`${baseLocalURL}/members/mypage`, {
-    method: 'GET',
-    headers: commonHeader,
-    // headers: commonHeader,
-  })
-  if (!res.ok) {
-    throw Error('fail to fatch member!')
-  }
-  return await res.json()
-}
-
 export default async function Itemlayout({
   children,
   params,
@@ -55,8 +39,6 @@ export default async function Itemlayout({
   // 수정 필요!! 정리
   // const itemDetails = await fetchItemDetails(params.itemId)
   const itemDetails = await fetchItemDetail(params.itemId)
-  const member = await fetchMembers()
-  console.log('멤버!:', member)
 
   return (
     <>
@@ -66,7 +48,7 @@ export default async function Itemlayout({
       </div>
       <div className="pt-28 py-20 min-h-screen">{children}</div>
       <div className="fixed bottom-0 h-20 w-96">
-        <BottomTab wished={itemDetails.data.wished} itemId={params.itemId} loginId={member.data.loginId} />
+        <BottomTab wished={itemDetails.data.wished} itemId={params.itemId} />
       </div>
     </>
   )
