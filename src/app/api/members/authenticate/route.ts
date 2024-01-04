@@ -21,9 +21,9 @@ export async function POST(req: NextRequest) {
       console.log('Failed to login authenticate', res.status)
       return NextResponse.json(loginTokenData.msg)
     }
-    if (!req.cookies.has('auth-token')) {
+    if (!req.cookies.has('AUTH_TOKEN')) {
       cookies().set({
-        name: 'auth-token',
+        name: 'AUTH_TOKEN',
         value: `${loginTokenData.data.token}`,
         httpOnly: true,
         path: '/',

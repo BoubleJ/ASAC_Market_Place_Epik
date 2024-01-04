@@ -6,8 +6,9 @@ import { reviewsType } from '@/types/review'
 
 export default async function ReviewList({ itemId }: { itemId: number }) {
   const reviewData = await fetchReviews(itemId)
-  const reviews = reviewData.reviews
-  const reviewCount = reviewData.reviewCount
+  const reviews = reviewData.data.reviews
+  const reviewCount = reviewData.data.reviewCount
+  const itemName = reviewData.data.itemName
 
   return (
     <div>
@@ -18,7 +19,7 @@ export default async function ReviewList({ itemId }: { itemId: number }) {
       <div>
         <div className="flex flex-col gap-8 py-5">
           {reviews.map((review: reviewsType, index: number) => (
-            <Review key={index} review={review} itemId={itemId} />
+            <Review key={index} review={review} itemId={itemId} itemName={itemName} />
           ))}
         </div>
       </div>
