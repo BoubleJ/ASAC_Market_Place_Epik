@@ -12,7 +12,7 @@ export async function POST(req: NextRequest) {
     })
 
     if (!res.ok) {
-      throw new Error('Failed to check email')
+      throw new Error('fail to get member data')
     }
 
     const response = await res.json()
