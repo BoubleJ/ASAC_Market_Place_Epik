@@ -10,7 +10,7 @@ export async function fetchItemDetails(itemId: number) {
   }
   return res.json()
 }
-
+// routehandler로 ! (토큰 필요)
 export async function fetchReviews(itemId: number) {
   const res = await fetch(`${baseLocalURL}/items/reviews?itemId=${itemId}`)
   if (!res.ok) {
