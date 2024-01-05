@@ -29,6 +29,7 @@ const nextConfig = withBundleAnalyzer({
       {
         source: '/local/api/:path*',
         destination: 'http://43.201.27.83:8080/api/:path*',
+        // destination: 'http://localhost:8080/api/:path*',
       },
     ]
   },

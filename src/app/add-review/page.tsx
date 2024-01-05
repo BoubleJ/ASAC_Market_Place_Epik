@@ -44,8 +44,10 @@ export default function AddReviewPage() {
     formData.append(
       'review',
       JSON.stringify({
-        title: data.title,
-        content: data.content,
+        memberId: 1,
+        itemId: 34,
+        comment: data.content,
+        imageUrls: [],
       }),
     )
 
@@ -57,18 +59,18 @@ export default function AddReviewPage() {
     console.log('FormData:', formData.getAll('reviewImages'))
     console.log('FormData:', formData.get('review'))
 
-    // try {
-    //   const response = await fetch('/api/addreview', {
-    //     method: 'POST',
-    //     body: formData,
-    //   });
+    try {
+      const response = await fetch('/api/addReview', {
+        method: 'POST',
+        body: formData,
+      })
 
-    //   if (!response.ok) {
-    //     console.error('Review submission failed');
-    //   }
-    // } catch (error) {
-    //   console.error('Failed to submit review', error);
-    // }
+      if (!response.ok) {
+        console.error('Review 등록 failed')
+      }
+    } catch (error) {
+      console.error('error fetching review before route handler', error)
+    }
   }
 
   return (
