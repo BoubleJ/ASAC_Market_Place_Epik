@@ -35,6 +35,7 @@ export default function ConnectForm() {
   async function onSubmit(data: z.infer<typeof FormSchema>) {
     console.log(data)
     const res = await fetchVerifyAndUpdateSocialLogin(encodeVerifyAndUpdateSocialLoginForm(data))
+    console.log(res)
     if (res.errorMessage) {
       openCheckModal(res.errorMessage)
     } else {
