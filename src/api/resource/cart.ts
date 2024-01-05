@@ -60,7 +60,8 @@ export async function fetchIncreaseCartItemById(itemId: number) {
 }
 
 export async function fetchDecreaseCartItemById(cartId: number, itemId: number) {
-  const res = await fetch(`api/cart/item/minus?cartId=${cartId}?itemId=${itemId}`, {
+  console.log(cartId, itemId)
+  const res = await fetch(`api/cart/item/minus?cartId=${cartId}&itemId=${itemId}`, {
     method: 'POST',
     headers: commonHeader,
   })

@@ -22,7 +22,7 @@ export interface CartItem {
   selected: boolean
 }
 
-export interface cartItemDto {
+export interface CartItemDto {
   itemId: number
   itemName: string
   itemPrice: number
@@ -33,10 +33,10 @@ export interface cartItemDto {
   promotionImageUrl: string
 }
 
-export interface Order {
+export interface Cart {
   cartId: number
   amount: number
   salesTotalAmount: number
   totalAmount: number
-  cartItemDtos: cartItemDto[]
+  cartItemDtos: CartItemDto[]
 }

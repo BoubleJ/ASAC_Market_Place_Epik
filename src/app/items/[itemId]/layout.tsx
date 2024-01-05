@@ -1,5 +1,4 @@
 import { cookies } from 'next/headers'
-import React from 'react'
 
 import { convertItemDetailToProduct } from '@/api/service/item'
 // import { fetchItemDetails } from '@/api/resource/items'

@@ -1,16 +1,9 @@
-import { type NextRequest, NextResponse } from 'next/server'
+import { type NextRequest } from 'next/server'
+
+import setAuthToken from '@/lib/middlewares/setAuthToken'
 
 export function middleware(request: NextRequest) {
-  const requestHeaders = new Headers(request.headers)
-  if (request.cookies.has('AUTH_TOKEN')) {
-    console.log(request.cookies.get('AUTH_TOKEN'))
-    requestHeaders.set('Authorization', `Bearer ${request.cookies.get('AUTH_TOKEN')?.value}`)
+  if (request.nextUrl.pathname.startsWith('/recommendations') && request.nextUrl.searchParams.has('authorization')) {
+    return setAuthToken(request)
   }
-  const response = NextResponse.next()
-  response
-  return NextResponse.next({
-    request: {
-      headers: requestHeaders,
-    },
-  })
 }

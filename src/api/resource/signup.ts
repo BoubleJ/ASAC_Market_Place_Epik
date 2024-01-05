@@ -2,7 +2,7 @@ import { commonHeader } from '@/api/util/instance'
 import { ICheckEmailParams, ICheckUserIdParams, ISignUpPrams } from '@/types/signup'
 
 export async function fetchCheckLoginId(body: ICheckUserIdParams): Promise<boolean> {
-  const res = await fetch(`/api/members/check-loginid`, {
+  const res = await fetch(`api/members/check-loginid`, {
     method: 'POST',
     headers: commonHeader,
     body: JSON.stringify(body),
@@ -14,7 +14,7 @@ export async function fetchCheckLoginId(body: ICheckUserIdParams): Promise<boole
   return await res.json()
 }
 export async function fetchCheckEmail(body: ICheckEmailParams): Promise<boolean> {
-  const res = await fetch(`/api/members/check-email`, {
+  const res = await fetch(`api/members/check-email`, {
     method: 'POST',
     headers: commonHeader,
     body: JSON.stringify(body),
@@ -28,7 +28,7 @@ export async function fetchCheckEmail(body: ICheckEmailParams): Promise<boolean>
 }
 
 export async function fetchSignUp(body: ISignUpPrams) {
-  const res = await fetch(`/api/members/signup`, {
+  const res = await fetch(`api/members/signup`, {
     method: 'POST',
     headers: commonHeader,
     body: JSON.stringify(body),

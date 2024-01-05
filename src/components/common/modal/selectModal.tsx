@@ -3,13 +3,13 @@ import React from 'react'
 import { useModalState } from '@/components/provider/modalProvider'
 import { Button } from '@/components/ui/button'
 
-interface ICheckModal {
+interface ISelectModal {
   content: string
   onCheck?: () => void
   onCancel?: () => void
 }
 
-export default function SelectModal({ content, onCheck, onCancel }: ICheckModal) {
+export default function SelectModal({ content, onCheck, onCancel }: ISelectModal) {
   const state = useModalState()
   const handleCheck = () => {
     if (onCheck !== undefined) {

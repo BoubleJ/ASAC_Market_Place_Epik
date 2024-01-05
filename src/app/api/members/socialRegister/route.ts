@@ -16,9 +16,10 @@ export async function POST(req: NextRequest) {
     if (!res.ok) {
       throw new Error('Failed to check login id')
     }
-
-    return NextResponse.json(res)
+    const response = await res.json()
+    console.log(response)
+    return NextResponse.json(response)
   } catch (error) {
-    return NextResponse.redirect(`/login`)
+    return NextResponse.redirect(`http://localhost:3000/login`)
   }
 }

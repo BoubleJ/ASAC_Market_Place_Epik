@@ -1,7 +1,7 @@
 import { itemIdParam } from '@/app/items/[itemId]/layout'
 import { deleteWishParams } from '@/types/wish'
 
-import { baseLocalURL, commonHeader } from '../util/instance'
+import { baseLocalURL, baseURL, commonHeader } from '../util/instance'
 
 export async function fetchItemDetails(itemId: number) {
   const res = await fetch(`${baseLocalURL}/items?itemId=${itemId}`)
@@ -87,7 +87,7 @@ export async function deleteFromWishList(body: deleteWishParams) {
 
 export async function fetchWishList() {
   console.log('fetchWishList')
-  const res = await fetch(`/api/items/wishList`, {
+  const res = await fetch(`${baseURL}/api/items/wishList`, {
     method: 'GET',
     headers: commonHeader,
   })

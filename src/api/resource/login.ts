@@ -2,7 +2,7 @@ import { commonHeader } from '@/api/util/instance'
 import { ILoginParams, ISocialRegisterParams, IVerifyAndUpdateSocialLoginParams } from '@/types/login'
 
 export async function fetchLogin(body: ILoginParams) {
-  const res = await fetch(`/api/members/authenticate`, {
+  const res = await fetch(`api/members/authenticate`, {
     method: 'POST',
     headers: commonHeader,
     body: JSON.stringify(body),
@@ -17,7 +17,7 @@ export async function fetchLogin(body: ILoginParams) {
 }
 
 export async function fetchVerifyAndUpdateSocialLogin(body: IVerifyAndUpdateSocialLoginParams) {
-  const res = await fetch(`/api/members/verify-password`, {
+  const res = await fetch(`api/members/verify-password`, {
     method: 'POST',
     headers: commonHeader,
     body: JSON.stringify(body),
@@ -33,7 +33,7 @@ export async function fetchVerifyAndUpdateSocialLogin(body: IVerifyAndUpdateSoci
 }
 
 export async function fetchSocialRegister(body: ISocialRegisterParams) {
-  const res = await fetch(`/api/members/socialRegister`, {
+  const res = await fetch(`api/members/socialRegister`, {
     method: 'POST',
     headers: commonHeader,
     body: JSON.stringify(body),
