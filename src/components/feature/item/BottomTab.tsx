@@ -16,12 +16,11 @@ import { Product } from '@/types/item'
 interface IBottomTab {
   wished: boolean
   itemId: number
-  loginId: string
   product: Product
 }
 
 // state 추가하기!
-export default function BottomTab({ wished, itemId, loginId, product }: IBottomTab) {
+export default function BottomTab({ wished, itemId, product }: IBottomTab) {
   const itemIdParam = {
     itemId: itemId,
   }
@@ -58,7 +57,7 @@ export default function BottomTab({ wished, itemId, loginId, product }: IBottomT
     }
     msg = await addToWishList(body)
     openCheckModal(msg)
-    setIsWished(true)
+    if (msg !== '사용자를 찾을 수 없습니다. 로그인 해주세요') setIsWished(true)
   }
   return (
     // 찜하기 api, wished 필드 추가되면 찜하기 기능 구현 예정
