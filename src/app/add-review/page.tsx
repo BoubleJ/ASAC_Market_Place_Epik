@@ -5,8 +5,10 @@ import { useForm } from 'react-hook-form'
 
 import SvgIconPlusMono from '@/components/icons/icon-plus-mono'
 import { Button } from '@/components/ui/button'
+import { useRouter } from 'next/navigation'
 
 export default function AddReviewPage() {
+  const router = useRouter()
   const imgRef = useRef<HTMLInputElement>(null)
   const {
     register,
@@ -64,12 +66,10 @@ export default function AddReviewPage() {
         method: 'POST',
         body: formData,
       })
-
-      if (!response.ok) {
-        console.error('Review 등록 failed')
-      }
+      // 에러 처리 추가
+      router.push('/myPage')
     } catch (error) {
-      console.error('error fetching review before route handler', error)
+      console.error('error fetching addreview ', error)
     }
   }
 

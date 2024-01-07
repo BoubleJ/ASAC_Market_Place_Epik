@@ -22,7 +22,7 @@ export async function POST(req: NextRequest) {
 
     const res = await fetch(`${baseURL}/reviews/create`, {
       method: 'POST',
-      headers: requestHeaders,
+      // headers: requestHeaders,
       body: bodyFormdata,
     })
     const resoense = await res.json()
@@ -30,7 +30,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(resoense)
   } catch (error) {
     console.log('review 등록 에러', error)
-    return NextResponse.json({ msg: 'error' })
+    return NextResponse.json({ errorMessage: '리뷰등록 실패' })
   }
 }
 
