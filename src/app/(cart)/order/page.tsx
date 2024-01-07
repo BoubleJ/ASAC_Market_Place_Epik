@@ -79,7 +79,7 @@ export default async function OrderPage() {
       </section>
       <section className="w-full px-5 pb-[61px]">
         <OrderTerms />
-        <OrderPaymentButton />
+        <OrderPaymentButton content={orders} />
       </section>
     </>
   )

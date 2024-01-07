@@ -22,13 +22,22 @@ export interface IPaymentParams {
   paymentMethod: PaymentMethodType
 }
 
+export const ShippingStatus = {
+  PENDING: '배송준비',
+  PROCESSING: '배송중',
+  COMPLETED: '배송완료',
+  PAID: '결제완료',
+} as const
+
+export type DeliveryStatus = 'PENDING' | 'PROCESSING' | 'COMPLETED' | 'PAID'
+
 export interface IOrderListItem {
-  orderDateTime: Date
+  orderDateTime: string
   itemName: string
   orderId: number
   totalAmount: number
-  deliveryStatus: 'PENDING' | 'PROCESSING' | 'COMPLETED' | 'PAID'
-  paymentMethod: null
+  deliveryStatus: DeliveryStatus
+  paymentMethod: string | null
 }
 
 export type IOrderList = IOrderListItem[]
