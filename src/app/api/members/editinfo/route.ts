@@ -19,11 +19,10 @@ export async function POST(req: NextRequest) {
       body: JSON.stringify(body),
     })
 
-    if (!res.ok) {
-      throw new Error('Failed to edit Info')
-    }
-
     const response = await res.json()
+    if (res.status === 400) {
+      return NextResponse.json({ errorMessage: response.msg })
+    }
     return NextResponse.json({ response })
   } catch (error) {
     return NextResponse.redirect(`http://localhost:3000/myPage`)
