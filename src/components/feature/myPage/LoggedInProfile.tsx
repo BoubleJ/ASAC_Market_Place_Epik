@@ -1,15 +1,16 @@
 import React from 'react'
 
 import { Button } from '@/components/ui/button'
+import { memberType } from '@/app/(main)/(myPage)/myPage/page'
 
-export default function Profile() {
+export default function LoggedInProfile({ member }: { member: memberType }) {
   return (
     <div>
       <div className="flex gap-4 items-center ">
         <div className="border-2 border-brand-primary-400 rounded-lg p-4 text-brand-primary-500 text-title-md">
           일반
         </div>
-        <span className="text-title-md">이땡땡 님</span>
+        <span className="text-title-md">{member?.memberName} 님</span>
       </div>
       <div className="flex mt-4 justify-around gap-2 text-button-sm text-center">
         <Button variant={'gray'} size={'lg'}>
