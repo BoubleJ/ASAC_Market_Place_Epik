@@ -7,11 +7,7 @@ export async function fetchEditInfo(body: EditInfoParams) {
     headers: commonHeader,
     body: JSON.stringify(body),
   })
+  const msg = await res.json()
 
-  if (res.status === 404) {
-    const msg = await res.json()
-    return { errorMessage: msg.msg }
-  }
-
-  return await res.json()
+  return await msg
 }

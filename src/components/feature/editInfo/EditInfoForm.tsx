@@ -41,10 +41,7 @@ export default function EditInfoForm({ currentMemberInfo }: { currentMemberInfo:
   })
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
-    console.log(data)
-    console.log('????')
     const res = await fetchEditInfo(encodeEditInfoForm({ form: data }))
-    console.log(res)
     if (res.errorMessage) {
       openCheckModal(res.errorMessage)
       return
@@ -58,7 +55,6 @@ export default function EditInfoForm({ currentMemberInfo }: { currentMemberInfo:
   }
 
   async function handleValidateEmail(email: string) {
-    console.log(email)
     const isValidEmail = await fetchCheckEmail(encodeCheckEmail(email))
     isValidEmail && openCheckModal(email)
 
@@ -70,14 +66,10 @@ export default function EditInfoForm({ currentMemberInfo }: { currentMemberInfo:
     }
   }
   async function handleValidatePhone(phone: string) {
-    console.log(phone)
     openCheckModal(ErrorMsg.vaildate.phone)
   }
 
-  async function onError(error: any) {
-    console.log(error)
-    console.log('!!!!!!')
-  }
+  async function onError(error: any) {}
   return (
     <section className="py-8 px-5">
       <Form {...form}>
