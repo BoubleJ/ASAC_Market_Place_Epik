@@ -1,5 +1,6 @@
-import { baseURL, commonHeader } from '@/api/util/instance'
 import { cookies } from 'next/headers'
+
+import { baseURL, commonHeader } from '@/api/util/instance'
 
 export async function fetchMember() {
   if (cookies().has('AUTH_TOKEN')) {

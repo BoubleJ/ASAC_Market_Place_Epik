@@ -1,5 +1,5 @@
+import { commonHeader } from '@/api/util/instance'
 import { EditInfoParams } from '@/types/editinfo'
-import { baseURL, commonHeader } from '@/api/util/instance'
 
 export async function fetchEditInfo(body: EditInfoParams) {
   const res = await fetch(`/api/members/editinfo`, {

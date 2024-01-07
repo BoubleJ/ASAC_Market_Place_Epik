@@ -1,6 +1,5 @@
 import { EditInfoParams, IEditInfoForm } from '@/types/editinfo'
-import { ICheckEmailParams, ICheckUserIdParams, ISignUpForm } from '@/types/signup'
-import { ISignUpPrams } from '@/types/signup'
+import { ICheckEmailParams, ICheckUserIdParams } from '@/types/signup'
 
 export const encodeEditInfoForm = (data: IEditInfoForm): EditInfoParams => {
   const { loginId, password, newPassword, newPasswordCheck, memberName, email, phoneNumber } = data.form
