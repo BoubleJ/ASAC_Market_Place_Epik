@@ -1,16 +1,23 @@
+import Link from 'next/link'
+
 import { convertNumberFormat } from '@/lib/utils'
 import { OrderItem } from '@/types/order'
 
-interface IOrderProduct {
+interface IOrderDetailItem {
   content: OrderItem
 }
-export default function OrderProduct({ content }: IOrderProduct) {
+export default function OrderDetailItem({ content }: IOrderDetailItem) {
   const unDiscountPrice = content.itemPrice * content.itemCount
   const discountPrice = Math.floor(content.itemPrice * (content.discountRate / 100)) * content.itemCount
   const finalDiscountedPrice = unDiscountPrice - discountPrice
   return (
     <div className="flex flex-col gap-2">
-      <span className="text-body-base font-bold">{content.itemName}</span>
+      <Link
+        href={`/item/${content.itemId}`}
+        className="text-grayscale-800 text-body-base font-bold cursor-pointer hover:text-brand-primary-500"
+      >
+        {content.itemName}
+      </Link>
       <div className="flex">
         <div className="mr-2 text-body-base font-bold">
           <span>{convertNumberFormat(finalDiscountedPrice)}</span>

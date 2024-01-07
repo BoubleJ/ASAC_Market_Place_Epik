@@ -15,7 +15,7 @@ import OrderUserInfo from '@/components/feature/order/orderUserInfo'
 import { useOrderStore } from '@/store/client/orderSlice'
 import { IOrder } from '@/types/order'
 
-// export const runtime = 'edge'
+export const runtime = 'edge'
 
 const getOrders = async () => {
   try {
@@ -47,9 +47,7 @@ const getOrders = async () => {
 
 export default async function OrderPage() {
   const orders: IOrder = await getOrders()
-  console.log(orders)
   useOrderStore.setState({ orders: orders })
-  // console.log(useOrderStore.getState().orderCart)
   return (
     <>
       <section className="w-full px-5">

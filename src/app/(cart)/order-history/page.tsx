@@ -6,7 +6,7 @@ import OrderHistoryHeader from '@/components/feature/orderHistory/orderHistoryHe
 import OrderHistorylist from '@/components/feature/orderHistory/orderHistorylist'
 import { IOrderList } from '@/types/order'
 
-// export const runtime = 'edge'
+export const runtime = 'edge'
 
 const InititlaButtonContents = [
   { id: 'OrderHistoryButton3', content: '3개월', month: 3, clicked: true },
@@ -61,8 +61,8 @@ const DUMMY_ORDER_LIST: IOrderList = [
   },
 ]
 export default async function OrderHistoryePage() {
-  // const initialIOrderList = await getOrderList()
-  const initialIOrderList = DUMMY_ORDER_LIST
+  const initialIOrderList = await getOrderList()
+  // const initialIOrderList = DUMMY_ORDER_LIST
   return (
     <section className="w-full px-5">
       <OrderHistoryHeader />

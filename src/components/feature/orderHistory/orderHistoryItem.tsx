@@ -19,15 +19,16 @@ export default function OrderHistoryItem({ content }: IOrderHistoryItem) {
           <ChevronRight width={14} height={14} className="fill-transparent" />
         </Link>
       </div>
+      <div className="bg-grayscale-50 w-full h-[2px]" />
       <div className="flex gap-[23px]">
-        <div className="space-y-3 text-grayscale-600 font-medium">
+        <div className="space-y-3 text-grayscale-600 font-medium text-body-base">
           <span className="block line-clamp-1">상품명</span>
           <span className="block line-clamp-1">주문번호</span>
           <span className="block line-clamp-1">결제방법</span>
           <span className="block line-clamp-1">결제금액</span>
           <span className="block line-clamp-1">주문상태</span>
         </div>
-        <div className="space-y-3 text-grayscale-800 font-medium">
+        <div className="space-y-3 text-grayscale-800 font-medium text-body-base">
           <span className="block line-clamp-1">{content.itemName}</span>
           <span className="block line-clamp-1">{content.orderId}</span>
           <span className="block line-clamp-1">{content.paymentMethod}</span>
