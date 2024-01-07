@@ -4,8 +4,11 @@ import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-import { fetchCheckEmail, fetchSignUp } from '@/api/resource/signup'
-import { encodeCheckEmail, encodeSignUpForm } from '@/api/service/signup'
+import { fetchEditInfo } from '@/api/resource/editInfo'
+import { fetchCheckEmail } from '@/api/resource/signup'
+import { encodeEditInfoForm } from '@/api/service/editinfo'
+import { encodeCheckEmail } from '@/api/service/signup'
+import { currentMemberInfoType } from '@/app/edit-info/page'
 import CheckModal from '@/components/common/modal/checkModal'
 import SignupValidationContainer from '@/components/feature/signup/SignupValidationContainer'
 import { useModalState } from '@/components/provider/modalProvider'
@@ -13,9 +16,6 @@ import { Button } from '@/components/ui/button'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { editInfoFormSchema } from '@/lib/schema/editInfo'
-import { encodeEditInfoForm } from '@/api/service/editinfo'
-import { fetchEditInfo } from '@/api/resource/editInfo'
-import { currentMemberInfoType } from '@/app/edit-info/page'
 
 const FormSchema = editInfoFormSchema
 

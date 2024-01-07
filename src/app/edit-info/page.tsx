@@ -1,6 +1,7 @@
 import React from 'react'
-import EditInfoForm from '@/components/feature/editInfo/EditInfoForm'
+
 import { fetchMember, fetchMemberInfo } from '@/api/resource/member'
+import EditInfoForm from '@/components/feature/editInfo/EditInfoForm'
 
 export type currentMemberInfoType = {
   loginId: string

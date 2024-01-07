@@ -1,5 +1,6 @@
-import { editInfoFormSchema } from '@/lib/schema/editInfo'
 import { z } from 'zod'
+
+import { editInfoFormSchema } from '@/lib/schema/editInfo'
 
 export interface IEditInfoForm {
   form: z.infer<typeof editInfoFormSchema>

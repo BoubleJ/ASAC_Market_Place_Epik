@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { Button } from '@/components/ui/button'
 import { memberType } from '@/app/(main)/(myPage)/myPage/page'
+import { Button } from '@/components/ui/button'
 
 export default function LoggedInProfile({ member }: { member: memberType }) {
   return (
