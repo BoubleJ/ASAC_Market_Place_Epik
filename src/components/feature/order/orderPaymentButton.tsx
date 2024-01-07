@@ -1,20 +1,33 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
+import { useEffect } from 'react'
 
+import { fetchInsertCartItemById } from '@/api/resource/cart'
 import { fetchOrdersPayment } from '@/api/resource/order'
 import CheckModal from '@/components/common/modal/checkModal'
 import { useModalState } from '@/components/provider/modalProvider'
 import { Button } from '@/components/ui/button'
+import { convertNumberFormat } from '@/lib/utils'
+import { useCartStore } from '@/store/client/cartSlice'
 import { useOrderStore } from '@/store/client/orderSlice'
-import { IPaymentParams } from '@/types/order'
+import { IOrder, IPaymentParams } from '@/types/order'
 
-export default function OrderPaymentButton() {
+interface IOrderPaymentButton {
+  content: IOrder
+}
+
+export default function OrderPaymentButton({ content }: IOrderPaymentButton) {
   const router = useRouter()
   const state = useModalState()
-  const { orders } = useOrderStore()
+  const { orders, setOrders } = useOrderStore()
+  const { unSelectedItems } = useCartStore()
+  const restItem = unSelectedItems()
 
-  console.log(orders)
+  const deliveryCharge = 3000
+  useEffect(() => {
+    setOrders(content)
+  }, [setOrders, content])
 
   const openCheckModal = (content: string) => {
     state.setModal(<CheckModal content={content} />)
@@ -28,16 +41,22 @@ export default function OrderPaymentButton() {
       paymentMethod: 'KAKAOPAY',
     }
 
+    console.log(body)
+
     const res = await fetchOrdersPayment(body)
-    if (typeof res === 'string') {
-      return openCheckModal(res)
+    console.log('paymentResult :', res)
+    if (res.msg) {
+      return openCheckModal(res.msg)
+    }
+    if (restItem.length !== 0) {
+      restItem.map(async (item) => await fetchInsertCartItemById(item.id))
     }
     router.push('/order-complete')
   }
 
   return (
     <Button variant={'primary'} size={'lg'} onClick={handleOnPayment}>
-      <span>{orders?.totalAmount!}원 결제하기</span>
+      <span>{convertNumberFormat(orders?.totalAmount! + deliveryCharge)}원 결제하기</span>
     </Button>
   )
 }

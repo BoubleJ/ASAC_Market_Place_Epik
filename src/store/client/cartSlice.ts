@@ -11,6 +11,7 @@ type CartStore = {
   setCartId: (id: number) => void
   setCart: (cartDtos: CartItemDto[]) => void
   selectedItems: () => CartItem[]
+  unSelectedItems: () => CartItem[]
   price: () => number
   discountPrice: () => number
   count: () => number
@@ -70,24 +71,33 @@ export const useCartStore = create<CartStore>()(
       if (cart.length) return cart.filter((item) => item.selected === true)
       return []
     },
+    unSelectedItems: () => {
+      const { cart } = get()
+      if (cart.length) return cart.filter((item) => item.selected === false)
+      return []
+    },
     price() {
       const { cart } = get()
       const items = cart.filter((item) => item.selected === true)
       if (items.length)
-        return items
-          .map((item) => Math.floor((item.itemPrice - item.discountedPrice) * item.count))
-          // .map((item) => Math.floor(item.itemPrice - item.itemPrice * (item.discountRate / 100)) * item.count)
-          .reduce((prev, curr) => prev + curr)
+        return (
+          items
+            .map((item) => Math.floor((item.itemPrice - item.discountedPrice) * item.count))
+            // .map((item) => Math.floor(item.itemPrice - item.itemPrice * (item.discountRate / 100)) * item.count)
+            .reduce((prev, curr) => prev + curr)
+        )
       return 0
     },
     discountPrice() {
       const { cart } = get()
       const items = cart.filter((item) => item.selected === true)
       if (items.length)
-        return items
-          .map((item) => Math.floor(item.discountedPrice * item.count))
-          // .map((item) => Math.floor(item.itemPrice * (item.discountRate / 100)) * item.count)
-          .reduce((prev, curr) => prev + curr)
+        return (
+          items
+            .map((item) => Math.floor(item.discountedPrice * item.count))
+            // .map((item) => Math.floor(item.itemPrice * (item.discountRate / 100)) * item.count)
+            .reduce((prev, curr) => prev + curr)
+        )
       return 0
     },
     count: () => {

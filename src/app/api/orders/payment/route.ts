@@ -5,6 +5,8 @@ import { baseURL } from '@/api/util/instance'
 
 export async function POST(req: NextRequest) {
   try {
+    const body = await req.json()
+    console.log(body)
     const requestHeaders = new Headers(req.headers)
 
     const authToken = cookies().get('AUTH_TOKEN')?.value
@@ -15,7 +17,9 @@ export async function POST(req: NextRequest) {
     }
 
     const res = await fetch(`${baseURL}/orders/payment`, {
+      method: 'POST',
       headers: requestHeaders,
+      body: JSON.stringify(body),
     })
 
     if (!res.ok) {

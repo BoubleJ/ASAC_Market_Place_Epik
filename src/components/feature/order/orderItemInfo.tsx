@@ -7,7 +7,7 @@ interface IOrderItemInfo {
 }
 
 export default function OrderItemInfo({ orderItems }: IOrderItemInfo) {
-  const isEmpty = !orderItems || orderItems.length !== 0
+  const isEmpty = !orderItems
   const headItemNamePrefix = isEmpty ? '' : orderItems[0].itemName.substring(0, 12)
   const orderProductCount = !orderItems ? 0 : orderItems.length
   const headItemName = isEmpty ? '선택된 상품이 없습니다' : `${headItemNamePrefix}...외${orderProductCount}건`
@@ -18,8 +18,8 @@ export default function OrderItemInfo({ orderItems }: IOrderItemInfo) {
           <span className="">주문상품</span>
           <span className="ml-auto pr-[9px] line-clamp-1">{headItemName}</span>
         </AccordionTrigger>
-        {/* <AccordionContent>{!isEmpty && <OrderItemList />}</AccordionContent> */}
-        <AccordionContent>{<OrderItemList />}</AccordionContent>
+        <AccordionContent>{!isEmpty && <OrderItemList />}</AccordionContent>
+        {/* <AccordionContent>{<OrderItemList />}</AccordionContent> */}
       </AccordionItem>
     </Accordion>
   )
