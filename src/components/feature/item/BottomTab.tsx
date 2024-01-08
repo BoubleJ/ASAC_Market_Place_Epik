@@ -40,7 +40,8 @@ export default function BottomTab({ wished, itemId, product }: IBottomTab) {
 
   const handleAddToCart = async () => {
     const msg = await fetchInsertCartItemById(product.id)
-    if (!msg.startWith('장바구니')) {
+    console.log(msg)
+    if (!msg.startsWith('장바구니')) {
       return openSelectModal(`${msg}`)
     }
     add(product)

@@ -15,13 +15,13 @@ export async function fetchGetCartItem() {
 }
 
 export async function fetchInsertCartItemById(itemId: number) {
-  const res = await fetch(`api/cart/insert?itemId=${itemId}`, {
+  const res = await fetch(`/api/cart/insert?itemId=${itemId}`, {
     method: 'POST',
     headers: commonHeader,
   })
 
   if (res.status !== 200) {
-    const errorMsg = await res.text()
+    const errorMsg = await res.json()
     return { errorMessage: errorMsg }
   }
 
