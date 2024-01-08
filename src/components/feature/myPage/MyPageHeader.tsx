@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React from 'react'
 
 import Header from '@/components/common/header'
@@ -11,7 +12,9 @@ export default function MyPageHeader() {
         center={<span className="text-center">마이마켓</span>}
         right={
           <button className="ml-auto">
-            <Bag width={'1.5rem'} height={'1.5rem'} fill="transparent" />
+            <Link href={`/cart`}>
+              <Bag width={'1.5rem'} height={'1.5rem'} fill="transparent" />
+            </Link>
           </button>
         }
       />

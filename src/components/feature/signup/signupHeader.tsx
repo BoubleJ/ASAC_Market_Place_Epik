@@ -1,4 +1,5 @@
 'use client'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
 import Header from '@/components/common/header'
@@ -21,11 +22,13 @@ export default function SignupHeader() {
       center={<span className="text-center">회원가입</span>}
       right={
         <Button
-        size={'icon'}
-        onClick={() => router.push("/cart")}
+          size={'icon'}
+          onClick={() => router.push('/cart')}
           className="bg-transparent text-grayscale-900 hover:bg-transparent border-0 ring-0 shadow-none ml-auto"
         >
-          <Bag width={'1.5rem'} height={'1.5rem'} fill="white" />
+          <Link href={`/cart`}>
+            <Bag width={'1.5rem'} height={'1.5rem'} fill="white" />
+          </Link>
         </Button>
       }
     />

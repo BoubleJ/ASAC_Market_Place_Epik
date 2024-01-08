@@ -1,4 +1,5 @@
 'use client'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 
@@ -33,7 +34,9 @@ export default function SearchResultHeader({ searchedWord }: { searchedWord: str
             setSearchWord={setSearchWord}
           />
           <button className="font-bold">
-            <Bag width={'1.5rem'} height={'1.5rem'} fill="transparent" />
+            <Link href={`/cart`}>
+              <Bag width={'1.5rem'} height={'1.5rem'} fill="transparent" />
+            </Link>
           </button>
         </div>
       </div>

@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React from 'react'
 
 import Header from '@/components/common/header'
@@ -16,7 +17,9 @@ export default function SearchHeader() {
             // onClick={() => }
             className="bg-transparent hover:bg-transparent border-0 ring-0 shadow-none ml-auto"
           >
-            <Bag width={'1.5rem'} height={'1.5rem'} fill="transparent" />
+            <Link href={`/cart`}>
+              <Bag width={'1.5rem'} height={'1.5rem'} fill="transparent" />
+            </Link>
           </Button>
         }
       />

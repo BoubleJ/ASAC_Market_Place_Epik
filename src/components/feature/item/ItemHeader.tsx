@@ -1,4 +1,5 @@
 'use client'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import React from 'react'
 
@@ -23,7 +24,9 @@ export default function ItemHeader({ itemName }: { itemName: string }) {
           // onClick={() => router.back()}
           className="bg-transparent text-grayscale-900 hover:bg-transparent border-0 ring-0 shadow-none ml-auto"
         >
-          <Bag width={'1.5rem'} height={'1.5rem'} fill="white" />
+          <Link href={`/cart`}>
+            <Bag width={'1.5rem'} height={'1.5rem'} fill="white" />
+          </Link>
         </Button>
       </nav>
     </header>

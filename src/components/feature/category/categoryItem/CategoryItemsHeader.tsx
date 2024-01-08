@@ -1,4 +1,5 @@
 'use client'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import React from 'react'
 
@@ -17,7 +18,9 @@ export default function CategoryItemsHeader({ mainCategory }: { mainCategory: st
       center={<span className="text-center">{mainCategory}</span>}
       right={
         <button className="ml-auto">
-          <Bag width={'1.5rem'} height={'1.5rem'} fill="transparent" />
+          <Link href={`/cart`}>
+            <Bag width={'1.5rem'} height={'1.5rem'} fill="transparent" />
+          </Link>
         </button>
       }
     />
