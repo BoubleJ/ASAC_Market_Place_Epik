@@ -2,10 +2,22 @@
 import { useRouter } from 'next/navigation'
 import React from 'react'
 
+import { commonHeader } from '@/api/util/instance'
+
 import MyMenu from './MyMenu'
 
 export default function MyMenus() {
   const router = useRouter()
+
+  async function handleDelete() {
+    const res = await fetch(`/api/logout`, {
+      method: 'POST',
+      headers: commonHeader,
+    })
+    const msg = await res.json()
+    console.log(msg)
+  }
+
   return (
     <div className="flex flex-col w-full">
       <div className="border-4 border-grayscale-50"></div>
@@ -23,6 +35,12 @@ export default function MyMenus() {
 
       <MyMenu menuName={'1:1 문의'} />
       <MyMenu menuName={'자주하는 질문'} />
+      <MyMenu
+        menuName={'로그아웃'}
+        onClick={() => {
+          handleDelete()
+        }}
+      />
     </div>
   )
 }
