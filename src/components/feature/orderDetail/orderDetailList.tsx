@@ -31,7 +31,7 @@ export default function OrderDetailList({
         {orderDetailItems.map((item) => (
           <div key={item.itemId} className="flex justify-between w-full py-4">
             <OrderDetailItem content={item} />
-            <OrderDetailButtonGroup deliveryStatus={deliveryStatus} />
+            <OrderDetailButtonGroup content={item} deliveryStatus={deliveryStatus} />
           </div>
         ))}
       </div>

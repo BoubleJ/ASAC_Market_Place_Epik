@@ -1,9 +1,11 @@
 'use client'
 
+import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 
 import { fetchInsertCartItemById } from '@/api/resource/cart'
 import { addToWishList, deleteFromWishList } from '@/api/resource/items'
+import { basePath } from '@/api/util/instance'
 import { itemIdParam } from '@/app/items/[itemId]/layout'
 import CheckModal from '@/components/common/modal/checkModal'
 import SelectModal from '@/components/common/modal/selectModal'
@@ -27,6 +29,7 @@ export default function BottomTab({ wished, itemId, product }: IBottomTab) {
   const state = useModalState()
   const [isWished, setIsWished] = useState(wished)
   const { add } = useCartStore()
+  const router = useRouter()
 
   const openCheckModal = (content: string) => {
     state.setModal(<CheckModal content={content} />)
@@ -38,13 +41,19 @@ export default function BottomTab({ wished, itemId, product }: IBottomTab) {
     state.modalRef.current?.showModal()
   }
 
-  const handleAddToCart = async () => {
+  const handlePushToCart = async () => {
+    return router.push(`${basePath}/cart`)
+  }
+
+  const handleMoModalWithAddToCart = async () => {
     const msg = await fetchInsertCartItemById(product.id)
     console.log(msg)
     if (!msg.startsWith('장바구니')) {
-      return openSelectModal(`${msg}`)
+      return openSelectModal(`이미 장바구니에 추가한 상품입니다.`)
+    } else {
+      add(product)
+      return openSelectModal(`장바구니에 상품을 추가하였습니다. 장바구니로 이동하시겠습니까`, handlePushToCart)
     }
-    add(product)
   }
 
   async function handleWish(body: itemIdParam) {
@@ -71,7 +80,7 @@ export default function BottomTab({ wished, itemId, product }: IBottomTab) {
       >
         <SvgHeart fill={isWished ? 'currentColor' : 'transparent'} width={'1.5rem'} height={'1.5rem'} />
       </Button>
-      <Button variant={'primary'} size={'sm'} className="h-full w-4/5" onClick={handleAddToCart}>
+      <Button variant={'primary'} size={'sm'} className="h-full w-4/5" onClick={handleMoModalWithAddToCart}>
         <span className=" text-button-base">구매하기{wished}</span>
       </Button>
     </div>

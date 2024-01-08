@@ -43,8 +43,8 @@ const DUMMY_ORDERS: IOrder = {
 
 export const useOrderStore = create<OrderStore>()(
   devtools((set, get) => ({
-    orders: DUMMY_ORDERS,
-    // orders: null,
+    // orders: DUMMY_ORDERS,
+    orders: null,
     setOrders: (orders: IOrder) => {
       set({ orders: orders })
     },
