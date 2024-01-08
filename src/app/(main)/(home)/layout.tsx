@@ -8,7 +8,7 @@ export default function HomeLayout({ children }: { children: React.ReactNode }) 
     <section className="relative min-h-screen">
       <HomeHeader />
       <HomeTabs />
-      <div className="min-h-scree pt-24">{children}</div>
+      <div className="min-h-screen pt-24">{children}</div>
     </section>
   )
 }
