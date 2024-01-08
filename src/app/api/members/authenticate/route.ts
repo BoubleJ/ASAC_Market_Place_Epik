@@ -14,7 +14,6 @@ export async function POST(req: NextRequest) {
       body: JSON.stringify(body),
     })
     const loginTokenData = await res.json()
-    console.log(loginTokenData)
 
     if (!res.ok) {
       // throw new Error('Failed to login authenticate')

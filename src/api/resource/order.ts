@@ -1,8 +1,8 @@
-import { commonHeader } from '@/api/util/instance'
+import { basePath, commonHeader } from '@/api/util/instance'
 import { IPaymentParams } from '@/types/order'
 
 export async function fetchOrdersPayment(body: IPaymentParams) {
-  const res = await fetch(`api/orders/payment`, {
+  const res = await fetch(`${basePath}/api/orders/payment`, {
     method: 'POST',
     headers: commonHeader,
     body: JSON.stringify(body),
@@ -18,7 +18,7 @@ export async function fetchOrdersPayment(body: IPaymentParams) {
 }
 
 export async function fetchOrders() {
-  const res = await fetch(`api/orders`, {
+  const res = await fetch(`${basePath}/api/orders`, {
     headers: commonHeader,
   })
 
@@ -32,7 +32,7 @@ export async function fetchOrders() {
 }
 
 export async function fetchOrderList(month: number) {
-  const res = await fetch(`api/mypage/member/orderlist?month=${month}`, {
+  const res = await fetch(`${basePath}/api/mypage/member/orderlist?month=${month}`, {
     headers: commonHeader,
   })
 
@@ -46,7 +46,7 @@ export async function fetchOrderList(month: number) {
 }
 
 export async function fetchOrderListDetail(orderId: number) {
-  const res = await fetch(`api/mypage/member/orderlist/detail/${orderId}`, {
+  const res = await fetch(`${basePath}/api/mypage/member/orderlist/detail/${orderId}`, {
     headers: commonHeader,
   })
 

@@ -36,12 +36,13 @@ export default function ConnectForm() {
     console.log(data)
     const res = await fetchVerifyAndUpdateSocialLogin(encodeVerifyAndUpdateSocialLoginForm(data))
     console.log(res)
-    if (res.errorMessage) {
-      openCheckModal(res.errorMessage)
-    } else {
-      openCheckModal(res)
-      router.push('/recommandations')
+    if (res.msg.startsWith('비밀번호 검증')) {
+      openCheckModal(res.msg)
     }
+    // else {
+    //   openCheckModal(res.msg)
+    //   router.push('/recommandations')
+    // }
   }
 
   return (
