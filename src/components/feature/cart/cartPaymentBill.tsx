@@ -7,6 +7,8 @@ import CartPaymentButton from './cartPaymentButton'
 
 export default function CartPaymentBill() {
   const { selectedItems, price, discountPrice } = useCartStore()
+  console.log(price())
+  console.log(discountPrice())
   const deliveryCharge = 3000
   const paymentScheduledItems = selectedItems()
   return (

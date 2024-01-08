@@ -1,24 +1,50 @@
 'use client'
+
 import React, { useState } from 'react'
 
+import { fetchInsertCartItemById } from '@/api/resource/cart'
 import { addToWishList, deleteFromWishList } from '@/api/resource/items'
 import { itemIdParam } from '@/app/items/[itemId]/layout'
 import CheckModal from '@/components/common/modal/checkModal'
+import SelectModal from '@/components/common/modal/selectModal'
 import SvgHeart from '@/components/icons/heart'
 import { useModalState } from '@/components/provider/modalProvider'
 import { Button } from '@/components/ui/button'
+import { useCartStore } from '@/store/client/cartSlice'
+import { Product } from '@/types/item'
+
+interface IBottomTab {
+  wished: boolean
+  itemId: number
+  product: Product
+}
 
 // state 추가하기!
-export default function BottomTab({ wished, itemId }: { wished: boolean; itemId: number }) {
+export default function BottomTab({ wished, itemId, product }: IBottomTab) {
   const itemIdParam = {
     itemId: itemId,
   }
   const state = useModalState()
   const [isWished, setIsWished] = useState(wished)
+  const { add } = useCartStore()
 
   const openCheckModal = (content: string) => {
     state.setModal(<CheckModal content={content} />)
     state.modalRef.current?.showModal()
+  }
+
+  const openSelectModal = (content: string, onCheck?: () => void, onCancel?: () => void) => {
+    state.setModal(<SelectModal content={content} onCheck={onCheck} onCancel={onCancel} />)
+    state.modalRef.current?.showModal()
+  }
+
+  const handleAddToCart = async () => {
+    const msg = await fetchInsertCartItemById(product.id)
+    console.log(msg)
+    if (!msg.startsWith('장바구니')) {
+      return openSelectModal(`${msg}`)
+    }
+    add(product)
   }
 
   async function handleWish(body: itemIdParam) {
@@ -45,7 +71,7 @@ export default function BottomTab({ wished, itemId }: { wished: boolean; itemId:
       >
         <SvgHeart fill={isWished ? 'currentColor' : 'transparent'} width={'1.5rem'} height={'1.5rem'} />
       </Button>
-      <Button variant={'primary'} size={'sm'} className="h-full w-4/5">
+      <Button variant={'primary'} size={'sm'} className="h-full w-4/5" onClick={handleAddToCart}>
         <span className=" text-button-base">구매하기{wished}</span>
       </Button>
     </div>

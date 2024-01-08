@@ -1,16 +1,19 @@
-import { type NextRequest, NextResponse } from 'next/server'
+import { type NextRequest } from 'next/server'
 
-export function middleware(request: NextRequest) {
-  const requestHeaders = new Headers(request.headers)
-  if (request.cookies.has('AUTH_TOKEN')) {
-    console.log(request.cookies.get('AUTH_TOKEN'))
-    requestHeaders.set('Authorization', `Bearer ${request.cookies.get('AUTH_TOKEN')?.value}`)
+import setAuthToken from '@/lib/middlewares/setAuthToken'
+import setProviderInfo from '@/lib/middlewares/setProviderInfo'
+
+export async function middleware(request: NextRequest) {
+  if (request.nextUrl.pathname.startsWith('/recommendations') && request.nextUrl.searchParams.has('authToken')) {
+    return setAuthToken(request)
   }
-  const response = NextResponse.next()
-  response
-  return NextResponse.next({
-    request: {
-      headers: requestHeaders,
-    },
-  })
+  if (request.nextUrl.pathname.startsWith('/login/connect') && request.nextUrl.searchParams.has('providerEmail')) {
+    return setProviderInfo(request)
+  }
+  if (
+    request.nextUrl.pathname.startsWith('/login/social-register') &&
+    request.nextUrl.searchParams.has('providerEmail')
+  ) {
+    return setProviderInfo(request)
+  }
 }

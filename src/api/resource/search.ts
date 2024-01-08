@@ -43,7 +43,7 @@ export async function fetchFilterData(params: string) {
 }
 
 export async function fetchAutoCompleteWords(searchingWord: string) {
-  // const res = await fetch(`/api/search/autokeyword?keyword=${searchingWord}`)
+  // const res = await fetch(`${baseURL}/api/search/autokeyword?keyword=${searchingWord}`)
   const res = await fetch(`${baseLocalURL}/search/autokeyword?keyword=${searchingWord}&limit=5`)
   if (!res.ok) {
     throw new Error('Failed to fetch')

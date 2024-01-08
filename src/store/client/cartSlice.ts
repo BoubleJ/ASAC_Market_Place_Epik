@@ -1,21 +1,29 @@
 import { create } from 'zustand'
 import { devtools } from 'zustand/middleware'
 
-import { CartItem, ProductType } from '@/types/product'
+import { convertCartitemDtosToCartItem } from '@/api/service/cart'
+import { Product } from '@/types/item'
+import { CartItem, CartItemDto } from '@/types/product'
 
 type CartStore = {
+  cartId: number
   cart: CartItem[]
+  setCartId: (id: number) => void
+  setCart: (cartDtos: CartItemDto[]) => void
   selectedItems: () => CartItem[]
+  unSelectedItems: () => CartItem[]
   price: () => number
   discountPrice: () => number
   count: () => number
   selectedCount: () => number
-  add: (product: ProductType) => void
-  select: (idProduct: number) => void
-  selectAll: (value: boolean) => void
-  remove: (idProduct: number) => void
+  add: (product: Product) => void
+  select: (ProductId: number) => void
+  unSelect: (ProductId: number) => void
+  selectAll: () => void
+  unSelectAll: () => void
+  decrease: (ProductId: number) => void
   removeSelectedItem: () => void
-  removeItem: (idProduct: number) => void
+  removeItem: (ProductId: number) => void
   removeAll: () => void
 }
 
@@ -30,7 +38,7 @@ const DUMMY_CART_ITEMS: CartItem[] = [
     promotionUrl: '/images/hotdog.svg',
     reviewCount: 80,
     count: 2,
-    selected: false,
+    selected: true,
   },
   {
     id: 2,
@@ -48,27 +56,48 @@ const DUMMY_CART_ITEMS: CartItem[] = [
 
 export const useCartStore = create<CartStore>()(
   devtools((set, get) => ({
-    cart: [...DUMMY_CART_ITEMS],
-    // cart: [],
+    // cart: [...DUMMY_CART_ITEMS],
+    cartId: 0,
+    cart: [],
+    setCartId(id: number) {
+      set({ cartId: id })
+    },
+    setCart: async (cartItemList: CartItemDto[]) => {
+      const cartItems: CartItem[] = convertCartitemDtosToCartItem(cartItemList)
+      set({ cart: cartItems })
+    },
     selectedItems: () => {
       const { cart } = get()
       if (cart.length) return cart.filter((item) => item.selected === true)
+      return []
+    },
+    unSelectedItems: () => {
+      const { cart } = get()
+      if (cart.length) return cart.filter((item) => item.selected === false)
       return []
     },
     price() {
       const { cart } = get()
       const items = cart.filter((item) => item.selected === true)
       if (items.length)
-        return items.map((item) => item.discountedPrice * item.count).reduce((prev, curr) => prev + curr)
+        return (
+          items
+            .map((item) => Math.floor((item.itemPrice - item.discountedPrice) * item.count))
+            // .map((item) => Math.floor(item.itemPrice - item.itemPrice * (item.discountRate / 100)) * item.count)
+            .reduce((prev, curr) => prev + curr)
+        )
       return 0
     },
     discountPrice() {
       const { cart } = get()
       const items = cart.filter((item) => item.selected === true)
       if (items.length)
-        return items
-          .map((item) => (item.itemPrice - item.discountedPrice) * item.count)
-          .reduce((prev, curr) => prev + curr)
+        return (
+          items
+            .map((item) => Math.floor(item.discountedPrice * item.count))
+            // .map((item) => Math.floor(item.itemPrice * (item.discountRate / 100)) * item.count)
+            .reduce((prev, curr) => prev + curr)
+        )
       return 0
     },
     count: () => {
@@ -81,24 +110,34 @@ export const useCartStore = create<CartStore>()(
       if (cart.length) return cart.filter((item) => item.selected === true).length
       return 0
     },
-    add: (product: ProductType) => {
+    add: (product: Product) => {
       const { cart } = get()
       const updatedCart = updateCart(product, cart)
       set({ cart: updatedCart })
     },
-    select(idProduct: number) {
+    select(ProductId: number) {
       const { cart } = get()
-      const updatedCart = updateSelectfield(idProduct, cart)
+      const updatedCart = updateSelectfield(ProductId, cart)
       set({ cart: updatedCart })
     },
-    selectAll(value: boolean) {
+    unSelect(ProductId: number) {
       const { cart } = get()
-      const updatedCart = toggleAllCartItem(value, cart)
+      const updatedCart = updateSelectfield(ProductId, cart)
       set({ cart: updatedCart })
     },
-    remove: (idProduct: number) => {
+    selectAll() {
       const { cart } = get()
-      const updatedCart = removeCart(idProduct, cart)
+      const updatedCart = selectAllCartItem(cart)
+      set({ cart: updatedCart })
+    },
+    unSelectAll() {
+      const { cart } = get()
+      const updatedCart = unSelectAllCartItem(cart)
+      set({ cart: updatedCart })
+    },
+    decrease: (ProductId: number) => {
+      const { cart } = get()
+      const updatedCart = removeCart(ProductId, cart)
       set({ cart: updatedCart })
     },
     removeSelectedItem() {
@@ -106,22 +145,22 @@ export const useCartStore = create<CartStore>()(
       const updatedCart = removeSelected(cart)
       set({ cart: updatedCart })
     },
-    removeItem(idProduct: number) {
+    removeItem(ProductId: number) {
       const { cart } = get()
-      const updatedCart = removeFromCart(idProduct, cart)
+      const updatedCart = removeFromCart(ProductId, cart)
       set({ cart: updatedCart })
     },
     removeAll: () => set({ cart: [] }),
   })),
 )
 
-function updateCart(product: ProductType, cart: CartItem[]): CartItem[] {
-  const cartItem = { ...product, count: 1, selected: false } as CartItem
-
+function updateCart(product: Product, cart: CartItem[]): CartItem[] {
+  const cartItem = { ...product, count: 1, selected: true } as CartItem
   const productOnCart = cart.map((item) => item.id).includes(product.id)
 
-  if (!productOnCart) cart.push(cartItem)
-  else {
+  if (!productOnCart) {
+    cart.push(cartItem)
+  } else {
     return cart.map((item) => {
       if (item.id === product.id) return { ...item, count: item.count + 1 } as CartItem
       return item
@@ -131,24 +170,35 @@ function updateCart(product: ProductType, cart: CartItem[]): CartItem[] {
   return cart
 }
 
-function updateSelectfield(idProduct: number, cart: CartItem[]) {
+function updateSelectfield(ProductId: number, cart: CartItem[]) {
   return cart.map((item) => {
-    if (item.id === idProduct) return { ...item, selected: !item.selected }
+    if (item.id === ProductId) {
+      if (item.selected === true) {
+        return { ...item, selected: false, count: 1 }
+      } else {
+        return { ...item, selected: true, count: 1 }
+      }
+    }
     return item
   })
 }
 
-function toggleAllCartItem(value: boolean, cart: CartItem[]) {
+function selectAllCartItem(cart: CartItem[]) {
   return cart.map((item) => {
-    if (item.selected === !value) return { ...item, selected: value }
+    return { ...item, selected: true }
     return item
   })
 }
-
-function removeCart(idProduct: number, cart: CartItem[]): CartItem[] {
+function unSelectAllCartItem(cart: CartItem[]) {
+  return cart.map((item) => {
+    return { ...item, selected: false }
+    return item
+  })
+}
+function removeCart(ProductId: number, cart: CartItem[]): CartItem[] {
   return cart
     .map((item) => {
-      if (item.id === idProduct) return { ...item, count: item.count - 1 }
+      if (item.id === ProductId) return { ...item, count: item.count - 1 }
       return item
     })
     .filter((item) => {
@@ -156,9 +206,9 @@ function removeCart(idProduct: number, cart: CartItem[]): CartItem[] {
     })
 }
 
-function removeFromCart(idProduct: number, cart: CartItem[]): CartItem[] {
+function removeFromCart(ProductId: number, cart: CartItem[]): CartItem[] {
   return cart.filter((item) => {
-    return item.id !== idProduct
+    return item.id !== ProductId
   })
 }
 

@@ -35,12 +35,14 @@ export default function ConnectForm() {
   async function onSubmit(data: z.infer<typeof FormSchema>) {
     console.log(data)
     const res = await fetchVerifyAndUpdateSocialLogin(encodeVerifyAndUpdateSocialLoginForm(data))
-    if (res.errorMessage) {
-      openCheckModal(res.errorMessage)
-    } else {
-      openCheckModal(res)
-      router.push('/recommandations')
+    console.log(res)
+    if (res.msg.startsWith('비밀번호 검증')) {
+      openCheckModal(res.msg)
     }
+    // else {
+    //   openCheckModal(res.msg)
+    //   router.push('/recommandations')
+    // }
   }
 
   return (
