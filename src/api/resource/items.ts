@@ -1,7 +1,7 @@
 import { itemIdParam } from '@/app/items/[itemId]/layout'
 import { deleteWishParams } from '@/types/wish'
 
-import { baseLocalURL, baseURL, commonHeader } from '../util/instance'
+import { baseLocalURL, basePath, baseURL, commonHeader } from '../util/instance'
 
 export async function fetchItemDetails(itemId: number) {
   const res = await fetch(`${baseLocalURL}/items?itemId=${itemId}`)
@@ -56,7 +56,7 @@ export async function addWish(itemId: number) {
 }
 
 export async function addToWishList(body: itemIdParam) {
-  const res = await fetch('/api/items/wish', {
+  const res = await fetch(`${basePath}/api/items/wish`, {
     method: 'POST',
     headers: commonHeader,
     body: JSON.stringify(body),
@@ -71,7 +71,7 @@ export async function addToWishList(body: itemIdParam) {
 }
 
 export async function deleteFromWishList(body: deleteWishParams) {
-  const res = await fetch('/api/items/deleteWish', {
+  const res = await fetch(`${basePath}/api/items/deleteWish`, {
     method: 'POST',
     headers: commonHeader,
     body: JSON.stringify(body),

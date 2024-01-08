@@ -5,6 +5,7 @@ import { baseURL } from '@/api/util/instance'
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
+    console.log(body)
     const requestHeaders = new Headers(req.headers)
 
     const res = await fetch(`${baseURL}/members/verify-password`, {

@@ -1,7 +1,7 @@
-import { commonHeader } from '@/api/util/instance'
+import { basePath, commonHeader } from '@/api/util/instance'
 
 export async function fetchGetCartItem() {
-  const res = await fetch(`api/cart`, {
+  const res = await fetch(`${basePath}/api/cart`, {
     headers: commonHeader,
   })
 
@@ -15,7 +15,7 @@ export async function fetchGetCartItem() {
 }
 
 export async function fetchInsertCartItemById(itemId: number) {
-  const res = await fetch(`/api/cart/insert?itemId=${itemId}`, {
+  const res = await fetch(`${basePath}/api/cart/insert?itemId=${itemId}`, {
     method: 'POST',
     headers: commonHeader,
   })
@@ -30,7 +30,7 @@ export async function fetchInsertCartItemById(itemId: number) {
 }
 
 export async function fetchDeleteCartItemById(itemId: number) {
-  const res = await fetch(`api/cart/delete?itemId=${itemId}`, {
+  const res = await fetch(`${basePath}/api/cart/delete?itemId=${itemId}`, {
     method: 'POST',
     headers: commonHeader,
   })
@@ -45,7 +45,7 @@ export async function fetchDeleteCartItemById(itemId: number) {
 }
 
 export async function fetchIncreaseCartItemById(itemId: number) {
-  const res = await fetch(`api/cart/item/add?itemId=${itemId}`, {
+  const res = await fetch(`${basePath}/api/cart/item/add?itemId=${itemId}`, {
     method: 'POST',
     headers: commonHeader,
   })
@@ -61,7 +61,7 @@ export async function fetchIncreaseCartItemById(itemId: number) {
 
 export async function fetchDecreaseCartItemById(cartId: number, itemId: number) {
   console.log(cartId, itemId)
-  const res = await fetch(`api/cart/item/minus?cartId=${cartId}&itemId=${itemId}`, {
+  const res = await fetch(`${basePath}/api/cart/item/minus?cartId=${cartId}&itemId=${itemId}`, {
     method: 'POST',
     headers: commonHeader,
   })
