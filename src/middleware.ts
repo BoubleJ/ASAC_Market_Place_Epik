@@ -1,7 +1,10 @@
-import { type NextRequest } from 'next/server'
+import { cookies } from 'next/headers'
+import { NextRequest, NextResponse } from 'next/server'
 
 import setAuthToken from '@/lib/middlewares/setAuthToken'
 import setProviderInfo from '@/lib/middlewares/setProviderInfo'
+
+import { basePath } from './api/util/instance'
 
 export async function middleware(request: NextRequest) {
   if (request.nextUrl.pathname.startsWith('/recommendations') && request.nextUrl.searchParams.has('authToken')) {
@@ -15,5 +18,9 @@ export async function middleware(request: NextRequest) {
     request.nextUrl.searchParams.has('providerEmail')
   ) {
     return setProviderInfo(request)
+  }
+  if (request.nextUrl.pathname.startsWith(`/myPage`) && !cookies().has('AUTH_TOKEN')) {
+    return NextResponse.redirect(`${basePath}/registration`)
+    // if()
   }
 }

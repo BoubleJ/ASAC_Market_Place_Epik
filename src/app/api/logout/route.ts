@@ -19,11 +19,11 @@ export async function POST(req: NextRequest) {
       headers: requestHeaders,
     })
 
-    if (!res.ok) {
-      // throw new Error('Failed to login authenticate')
-      console.log('Failed to logout', res.status)
-      return NextResponse.json({ msg: '로그아웃을 실패했습니다.' })
-    }
+    // if (!res.ok) {
+    //   // throw new Error('Failed to login authenticate')
+    //   console.log('Failed to logout', res.status)
+    //   return NextResponse.json({ msg: '로그아웃을 실패했습니다.' })
+    // }
 
     cookies().delete('AUTH_TOKEN')
 
