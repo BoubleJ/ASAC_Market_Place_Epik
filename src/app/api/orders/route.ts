@@ -7,24 +7,27 @@ export async function GET(req: NextRequest) {
   try {
     const requestHeaders = new Headers(req.headers)
 
-    if (!cookies().has('AUTH_TOKEN')) {
-      return NextResponse.json({ data: {} })
-    }
-    requestHeaders.set('Authorization', `Bearer ${cookies().get('AUTH_TOKEN')?.value}`)
+    const authToken = cookies().get('AUTH_TOKEN')?.value
+    const hasCookies = cookies().has('AUTH_TOKEN')
 
-    const res = await fetch(`${baseURL}/orders/payment`, {
+    if (hasCookies) {
+      requestHeaders.set('Authorization', `Bearer ${authToken}`)
+    }
+
+    const res = await fetch(`${baseURL}/orders`, {
       headers: requestHeaders,
     })
 
     if (!res.ok) {
-      throw new Error('Failed to check email')
+      console.log('Failed to get orders', res.status)
+      return NextResponse.json({ msg: '주문서를 불러오는데 실패했습니다.' })
     }
 
-    return NextResponse.json(await res.json())
+    const response = await res.json()
+    console.log(response)
+
+    return NextResponse.json(response)
   } catch (error) {
-    return NextResponse.redirect(`http://localhost:3000/signup`)
+    return NextResponse.json({ msg: '주문서를 불러오지 못했습니다' })
   }
 }
-// Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrZGhnYnlAbmF2ZXIuY29tIiwibWVtYmVySWQiOjI1MiwibG9naW5JZCI6Imx1Y3k0NTYiLCJhdXRoIjoiUk9MRV9VU0VSIiwiZXhwIjoxNzAzMDUwMTE5fQ.iWBf_4-mWKiqxKTCQD987OR_oyrOgcIfHG9jUOc3QAR1A4TBZ7jKXHkKcndJcGHVFd-uS0jkruw__5oS2j7E8A
-// http://43.201.27.83:8080/api/orders
-// http://localhost:8080/api/orders
