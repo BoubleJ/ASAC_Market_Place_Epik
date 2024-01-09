@@ -1,7 +1,7 @@
 import { itemIdParam } from '@/app/items/[itemId]/layout'
-import { deleteWishParams } from '@/types/wish'
+import { addhelpfulParams, deleteWishParams } from '@/types/wish'
 
-import { baseLocalURL, basePath, baseURL, commonHeader } from '../util/instance'
+import { baseLocalURL, basePath, commonHeader } from '../util/instance'
 
 export async function fetchItemDetails(itemId: number) {
   const res = await fetch(`${baseLocalURL}/items?itemId=${itemId}`)
@@ -19,30 +19,35 @@ export async function fetchReviews(itemId: number) {
   return res.json()
 }
 
-export async function fetchHelpfulCount(itemId: number, reviewId: number) {
-  const res = await fetch(`${baseLocalURL}/items/reviews/helpful?itemId=${itemId}&reviewId=${reviewId}`, {
+export async function fetchHelpfulCount(body: addhelpfulParams) {
+  // const res = await fetch(`${baseLocalURL}/items/reviews/helpful?itemId=${itemId}&reviewId=${reviewId}`, {
+  const res = await fetch(`${basePath}/api/helpfulCount`, {
     method: 'POST',
     headers: commonHeader,
+    body: JSON.stringify(body),
   })
 
   if (!res.ok) {
     throw new Error('Failed')
   }
-
-  return res
+  const state = await res.json()
+  console.log(state.msg, 'ㅎㅂㅎ')
+  return state.msg
 }
 
-export async function fetchLessHelpCount(itemId: number, reviewId: number) {
-  const res = await fetch(`${baseLocalURL}/items/reviews/helpless?itemId=${itemId}&reviewId=${reviewId}`, {
+export async function fetchLessHelpCount(body: addhelpfulParams) {
+  const res = await fetch(`${basePath}/api/helplessCount`, {
     method: 'POST',
     headers: commonHeader,
+    body: JSON.stringify(body),
   })
 
   if (!res.ok) {
     throw new Error('Failed')
   }
-
-  return res
+  const state = await res.json()
+  console.log(state.msg, 'ㅎㅂㅎ')
+  return state.msg
 }
 
 export async function addWish(itemId: number) {
@@ -87,7 +92,7 @@ export async function deleteFromWishList(body: deleteWishParams) {
 
 export async function fetchWishList() {
   console.log('fetchWishList')
-  const res = await fetch(`${baseURL}/api/items/wishList`, {
+  const res = await fetch(`${basePath}/api/items/wishList`, {
     method: 'GET',
     headers: commonHeader,
   })
