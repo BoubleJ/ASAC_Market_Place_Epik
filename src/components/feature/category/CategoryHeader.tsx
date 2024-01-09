@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React from 'react'
 
 import Header from '@/components/common/header'
@@ -12,7 +13,9 @@ export default function CategoryHeader() {
         center={<span className="text-center">카테고리</span>}
         right={
           <Button size={'icon'} className="bg-transparent hover:bg-transparent border-0 ring-0 shadow-none ml-auto">
-            <Bag width={'1.5rem'} height={'1.5rem'} fill="transparent" />
+            <Link href={`/cart`}>
+              <Bag width={'1.5rem'} height={'1.5rem'} fill="transparent" />
+            </Link>
           </Button>
         }
       />

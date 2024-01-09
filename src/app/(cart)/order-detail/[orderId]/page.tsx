@@ -6,7 +6,7 @@ import OrderDetailList from '@/components/feature/orderDetail/orderDetailList'
 import OrderDetailPaymentInfo from '@/components/feature/orderDetail/orderDetailPaymentInfo'
 import { IOrderDetail } from '@/types/order'
 
-export const runtime = 'edge'
+// export const runtime = 'edge'
 
 const getOrderListById = async (orderId: number) => {
   try {
@@ -24,14 +24,13 @@ const getOrderListById = async (orderId: number) => {
     })
 
     if (!res.ok) {
-      console.log('Failed to get orderlist', res.status)
+      console.log('Failed to get order detail', res.status)
       return { msg: '상세 주문 내역을 불러오는데 실패했습니다.' }
     }
 
     const response = await res.json()
-    console.log(response)
 
-    return response
+    return response.data
   } catch (error) {
     return { msg: '상세 주문 내역을 불러오지 못했습니다' }
   }

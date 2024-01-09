@@ -32,14 +32,14 @@ const getOrderList = async () => {
 
     if (!res.ok) {
       console.log('Failed to get orders', res.status)
-      return { msg: '주문서를 불러오는데 실패했습니다.' }
+      return { msg: '주문내역을 불러오는데 실패했습니다.' }
     }
 
     const response = await res.json()
 
     return response.data
   } catch (error) {
-    return { msg: '주문서를 불러오지 못했습니다' }
+    return { msg: '주문내역을 불러오지 못했습니다' }
   }
 }
 const DUMMY_ORDER_LIST: IOrderList = [

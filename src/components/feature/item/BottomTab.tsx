@@ -49,7 +49,8 @@ export default function BottomTab({ wished, itemId, product }: IBottomTab) {
     const msg = await fetchInsertCartItemById(product.id)
     console.log(msg)
     if (!msg.startsWith('장바구니')) {
-      return openSelectModal(`이미 장바구니에 추가한 상품입니다.`)
+      // return openSelectModal(`이미 장바구니에 추가한 상품입니다.`)
+      return openSelectModal(`${msg}`)
     } else {
       add(product)
       return openSelectModal(`장바구니에 상품을 추가하였습니다. 장바구니로 이동하시겠습니까`, handlePushToCart)

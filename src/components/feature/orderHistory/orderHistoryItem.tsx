@@ -3,7 +3,7 @@ import React from 'react'
 
 import { ChevronRight } from '@/components/icons'
 import { convertStringToDateFormat } from '@/lib/utils'
-import { IOrderListItem, ShippingStatus } from '@/types/order'
+import { IOrderListItem } from '@/types/order'
 
 interface IOrderHistoryItem {
   content: IOrderListItem
@@ -26,14 +26,12 @@ export default function OrderHistoryItem({ content }: IOrderHistoryItem) {
           <span className="block line-clamp-1">주문번호</span>
           <span className="block line-clamp-1">결제방법</span>
           <span className="block line-clamp-1">결제금액</span>
-          <span className="block line-clamp-1">주문상태</span>
         </div>
         <div className="space-y-3 text-grayscale-800 font-medium text-body-base">
           <span className="block line-clamp-1">{content.itemName}</span>
           <span className="block line-clamp-1">{content.orderId}</span>
           <span className="block line-clamp-1">{content.paymentMethod}</span>
           <span className="block line-clamp-1">{content.totalAmount}</span>
-          <span className="block line-clamp-1">{ShippingStatus[`${content.deliveryStatus}`]}</span>
         </div>
       </div>
     </section>
