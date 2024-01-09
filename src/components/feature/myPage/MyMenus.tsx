@@ -30,7 +30,7 @@ export default function MyMenus() {
     const msg = await res.json()
     console.log(msg)
 
-    router.replace('/myPage')
+    router.replace('/registration')
   }
 
   return (

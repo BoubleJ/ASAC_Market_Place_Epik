@@ -21,3 +21,9 @@ export function convertStringToDateFormat(string: string) {
   }
   return Intl.DateTimeFormat('ko-KR', options).format(new Date(string))
 }
+
+const DUMMY_URL_LIST = ['http://myshop.com', 'http://example.com', 'http://sales.com']
+
+export function checkDummyImageUrl(url: string) {
+  return DUMMY_URL_LIST.some((path) => url.startsWith(path))
+}

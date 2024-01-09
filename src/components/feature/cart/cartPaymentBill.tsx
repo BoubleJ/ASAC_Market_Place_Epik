@@ -28,7 +28,7 @@ export default function CartPaymentBill() {
       <div className="flex justify-between text-body-md w-full">
         <span>배송비</span>
         <div className="space-x-2">
-          <span>+{convertNumberFormat(deliveryCharge)}</span>
+          <span>+{price() === 0 ? 0 : convertNumberFormat(deliveryCharge)}</span>
           <span>원</span>
         </div>
       </div>

@@ -6,12 +6,12 @@ export async function fetchGetCartItem() {
   })
 
   if (res.status !== 200) {
-    const errorMsg = await res.text()
-    return { errorMessage: errorMsg }
+    const errorMsg = await res.json()
+    return errorMsg
   }
 
-  const respnse = await res.json()
-  return respnse.data
+  const response = await res.json()
+  return response.data
 }
 
 export async function fetchInsertCartItemById(itemId: number) {
@@ -22,11 +22,11 @@ export async function fetchInsertCartItemById(itemId: number) {
 
   if (res.status !== 200) {
     const errorMsg = await res.json()
-    return { errorMessage: errorMsg }
+    return errorMsg
   }
 
-  const respnse = await res.json()
-  return respnse.msg
+  const response = await res.json()
+  return response.msg
 }
 
 export async function fetchDeleteCartItemById(itemId: number) {
@@ -36,12 +36,12 @@ export async function fetchDeleteCartItemById(itemId: number) {
   })
 
   if (res.status !== 200) {
-    const errorMsg = await res.text()
-    return { errorMessage: errorMsg }
+    const errorMsg = await res.json()
+    return errorMsg
   }
 
-  const respnse = await res.json()
-  return respnse.msg
+  const response = await res.json()
+  return response.msg
 }
 
 export async function fetchIncreaseCartItemById(itemId: number) {
@@ -51,26 +51,25 @@ export async function fetchIncreaseCartItemById(itemId: number) {
   })
 
   if (res.status !== 200) {
-    const errorMsg = await res.text()
-    return { errorMessage: errorMsg }
+    const errorMsg = await res.json()
+    return errorMsg
   }
 
-  const respnse = await res.json()
-  return respnse.msg
+  const response = await res.json()
+  return response.msg
 }
 
 export async function fetchDecreaseCartItemById(cartId: number, itemId: number) {
-  console.log(cartId, itemId)
   const res = await fetch(`${basePath}/api/cart/item/minus?cartId=${cartId}&itemId=${itemId}`, {
     method: 'POST',
     headers: commonHeader,
   })
 
   if (res.status !== 200) {
-    const errorMsg = await res.text()
-    return { errorMessage: errorMsg }
+    const errorMsg = await res.json()
+    return errorMsg
   }
 
-  const respnse = await res.json()
-  return respnse.msg
+  const response = await res.json()
+  return response.msg
 }

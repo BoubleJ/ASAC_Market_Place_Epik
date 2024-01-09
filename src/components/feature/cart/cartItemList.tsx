@@ -19,8 +19,6 @@ export default function CartItemList({ content }: ICartItemList) {
     setCartId(cartId)
   }, [content, cartItemDtos, cartId, setCartId, setCart])
 
-  console.log(cart)
-
   return (
     <section className="flex flex-col gap-2 w-full px-5 py-[18px]">
       {cart.map((product: CartItem) => (
