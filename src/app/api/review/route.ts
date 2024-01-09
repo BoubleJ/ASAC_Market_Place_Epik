@@ -1,20 +1,23 @@
 import { cookies } from 'next/headers'
-import { NextRequest, NextResponse } from 'next/server'
+import { NextResponse } from 'next/server'
 
 import { baseURL } from '@/api/util/instance'
 
-export async function GET(req: NextRequest) {
+export async function POST(req: Request) {
+  const itemId = await req.json()
   const authToken = cookies().get('AUTH_TOKEN')?.value
   const hasCookies = cookies().has('AUTH_TOKEN')
+
   try {
     const requestHeaders = new Headers(req.headers)
     // console.log('cookie', cookies().getAll())
     if (hasCookies) {
       requestHeaders.set('Authorization', `Bearer ${authToken}`)
     }
-    console.log('찜목록 !! Authorization', requestHeaders)
+    console.log(itemId, 'ㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎ')
+    console.log(hasCookies, 'ㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎ')
 
-    const res = await fetch(`${baseURL}/members/mypage/wishlist`, {
+    const res = await fetch(`${baseURL}/items/reviews?itemId=${33}`, {
       method: 'GET',
       headers: requestHeaders,
       // headers: commonHeader,
@@ -24,7 +27,7 @@ export async function GET(req: NextRequest) {
 
     // return res
   } catch (error) {
-    console.log('wishlist에러', error)
+    console.log('reviewList에러', error)
     return NextResponse.json({ msg: 'error' })
   }
 }

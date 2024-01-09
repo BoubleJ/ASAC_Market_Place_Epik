@@ -6,23 +6,28 @@ import { baseURL } from '@/api/util/instance'
 export async function POST(req: NextRequest) {
   try {
     const requestHeaders = new Headers(req.headers)
-    console.log('cookie', cookies().getAll())
 
     if (cookies().has('AUTH_TOKEN')) {
       requestHeaders.set('Authorization', `Bearer ${cookies().get('AUTH_TOKEN')?.value}`)
     }
+    console.log('route post helpless')
 
-    const deleteParams = await req.json()
-    console.log(deleteParams, '!!!')
+    const helplessParams = await req.json()
+    console.log(helplessParams, '!!!')
     // const body = await req.json()
     // console.log(requestHeaders)
-    const res = await fetch(`${baseURL}/items/nowish?itemId=${deleteParams.itemId}`, {
-      method: 'POST',
-      headers: requestHeaders,
-      // headers: commonHeader,
-      body: JSON.stringify(deleteParams),
-    })
+    const res = await fetch(
+      `${baseURL}/reviews/helpless?itemId=${helplessParams.itemId}&reviewId=${helplessParams.reviewId}`,
+      {
+        method: 'POST',
+        headers: requestHeaders,
+        // headers: commonHeader,
+        body: JSON.stringify(helplessParams),
+      },
+    )
     const resoense = await res.json()
+    console.log(resoense, '!!!!!!!!!!!')
+
     return NextResponse.json(resoense)
 
     // return res

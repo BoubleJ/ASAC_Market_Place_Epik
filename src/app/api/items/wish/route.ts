@@ -11,11 +11,6 @@ export async function POST(req: NextRequest) {
     if (cookies().has('AUTH_TOKEN')) {
       requestHeaders.set('Authorization', `Bearer ${cookies().get('AUTH_TOKEN')?.value}`)
     }
-    console.log('Authorization', requestHeaders)
-    // console.log('리퀘헤더', requestHeaders)
-    // console.log('---------------------------------')
-    // console.log('req.header!!', req.headers)
-    // console.log('쿠키', cookies().getAll())
 
     console.log('route post')
 
@@ -26,11 +21,9 @@ export async function POST(req: NextRequest) {
     const res = await fetch(`${baseURL}/items/yeswish?itemId=${itemId.itemId}`, {
       method: 'POST',
       headers: requestHeaders,
-      // headers: commonHeader,
       body: JSON.stringify(itemId),
     })
     const resoense = await res.json()
-    console.log(resoense, 'ㅎㅎㅎ')
     return NextResponse.json(resoense)
 
     // return res

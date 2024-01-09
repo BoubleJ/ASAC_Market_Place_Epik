@@ -5,6 +5,7 @@ import React, { useState } from 'react'
 import { fetchHelpfulCount, fetchLessHelpCount } from '@/api/resource/items'
 import SvgThumbsUp from '@/components/icons/thumbs-up'
 import { reviewsType } from '@/types/review'
+import { addhelpfulParams } from '@/types/wish'
 
 export default function Review({
   review,
@@ -21,12 +22,12 @@ export default function Review({
   // api 업데이트 후 적용 (도움돼요 채크 여부)
 
   const increaseHelpfulCount = async (reviewId: number, isHelpful: boolean, itemId: number) => {
+    const body: addhelpfulParams = { itemId: itemId, reviewId: reviewId }
     if (!isHelpful) {
-      const a = await fetchHelpfulCount(itemId, reviewId)
-      console.log(await a.text())
+      const a = await fetchHelpfulCount(body)
       setHelpfulCount(helpfulCount + 1)
     } else {
-      await fetchLessHelpCount(itemId, reviewId)
+      await fetchLessHelpCount(body)
       setHelpfulCount(helpfulCount + -1)
     }
     setIsHelpful((prevIsHelpful) => !prevIsHelpful)

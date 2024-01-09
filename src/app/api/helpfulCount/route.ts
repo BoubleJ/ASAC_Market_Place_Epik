@@ -11,25 +11,29 @@ export async function POST(req: NextRequest) {
     if (cookies().has('AUTH_TOKEN')) {
       requestHeaders.set('Authorization', `Bearer ${cookies().get('AUTH_TOKEN')?.value}`)
     }
-    const body = req.body
-    const bodyFormdata = await req.formData()
+    console.log('route post helful')
 
-    console.log('route post왔슴')
-    console.log(bodyFormdata)
-
-    console.log(bodyFormdata.get('review'), '폼데이터!')
-    console.log(bodyFormdata.getAll('reviewImages'), '폼데이터!')
-
-    const res = await fetch(`${baseURL}/reviews/create`, {
-      method: 'POST',
-      // headers: requestHeaders,
-      body: bodyFormdata,
-    })
+    const helpfulParams = await req.json()
+    console.log(helpfulParams, '!!!')
+    // const body = await req.json()
+    // console.log(requestHeaders)
+    const res = await fetch(
+      `${baseURL}/reviews/helpful?itemId=${helpfulParams.itemId}&reviewId=${helpfulParams.reviewId}`,
+      {
+        method: 'POST',
+        headers: requestHeaders,
+        // headers: commonHeader,
+        body: JSON.stringify(helpfulParams),
+      },
+    )
     const resoense = await res.json()
+    console.log(resoense, '!!!!!!!!!!!')
     return NextResponse.json(resoense)
+
+    // return res
   } catch (error) {
-    console.log('review 등록 에러', error)
-    return NextResponse.json({ errorMessage: '리뷰등록 실패' })
+    console.log('delete 에러', error)
+    return NextResponse.json({ msg: 'error' })
   }
 }
 

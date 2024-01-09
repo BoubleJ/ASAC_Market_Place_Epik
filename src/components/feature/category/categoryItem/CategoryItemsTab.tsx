@@ -29,7 +29,7 @@ export default function CategoryItemsTab({
               ? 'text-brand-primary-500 border-b-2 border-brand-primary-500'
               : 'text-grayscale-400'
           }`}
-          href={`/${currentMainCategory}-${subCategory.name}`}
+          href={`/categories/${currentMainCategory}-${subCategory.name}`}
           replace
         >
           <div>{subCategory.name}</div>

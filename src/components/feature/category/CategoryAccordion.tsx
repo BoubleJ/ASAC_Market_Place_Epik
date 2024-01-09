@@ -21,7 +21,7 @@ export default function CategoryAccordion({ category }: { category: CategoryList
                 <button
                   className="hover:font-semibold"
                   onClick={() => {
-                    router.push(`/${mainCategory.name}-전체보기`)
+                    router.push(`/categories/${mainCategory.name}-전체보기`)
                   }}
                 >
                   전체보기
@@ -29,7 +29,7 @@ export default function CategoryAccordion({ category }: { category: CategoryList
                 {mainCategory.subCategories.map((subCategory) => (
                   <button
                     onClick={() => {
-                      router.push(`/${mainCategory.name}-${subCategory.name}`)
+                      router.push(`/categories/${mainCategory.name}-${subCategory.name}`)
                     }}
                     className="hover:font-semibold"
                     key={subCategory.name}
@@ -52,7 +52,7 @@ export default function CategoryAccordion({ category }: { category: CategoryList
                 {mainCategory.subCategory.map((subCategory) => (
                   <button
                     onClick={() => {
-                      router.push(`/categoryItems?main=${mainCategory.name}&sub=${subCategory.name}`)
+                      router.push(`/categories/categoryItems?main=${mainCategory.name}&sub=${subCategory.name}`)
                     }}
                     className="hover:font-semibold"
                     key={subCategory.name}
