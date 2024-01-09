@@ -55,8 +55,10 @@ export default function OrderPaymentButton({ content }: IOrderPaymentButton) {
   }
 
   return (
-    <Button variant={'primary'} size={'lg'} onClick={handleOnPayment}>
-      <span>{convertNumberFormat(orders?.totalAmount! + deliveryCharge)}원 결제하기</span>
-    </Button>
+    <section className="flex justify-center items-center">
+      <Button variant={'primary'} size={'lg'} onClick={handleOnPayment}>
+        <span>{convertNumberFormat(orders?.totalAmount! + deliveryCharge)}원 결제하기</span>
+      </Button>
+    </section>
   )
 }
