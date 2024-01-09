@@ -1,6 +1,6 @@
 'use client'
 import Image from 'next/image'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import React, { useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
@@ -9,6 +9,9 @@ import { Button } from '@/components/ui/button'
 
 export default function AddReviewPage() {
   const router = useRouter()
+  const params = useSearchParams()
+  const itemId = params.get('itemId')
+  const itemName = params.get('itemName')
   const imgRef = useRef<HTMLInputElement>(null)
   const {
     register,
@@ -41,13 +44,14 @@ export default function AddReviewPage() {
 
   const send = async (data: Record<string, any>) => {
     const formData = new FormData()
+    console.log(itemId, 'id!!!!!!!!!!!!!!!')
 
     // 리뷰
     formData.append(
       'review',
       JSON.stringify({
         memberId: 1,
-        itemId: 34,
+        itemId: itemId,
         comment: data.content,
         imageUrls: [],
       }),
@@ -75,7 +79,7 @@ export default function AddReviewPage() {
 
   return (
     <div className="min-h-screen p-4 flex flex-col gap-4">
-      <div className="text-title-sm border-b pb-4">[하기스] 2023 네이처썸머 팬티형 기저귀 1박스 3종 (택1)</div>
+      <div className="text-title-sm border-b pb-4">{itemName}</div>
       <div className="text-title-sm">후기쓰기</div>
       <form className="flex flex-col gap-5" onSubmit={handleSubmit(send)}>
         <input

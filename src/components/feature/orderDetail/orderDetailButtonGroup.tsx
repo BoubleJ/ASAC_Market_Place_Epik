@@ -14,7 +14,7 @@ export default function OrderDetailButtonGroup({ content, deliveryStatus }: IOrd
     <div className="flex justify-start items-center text-body-base text-grayscale-800 gap-3">
       <span className="block line-clamp-1 font-bold">{ShippingStatus[`${deliveryStatus}`]}</span>
       <Button variant={'outline'} className="rounded-none">
-        <Link href={`/add-review?itemId${content.itemId}&itemName=${content.itemName}`}>리뷰쓰기</Link>
+        <Link href={`/add-review?itemId=${content.itemId}&itemName=${content.itemName}`}>리뷰쓰기</Link>
       </Button>
     </div>
   )
