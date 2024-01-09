@@ -6,6 +6,7 @@ import { IOrder } from '@/types/order'
 type OrderStore = {
   orders: IOrder | null
   setOrders: (orders: IOrder) => void
+  isEmpty: () => boolean
 }
 
 const DUMMY_ORDERS: IOrder = {
@@ -47,6 +48,10 @@ export const useOrderStore = create<OrderStore>()(
     orders: null,
     setOrders: (orders: IOrder) => {
       set({ orders: orders })
+    },
+    isEmpty: () => {
+      const { orders } = get()
+      return orders === null ? true : orders.orderItemDtos.length === 0
     },
   })),
 )
