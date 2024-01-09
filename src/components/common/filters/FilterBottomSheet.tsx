@@ -42,6 +42,11 @@ export default function FilterBottomSheet({
   ): AppliedFilterType => {
     const filterOptions = selectedFilters[filterName]
 
+    if (filterName === '가격') {
+      // '가격'인 경우에는 라디오 버튼처럼 작동
+      return { ...selectedFilters, [filterName]: [option] }
+    }
+
     if (filterOptions) {
       const updatedOptions = filterOptions.includes(option)
         ? filterOptions.filter((item) => item !== option)
