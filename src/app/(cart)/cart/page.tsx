@@ -20,6 +20,7 @@ const getCart = async () => {
 
   const res = await fetch(`${baseURL}/cart`, {
     headers: requestHeaders,
+    cache: 'no-cache',
   })
 
   if (!res.ok) {

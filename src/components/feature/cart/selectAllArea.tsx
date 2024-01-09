@@ -9,8 +9,12 @@ import { cn } from '@/lib/utils'
 import { useCartStore } from '@/store/client/cartSlice'
 
 export default function SelectAllArea() {
-  const { cart, selectedCount, selectAll, removeSelectedItem, selectedItems, unSelectAll } = useCartStore()
+  const { cart, selectedCount, selectAll, removeSelectedItem, selectedItems, unSelectAll, price } = useCartStore()
   const state = useModalState()
+
+  const isEmpty = () => {
+    return cart.length === 0 || price() === 0
+  }
 
   const openSelectModal = (content: string, onCheck?: () => void, onCancel?: () => void) => {
     state.setModal(<SelectModal content={content} onCheck={onCheck} onCancel={onCancel} />)
@@ -20,6 +24,7 @@ export default function SelectAllArea() {
   const isAllChecked = () => {
     return cart.length ? !cart.some((item) => item.selected === false) : false
   }
+
   const handleSelectAllProduct = () => {
     if (isAllChecked()) {
       console.log('all checked so unselect all')
@@ -31,17 +36,26 @@ export default function SelectAllArea() {
       selectAll()
     }
   }
+
   const handleDeleteSelectedProduct = async () => {
     selectedItems().map(async (item) => await fetchDeleteCartItemById(item.id))
     removeSelectedItem()
   }
+
   const handleModalWithDeleteSelectedProduct = async () => {
     openSelectModal('삭제하시겠습니까?', handleDeleteSelectedProduct)
   }
+
   return (
     <section className="flex justify-between items-center px-5 w-full">
       <div className="flex items-center text-body-sm">
-        <Button variant={'none'} size={'checkbox'} className="mr-2" onClick={handleSelectAllProduct}>
+        <Button
+          variant={'none'}
+          size={'checkbox'}
+          className="mr-2"
+          onClick={handleSelectAllProduct}
+          disabled={isEmpty()}
+        >
           <CheckCircle
             width={'1.375rem'}
             height={'1.375rem'}
@@ -55,7 +69,7 @@ export default function SelectAllArea() {
           ({selectedCount()}/{cart.length})
         </span>
       </div>
-      <Button variant={'none'} className="" onClick={handleModalWithDeleteSelectedProduct}>
+      <Button variant={'none'} className="" onClick={handleModalWithDeleteSelectedProduct} disabled={isEmpty()}>
         선택삭제
       </Button>
     </section>

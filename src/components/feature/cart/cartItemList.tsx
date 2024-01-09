@@ -17,9 +17,7 @@ export default function CartItemList({ content }: ICartItemList) {
   useEffect(() => {
     setCart(cartItemDtos)
     setCartId(cartId)
-  }, [])
-
-  console.log(cart)
+  }, [content, cartItemDtos, cartId, setCartId, setCart])
 
   return (
     <section className="flex flex-col gap-2 w-full px-5 py-[18px]">

@@ -10,7 +10,7 @@ export default function OrderHistoryHeader() {
   return (
     <Header
       left={
-        <ChevronLeft width={'1.5rem'} height={'1.5rem'} onClick={() => router.push('/mypage')} className="fill-white" />
+        <ChevronLeft width={'1.5rem'} height={'1.5rem'} onClick={() => router.push('/myPage')} className="fill-transparent" />
       }
       center={<span className="text-center text-grayscale-800 text-body-lg">주문내역</span>}
     />

@@ -10,7 +10,7 @@ import SelectModal from '@/components/common/modal/selectModal'
 import { CheckCircle, IconMinusMono, IconPlusMono, IconXMono } from '@/components/icons'
 import { useModalState } from '@/components/provider/modalProvider'
 import { Button } from '@/components/ui/button'
-import { cn, convertNumberFormat } from '@/lib/utils'
+import { checkDummyImageUrl, cn, convertNumberFormat } from '@/lib/utils'
 import { useCartStore } from '@/store/client/cartSlice'
 import { CartItem } from '@/types/product'
 
@@ -93,7 +93,7 @@ export default function CartItemCard({ product }: ICartItemCard) {
       <div className="flex flex-col col-span-10 gap-4">
         <span className="text-body-sm line-clamp-2">{product.name}</span>
         <div className="flex h-2/3 gap-4">
-          {!product.promotionUrl.startsWith('http://example.com') ? (
+          {!checkDummyImageUrl(product.promotionUrl) ? (
             <Image width={70} height={90} src={product.promotionUrl} alt={`${product.name}`} />
           ) : (
             <Image width={70} height={90} src={'/images/default_product_image.svg'} alt={`${product.name}`} />

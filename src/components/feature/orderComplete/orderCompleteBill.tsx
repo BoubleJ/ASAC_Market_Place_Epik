@@ -1,5 +1,6 @@
 'use client'
 
+import { convertNumberFormat } from '@/lib/utils'
 import { useOrderStore } from '@/store/client/orderSlice'
 
 export default function OrderCompleteBill() {
@@ -10,7 +11,7 @@ export default function OrderCompleteBill() {
       <div className="flex justify-between w-full mb-3">
         <span className="text-body-md">결제금액</span>
         <div className="space-x-2">
-          <span>{orders?.totalAmount}</span>
+          <span>{convertNumberFormat(orders?.totalAmount!)}</span>
           <span>원</span>
         </div>
       </div>

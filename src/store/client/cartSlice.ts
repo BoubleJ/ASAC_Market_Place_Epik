@@ -3,9 +3,10 @@ import { devtools } from 'zustand/middleware'
 
 import { convertCartitemDtosToCartItem } from '@/api/service/cart'
 import { Product } from '@/types/item'
-import { CartItem, CartItemDto } from '@/types/product'
+import { Cart, CartItem, CartItemDto } from '@/types/product'
 
 type CartStore = {
+  cartInfo: Omit<Cart, 'cartItemDtos'>
   cartId: number
   cart: CartItem[]
   setCartId: (id: number) => void
@@ -57,6 +58,7 @@ const DUMMY_CART_ITEMS: CartItem[] = [
 export const useCartStore = create<CartStore>()(
   devtools((set, get) => ({
     // cart: [...DUMMY_CART_ITEMS],
+    cartInfo: { cartId: 0, amount: 0, salesTotalAmount: 0, totalAmount: 0 },
     cartId: 0,
     cart: [],
     setCartId(id: number) {
