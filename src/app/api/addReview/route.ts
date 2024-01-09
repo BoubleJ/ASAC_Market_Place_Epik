@@ -26,7 +26,6 @@ export async function POST(req: NextRequest) {
       body: bodyFormdata,
     })
     const resoense = await res.json()
-    console.log(resoense, 'ㅎㅎㅎ')
     return NextResponse.json(resoense)
   } catch (error) {
     console.log('review 등록 에러', error)

@@ -9,21 +9,17 @@ export async function GET(req: NextRequest) {
   try {
     const requestHeaders = new Headers(req.headers)
     // console.log('cookie', cookies().getAll())
-    console.log('---------!----------!--------')
     if (hasCookies) {
       requestHeaders.set('Authorization', `Bearer ${authToken}`)
     }
     console.log('찜목록 !! Authorization', requestHeaders)
 
-    // const body = await req.json()
-    // console.log(requestHeaders)
     const res = await fetch(`${baseURL}/members/mypage/wishlist`, {
       method: 'GET',
       headers: requestHeaders,
       // headers: commonHeader,
     })
     const resoense = await res.json()
-    console.log(resoense, 'ㅎㅎㅎ')
     return NextResponse.json(resoense)
 
     // return res
