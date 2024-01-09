@@ -17,7 +17,7 @@ export default function CartItemList({ content }: ICartItemList) {
   useEffect(() => {
     setCart(cartItemDtos)
     setCartId(cartId)
-  }, [])
+  }, [content, cartItemDtos, cartId, setCartId, setCart])
 
   console.log(cart)
 

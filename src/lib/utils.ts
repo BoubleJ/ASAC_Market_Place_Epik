@@ -10,6 +10,7 @@ export function convertNumberFormat(number: number) {
 }
 
 export function convertStringToDateFormat(string: string) {
+  console.log(string)
   let options: Intl.DateTimeFormatOptions = {
     year: 'numeric',
     month: '2-digit',
@@ -18,5 +19,5 @@ export function convertStringToDateFormat(string: string) {
     minute: '2-digit',
     hour12: true,
   }
-  return new Intl.DateTimeFormat('ko-KR', options).format(new Date(string))
+  return Intl.DateTimeFormat('ko-KR', options).format(new Date(string))
 }

@@ -41,7 +41,13 @@ export default function SelectAllArea() {
   return (
     <section className="flex justify-between items-center px-5 w-full">
       <div className="flex items-center text-body-sm">
-        <Button variant={'none'} size={'checkbox'} className="mr-2" onClick={handleSelectAllProduct}>
+        <Button
+          variant={'none'}
+          size={'checkbox'}
+          className="mr-2"
+          onClick={handleSelectAllProduct}
+          disabled={selectedItems.length === 0}
+        >
           <CheckCircle
             width={'1.375rem'}
             height={'1.375rem'}
@@ -55,7 +61,12 @@ export default function SelectAllArea() {
           ({selectedCount()}/{cart.length})
         </span>
       </div>
-      <Button variant={'none'} className="" onClick={handleModalWithDeleteSelectedProduct}>
+      <Button
+        variant={'none'}
+        className=""
+        onClick={handleModalWithDeleteSelectedProduct}
+        disabled={selectedItems.length === 0}
+      >
         선택삭제
       </Button>
     </section>
