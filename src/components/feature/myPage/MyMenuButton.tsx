@@ -2,7 +2,7 @@ import React from 'react'
 
 import { ChevronRight } from '@/components/icons'
 
-export default function MyMenu({
+export default function MyMenuButton({
   menuName,
   detail,
   onClick,
