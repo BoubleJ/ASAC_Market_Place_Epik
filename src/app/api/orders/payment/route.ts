@@ -23,7 +23,7 @@ export async function POST(req: NextRequest) {
     })
 
     if (!res.ok) {
-      console.log('Failed to get orders', res.status)
+      console.log('Failed to get payment', res.status)
       const msg = await res.json()
       return NextResponse.json({ msg })
     }
