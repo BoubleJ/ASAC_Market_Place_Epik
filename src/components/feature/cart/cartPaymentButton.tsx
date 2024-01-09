@@ -11,7 +11,7 @@ export default function CartPaymentButton() {
   const router = useRouter()
 
   const isEmpty = () => {
-    return cart.length === 0 || price() !== 0
+    return cart.length === 0 || price() === 0
   }
 
   const handleCartValidation = () => {
