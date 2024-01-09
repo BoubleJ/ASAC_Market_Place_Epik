@@ -7,7 +7,8 @@ interface IOrderItemInfo {
 }
 
 export default function OrderItemInfo({ orderItems }: IOrderItemInfo) {
-  const isEmpty = !orderItems
+  const isEmpty = orderItems.length === 0
+  console.log(orderItems)
   const headItemNamePrefix = isEmpty ? '' : orderItems[0].itemName.substring(0, 12)
   const orderProductCount = !orderItems ? 0 : orderItems.length
   const headItemName = isEmpty ? '선택된 상품이 없습니다' : `${headItemNamePrefix}...외${orderProductCount}건`

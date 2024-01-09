@@ -20,10 +20,10 @@ interface IOrderPaymentButton {
 export default function OrderPaymentButton({ content }: IOrderPaymentButton) {
   const router = useRouter()
   const state = useModalState()
-  const { orders, setOrders } = useOrderStore()
+  const { orders, setOrders, isEmpty } = useOrderStore()
   const { unSelectedItems } = useCartStore()
   const restItem = unSelectedItems()
-
+  const isEmptyOrder: boolean = isEmpty()
   const deliveryCharge = 3000
   useEffect(() => {
     setOrders(content)
@@ -56,7 +56,7 @@ export default function OrderPaymentButton({ content }: IOrderPaymentButton) {
 
   return (
     <section className="flex justify-center items-center">
-      <Button variant={'primary'} size={'lg'} onClick={handleOnPayment}>
+      <Button variant={'primary'} size={'lg'} onClick={handleOnPayment} disabled={isEmptyOrder}>
         <span>{convertNumberFormat(orders?.totalAmount! + deliveryCharge)}원 결제하기</span>
       </Button>
     </section>

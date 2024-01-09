@@ -22,7 +22,6 @@ export default function OrderHistorylist({ initialOrderList }: IOrderHistorylist
   useEffect(() => {
     setOrderList(initialOrderList)
   }, [setOrderList, initialOrderList])
-  console.log(isEmpty())
   if (isEmpty()) return <OrderHistoryEmpty />
 
   return (

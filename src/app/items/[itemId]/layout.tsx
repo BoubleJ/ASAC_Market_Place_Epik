@@ -9,8 +9,10 @@ import ItemTabs from '@/components/feature/item/ItemTabs'
 import { Product } from '@/types/item'
 
 async function fetchItemDetail(itemId: number) {
-  if (cookies().has('AUTH_TOKEN')) {
-    commonHeader.set('Authorization', `Bearer ${cookies().get('AUTH_TOKEN')?.value}`)
+  const authToken = cookies().get('AUTH_TOKEN')?.value
+  const hasCookies = cookies().has('AUTH_TOKEN')
+  if (hasCookies) {
+    commonHeader.set('Authorization', `Bearer ${authToken}`)
   }
   const res = await fetch(`${baseLocalURL}/items?itemId=${itemId}`, {
     method: 'GET',
@@ -18,7 +20,7 @@ async function fetchItemDetail(itemId: number) {
     // headers: commonHeader,
   })
   if (!res.ok) {
-    throw Error(`fail to fetch itemDetail!`)
+    throw Error(`fail to fetch itemDetail! ${res.status}`)
   }
 
   console.log('ㅎㅂㅎ')
