@@ -4,13 +4,12 @@ import { NextRequest, NextResponse } from 'next/server'
 import { baseURL } from '@/api/util/instance'
 
 export async function POST(req: NextRequest) {
+  const authToken = cookies().get('AUTH_TOKEN')?.value
+  const hasCookies = cookies().has('AUTH_TOKEN')
   try {
     const cartId = req.nextUrl.searchParams.get('cartId')
     const itemId = req.nextUrl.searchParams.get('itemId')
     const requestHeaders = new Headers(req.headers)
-
-    const authToken = cookies().get('AUTH_TOKEN')?.value
-    const hasCookies = cookies().has('AUTH_TOKEN')
 
     if (hasCookies) {
       requestHeaders.set('Authorization', `Bearer ${authToken}`)
