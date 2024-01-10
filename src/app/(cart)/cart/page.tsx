@@ -7,6 +7,8 @@ import CartPaymentBill from '@/components/feature/cart/cartPaymentBill'
 import SelectAllArea from '@/components/feature/cart/selectAllArea'
 import { Cart } from '@/types/product'
 
+export const dynamic = 'force-dynamic'
+
 const getCart = async () => {
   const requestHeaders = new Headers(commonHeader)
   const authToken = cookies().get('AUTH_TOKEN')?.value
