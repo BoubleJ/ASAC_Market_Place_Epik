@@ -30,7 +30,7 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json(response)
   } catch (error) {
-    // return NextResponse.json({ msg: '상품을 장바구니에 추가하지 못했습니다.' })
-    return NextResponse.json({ msg: error })
+    console.log('cart insert error :', error)
+    return NextResponse.json({ msg: '상품을 장바구니에 추가하지 못했습니다.' })
   }
 }
