@@ -13,7 +13,7 @@ export default function OrderDetailItem({ content }: IOrderDetailItem) {
   return (
     <div className="flex flex-col gap-2">
       <Link
-        href={`/item/${content.itemId}`}
+        href={`/items/${content.itemId}`}
         className="text-grayscale-800 text-body-base font-bold cursor-pointer hover:text-brand-primary-500"
       >
         {content.itemName}
