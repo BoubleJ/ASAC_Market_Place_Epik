@@ -9,7 +9,7 @@ export async function POST(req: NextRequest) {
   try {
     const cartId = req.nextUrl.searchParams.get('cartId')
     const itemId = req.nextUrl.searchParams.get('itemId')
-    const requestHeaders = new Headers(req.headers)
+    const requestHeaders = new Headers()
 
     if (hasCookies) {
       requestHeaders.set('Authorization', `Bearer ${authToken}`)

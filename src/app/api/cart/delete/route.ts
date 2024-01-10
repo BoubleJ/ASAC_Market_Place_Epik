@@ -6,7 +6,7 @@ import { baseURL } from '@/api/util/instance'
 export async function POST(req: NextRequest) {
   try {
     const itemId = req.nextUrl.searchParams.get('itemId')
-    const requestHeaders = new Headers(req.headers)
+    const requestHeaders = new Headers()
 
     const authToken = cookies().get('AUTH_TOKEN')?.value
     const hasCookies = cookies().has('AUTH_TOKEN')
