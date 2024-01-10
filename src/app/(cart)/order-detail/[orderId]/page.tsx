@@ -36,42 +36,10 @@ const getOrderListById = async (orderId: number) => {
   }
 }
 
-const DUMMY_ORDER_DETAIL: IOrderDetail = {
-  orderDateTime: '2023-12-12T14:42:44.368676',
-  itemName: '구글 무선 스마트폰 001',
-  orderId: 1,
-  totalAmount: 358509,
-  deliveryStatus: 'PENDING',
-  paymentMethod: 'KAKAOPAY',
-  orderItemDtos: [
-    {
-      itemId: 2,
-      itemName: '구글 무선 스마트폰 001',
-      itemPrice: 40978,
-      itemCount: 1,
-      discountRate: 2,
-    },
-    {
-      itemId: 3,
-      itemName: '구글 무선 스마트폰 002',
-      itemPrice: 40978,
-      itemCount: 1,
-      discountRate: 2,
-    },
-    {
-      itemId: 4,
-      itemName: '구글 무선 스마트폰 003',
-      itemPrice: 40978,
-      itemCount: 1,
-      discountRate: 2,
-    },
-  ],
-}
-
 export default async function OrderDetailPage({ params }: { params: { orderId: string } }) {
   const orderId = params.orderId
   const orderDetail: IOrderDetail = await getOrderListById(parseInt(orderId))
-  // const orderDetail: IOrderDetail = DUMMY_ORDER_DETAIL
+
   return (
     <>
       <section className="w-full px-5">
