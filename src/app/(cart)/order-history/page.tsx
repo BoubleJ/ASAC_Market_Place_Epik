@@ -4,7 +4,6 @@ import { baseURL, commonHeader } from '@/api/util/instance'
 import OrderHistoryButtonGroup from '@/components/feature/orderHistory/orderHistoryButtonGroup'
 import OrderHistoryHeader from '@/components/feature/orderHistory/orderHistoryHeader'
 import OrderHistorylist from '@/components/feature/orderHistory/orderHistorylist'
-import { IOrderList } from '@/types/order'
 
 // export const runtime = 'edge'
 
@@ -42,27 +41,10 @@ const getOrderList = async () => {
     return { msg: '주문내역을 불러오지 못했습니다' }
   }
 }
-const DUMMY_ORDER_LIST: IOrderList = [
-  {
-    orderDateTime: '2023-12-12T14:42:44.368676',
-    itemName: '구글 무선 스마트폰 001',
-    orderId: 1,
-    totalAmount: 358509,
-    deliveryStatus: 'PENDING',
-    paymentMethod: 'KAKAOPAY',
-  },
-  {
-    orderDateTime: '2023-12-12T14:42:44.368676',
-    itemName: '구글 무선 스마트폰 001',
-    orderId: 1,
-    totalAmount: 358509,
-    deliveryStatus: 'PENDING',
-    paymentMethod: 'KAKAOPAY',
-  },
-]
+
 export default async function OrderHistoryePage() {
   const initialIOrderList = await getOrderList()
-  // const initialIOrderList = DUMMY_ORDER_LIST
+
   return (
     <section className="w-full px-5">
       <OrderHistoryHeader />

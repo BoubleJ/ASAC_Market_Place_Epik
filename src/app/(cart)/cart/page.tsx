@@ -35,15 +35,14 @@ const getCart = async () => {
 }
 export default async function CartPage() {
   const cart = await getCart()
+
   return (
     <>
       <div className="w-full">
         <CartHeader />
         <SelectAllArea />
       </div>
-      {/* <Suspense fallback={}> */}
       <CartItemList content={cart} />
-      {/* </Suspense> */}
       <CartPaymentBill />
     </>
   )
