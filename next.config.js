@@ -27,7 +27,7 @@ const nextConfig = withBundleAnalyzer({
   async rewrites() {
     return [
       {
-        // source: '/local/api/:path*',
+        // source: '/api/:path*',
         // destination: 'http://43.201.27.83:8080/api/:path*',
         // destination: 'http://localhost:8080/api/:path*',
         source: 'https://43.201.27.83:8080/api/:path*',
