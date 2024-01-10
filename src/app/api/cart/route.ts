@@ -21,11 +21,11 @@ export async function GET(req: NextRequest) {
     if (!res.ok) {
       // throw new Error('Failed to login authenticate')
       console.log('Failed to get Cart', res.status)
-      return NextResponse.json({ msg: '장바구니를 불러오는데 실패했습니다.' })
+      const response = await res.json()
+      return NextResponse.json(response)
     }
 
     const response = await res.json()
-    console.log(response)
 
     return NextResponse.json(response)
   } catch (error) {

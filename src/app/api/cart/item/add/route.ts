@@ -6,7 +6,6 @@ import { baseURL } from '@/api/util/instance'
 export async function POST(req: NextRequest) {
   try {
     const itemId = req.nextUrl.searchParams.get('itemId')
-
     const requestHeaders = new Headers(req.headers)
 
     const authToken = cookies().get('AUTH_TOKEN')?.value
@@ -23,11 +22,11 @@ export async function POST(req: NextRequest) {
     if (!res.ok) {
       // throw new Error('Failed to login authenticate')
       console.log('Failed to increase item Cart', res.status)
-      return NextResponse.json({ msg: '상품을 개수를 추가하는데 실패했습니다.' })
+      const response = await res.json()
+      return NextResponse.json(response)
     }
 
     const response = await res.json()
-    console.log(response)
 
     return NextResponse.json(response)
   } catch (error) {

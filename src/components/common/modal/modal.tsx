@@ -20,7 +20,7 @@ const Modal = forwardRef((props: ModalProps, ref: ForwardedRef<HTMLDialogElement
    *  dialog 요소(e.currentTarget, state.modalRef.current)와 클릭 이벤트가 발생한 요소(e.target)를 비교
    *  dialog 내부 요소는 dialog와 다른 요소, dialog의 backdrop은 dialog와 같은 요소 취급
    */
-  const closeIfClickedOuside = (e: React.UIEvent<HTMLDialogElement>) => {
+  const closeIfClickedOutside = (e: React.UIEvent<HTMLDialogElement>) => {
     // console.log(e.target)
     // console.log(e.currentTarget)
     // console.log(state.modalRef.current)
@@ -30,7 +30,7 @@ const Modal = forwardRef((props: ModalProps, ref: ForwardedRef<HTMLDialogElement
   }
 
   return (
-    <dialog ref={ref} className="backdrop:bg-black backdrop:opacity-40 rounded-lg" onClick={closeIfClickedOuside}>
+    <dialog ref={ref} className="backdrop:bg-black backdrop:opacity-40 rounded-lg" onClick={closeIfClickedOutside}>
       <div className="flex flex-col gap-2">{props.children}</div>
     </dialog>
   )
