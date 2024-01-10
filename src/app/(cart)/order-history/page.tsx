@@ -6,6 +6,7 @@ import OrderHistoryHeader from '@/components/feature/orderHistory/orderHistoryHe
 import OrderHistorylist from '@/components/feature/orderHistory/orderHistorylist'
 
 // export const runtime = 'edge'
+export const dynamic = 'force-dynamic'
 
 const InititlaButtonContents = [
   { id: 'OrderHistoryButton3', content: '3개월', month: 3, clicked: true },
