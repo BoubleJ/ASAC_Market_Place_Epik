@@ -7,7 +7,7 @@ import CartPaymentBill from '@/components/feature/cart/cartPaymentBill'
 import SelectAllArea from '@/components/feature/cart/selectAllArea'
 import { Cart } from '@/types/product'
 
-export const runtime = 'edge'
+// export const runtime = 'edge'
 
 const getCart = async () => {
   const requestHeaders = new Headers(commonHeader)

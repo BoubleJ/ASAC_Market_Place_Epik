@@ -15,7 +15,7 @@ import OrderUserInfo from '@/components/feature/order/orderUserInfo'
 import { useOrderStore } from '@/store/client/orderSlice'
 import { IOrder } from '@/types/order'
 
-export const runtime = 'edge'
+// export const runtime = 'edge'
 
 const getOrders = async () => {
   try {

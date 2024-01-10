@@ -6,7 +6,7 @@ import OrderHistoryHeader from '@/components/feature/orderHistory/orderHistoryHe
 import OrderHistorylist from '@/components/feature/orderHistory/orderHistorylist'
 import { IOrderList } from '@/types/order'
 
-export const runtime = 'edge'
+// export const runtime = 'edge'
 
 const InititlaButtonContents = [
   { id: 'OrderHistoryButton3', content: '3개월', month: 3, clicked: true },
