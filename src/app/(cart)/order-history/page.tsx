@@ -1,21 +1,13 @@
 import { cookies } from 'next/headers'
 
 import { baseURL, commonHeader } from '@/api/util/instance'
-import OrderHistoryButtonGroup from '@/components/feature/orderHistory/orderHistoryButtonGroup'
 import OrderHistoryHeader from '@/components/feature/orderHistory/orderHistoryHeader'
 import OrderHistorylist from '@/components/feature/orderHistory/orderHistorylist'
+import OrderHistoryTab from '@/components/feature/orderHistory/orderHistoryTab'
 
-// export const runtime = 'edge'
 export const dynamic = 'force-dynamic'
 
-const InititlaButtonContents = [
-  { id: 'OrderHistoryButton3', content: '3개월', month: 3, clicked: true },
-  { id: 'OrderHistoryButton6', content: '6개월', month: 6, clicked: false },
-  { id: 'OrderHistoryButton12', content: '1년', month: 12, clicked: false },
-  { id: 'OrderHistoryButton36', content: '3년', month: 36, clicked: false },
-]
-
-const getOrderList = async () => {
+const getOrderList = async (month: number) => {
   try {
     const requestHeaders = new Headers(commonHeader)
 
@@ -26,12 +18,12 @@ const getOrderList = async () => {
       requestHeaders.set('Authorization', `Bearer ${authToken}`)
     }
 
-    const res = await fetch(`${baseURL}/members/mypage/orderlist?month=${3}`, {
+    const res = await fetch(`${baseURL}/members/mypage/orderlist?month=${month}`, {
       headers: requestHeaders,
     })
 
     if (!res.ok) {
-      console.log('Failed to get orders', res.status)
+      console.log('Failed to get orderlists', res.status)
       return { msg: '주문내역을 불러오는데 실패했습니다.' }
     }
 
@@ -43,13 +35,16 @@ const getOrderList = async () => {
   }
 }
 
-export default async function OrderHistoryePage() {
-  const initialIOrderList = await getOrderList()
+export default async function OrderHistoryePage({ searchParams }: { searchParams: { duration: string } }) {
+  const qs = searchParams
+  const isEmptySearchParams = Object.keys(qs).length === 0
+  const month = isEmptySearchParams ? 3 : parseInt(qs.duration)
+  const initialIOrderList = await getOrderList(month)
 
   return (
     <section className="w-full px-5">
       <OrderHistoryHeader />
-      <OrderHistoryButtonGroup initialData={InititlaButtonContents} />
+      <OrderHistoryTab />
       <OrderHistorylist initialOrderList={initialIOrderList} />
     </section>
   )

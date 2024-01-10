@@ -14,6 +14,7 @@ interface IOrderHistorylist {
 
 export default function OrderHistorylist({ initialOrderList }: IOrderHistorylist) {
   const { orderList, setOrderList } = useOrderListStore()
+
   const isEmpty = () => {
     if (!orderList) return true
     return orderList.length === 0
@@ -22,6 +23,7 @@ export default function OrderHistorylist({ initialOrderList }: IOrderHistorylist
   useEffect(() => {
     setOrderList(initialOrderList)
   }, [setOrderList, initialOrderList])
+
   if (isEmpty()) return <OrderHistoryEmpty />
 
   return (

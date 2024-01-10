@@ -10,7 +10,6 @@ export function convertNumberFormat(number: number) {
 }
 
 export function convertStringToDateFormat(string: string) {
-  console.log(string)
   let options: Intl.DateTimeFormatOptions = {
     year: 'numeric',
     month: '2-digit',
