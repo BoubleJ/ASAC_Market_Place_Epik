@@ -1,17 +1,13 @@
 import OrderItemList from '@/components/feature/order/orderItemList'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
-import { OrderItem } from '@/types/order'
+import { useOrderStore } from '@/store/client/orderSlice'
 
-interface IOrderItemInfo {
-  orderItems: OrderItem[]
-}
-
-export default function OrderItemInfo({ orderItems }: IOrderItemInfo) {
-  const isEmpty = orderItems.length === 0
-  console.log(orderItems)
-  const headItemNamePrefix = isEmpty ? '' : orderItems[0].itemName.substring(0, 12)
-  const orderProductCount = !orderItems ? 0 : orderItems.length
-  const headItemName = isEmpty ? '선택된 상품이 없습니다' : `${headItemNamePrefix}...외${orderProductCount}건`
+export default function OrderItemInfo() {
+  const { orders, isEmpty } = useOrderStore.getState()
+  const isOrderEmpty = isEmpty()
+  const headItemNamePrefix = isOrderEmpty ? '' : orders?.orderItemDtos[0].itemName.substring(0, 12)
+  const orderProductCount = isOrderEmpty ? 0 : orders?.orderItemDtos.length
+  const headItemName = isOrderEmpty ? '선택된 상품이 없습니다' : `${headItemNamePrefix}...외${orderProductCount}건`
   return (
     <Accordion type="single" collapsible className="w-full">
       <AccordionItem value="item-1">
@@ -19,8 +15,7 @@ export default function OrderItemInfo({ orderItems }: IOrderItemInfo) {
           <span className="">주문상품</span>
           <span className="ml-auto pr-[9px] line-clamp-1">{headItemName}</span>
         </AccordionTrigger>
-        <AccordionContent>{!isEmpty && <OrderItemList />}</AccordionContent>
-        {/* <AccordionContent>{<OrderItemList />}</AccordionContent> */}
+        <AccordionContent>{!isOrderEmpty && <OrderItemList />}</AccordionContent>
       </AccordionItem>
     </Accordion>
   )

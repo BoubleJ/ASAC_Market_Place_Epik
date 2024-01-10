@@ -4,12 +4,11 @@ import { NextRequest, NextResponse } from 'next/server'
 import { baseURL } from '@/api/util/instance'
 
 export async function POST(req: NextRequest) {
+  const authToken = cookies().get('AUTH_TOKEN')?.value
+  const hasCookies = cookies().has('AUTH_TOKEN')
   try {
     const itemId = req.nextUrl.searchParams.get('itemId')
     const requestHeaders = new Headers(req.headers)
-
-    const authToken = cookies().get('AUTH_TOKEN')?.value
-    const hasCookies = cookies().has('AUTH_TOKEN')
 
     if (hasCookies) {
       requestHeaders.set('Authorization', `Bearer ${authToken}`)
@@ -30,6 +29,7 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json(response)
   } catch (error) {
-    return NextResponse.json({ msg: '상품을 개수를 추가하지 못했습니다' })
+    // return NextResponse.json({ msg: '상품을 개수를 추가하지 못했습니다' })
+    return NextResponse.json({ msg: error })
   }
 }

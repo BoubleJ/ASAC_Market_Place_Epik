@@ -39,6 +39,3 @@ export default function OrderHistoryButtonGroup({ initialData }: IOrderHistoryBu
     </div>
   )
 }
-function orderListSlice(): { setDuration: any } {
-  throw new Error('Function not implemented.')
-}

@@ -52,7 +52,7 @@ export default async function OrderPage() {
     <>
       <section className="w-full px-5">
         <OrderHeader />
-        <OrderItemInfo orderItems={orders.orderItemDtos} />
+        <OrderItemInfo />
       </section>
       <section className="w-full px-5">
         <OrderUserInfo />
