@@ -31,6 +31,7 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json(response)
   } catch (error) {
-    return NextResponse.json({ msg: '상품을 개수를 줄이지 못했습니다' })
+    // return NextResponse.json({ msg: '상품을 개수를 줄이지 못했습니다' })
+    return NextResponse.json({ msg: error })
   }
 }
