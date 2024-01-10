@@ -8,7 +8,8 @@ export async function POST(req: NextRequest) {
   const hasCookies = cookies().has('AUTH_TOKEN')
   try {
     const itemId = req.nextUrl.searchParams.get('itemId')
-    const requestHeaders = new Headers(req.headers)
+    // const requestHeaders = new Headers(req.headers)
+    const requestHeaders = new Headers()
 
     if (hasCookies) {
       requestHeaders.set('Authorization', `Bearer ${authToken}`)
@@ -27,7 +28,7 @@ export async function POST(req: NextRequest) {
     }
 
     const response = await res.json()
-
+    console.log(response)
     return NextResponse.json(response)
   } catch (error) {
     console.log('cart insert error :', error)
