@@ -20,6 +20,8 @@ export async function GET(req: NextRequest) {
 
     if (!res.ok) {
       console.log('Failed to get orders', res.status)
+      const response = await res.json()
+      console.log(response)
       return NextResponse.json({ msg: '주문서를 불러오는데 실패했습니다.' })
     }
 
@@ -28,6 +30,7 @@ export async function GET(req: NextRequest) {
 
     return NextResponse.json(response)
   } catch (error) {
+    console.log(error)
     return NextResponse.json({ msg: '주문서를 불러오지 못했습니다' })
   }
 }
