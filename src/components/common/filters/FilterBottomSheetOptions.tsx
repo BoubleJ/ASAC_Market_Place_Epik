@@ -15,8 +15,9 @@ export default function FilterBottomSheetOptions({
         ? selectedFilter.map((option, index) => (
             <div key={index} className="py-2">
               <input
-                type="checkbox"
+                type="radio"
                 id={option}
+                name="category"
                 checked={selectedCategories.includes(option)}
                 onChange={() => handleCheckboxChange(option)}
               />

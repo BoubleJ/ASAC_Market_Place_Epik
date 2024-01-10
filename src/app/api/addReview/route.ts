@@ -11,21 +11,28 @@ export async function POST(req: NextRequest) {
     if (cookies().has('AUTH_TOKEN')) {
       requestHeaders.set('Authorization', `Bearer ${cookies().get('AUTH_TOKEN')?.value}`)
     }
-    const body = req.body
+
+    // requestHeaders.set('Accept', 'multipart/form-data')
     const bodyFormdata = await req.formData()
+    // const b = await req.body
 
     console.log('route post왔슴')
     console.log(bodyFormdata)
 
     console.log(bodyFormdata.get('review'), '폼데이터!')
     console.log(bodyFormdata.getAll('reviewImages'), '폼데이터!')
+    console.log(cookies().has('AUTH_TOKEN'), '쿠키')
+    console.log(requestHeaders, '리퀴스트 헤에에엥더')
 
     const res = await fetch(`${baseURL}/reviews/create`, {
       method: 'POST',
-      // headers: requestHeaders,
+      headers: { Authorization: `Bearer ${cookies().get('AUTH_TOKEN')?.value}` },
       body: bodyFormdata,
     })
     const resoense = await res.json()
+    console.log('review 등록 성공', resoense)
+    console.log('review 등록 성공', resoense)
+
     return NextResponse.json(resoense)
   } catch (error) {
     console.log('review 등록 에러', error)

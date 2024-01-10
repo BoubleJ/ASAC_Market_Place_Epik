@@ -4,6 +4,8 @@ import EventBanner from '@/components/feature/recommendations/EventBanner'
 import LastSale from '@/components/feature/recommendations/LastSale'
 import WeekendSale from '@/components/feature/recommendations/WeekendSale'
 
+export const dynamic = 'force-dynamic'
+
 export default function RecommendationsPage() {
   return (
     <div className="flex flex-col">
