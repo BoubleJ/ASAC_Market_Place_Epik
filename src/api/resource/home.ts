@@ -8,7 +8,7 @@ export async function fetchBestItemsData(
   const res = await fetch(
     `${baseLocalURL}/search/complexitem?status=BESTSELLER${categoryParams ? `&categoryName=${categoryParams}` : ''}${
       brandParams ? `&brand=${brandParams}` : ''
-    }${priceParams ? `&price=${priceParams}` : ''}`,
+    }${priceParams ? `&priceRange=${priceParams}` : ''}`,
   )
 
   if (!res.ok) {
@@ -28,7 +28,7 @@ export async function fetchNewArrivalsData(
   const res = await fetch(
     `${baseLocalURL}/search/complexitem?promotionType=NEW_ARRIVAL&${
       categoryParams ? `&categoryName=${categoryParams}` : ''
-    }${brandParams ? `&brand=${brandParams}` : ''}${priceParams ? `&price=${priceParams}` : ''}`,
+    }${brandParams ? `&brand=${brandParams}` : ''}${priceParams ? `&priceRange=${priceParams}` : ''}`,
   )
   if (!res.ok) {
     throw new Error('Failed to fetch data')
