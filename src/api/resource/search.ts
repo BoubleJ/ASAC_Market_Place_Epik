@@ -9,7 +9,7 @@ export async function fetchSearchItemsData(
   const res = await fetch(
     `${baseLocalURL}/search/complexitem?name=${searchWord}${categoryParams ? `&categoryName=${categoryParams}` : ''}${
       brandParams ? `&brand=${brandParams}` : ''
-    }${priceParams ? `&price=${priceParams}` : ''}`,
+    }${priceParams ? `&priceRange=${priceParams}` : ''}`,
   )
 
   if (!res.ok) {
