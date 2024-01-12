@@ -28,7 +28,7 @@ export default async function CategoryItemsPage({
   console.log(categoryItem.items.content.length)
   return (
     <div className="pt-28">
-      <CategoryFilter itemLength={categoryItem.items.content.length} />
+      <CategoryFilter itemLength={categoryItem.items.content.length} categoryNameParam={categoryNameParam} />
       <div>
         <CategoryItemsList categoryItems={categoryItem} />
       </div>

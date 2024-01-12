@@ -1,16 +1,17 @@
 'use client'
-import { useSearchParams } from 'next/navigation'
+
 import React, { useEffect, useState } from 'react'
 
 import { fetchCategoryFilterData } from '@/api/resource/category'
 import Filters from '@/components/common/filters/Filters'
 
-export default function CategoryFilter({ itemLength }: { itemLength: number }) {
-  const params = useSearchParams()
-  const subCategory = params.get('sub') || ''
-  const mainCategory = params.get('main') || ''
-  const categoryNameParam = subCategory === '전체보기' ? mainCategory : subCategory
-
+export default function CategoryFilter({
+  itemLength,
+  categoryNameParam,
+}: {
+  itemLength: number
+  categoryNameParam: string
+}) {
   const [filterData, setFilterData] = useState({ categoryCounts: {}, brandCounts: {}, priceRange: [] })
 
   useEffect(() => {
@@ -23,12 +24,15 @@ export default function CategoryFilter({ itemLength }: { itemLength: number }) {
   const brandCounts = filterData.brandCounts
   const priceRange = filterData.priceRange
   return (
-    <Filters
-      totalEliments={itemLength}
-      categoryCounts={categoryCounts}
-      brandCounts={brandCounts}
-      priceRange={priceRange}
-      stickyLocation={'top-28'}
-    />
+    <>
+      <div>{categoryNameParam}ㅋㅋㅋㅋㅋㅋㅋ</div>
+      <Filters
+        totalEliments={itemLength}
+        categoryCounts={categoryCounts}
+        brandCounts={brandCounts}
+        priceRange={priceRange}
+        stickyLocation={'top-28'}
+      />
+    </>
   )
 }
