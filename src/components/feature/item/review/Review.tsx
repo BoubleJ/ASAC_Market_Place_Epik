@@ -43,7 +43,7 @@ export default function Review({
       </div>
       {/* <span className=" text-body-xs font-normal text-grayscale-300">{review.itemName}</span> */}
       <span className="text-body-xs font-normal text-grayscale-300">{itemName}</span>
-      <div className="aspect-square w-1/4 rounded-lg overflow-hidden relative">
+      <div className="aspect-square w-1/4 rounded-lg overflow-hidden relative no-scrollbar">
         <Image
           alt="review image"
           // src={image}

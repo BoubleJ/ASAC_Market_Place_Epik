@@ -9,7 +9,7 @@ export function convertNumberFormat(number: number) {
   return new Intl.NumberFormat('ko-KR').format(number)
 }
 
-export function convertStringToDateFormat(string: string) {
+export function convertStringToDateFormat(date: string) {
   let options: Intl.DateTimeFormatOptions = {
     year: 'numeric',
     month: '2-digit',
@@ -17,8 +17,9 @@ export function convertStringToDateFormat(string: string) {
     hour: '2-digit',
     minute: '2-digit',
     hour12: true,
+    timeZone: 'Asia/Seoul',
   }
-  return Intl.DateTimeFormat('ko-KR', options).format(new Date(string))
+  return Intl.DateTimeFormat('ko-KR', options).format(new Date(date))
 }
 
 const DUMMY_URL_LIST = ['http://myshop.com', 'http://example.com', 'http://sales.com']

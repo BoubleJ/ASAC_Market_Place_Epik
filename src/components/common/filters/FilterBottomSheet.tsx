@@ -73,7 +73,7 @@ export default function FilterBottomSheet({
 
   return (
     <div>
-      <div className="fixed w-96 h-96 bottom-0 z-40 rounded-t-lg overflow-scroll bg-white pb-4">
+      <div className="fixed w-96 h-96 bottom-0 z-40 rounded-t-lg overflow-scroll bg-white pb-4 no-scrollbar">
         <div className="relative">
           <FilterBottomSheetHeader
             filters={filters}

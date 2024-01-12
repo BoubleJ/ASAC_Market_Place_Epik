@@ -20,7 +20,7 @@ export default function CategoryItemsTab({
   const subCategories = currentSubCategories ? [{ name: '전체보기' }, ...currentSubCategories.subCategories] : []
 
   return (
-    <nav className="sticky top-20 text-body-sm px-4 gap-10 bg-white flex justify-between z-10 border-b border-b-grayscale-50 overflow-x-scroll whitespace-nowrap">
+    <nav className="sticky top-20 text-body-sm px-4 gap-10 bg-white flex justify-between z-10 border-b border-b-grayscale-50 overflow-x-scroll whitespace-nowrap no-scrollbar">
       {subCategories.map((subCategory, index) => (
         <Link
           key={index}
