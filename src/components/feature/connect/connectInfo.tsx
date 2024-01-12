@@ -1,6 +1,14 @@
+import { fetchMember } from '@/api/resource/member'
 import { User } from '@/components/icons'
 
-export default function ConnectInfo() {
+export default async function ConnectInfo() {
+  const member = await fetchMember()
+  let isLoggedIn = true
+  console.log(member)
+  if (member.errorMessage) {
+    console.log(member.errorMessage)
+    isLoggedIn = false
+  }
   return (
     <section className="p-5">
       <div className="flex flex-col gap-[10px] justify-between items-start">
@@ -16,7 +24,11 @@ export default function ConnectInfo() {
               className="fill-grayscale-200 stroke-grayscale-200 text-grayscale-200"
             />
           </div>
-          <span className="text-body-lg">ID???</span>
+          {isLoggedIn ? (
+            <span className="text-body-lg">ID: {member.memberName}</span>
+          ) : (
+            <span className="text-body-lg">등록된 ID를 불러오지 못하였습니다.</span>
+          )}
         </div>
       </div>
     </section>

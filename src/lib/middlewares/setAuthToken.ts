@@ -1,5 +1,7 @@
 import { type NextRequest, NextResponse } from 'next/server'
 
+import { basePath } from '@/api/util/instance'
+
 export default async function setAuthToken(request: NextRequest) {
   try {
     const url = request.nextUrl.clone()
@@ -23,6 +25,6 @@ export default async function setAuthToken(request: NextRequest) {
     return response
   } catch (error) {
     console.log('Could not set authentication token:', error)
-    return NextResponse.redirect('http://localhost:3000/login', { status: 302 })
+    return NextResponse.redirect(`${basePath}/login`, { status: 302 })
   }
 }

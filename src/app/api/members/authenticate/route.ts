@@ -1,7 +1,7 @@
 import { cookies } from 'next/headers'
 import { NextRequest, NextResponse } from 'next/server'
 
-import { baseURL } from '@/api/util/instance'
+import { basePath, baseURL } from '@/api/util/instance'
 
 export async function POST(req: NextRequest) {
   try {
@@ -33,6 +33,6 @@ export async function POST(req: NextRequest) {
     console.log('authenticate route.ts:', cookies().getAll())
     return NextResponse.json(true)
   } catch (error) {
-    return NextResponse.redirect(`http://localhost:3000/signup`)
+    return NextResponse.redirect(`${basePath}/signup`)
   }
 }
