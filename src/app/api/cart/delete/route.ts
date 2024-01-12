@@ -6,7 +6,7 @@ import { baseURL } from '@/api/util/instance'
 export async function POST(req: NextRequest) {
   try {
     const itemId = req.nextUrl.searchParams.get('itemId')
-    const requestHeaders = new Headers(req.headers)
+    const requestHeaders = new Headers()
 
     const authToken = cookies().get('AUTH_TOKEN')?.value
     const hasCookies = cookies().has('AUTH_TOKEN')
@@ -30,6 +30,7 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json(response)
   } catch (error) {
+    console.log('cart delete error :', error)
     return NextResponse.json({ msg: '상품을 장바구니에 삭제하지 못했습니다.' })
   }
 }

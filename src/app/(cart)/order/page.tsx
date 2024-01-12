@@ -15,7 +15,7 @@ import OrderUserInfo from '@/components/feature/order/orderUserInfo'
 import { useOrderStore } from '@/store/client/orderSlice'
 import { IOrder } from '@/types/order'
 
-export const runtime = 'edge'
+export const dynamic = 'force-dynamic'
 
 const getOrders = async () => {
   try {
@@ -52,7 +52,7 @@ export default async function OrderPage() {
     <>
       <section className="w-full px-5">
         <OrderHeader />
-        <OrderItemInfo orderItems={orders.orderItemDtos} />
+        <OrderItemInfo />
       </section>
       <section className="w-full px-5">
         <OrderUserInfo />

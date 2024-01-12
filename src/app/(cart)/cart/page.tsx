@@ -7,7 +7,7 @@ import CartPaymentBill from '@/components/feature/cart/cartPaymentBill'
 import SelectAllArea from '@/components/feature/cart/selectAllArea'
 import { Cart } from '@/types/product'
 
-// export const runtime = 'edge'
+export const dynamic = 'force-dynamic'
 
 const getCart = async () => {
   const requestHeaders = new Headers(commonHeader)
@@ -35,7 +35,7 @@ const getCart = async () => {
 }
 export default async function CartPage() {
   const cart = await getCart()
-
+  // const cart = await fetchGetCartItem()
   return (
     <>
       <div className="w-full">

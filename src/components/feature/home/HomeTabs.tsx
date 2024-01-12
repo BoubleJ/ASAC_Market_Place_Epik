@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React from 'react'
 
 import HomeTab from '@/components/feature/home/HomeTab'
@@ -6,8 +7,8 @@ const navLinks = [
   { href: '/recommendations', tabLabel: '추천' },
   { href: '/new-arrivals', tabLabel: '신상품' },
   { href: '/best-items', tabLabel: '베스트' },
-  { href: '/budgetShooping', tabLabel: '알뜰쇼핑' },
-  { href: '/specialOffer', tabLabel: '특가/혜택' },
+  // { href: '/budgetShooping', tabLabel: '알뜰쇼핑' },
+  // { href: '/specialOffer', tabLabel: '특가/혜택' },
 ]
 
 export default function HomeTabs() {
@@ -16,6 +17,12 @@ export default function HomeTabs() {
       {navLinks.map((link, index) => (
         <HomeTab key={index} href={link.href} tabLabel={link.tabLabel} />
       ))}
+      <Link className="text-grayscale-400" href={'/recommendations'}>
+        알뜰쇼핑
+      </Link>
+      <Link className="text-grayscale-400" href={'/recommendations'}>
+        특가/혜택
+      </Link>
     </nav>
   )
 }

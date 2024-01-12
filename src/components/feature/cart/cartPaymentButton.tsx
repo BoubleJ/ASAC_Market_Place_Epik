@@ -21,7 +21,7 @@ export default function CartPaymentButton() {
 
   return (
     <Button variant={'primary'} size={'lg'} onClick={handleCartValidation} disabled={isEmpty()}>
-      <span>{convertNumberFormat(price())}원 결제하기</span>
+      <span>{convertNumberFormat(price() + 3000)}원 결제하기</span>
     </Button>
   )
 }

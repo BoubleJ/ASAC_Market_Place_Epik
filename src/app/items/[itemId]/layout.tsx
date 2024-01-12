@@ -8,6 +8,8 @@ import ItemHeader from '@/components/feature/item/ItemHeader'
 import ItemTabs from '@/components/feature/item/ItemTabs'
 import { Product } from '@/types/item'
 
+export const dynamic = 'force-dynamic'
+
 async function fetchItemDetail(itemId: number) {
   const authToken = cookies().get('AUTH_TOKEN')?.value
   const hasCookies = cookies().has('AUTH_TOKEN')

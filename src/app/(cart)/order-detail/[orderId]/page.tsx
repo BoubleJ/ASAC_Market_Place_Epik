@@ -7,6 +7,7 @@ import OrderDetailPaymentInfo from '@/components/feature/orderDetail/orderDetail
 import { IOrderDetail } from '@/types/order'
 
 // export const runtime = 'edge'
+export const dynamic = 'force-dynamic'
 
 const getOrderListById = async (orderId: number) => {
   try {

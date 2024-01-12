@@ -26,7 +26,7 @@ export default function AppliedFilters({ prevAppliedFilters }: { prevAppliedFilt
   }
 
   return (
-    <div className="flex px-4 py-1 text-body-sm overflow-x-scroll whitespace-nowrap">
+    <div className="flex px-4 py-1 text-body-sm overflow-x-scroll whitespace-nowrap no-scrollbar">
       {Object.keys(prevAppliedFilters).map((filterName) => {
         const filterOption = prevAppliedFilters[filterName as keyof AppliedFilterType]
 

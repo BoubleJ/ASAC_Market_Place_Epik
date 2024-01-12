@@ -30,14 +30,14 @@ export default function CartItemCard({ product }: ICartItemCard) {
   const handleIncreaseItemCount = async () => {
     const msg = await fetchIncreaseCartItemById(product.id)
     if (!msg.startsWith('아이템')) {
-      return openSelectModal(`상품의 개수를 추가하는데 실패했습니다.`)
+      return openSelectModal(`${msg}`)
     }
     add(product)
   }
   const handleDecreaseItemCount = async () => {
     const msg = await fetchDecreaseCartItemById(cartId, product.id)
     if (!msg.startsWith('아이템')) {
-      return openSelectModal(`상품의 개수를 줄이는데 실패했습니다.`)
+      return openSelectModal(`${msg}`)
     }
     decrease(product.id)
   }
