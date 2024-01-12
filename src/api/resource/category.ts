@@ -1,6 +1,6 @@
 // import { baseURL } from '../util/instance'
 
-import { baseLocalURL, baseURL } from '../util/instance'
+import { baseLocalURL } from '../util/instance'
 
 export async function fetchCategory() {
   const res = await fetch(`${baseLocalURL}/items/category`)
@@ -30,7 +30,7 @@ export async function fetchCategoryItems(categoryName: string, brandParams: stri
 }
 
 export async function fetchCategoryFilterData(categoryName: string) {
-  const res = await fetch(`${baseURL}/search/counts?categoryName=${categoryName}`)
+  const res = await fetch(`${baseLocalURL}/search/counts?categoryName=${categoryName}`)
 
   if (!res.ok) {
     throw new Error('category items fetch failed')
