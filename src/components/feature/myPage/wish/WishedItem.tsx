@@ -41,7 +41,7 @@ export default function WishedItem() {
           <div className="h-full flex flex-col gap-4">
             {wishList.map((wishedItem: WishedItemType, index) => (
               <div key={index} className="h-[16%] flex gap-3">
-                <div className="h-28 w-[30%] overflow-hidden relative">
+                <div className="h-28 w-[30%] overflow-hidden relative no-scrollbar">
                   <Image
                     alt={wishedItem.itemName}
                     // src={wishedItem.promotionImageUrl}
