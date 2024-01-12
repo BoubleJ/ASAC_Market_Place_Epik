@@ -18,9 +18,9 @@ export default async function LastSale() {
           </div>
         ))}
       </div> */}
-      <div className="flex justify-center h-[271px] ">
-        <LastSaleCarousel productList={productList} />
-      </div>
+      <LastSaleCarousel productList={productList} />
+      {/* <div className="flex justify-center h-[271px] "> */}
+      {/* </div> */}
     </div>
   )
 }
