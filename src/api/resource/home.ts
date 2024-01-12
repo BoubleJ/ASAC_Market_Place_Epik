@@ -1,4 +1,4 @@
-import { baseLocalURL } from '@/api/util/instance'
+import { baseLocalURL, baseURL } from '@/api/util/instance'
 
 export async function fetchBestItemsData(
   categoryParams: string | null,
@@ -40,7 +40,7 @@ export async function fetchNewArrivalsData(
 }
 
 export async function fetchNewArrivalsFilterData() {
-  const res = await fetch(`${baseLocalURL}/search/counts?promotionType=NEW_ARRIVAL`)
+  const res = await fetch(`${baseURL}/search/counts?promotionType=NEW_ARRIVAL`)
   //localhost:8080/api/search/counts?name=아
 
   if (!res.ok) {
