@@ -30,6 +30,7 @@ export async function fetchCategoryItems(categoryName: string, brandParams: stri
 }
 
 export async function fetchCategoryFilterData(categoryName: string) {
+  console.log(categoryName, '카레코리 이름ㅋㅋㅋㅋㅋㅋㅋㅋㅋ')
   const res = await fetch(`${baseLocalURL}/search/counts?categoryName=${categoryName}`)
 
   if (!res.ok) {

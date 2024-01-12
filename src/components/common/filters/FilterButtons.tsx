@@ -14,7 +14,6 @@ export default function FilterButtons({
 }) {
   const pathname = usePathname()
   const isCategoryPage = pathname.includes('categories')
-  console.log('트루!!!!!!!!!!!!!!!!!!,', isCategoryPage)
   return (
     <div className="flex gap-4 py-2 px-3">
       {(Object.keys(filters) as Array<keyof FilterType>).map((filterName) => (
