@@ -1,7 +1,7 @@
 import { cookies } from 'next/headers'
 import { NextRequest, NextResponse } from 'next/server'
 
-import { baseURL } from '@/api/util/instance'
+import { basePath, baseURL } from '@/api/util/instance'
 
 export async function POST(req: NextRequest) {
   try {
@@ -25,6 +25,6 @@ export async function POST(req: NextRequest) {
     }
     return NextResponse.json({ response })
   } catch (error) {
-    return NextResponse.redirect(`http://localhost:3000/myPage`)
+    return NextResponse.redirect(`${basePath}/myPage`)
   }
 }

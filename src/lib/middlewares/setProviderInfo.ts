@@ -1,5 +1,7 @@
 import { type NextRequest, NextResponse } from 'next/server'
 
+import { basePath } from '@/api/util/instance'
+
 export default async function setProviderInfo(request: NextRequest) {
   try {
     const url = request.nextUrl.clone()
@@ -35,6 +37,6 @@ export default async function setProviderInfo(request: NextRequest) {
     return response
   } catch (error) {
     console.log('Couldnt set providerInfo in setProviderInfo.ts :', error)
-    return NextResponse.redirect('http://localhost:3000/login')
+    return NextResponse.redirect(`${basePath}/login`)
   }
 }

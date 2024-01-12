@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-import { baseURL } from '@/api/util/instance'
+import { basePath, baseURL } from '@/api/util/instance'
 
 export async function POST(req: NextRequest) {
   try {
@@ -20,6 +20,6 @@ export async function POST(req: NextRequest) {
     const response = await res.json()
     return NextResponse.json(response.data)
   } catch (error) {
-    return NextResponse.redirect(`http://localhost:3000/signup`)
+    return NextResponse.redirect(`${basePath}/signup`)
   }
 }
