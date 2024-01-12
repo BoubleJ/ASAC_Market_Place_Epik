@@ -25,7 +25,6 @@ export default function CategoryFilter({
   const priceRange = filterData.priceRange
   return (
     <>
-      <div>{categoryNameParam}ㅋㅋㅋㅋㅋㅋㅋ</div>
       <Filters
         totalEliments={itemLength}
         categoryCounts={categoryCounts}
