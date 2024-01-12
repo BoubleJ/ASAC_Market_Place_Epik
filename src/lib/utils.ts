@@ -10,6 +10,11 @@ export function convertNumberFormat(number: number) {
 }
 
 export function convertStringToDateFormat(date: string) {
+  const serverDate = new Date(date)
+  const KST = new Date()
+  const UTC_NINE = serverDate.getTime() + 9 * 60 * 60 * 1000
+  KST.setTime(UTC_NINE)
+
   let options: Intl.DateTimeFormatOptions = {
     year: 'numeric',
     month: '2-digit',
@@ -19,7 +24,7 @@ export function convertStringToDateFormat(date: string) {
     hour12: true,
     timeZone: 'Asia/Seoul',
   }
-  return Intl.DateTimeFormat('ko-KR', options).format(new Date(date))
+  return Intl.DateTimeFormat('ko-KR', options).format(new Date(KST))
 }
 
 const DUMMY_URL_LIST = ['http://myshop.com', 'http://example.com', 'http://sales.com']
