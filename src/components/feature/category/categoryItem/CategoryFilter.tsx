@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react'
 import { fetchCategoryFilterData } from '@/api/resource/category'
 import Filters from '@/components/common/filters/Filters'
 
-export default function CategoryFilter() {
+export default function CategoryFilter({ itemLength }: { itemLength: number }) {
   const params = useSearchParams()
   const subCategory = params.get('sub') || ''
   const mainCategory = params.get('main') || ''
@@ -24,7 +24,7 @@ export default function CategoryFilter() {
   const priceRange = filterData.priceRange
   return (
     <Filters
-      totalEliments={0}
+      totalEliments={itemLength}
       categoryCounts={categoryCounts}
       brandCounts={brandCounts}
       priceRange={priceRange}

@@ -15,7 +15,7 @@ export async function fetchCategory() {
 export async function fetchCategoryItems(categoryName: string, brandParams: string | null, priceParams: string | null) {
   const res = await fetch(
     `${baseLocalURL}/search/complexitem?categoryName=${categoryName}${brandParams ? `&brand=${brandParams}` : ''}${
-      priceParams ? `&price=${priceParams}` : ''
+      priceParams ? `&priceRange=${priceParams}` : ''
     }`,
   )
 

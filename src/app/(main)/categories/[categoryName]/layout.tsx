@@ -1,7 +1,6 @@
 import React from 'react'
 
 import { fetchCategory } from '@/api/resource/category'
-import CategoryFilter from '@/components/feature/category/categoryItem/CategoryFilter'
 import CategoryItemsHeader from '@/components/feature/category/categoryItem/CategoryItemsHeader'
 import CategoryItemsTab from '@/components/feature/category/categoryItem/CategoryItemsTab'
 
@@ -26,11 +25,7 @@ export default async function CategoryItemsLayout({
         <CategoryItemsTab categories={categories} mainCategory={mainCategory} subCategory={subCategory} />
       </div>
 
-      <div className="pt-28">
-        <CategoryFilter />
-
-        {children}
-      </div>
+      {children}
     </>
   )
 }
