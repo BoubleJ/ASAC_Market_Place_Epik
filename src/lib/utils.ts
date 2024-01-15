@@ -27,6 +27,19 @@ export function convertStringToDateFormat(date: string) {
   return Intl.DateTimeFormat('ko-KR', options).format(new Date(KST))
 }
 
+export function convertStringToDateFormaUTC(date: string) {
+  let options: Intl.DateTimeFormatOptions = {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: true,
+    timeZone: 'Asia/Seoul',
+  }
+  return Intl.DateTimeFormat('ko-KR', options).format(new Date(date))
+}
+
 const DUMMY_URL_LIST = ['http://myshop.com', 'http://example.com', 'http://sales.com']
 
 export function checkDummyImageUrl(url: string) {

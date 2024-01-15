@@ -1,7 +1,7 @@
 import React from 'react'
 
 import OrderDetailItem from '@/components/feature/orderDetail/orderDetailItem'
-import { convertStringToDateFormat } from '@/lib/utils'
+import {convertStringToDateFormaUTC } from '@/lib/utils'
 import { DeliveryStatus, OrderItem } from '@/types/order'
 
 import OrderDetailButtonGroup from './orderDetailButtonGroup'
@@ -24,7 +24,7 @@ export default function OrderDetailList({
       <div className="text-body-md font-semibold flex gap-2 justify-start items-center w-full">
         <span>주문번호</span>
         <span>{orderId}</span>
-        <span className="ml-auto">{convertStringToDateFormat(orderDateTime)}</span>
+        <span className="ml-auto">{convertStringToDateFormaUTC(orderDateTime)}</span>
       </div>
       <div className="bg-grayscale-400 w-full h-[1px]" />
       <div className="divide-y-2 divide-gray-50 w-full">
