@@ -1,5 +1,7 @@
 import React from 'react'
 
+import FAQDropDown from '@/components/feature/faq/FAQDropDown'
+import FAQFilterBox from '@/components/feature/faq/FAQFilterBox'
 import FAQItemList from '@/components/feature/faq/FAQItemList'
 
 export default function page() {
@@ -7,6 +9,8 @@ export default function page() {
     <div className="w-full h-full p-4">
       <div className=" text-title-lg">
         <FAQItemList />
+        <FAQDropDown />
+        <FAQFilterBox />
       </div>
     </div>
   )
