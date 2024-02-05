@@ -1,19 +1,37 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
 
-import ModalContent from './ModalContent'
+import FAQBottomSeat from './FAQBottomSeat'
 
 export default function FAQFilterBox() {
-  const [showModal, setShowModal] = useState<boolean>(false)
+  let [Modal, setModal] = useState(false)
+  let [portalElement, setPortalElement] = useState<Element | null>(null)
+
+  useEffect(() => {
+    setPortalElement(document.getElementById('portal'))
+  }, [Modal])
+
+  const ModalHandler = () => {
+    setModal(!Modal)
+  }
 
   return (
     <div>
-      {showModal && createPortal(<ModalContent onClose={() => setShowModal(false)} />, document.body)}
-      <button className="" onClick={() => setShowModal(true)}>
-        Show modal using a portal
-      </button>
+      <div className="bg-yellow-400 w-20 h-10" onClick={ModalHandler}>
+        <p>로그인</p>
+      </div>
+      {Modal && portalElement
+        ? createPortal(
+            <FAQBottomSeat
+              ModalHandler={function (): void {
+                throw new Error('Function not implemented.')
+              }}
+            />,
+            portalElement,
+          )
+        : null}
     </div>
   )
 }
