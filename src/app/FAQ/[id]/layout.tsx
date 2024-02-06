@@ -5,8 +5,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <>
       <FAQHeader />
 
-      <div className="pt-20 ">{children}</div>
-     
+      <div className="">{children}</div>
     </>
   )
 }

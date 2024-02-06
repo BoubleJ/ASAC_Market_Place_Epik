@@ -1,26 +1,20 @@
+import { Span } from 'next/dist/trace'
 
-
-
-
-
-export default function FAQFilterBox( { setIsBottomSheetOpen} ) {
-
+export default function FAQFilterBox({ setIsBottomSheetOpen, slug }) {
   const bottomSheetHandler = () => {
     setIsBottomSheetOpen(true)
   }
 
-
-
-
   return (
-    <div>
-      <div className="bg-yellow-400 w-20 h-10" onClick={()=>{
-        bottomSheetHandler()
-      }}>
-        <p>로그인</p>
-       
+    <>
+      <div
+        className=" w-full h-12 border-2 border-solid rounded-md border-grayscale-100"
+        onClick={() => {
+          bottomSheetHandler()
+        }}
+      >
+        <p className=" text-body-base pl-5 py-3">{slug}</p>
       </div>
-   
-    </div>
+    </>
   )
 }
