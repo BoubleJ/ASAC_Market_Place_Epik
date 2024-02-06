@@ -3,17 +3,13 @@ import React from 'react'
 
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 
-export default function FAQItemList({list}) {
+export default function FAQItemList({ list, slug }) {
+  const result = list.find((item) => item.title === slug )
 
 
   return (
     <>
-      {
-    
-      
-      
-      
-      list.member.map((item) => {
+      {result.body.map((item) => {
         return (
           <Accordion type="single" collapsible className="w-full" key={item.Id}>
             <AccordionItem value="item-1">
