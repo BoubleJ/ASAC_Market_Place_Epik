@@ -1,11 +1,10 @@
-import { usePathname, useRouter } from 'next/navigation'
+
 import React from 'react'
 
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 
 export default function FAQItemList({ list, slug }) {
-  const result = list.find((item) => item.title == slug )
-
+  const result = list.find((item) => item.title == slug)
 
   return (
     <>

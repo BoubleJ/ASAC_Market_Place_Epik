@@ -5,7 +5,6 @@ import FAQFilterBox from '@/components/feature/faq/FAQFilterBox'
 import FAQItemList from '@/components/feature/faq/FAQItemList'
 
 import FQABottomSeat from './FAQBottomSeat'
-import { usePathname } from 'next/navigation'
 
 export default function FAQPage({ slug }) {
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false)
@@ -30,7 +29,7 @@ export default function FAQPage({ slug }) {
       title: 'member',
       filterTitle: '회원',
       body: [
-        { Id: 0, Question: ' 부과되나요?', Answer: '네' },
+        { Id: 0, Question: ' 부과되나멤버멤ㅁ버송흔멍요?', Answer: '네' },
         { Id: 1, Question: '선물하기 주문을 취소하고 싶어요', Answer: '아니오' },
         { Id: 2, Question: ' 하나요?', Answer: '네' },
         { Id: 3, Question: '아이디, 비밀번호를 잊어버렸습니다', Answer: '네' },
@@ -44,7 +43,7 @@ export default function FAQPage({ slug }) {
       title: 'item',
       filterTitle: '상품',
       body: [
-        { Id: 0, Question: ' 부과요?', Answer: '네' },
+        { Id: 0, Question: ' 부과아이템 상품백택배요?', Answer: '네' },
         { Id: 1, Question: '선물하기 주 싶어요', Answer: '아니오' },
         { Id: 2, Question: ' 하나요?', Answer: '네' },
         { Id: 3, Question: 'fsdaf버렸습니다', Answer: '네' },
@@ -58,7 +57,7 @@ export default function FAQPage({ slug }) {
       title: 'order',
       filterTitle: '주문/결제/대량주문',
       body: [
-        { Id: 0, Question: ' 부과fsdfas요?', Answer: '네' },
+        { Id: 0, Question: ' 부과fsdfa 주문결제여ㅑㅇㄹㅇs요?', Answer: '네' },
         { Id: 1, Question: '선물하dfsf기 주 싶어요', Answer: '아니오' },
         { Id: 2, Question: ' 하나요?', Answer: '네' },
         { Id: 3, Question: 'fsdafaaa버렸습니다', Answer: '네' },
@@ -72,7 +71,7 @@ export default function FAQPage({ slug }) {
       title: 'delivery',
       filterTitle: '배송',
       body: [
-        { Id: 0, Question: ' 부과요?', Answer: '네' },
+        { Id: 0, Question: ' 부과되나요>???요?', Answer: '네' },
         { Id: 1, Question: '선물하기 주 싶어요', Answer: '아니오' },
         { Id: 2, Question: ' 하나요캬캬캬캬캬캬컄?', Answer: '네' },
         { Id: 3, Question: 'fsdaf버렸습니다', Answer: '네' },
@@ -86,7 +85,7 @@ export default function FAQPage({ slug }) {
       title: 'packing',
       filterTitle: '포장',
       body: [
-        { Id: 0, Question: ' 부과요?', Answer: '네' },
+        { Id: 0, Question: ' 부과하뇽어라엉요?', Answer: '네' },
         { Id: 1, Question: '선물하ㄹㅇㄴㅁ라주고기 주 싶어요', Answer: '아니오' },
         { Id: 2, Question: ' 하나요?', Answer: '네' },
         { Id: 3, Question: 'fsdaf버렸습니다', Answer: '네' },
@@ -100,7 +99,7 @@ export default function FAQPage({ slug }) {
       title: 'event',
       filterTitle: '이벤트/쿠폰/적립',
       body: [
-        { Id: 0, Question: ' 부과요?', Answer: '네' },
+        { Id: 0, Question: ' dsfadfs부과요?', Answer: '네' },
         { Id: 1, Question: '선물하일머나럼ㄴ기 주 싶어요', Answer: '아니오' },
         { Id: 2, Question: ' 하나요?', Answer: '네' },
         { Id: 3, Question: 'fsdaf버렸습니다', Answer: '네' },
@@ -114,9 +113,9 @@ export default function FAQPage({ slug }) {
 
   return (
     <>
-      <FAQFilterBox setIsBottomSheetOpen={setIsBottomSheetOpen} list={list} slug={slug}/>
+      <FAQFilterBox setIsBottomSheetOpen={setIsBottomSheetOpen} list={list} slug={slug} />
       <FQABottomSeat isBottomSheetOpen={isBottomSheetOpen} setIsBottomSheetOpen={setIsBottomSheetOpen} list={list} />
-      <FAQItemList list={list} slug={slug}  />
+      <FAQItemList list={list} slug={slug} />
     </>
   )
 }
