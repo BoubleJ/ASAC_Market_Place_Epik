@@ -1,10 +1,11 @@
-import { Span } from 'next/dist/trace'
 
-export default function FAQFilterBox({ setIsBottomSheetOpen, slug }) {
+
+export default function FAQFilterBox({ setIsBottomSheetOpen, list, slug }) {
   const bottomSheetHandler = () => {
     setIsBottomSheetOpen(true)
   }
 
+  const result = list.find((item) => item.title == slug )
   return (
     <>
       <div
@@ -13,7 +14,7 @@ export default function FAQFilterBox({ setIsBottomSheetOpen, slug }) {
           bottomSheetHandler()
         }}
       >
-        <p className=" text-body-base pl-5 py-3">{slug}</p>
+        <p className=" text-body-base pl-5 py-3">{result.filterTitle}</p>
       </div>
     </>
   )
