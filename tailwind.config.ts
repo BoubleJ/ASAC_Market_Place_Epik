@@ -74,6 +74,9 @@ module.exports = {
         'brand-success': '1D62EC',
         'brand-warning': 'F3CB3C',
       },
+      flex: {
+        2: '2 2 0%',
+      },
     },
   },
   plugins: [require('tailwindcss-animate')],
