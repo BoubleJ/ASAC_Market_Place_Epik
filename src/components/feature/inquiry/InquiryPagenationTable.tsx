@@ -2,10 +2,12 @@
 import React, { useState } from 'react'
 
 import InquiryBox from './InquiryBox'
+import InquiryEmpty from './InquiryEmpty'
 import InquiryPagnationNumber from './InquiryPagnationNumber'
 
 export default function InquiryPagenationTable() {
-  const [limit, setLimit] = useState(5)
+  const [isInquiryListOpen, setIsInquiryListOpen] = useState(true)
+  const [limit, setLimit] = useState(3)
   const [page, setPage] = useState(1)
   const offset = (page - 1) * limit
 
@@ -64,27 +66,30 @@ export default function InquiryPagenationTable() {
   ]
 
   return (
-    <div>
-      <InquiryBox inquiryBoxInfo={inquiryListHeader} height="h-10" borderColor="border-gray-800" />
-
-      {data.slice(offset, offset + limit).map((item, idx) => (
-        <InquiryBox key={idx} inquiryBoxInfo={item} height="h-10" borderColor="border-gray-50" />
-      ))}
-
-      <label>
-        페이지 당 표시할 게시물 수:
-        <select type="number" value={limit} onChange={({ target: { value } }) => setLimit(Number(value))}>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="7">7</option>
-        </select>
-      </label>
-
-      <footer>
-        <InquiryPagnationNumber total={data.length} limit={limit} page={page} setPage={setPage} />
-      </footer>
-    </div>
+    <>
+      {isInquiryListOpen ? (
+        <div>
+          <InquiryBox inquiryBoxInfo={inquiryListHeader} height="h-10" borderColor="border-gray-800" />
+          {data.slice(offset, offset + limit).map((item, idx) => (
+            <InquiryBox key={idx} inquiryBoxInfo={item} height="h-10" borderColor="border-gray-50" />
+          ))}
+          <label>
+            페이지 당 표시할 게시물 수:
+            <select type="number" value={limit} onChange={({ target: { value } }) => setLimit(Number(value))}>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+            </select>
+          </label>
+          <footer>
+            <InquiryPagnationNumber total={data.length} limit={limit} page={page} setPage={setPage} />
+          </footer>
+        </div>
+      ) : (
+        <InquiryEmpty />
+      )}
+    </>
   )
 }
