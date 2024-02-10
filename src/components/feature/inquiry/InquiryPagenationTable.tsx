@@ -1,79 +1,90 @@
 'use client'
+import React, { useState } from 'react'
 
-import axios from 'axios'
-import React, { useEffect, useState } from 'react'
-
-import InquiryPagnation from './InquiryPagnation'
+import InquiryBox from './InquiryBox'
+import InquiryPagnationNumber from './InquiryPagnationNumber'
 
 export default function InquiryPagenationTable() {
-  const [data, setData] = useState({})
+  const [limit, setLimit] = useState(5)
   const [page, setPage] = useState(1)
+  const offset = (page - 1) * limit
 
-  useEffect(() => {
-    const getAllBooks = async () => {
-      try {
-        const { data } = await axios.get('https://bookstore-v2-api.onrender.com/api/v1/books', {
-          params: { page, limit: 2 },
-        })
-        setData({
-          list: data?.data,
-          totalPage: data?.pagination?.totalPage,
-        })
-        console.log(data)
-      } catch (error) {
-        console.log(error)
-      }
-    }
-    getAllBooks()
-  }, [page])
+  const inquiryListHeader = {
+    title: '제목',
+    writingDay: '작성일',
+    answer: '답변상태',
+  }
+
+  const data = [
+    {
+      title: '망고스틴이 박살...',
+      writingDay: '2023.11.04',
+      answer: '답변완료',
+    },
+    {
+      title: '망고스틴이 안녕 박살...',
+      writingDay: '2023.11.04',
+      answer: '답변완료',
+    },
+    {
+      title: '망고스틴박살나면 ',
+      writingDay: '2023.11.04',
+      answer: '답변완료',
+    },
+    {
+      title: '망고스틴이 박살...',
+      writingDay: '2023.11.04',
+      answer: '답변완료',
+    },
+    {
+      title: '망고스틴부르랑너.',
+      writingDay: '2023.11.04',
+      answer: '답변완료',
+    },
+    {
+      title: '망고스변재정틴이 박살...',
+      writingDay: '2023.11.04',
+      answer: '답변완료',
+    },
+    {
+      title: '망스틴이 박살...',
+      writingDay: '2023.11.04',
+      answer: '답변완료',
+    },
+    {
+      title: '틴이 박살...',
+      writingDay: '2023.11.04',
+      answer: '답변완료',
+    },
+    {
+      title: '고스틴이fsfsdafsa 박살...',
+      writingDay: '2023.11.04',
+      answer: '답변완료',
+    },
+  ]
+
   return (
     <div>
-      <div className="relative overflow-x-auto">
-        <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-            <tr>
-              <th scope="col" className="px-6 py-3">
-                Name
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Genre
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Price
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Discount
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {data &&
-              data?.list?.length > 0 &&
-              data.list.map((item, index) => {
-                return (
-                  <tr key={item._id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                    <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                      {item.name}
-                    </th>
-                    <td className="px-6 py-4"> {item?.genre[0]?.name}</td>
-                    <td className="px-6 py-4"> {item.price}</td>
-                    <td className="px-6 py-4"> {item.discount}</td>
-                  </tr>
-                )
-              })}
-          </tbody>
-        </table>
-      </div>
+      <InquiryBox inquiryBoxInfo={inquiryListHeader} height="h-10" borderColor="border-gray-800" />
 
-      {data && data.totalPage > 1 && (
-        <InquiryPagnation
-          total={data.totalPage}
-          current={page}
-          onChange={(page) => {
-            setPage(page)
-          }}
-        />
-      )}
+      {data.slice(offset, offset + limit).map((item, idx) => (
+        <InquiryBox key={idx} inquiryBoxInfo={item} height="h-10" borderColor="border-gray-50" />
+      ))}
+
+      <label>
+        페이지 당 표시할 게시물 수:
+        <select type="number" value={limit} onChange={({ target: { value } }) => setLimit(Number(value))}>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+        </select>
+      </label>
+
+      <footer>
+        <InquiryPagnationNumber total={data.length} limit={limit} page={page} setPage={setPage} />
+      </footer>
     </div>
   )
 }
