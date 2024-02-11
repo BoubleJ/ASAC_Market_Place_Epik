@@ -17,9 +17,7 @@ export default function InquiryBottomButton() {
         variant={'primary'}
         className="w-36 border-none rounded-lg h-12 mr-9 ml-2.5 font-thin  text-button-sm  text-white"
       >
-        <Link href={`${basePath}/add-inquiry`}>
-          1:1 문의
-        </Link>
+        <Link href={`${basePath}/add-inquiry`}>1:1 문의</Link>
       </Button>
     </div>
   )

@@ -1,6 +1,5 @@
 'use client'
 
-import Image from 'next/image'
 import React, { useState } from 'react'
 
 import AddInquiryBottomSeat from '@/components/feature/addInquiry/AddInquiryBottomSeat'
@@ -18,7 +17,7 @@ export default function page() {
         <p className="text-body-base pb-2">
           문의 유형<span className="text-red-600">*</span>
         </p>
-        <AddInquiryTypeBox setIsBottomSheetOpen={setIsBottomSheetOpen} list={list} inquiryType={inquiryType} />
+        <AddInquiryTypeBox setIsBottomSheetOpen={setIsBottomSheetOpen} inquiryType={inquiryType} />
         <AddInquiryBottomSeat
           isBottomSheetOpen={isBottomSheetOpen}
           setIsBottomSheetOpen={setIsBottomSheetOpen}

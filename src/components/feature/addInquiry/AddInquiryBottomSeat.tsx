@@ -1,10 +1,19 @@
 'use client'
 
-import React, { useState } from 'react'
+import React from 'react'
 
-export default function AddInquiryBottomSeat({ isBottomSheetOpen, setIsBottomSheetOpen, list, setInquiryType }) {
- 
-  const typeHandler = (clickType) => {
+export default function AddInquiryBottomSeat({
+  isBottomSheetOpen,
+  setIsBottomSheetOpen,
+  list,
+  setInquiryType,
+}: {
+  isBottomSheetOpen: boolean
+  setIsBottomSheetOpen: React.Dispatch<React.SetStateAction<boolean>>
+  list: string[]
+  setInquiryType: React.Dispatch<React.SetStateAction<string>>
+}) {
+  const typeHandler = (clickType: string) => {
     setInquiryType(clickType)
   }
 
@@ -22,7 +31,8 @@ export default function AddInquiryBottomSeat({ isBottomSheetOpen, setIsBottomShe
               closeBottomSheetHandler()
             }}
           ></div>
-          <div className="fixed bottom-0 w-96 h-2/3 border-solid border-black border-2 bg-white rounded-t-xl z-30">
+          <div className="fixed bottom-0 left-[576px] w-96 h-2/3 border-solid border-black border-2 bg-white rounded-t-xl z-30">
+            <div className="h-2 w-6  mx-auto mt-2.5 bg-gray-100 rounded-md"></div>
             <div className="relative">
               <p className="pl-5 text-title-lg pt-11 pb-4">문의 유형 선택</p>
 

@@ -3,7 +3,17 @@ import React from 'react'
 import { ChevronLeft } from '@/components/icons'
 import { ChevronRight } from '@/components/icons'
 
-export default function InquiryPagnationNumber({ total, limit, page, setPage }) {
+export default function InquiryPagnationNumber({
+  total,
+  limit,
+  page,
+  setPage,
+}: {
+  total: number
+  limit: number
+  page: number
+  setPage: React.Dispatch<React.SetStateAction<number>>
+}) {
   const numPages = Math.ceil(total / limit)
 
   return (
@@ -14,7 +24,7 @@ export default function InquiryPagnationNumber({ total, limit, page, setPage }) 
         </button>
         {Array(numPages)
           .fill()
-          .map((_, i) => (
+          .map((item, i) => (
             <button
               className=""
               key={i + 1}

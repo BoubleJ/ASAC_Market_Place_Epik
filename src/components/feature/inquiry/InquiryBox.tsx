@@ -1,6 +1,16 @@
 import React from 'react'
 
-export default function InquiryBox({ inquiryBoxInfo, height, borderColor }) {
+import { InquiryList } from '@/types/inquiry'
+
+export default function InquiryBox({
+  inquiryBoxInfo,
+  height,
+  borderColor,
+}: {
+  inquiryBoxInfo: InquiryList
+  height: string
+  borderColor: string
+}) {
   return (
     <div>
       <div className={`w-full ${height} border-solid border-b-2 border-black flex ${borderColor} `}>

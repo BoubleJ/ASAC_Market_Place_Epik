@@ -1,11 +1,22 @@
-import SvgTriangleDown from '@/components/icons/triangle-down'
+'use client'
 
-export default function FAQFilterBox({ setIsBottomSheetOpen, list, slug }) {
+import SvgTriangleDown from '@/components/icons/triangle-down'
+import { List, ListProps } from '@/types/faq'
+
+export default function FAQFilterBox({
+  setIsBottomSheetOpen,
+  list,
+  slug,
+}: {
+  setIsBottomSheetOpen: React.Dispatch<React.SetStateAction<boolean>>
+  list: List
+  slug: string
+}) {
   const bottomSheetHandler = () => {
     setIsBottomSheetOpen(true)
   }
 
-  const result = list.find((item) => item.title == slug)
+  const result = list.find((item: ListProps) => item.title == slug)
   return (
     <>
       <div
@@ -14,12 +25,12 @@ export default function FAQFilterBox({ setIsBottomSheetOpen, list, slug }) {
           bottomSheetHandler()
         }}
       >
-        <p className=" text-body-base pl-5 py-3">
+        <div className=" text-body-base pl-5 py-3">
           {result.filterTitle}
           <div className="float-right pt-0.5 pb-3 pr-2.5">
             <SvgTriangleDown />
           </div>
-        </p>
+        </div>
       </div>
     </>
   )
