@@ -77,9 +77,7 @@ module.exports = {
       flex: {
         2: '2 2 0%',
       },
-      inset: {
-        '625px': '625px',
-      }
+     
     },
   },
   plugins: [require('tailwindcss-animate')],

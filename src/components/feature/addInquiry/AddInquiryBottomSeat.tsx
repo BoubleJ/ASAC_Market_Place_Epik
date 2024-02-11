@@ -1,9 +1,13 @@
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+'use client'
 
+import React, { useState } from 'react'
 
-export default function FQABottomSeat({ isBottomSheetOpen, setIsBottomSheetOpen, list }) {
-  const pathname = usePathname()
+export default function AddInquiryBottomSeat({ isBottomSheetOpen, setIsBottomSheetOpen, list, setInquiryType }) {
+ 
+  const typeHandler = (clickType) => {
+    setInquiryType(clickType)
+  }
+
   const closeBottomSheetHandler = () => {
     setIsBottomSheetOpen(false)
   }
@@ -23,14 +27,16 @@ export default function FQABottomSeat({ isBottomSheetOpen, setIsBottomSheetOpen,
               <p className="pl-5 text-title-lg pt-11 pb-4">문의 유형 선택</p>
 
               {list.map((item, idx) => {
-                const isActive = pathname === '/FAQ/' + item.title
                 return (
-                  <div className="w-full h-14 hover:bg-grayscale-50" key={idx}>
-                    <Link href={'/FAQ/' + item.title}>
-                      <p className={`${isActive ? ' text-brand-primary-500' : ''} pl-5 py-4 text-body-md `}>
-                        {item.filterTitle}
-                      </p>
-                    </Link>
+                  <div
+                    onClick={() => {
+                      closeBottomSheetHandler()
+                      typeHandler(item)
+                    }}
+                    className="w-full h-14 hover:bg-grayscale-50"
+                    key={idx}
+                  >
+                    <p className=" pl-5 py-4 text-body-md">{item}</p>
                   </div>
                 )
               })}

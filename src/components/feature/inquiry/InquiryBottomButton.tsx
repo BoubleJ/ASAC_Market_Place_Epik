@@ -1,5 +1,7 @@
+import Link from 'next/link'
 import React from 'react'
 
+import { basePath } from '@/api/util/instance'
 import { Button } from '@/components/ui/button'
 
 export default function InquiryBottomButton() {
@@ -15,7 +17,9 @@ export default function InquiryBottomButton() {
         variant={'primary'}
         className="w-36 border-none rounded-lg h-12 mr-9 ml-2.5 font-thin  text-button-sm  text-white"
       >
-        1:1 문의
+        <Link href={`${basePath}/add-inquiry`}>
+          1:1 문의
+        </Link>
       </Button>
     </div>
   )

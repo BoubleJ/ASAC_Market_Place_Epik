@@ -6,7 +6,7 @@ import InquiryEmpty from './InquiryEmpty'
 import InquiryPagnationNumber from './InquiryPagnationNumber'
 
 export default function InquiryPagenationTable() {
-  const [isInquiryListOpen, setIsInquiryListOpen] = useState(true)
+  const [isInquiryListOpen, setIsInquiryListOpen] = useState(false)
   const [limit, setLimit] = useState(3)
   const [page, setPage] = useState(1)
   const offset = (page - 1) * limit
