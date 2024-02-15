@@ -1,8 +1,10 @@
+'use client'
+
 import { Button } from '@/components/ui/button'
 
 export default function OrderAddress() {
   return (
-    <div className="py-4">
+    <>
       <div className="mb-[15px]">
         <span className="text-body-base">배송지</span>
       </div>
@@ -12,6 +14,6 @@ export default function OrderAddress() {
           변경
         </Button>
       </div>
-    </div>
+    </>
   )
 }
