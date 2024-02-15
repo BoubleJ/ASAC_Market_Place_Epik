@@ -2,6 +2,7 @@ import './globals.css'
 
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
+import Script from 'next/script'
 import React from 'react'
 
 import Provider from '@/components/provider/provider'
@@ -24,6 +25,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <div className="fixed bg-white overflow-auto overflow-x-hidden w-96 h-full no-scrollbar">
           <Provider>{children}</Provider>
         </div>
+        <Script src="https://cdn.iamport.kr/v1/iamport.js" />
       </body>
     </html>
   )
