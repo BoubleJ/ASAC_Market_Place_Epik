@@ -15,6 +15,7 @@ export default function CartStoreInitializer({ cart, cartId }: ICartStoreInitial
   const initializer = useRef(false)
   if (!initializer.current) {
     useCartStore.setState({ cart: convertCartitemDtosToCartItem(cart), cartId })
+
     initializer.current = true
   }
   return null
