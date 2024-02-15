@@ -23,10 +23,12 @@ export async function POST(req: NextRequest) {
       // throw new Error('Failed to login authenticate')
       console.log('Failed to delete item from Cart', res.status)
       const response = await res.json()
+      console.log(response)
       return NextResponse.json(response)
     }
 
     const response = await res.json()
+    console.log(response)
 
     return NextResponse.json(response)
   } catch (error) {
