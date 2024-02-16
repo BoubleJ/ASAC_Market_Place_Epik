@@ -12,7 +12,7 @@ export default function InquiryHeader() {
           <IconXMono className=" fill-transparent" width={'1.5rem'} height={'1.5rem'} />
         </Link>
       }
-      center={<span className="text-center text-title-lg text-grayscale-800">1:1 문의</span>}
+      center={<span className="text-center text-title-lg text-grayscale-800">1:1 문의 내역</span>}
     />
   )
 }

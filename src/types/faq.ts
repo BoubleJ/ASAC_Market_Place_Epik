@@ -1,6 +1,4 @@
-export interface List {
-  list: Array<ListProps>
-}
+export type List = Array<ListProps>
 
 export interface ListProps extends Body {
   title: string

@@ -9,7 +9,7 @@ export default function AddInquiryHeader() {
     <Header
       left={
         <Link className="text-grayscale-800" href={`${basePath}/inquiry`}>
-        <ChevronLeft className=" fill-transparent" width={'1.5rem'} height={'1.5rem'} />
+          <ChevronLeft className=" fill-transparent" width={'1.5rem'} height={'1.5rem'} />
         </Link>
       }
       center={<span className="text-center text-title-lg text-grayscale-800">1:1 문의 작성</span>}

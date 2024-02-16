@@ -15,8 +15,8 @@ const menuItems = {
   wishedItems: { title: '찜한상품', description: '', path: `/wish` },
   reviews: { title: '상품후기', description: '', path: `/myPage` },
   editMemberInfo: { title: '개인정보수정', description: '', path: `/edit-info` },
-  inquiry: { title: '1:1 문의', description: '', path: `/myPage` },
-  FAQ: { title: '자주하는 질문', description: '', path: `/myPage` },
+  inquiry: { title: '1:1 문의 내역', description: '', path: `/inquiry` },
+  FAQ: { title: '자주하는 질문', description: '', path: `/FAQ/member` },
 }
 
 export default function MyMenus() {

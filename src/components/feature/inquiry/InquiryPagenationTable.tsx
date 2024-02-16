@@ -31,7 +31,7 @@ export default function InquiryPagenationTable() {
           {data.slice(offset, offset + limit).map((item: InquiryList, idx: number) => (
             <InquiryBox key={idx} inquiryBoxInfo={item} height="h-10" borderColor="border-gray-50" />
           ))}
-          <label>
+          {/* <label>
             페이지 당 표시할 게시물 수:
             <select value={limit} onChange={({ target: { value } }) => setLimit(Number(value))}>
               <option value="3">3</option>
@@ -40,7 +40,7 @@ export default function InquiryPagenationTable() {
               <option value="6">6</option>
               <option value="7">7</option>
             </select>
-          </label>
+          </label> */}
           <footer>
             <InquiryPagnationNumber total={data.length} limit={limit} page={page} setPage={setPage} />
           </footer>
