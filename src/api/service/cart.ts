@@ -1,4 +1,4 @@
-import { CartItem, CartItemDto } from '@/types/product'
+import { CartItem, CartItemCheckParam, CartItemDto } from '@/types/product'
 
 export const convertCartitemDtosToCartItem = (cartitemDtos: CartItemDto[]): CartItem[] => {
   const cartItems: CartItem[] = cartitemDtos.map((item: CartItemDto) => {
@@ -10,8 +10,16 @@ export const convertCartitemDtosToCartItem = (cartitemDtos: CartItemDto[]): Cart
       itemPrice: item.itemPrice,
       promotionUrl: item.promotionImageUrl,
       count: item.itemCount,
-      selected: true,
+      selected: item.checked,
     }
   })
   return cartItems
+}
+
+export const encodeCartItemCheckParam = (product: CartItem): CartItemCheckParam => {
+  const { id, selected } = product
+  return {
+    itemId: id,
+    checked: !selected,
+  }
 }

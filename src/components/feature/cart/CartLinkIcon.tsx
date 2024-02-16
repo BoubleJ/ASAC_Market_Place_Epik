@@ -3,6 +3,7 @@
 import { useRouter } from 'next/navigation'
 import React from 'react'
 
+import { basePath } from '@/api/util/instance'
 import { ShoppingCart } from '@/components/icons'
 import { cn } from '@/lib/utils'
 interface ICartLinkIcon {
@@ -15,7 +16,10 @@ export default function CartLinkIcon({ className }: ICartLinkIcon) {
       width={'1.5rem'}
       height={'1.5rem'}
       className={cn('text-white', className)}
-      onClick={() => router.push(`/cart`)}
+      onClick={() => {
+        // router.push(`/cart`)
+        window.location.href = `${basePath}/cart`
+      }}
     />
   )
 }
