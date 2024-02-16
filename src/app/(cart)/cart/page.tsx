@@ -11,7 +11,6 @@ import { useCartStore } from '@/store/client/cartSlice'
 import { Cart } from '@/types/product'
 
 export const dynamic = 'force-dynamic'
-export const revalidate = 0
 
 const getCart = async () => {
   const requestHeaders = new Headers(commonHeader)
@@ -24,7 +23,7 @@ const getCart = async () => {
 
   const res = await fetch(`${baseURL}/cart`, {
     headers: requestHeaders,
-    // next: { revalidate: 0 },
+    next: { revalidate: 0 },
   })
 
   if (!res.ok) {
@@ -49,7 +48,8 @@ export default async function CartPage() {
         <CartHeader />
         <SelectAllArea />
       </div>
-      <CartItemList content={cart} />
+      {/* <CartItemList content={cart} /> */}
+      <CartItemList />
       <CartPaymentBill />
     </>
   )

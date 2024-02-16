@@ -1,10 +1,10 @@
 'use client'
-import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import React from 'react'
 
 import Header from '@/components/common/header'
-import { Bag, ChevronLeft } from '@/components/icons'
+import CartLinkIcon from '@/components/feature/cart/CartLinkIcon'
+import { ChevronLeft } from '@/components/icons'
 
 export default function CategoryItemsHeader({ mainCategory }: { mainCategory: string }) {
   const router = useRouter()
@@ -18,9 +18,7 @@ export default function CategoryItemsHeader({ mainCategory }: { mainCategory: st
       center={<span className="text-center">{mainCategory}</span>}
       right={
         <button className="ml-auto">
-          <Link href={`/cart`}>
-            <Bag width={'1.5rem'} height={'1.5rem'} fill="transparent" />
-          </Link>
+          <CartLinkIcon />
         </button>
       }
     />

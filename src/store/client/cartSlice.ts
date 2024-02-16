@@ -176,9 +176,9 @@ function updateSelectfield(ProductId: number, cart: CartItem[]) {
   return cart.map((item) => {
     if (item.id === ProductId) {
       if (item.selected === true) {
-        return { ...item, selected: false, count: 1 }
+        return { ...item, selected: false }
       } else {
-        return { ...item, selected: true, count: 1 }
+        return { ...item, selected: true }
       }
     }
     return item
