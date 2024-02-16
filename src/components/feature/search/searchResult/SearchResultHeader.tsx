@@ -1,10 +1,10 @@
 'use client'
-import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 
+import CartLinkIcon from '@/components/feature/cart/CartLinkIcon'
 import SearchBar from '@/components/feature/search/SearchBar'
-import { Bag, ChevronLeft } from '@/components/icons'
+import { ChevronLeft } from '@/components/icons'
 
 import AutoComplete from '../AutoComplete'
 
@@ -34,9 +34,7 @@ export default function SearchResultHeader({ searchedWord }: { searchedWord: str
             setSearchWord={setSearchWord}
           />
           <button className="font-bold">
-            <Link href={`/cart`}>
-              <Bag width={'1.5rem'} height={'1.5rem'} fill="transparent" />
-            </Link>
+            <CartLinkIcon />
           </button>
         </div>
       </div>

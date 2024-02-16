@@ -1,9 +1,9 @@
 'use client'
-import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
 import Header from '@/components/common/header'
-import { Bag, IconXMono } from '@/components/icons'
+import CartLinkIcon from '@/components/feature/cart/CartLinkIcon'
+import { IconXMono } from '@/components/icons'
 import { Button } from '@/components/ui/button'
 
 export default function SignupHeader() {
@@ -26,9 +26,7 @@ export default function SignupHeader() {
           onClick={() => router.push('/cart')}
           className="bg-transparent text-grayscale-900 hover:bg-transparent border-0 ring-0 shadow-none ml-auto"
         >
-          <Link href={`/cart`}>
-            <Bag width={'1.5rem'} height={'1.5rem'} fill="white" />
-          </Link>
+          <CartLinkIcon />
         </Button>
       }
     />

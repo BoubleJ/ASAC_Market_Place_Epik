@@ -1,18 +1,16 @@
 import { Lobster } from 'next/font/google'
-import Link from 'next/link'
 import React from 'react'
-import { PiHandbagSimple } from 'react-icons/pi'
+
+import CartLinkIcon from '@/components/feature/cart/CartLinkIcon'
 
 const lobster = Lobster({ subsets: ['latin'], weight: '400' })
 
 export default function HomeHeader() {
   return (
-    <nav className="fixed top-0 w-96 h-14 bg-brand-primary-500 border border-b-gray-200 text-white flex justify-between z-10">
+    <nav className="fixed top-0 z-10 flex h-14 w-96 justify-between border border-b-gray-200 bg-brand-primary-500 text-white">
       <button className={`pl-6 text-2xl ${lobster.className} `}>market place</button>
-      <button className=" text-2xl pr-6">
-        <Link href={`/cart`}>
-          <PiHandbagSimple />
-        </Link>
+      <button className=" pr-6 text-2xl">
+        <CartLinkIcon />
       </button>
     </nav>
   )
