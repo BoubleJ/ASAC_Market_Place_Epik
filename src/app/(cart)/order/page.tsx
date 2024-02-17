@@ -8,7 +8,6 @@ import OrderUserInfo from '@/components/feature/order/orderUserInfo'
 import { useOrderStore } from '@/store/client/orderSlice'
 import { IOrder } from '@/types/order'
 // import { IOrder } from '@/types/order'
-
 export const dynamic = 'force-dynamic'
 
 const getOrders = async () => {
@@ -24,6 +23,7 @@ const getOrders = async () => {
 
     const res = await fetch(`${baseURL}/orders`, {
       headers: requestHeaders,
+      next: { revalidate: 0 },
     })
 
     if (!res.ok) {

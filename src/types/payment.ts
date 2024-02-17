@@ -9,3 +9,17 @@ export interface IPaymentParams {
   totalPrice: number
   paymentMethod: PaymentMethodType
 }
+
+export interface PaymentVerifyParams {
+  impUid: string
+  paymentId: number
+}
+
+export interface PaymentVerifyResponse {
+  success: true
+  transactionId: string
+  paymentStatus: string
+  paymentId: number
+  errorCode: null
+  errorMessage: null
+}
