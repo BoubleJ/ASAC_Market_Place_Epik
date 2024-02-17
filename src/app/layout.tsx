@@ -26,6 +26,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Provider>{children}</Provider>
         </div>
         <Script src="https://cdn.iamport.kr/v1/iamport.js" />
+        <Script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js" />
       </body>
     </html>
   )
