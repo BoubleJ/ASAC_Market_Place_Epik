@@ -9,6 +9,15 @@ import { z } from 'zod'
 import { fetchOrdersPayment, fetchPaymentVerify } from '@/api/resource/payment'
 import { encodePaymentVerifyParams } from '@/api/service/payment'
 import CheckModal from '@/components/common/modal/checkModal'
+import OrderAddress from '@/components/feature/order/orderAddress'
+import OrderBill from '@/components/feature/order/orderBill'
+import OrderContainer from '@/components/feature/order/orderContainer'
+import OrderCoupon from '@/components/feature/order/orderCoupon'
+import OrderPaymentButton from '@/components/feature/order/orderPaymentButton'
+import OrderPaymentMethod from '@/components/feature/order/OrderPaymentMethod'
+import OrderReserves from '@/components/feature/order/orderReserves'
+import OrderShippingRequirement from '@/components/feature/order/orderShippingRequirement'
+import OrderTerms from '@/components/feature/order/orderTerms'
 import { useModalState } from '@/components/provider/modalProvider'
 import { Form } from '@/components/ui/form'
 import { PaymentParamCreator } from '@/lib/payment/PaymentParamCreator'
@@ -17,18 +26,7 @@ import { orderFormSchema } from '@/lib/schema/order'
 import { useOrderStore } from '@/store/client/orderSlice'
 import { RequestPayResponse, RequestPayResponseCallback } from '@/types/portone'
 
-import OrderAddress from './orderAddress'
-import OrderBill from './orderBill'
-import OrderContainer from './orderContainer'
-import OrderCoupon from './orderCoupon'
-import OrderPaymentButton from './orderPaymentButton'
-import OrderPaymentMothod from './orderPaymentMothod'
-import OrderReserves from './orderReserves'
-import OrderShippingRequirement from './orderShippingRequirement'
-import OrderTerms from './orderTerms'
-
 // portone 결제 초기화
-initializePaymentModule()
 const FormSchema = orderFormSchema
 
 function OrderForm() {
@@ -93,8 +91,10 @@ function OrderForm() {
 
       console.log(res)
       const paymentId: number = res.data.paymentId
+      // 주소 api 작업
 
       // portone 결제 요청
+      initializePaymentModule()
       const callback: RequestPayResponseCallback = PortOneCallback(paymentId)
       requestPayment(paymentParamCreator.createPortOnePaymentParam(), callback)
     } catch (error) {
@@ -119,9 +119,9 @@ function OrderForm() {
             <OrderReserves />
           </OrderContainer>
           <OrderContainer>
-            <OrderPaymentMothod />
+            <OrderPaymentMethod />
           </OrderContainer>
-          <OrderContainer className="py-0 pt-[18px] pb-[30px]">
+          <OrderContainer className="py-0 pb-[30px] pt-[18px]">
             <OrderBill />
           </OrderContainer>
           <OrderContainer className="py-0 pb-[61px]">
