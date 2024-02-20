@@ -85,8 +85,8 @@ function OrderForm() {
       const body = paymentParamCreator.createPaymentParam()
       const res = await fetchOrdersPayment(body)
 
-      if (res.msg) {
-        return openCheckModal(res.msg)
+      if (res.data.errorMessage) {
+        return openCheckModal(res.data.errorMessage)
       }
 
       console.log(res)
