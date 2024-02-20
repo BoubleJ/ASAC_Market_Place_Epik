@@ -1,8 +1,8 @@
 import Image from 'next/image'
 import React from 'react'
 import { BiMessageRoundedDots } from 'react-icons/bi'
-import { PiHandbagSimple } from 'react-icons/pi'
 
+import { ShoppingCart } from '@/components/icons'
 import { ProductType } from '@/types/product'
 
 interface BigCardProps {
@@ -22,7 +22,7 @@ export default function BigCard({ product }: BigCardProps) {
           className="w-full h-full object-cover"
         ></Image>
         <div className="w-9 h-9 right-[4%] bottom-[6%] absolute bg-gray-700 bg-opacity-50 text-white rounded-[70px] justify-center items-center flex">
-          <PiHandbagSimple />
+          <ShoppingCart width={'1.25rem'} height={'1.25rem'} />
         </div>
       </div>
       <div className="w-full text-neutral-600 text-sm font-medium ">

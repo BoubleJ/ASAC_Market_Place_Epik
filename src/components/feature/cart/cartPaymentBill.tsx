@@ -2,12 +2,12 @@
 
 import { convertNumberFormat } from '@/lib/utils'
 import { useCartStore } from '@/store/client/cartSlice'
+import { DELIVERY_CHARGE } from '@/types/payment'
 
 import CartPaymentButton from './cartPaymentButton'
 
 export default function CartPaymentBill() {
   const { selectedItems, price, discountPrice } = useCartStore()
-  const deliveryCharge = 3000
   const paymentScheduledItems = selectedItems()
   return (
     <section className="flex flex-col items-center gap-4 w-full px-5 py-[18px] py-[30px]">
@@ -28,7 +28,7 @@ export default function CartPaymentBill() {
       <div className="flex justify-between text-body-md w-full">
         <span>배송비</span>
         <div className="space-x-2">
-          <span>+{price() === 0 ? 0 : convertNumberFormat(deliveryCharge)}</span>
+          <span>+{price() === 0 ? 0 : convertNumberFormat(DELIVERY_CHARGE)}</span>
           <span>원</span>
         </div>
       </div>
@@ -37,7 +37,7 @@ export default function CartPaymentBill() {
         <span className="text-body-md">결제예정금액</span>
         <div className="space-x-2">
           {paymentScheduledItems.length ? (
-            <span className="text-body-xl">{convertNumberFormat(price() + deliveryCharge)}</span>
+            <span className="text-body-xl">{convertNumberFormat(price() + DELIVERY_CHARGE)}</span>
           ) : (
             <span className="text-body-xl">0</span>
           )}

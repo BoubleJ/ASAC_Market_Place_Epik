@@ -1,7 +1,8 @@
+import { revalidatePath } from 'next/cache'
 import { cookies } from 'next/headers'
 import { NextRequest, NextResponse } from 'next/server'
 
-import { baseURL } from '@/api/util/instance'
+import { basePath, baseURL } from '@/api/util/instance'
 
 export async function GET(req: NextRequest) {
   try {
@@ -17,16 +18,16 @@ export async function GET(req: NextRequest) {
       method: 'GET',
       headers: requestHeaders,
     })
-
     if (!res.ok) {
       // throw new Error('Failed to login authenticate')
       console.log('Failed to get Cart', res.status)
       const response = await res.json()
       return NextResponse.json(response)
     }
+    const path = req.nextUrl.searchParams.get('path') || `${basePath}/api/cart`
+    revalidatePath(path)
 
     const response = await res.json()
-
     return NextResponse.json(response)
   } catch (error) {
     return NextResponse.json({ msg: '장바구니를 불러오지 못 했습니다.' })

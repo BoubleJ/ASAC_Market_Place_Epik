@@ -1,6 +1,7 @@
 'use client'
 
-import { fetchDeleteCartItemById, fetchInsertCartItemById } from '@/api/resource/cart'
+import { fetchDeleteCartItemById, fetchSelectCartItem } from '@/api/resource/cart'
+import { encodeCartItemCheckParam } from '@/api/service/cart'
 import SelectModal from '@/components/common/modal/selectModal'
 import CheckCircle from '@/components/icons/check-circle'
 import { useModalState } from '@/components/provider/modalProvider'
@@ -27,12 +28,18 @@ export default function SelectAllArea() {
 
   const handleSelectAllProduct = () => {
     if (isAllChecked()) {
-      console.log('all checked so unselect all')
-      selectedItems().map(async (item) => await fetchDeleteCartItemById(item.id))
+      // all checked so unselect all
+      selectedItems().map(async (item) => {
+        const body = encodeCartItemCheckParam(item)
+        await fetchSelectCartItem(body)
+      })
       unSelectAll()
     } else {
-      console.log('all unchecked so select all')
-      cart.map(async (item) => await fetchInsertCartItemById(item.id))
+      // all unchecked so select all
+      cart.map(async (item) => {
+        const body = encodeCartItemCheckParam(item)
+        await fetchSelectCartItem(body)
+      })
       selectAll()
     }
   }
@@ -49,13 +56,7 @@ export default function SelectAllArea() {
   return (
     <section className="flex justify-between items-center px-5 w-full">
       <div className="flex items-center text-body-sm">
-        <Button
-          variant={'none'}
-          size={'checkbox'}
-          className="mr-2"
-          onClick={handleSelectAllProduct}
-          disabled={isEmpty()}
-        >
+        <Button variant={'none'} size={'checkbox'} className="mr-2" onClick={handleSelectAllProduct}>
           <CheckCircle
             width={'1.375rem'}
             height={'1.375rem'}

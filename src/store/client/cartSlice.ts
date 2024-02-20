@@ -3,10 +3,10 @@ import { devtools } from 'zustand/middleware'
 
 import { convertCartitemDtosToCartItem } from '@/api/service/cart'
 import { Product } from '@/types/item'
-import { Cart, CartItem, CartItemDto } from '@/types/product'
+import { CartItem, CartItemDto } from '@/types/product'
 
 type CartStore = {
-  cartInfo: Omit<Cart, 'cartItemDtos'>
+  // cartInfo: Omit<Cart, 'cartItemDtos'>
   cartId: number
   cart: CartItem[]
   setCartId: (id: number) => void
@@ -58,7 +58,7 @@ const DUMMY_CART_ITEMS: CartItem[] = [
 export const useCartStore = create<CartStore>()(
   devtools((set, get) => ({
     // cart: [...DUMMY_CART_ITEMS],
-    cartInfo: { cartId: 0, amount: 0, salesTotalAmount: 0, totalAmount: 0 },
+    // cartInfo: { cartId: 0, amount: 0, salesTotalAmount: 0, totalAmount: 0 },
     cartId: 0,
     cart: [],
     setCartId(id: number) {
@@ -176,9 +176,9 @@ function updateSelectfield(ProductId: number, cart: CartItem[]) {
   return cart.map((item) => {
     if (item.id === ProductId) {
       if (item.selected === true) {
-        return { ...item, selected: false, count: 1 }
+        return { ...item, selected: false }
       } else {
-        return { ...item, selected: true, count: 1 }
+        return { ...item, selected: true }
       }
     }
     return item

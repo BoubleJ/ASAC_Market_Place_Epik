@@ -3,8 +3,8 @@ import { useRouter } from 'next//navigation'
 import Image from 'next/image'
 import React from 'react'
 import { BiMessageRoundedDots } from 'react-icons/bi'
-import { PiHandbagSimple } from 'react-icons/pi'
 
+import { ShoppingCart } from '@/components/icons'
 import { ProductType } from '@/types/product'
 
 interface SmallCardProps {
@@ -28,7 +28,7 @@ export default function SmallCard({ product }: SmallCardProps) {
           className="w-full h-full object-cover"
         />
         <div className="w-8 h-8 right-[6%] bottom-[6%] absolute bg-gray-700 bg-opacity-50 text-white rounded-[70px] justify-center items-center flex">
-          <PiHandbagSimple />
+          <ShoppingCart width={'1.125rem'} height={'1.125rem'} />
         </div>
       </div>
       <div className="flex-col w-full items-start flex text-left">

@@ -4,9 +4,8 @@ import { NextRequest, NextResponse } from 'next/server'
 import { baseURL } from '@/api/util/instance'
 
 export async function GET(req: NextRequest) {
+  const requestHeaders = new Headers(req.headers)
   try {
-    const requestHeaders = new Headers(req.headers)
-
     const authToken = cookies().get('AUTH_TOKEN')?.value
     const hasCookies = cookies().has('AUTH_TOKEN')
 

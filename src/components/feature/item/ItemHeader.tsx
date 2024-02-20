@@ -1,9 +1,9 @@
 'use client'
-import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import React from 'react'
 
-import { Bag, ChevronLeft } from '@/components/icons'
+import CartLinkIcon from '@/components/feature/cart/CartLinkIcon'
+import { ChevronLeft } from '@/components/icons'
 import { Button } from '@/components/ui/button'
 
 export default function ItemHeader({ itemName }: { itemName: string }) {
@@ -24,9 +24,7 @@ export default function ItemHeader({ itemName }: { itemName: string }) {
           // onClick={() => router.back()}
           className="bg-transparent text-grayscale-900 hover:bg-transparent border-0 ring-0 shadow-none ml-auto"
         >
-          <Link href={`/cart`}>
-            <Bag width={'1.5rem'} height={'1.5rem'} fill="white" />
-          </Link>
+          <CartLinkIcon className="text-black" />
         </Button>
       </nav>
     </header>

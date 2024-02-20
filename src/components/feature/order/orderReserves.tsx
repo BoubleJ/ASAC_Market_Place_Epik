@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react'
 
 import { Button } from '@/components/ui/button'
@@ -5,7 +7,7 @@ import { Input } from '@/components/ui/input'
 
 export default function OrderReserves() {
   return (
-    <div className="py-4">
+    <>
       <div className="mb-[15px]">
         <span className="text-body-base">적립금</span>
       </div>
@@ -20,6 +22,6 @@ export default function OrderReserves() {
           모두사용
         </Button>
       </div>
-    </div>
+    </>
   )
 }

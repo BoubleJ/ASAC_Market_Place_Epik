@@ -28,8 +28,7 @@ const nextConfig = withBundleAnalyzer({
     return [
       {
         source: '/local/api/:path*',
-        destination: 'http://aabbccdd.ap-northeast-2.elasticbeanstalk.com/api/:path*',
-        // destination: 'http://43.201.27.83:8080/api/:path*',
+        destination: 'http://43.201.51.181:8080/api/:path*',
         // destination: 'http://localhost:8080/api/:path*',
       },
     ]
