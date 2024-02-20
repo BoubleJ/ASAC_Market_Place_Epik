@@ -9,7 +9,7 @@ import MyMenuItem from '@/components/feature/myPage/MyMenuItem'
 
 const menuItems = {
   reserve: { title: '적립금', description: '100 원', path: `/myPage` },
-  coupon: { title: '쿠폰', description: '', path: `/myPage` },
+  coupon: { title: '쿠폰', description: '', path: `/coupon` },
   orderHistory: { title: '주문내역', description: '', path: `/order-history` },
   giftHistory: { title: '선물내역', description: '', path: `/myPage` },
   wishedItems: { title: '찜한상품', description: '', path: `/wish` },

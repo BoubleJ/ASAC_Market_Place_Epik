@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { baseURL } from '@/api/util/instance'
 import AddInquiryBottomSeat from '@/components/feature/addInquiry/AddInquiryBottomSeat'
@@ -13,6 +13,39 @@ export default function page() {
   const list = ['불만', '가득', '이게 나라냐 ']
   const [inquiryType, setInquiryType] = useState(list[0])
   const [src, setSrc] = useState('')
+
+  const uploadImage = async (file) => {
+    let filename = encodeURIComponent(file.type)
+    let res = await fetch(`${baseURL}/reviews/generate-presigned-url?fileName=${filename}&contentType=image/jpg`)
+    res = await res.json()
+    console.log(res)
+
+    // S3 업로드
+    const formData = new FormData()
+    Object.entries({ ...res.fields, file }).forEach(([key, value]) => {
+      formData.append(key, value)
+    })
+
+    let result = await fetch(res.msg, {
+      method: 'PUT',
+      body: formData,
+      headers: {
+        'Content-Type': file.type,
+      },
+    })
+    console.log(result)
+
+    setSrc(result.url + '/' + filename)
+  }
+
+  const handleFileChange = async (e) => {
+    let file = e.target.files[0]
+    await uploadImage(file)
+  }
+
+  useEffect(() => {
+    console.log(src)
+  }, [src])
 
   return (
     <>
@@ -49,40 +82,10 @@ export default function page() {
               type="file"
               id="file"
               name="cardImg"
-              className="opacity-0 h-full w-full border-2"
               multiple
               accept="image/*"
-              onChange={async (e) => {
-                let file = e.target.files[0]
-                let filename = encodeURIComponent(file.name)
-                let res = await fetch(
-                  `${baseURL}/reviews/generate-presigned-url?fileName=${filename}&contentType=image/jpeg`,
-                )
-                res = await res.json()
-                console.log(res)
-
-                //S3 업로드
-                const formData = new FormData()
-                Object.entries({ ...res.fields, file }).forEach(([key, value]) => {
-                  formData.append(key, value)
-                })
-                let 업로드결과 = await fetch(res.msg, {
-                  method: 'PUT',
-                  body: formData,
-                })
-                console.log(업로드결과)
-
-                const imageURL = 업로드결과.url.split('?')[0]
-                console.log(imageURL)
-                setSrc(imageURL)
-                console.log(src)
-               // if (업로드결과.ok) {
-                //  setSrc(업로드결과.url + '/' + filename)
-                 // console.log(src)
-              //  } else {
-               //   console.log('실패')
-             //   }
-              }}
+              onChange={handleFileChange}
+              className="opacity-0 h-full w-full border-2"
             ></input>
             <SvgIconPlusMono
               className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-gray-600"
