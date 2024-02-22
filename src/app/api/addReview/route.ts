@@ -5,35 +5,30 @@ import { baseURL } from '@/api/util/instance'
 
 export async function POST(req: NextRequest) {
   try {
-    const requestHeaders = new Headers(req.headers)
     console.log('cookie', cookies().getAll())
 
-    if (cookies().has('AUTH_TOKEN')) {
-      requestHeaders.set('Authorization', `Bearer ${cookies().get('AUTH_TOKEN')?.value}`)
-    }
-
-    // requestHeaders.set('Accept', 'multipart/form-data')
-    const bodyFormdata = await req.formData()
-    // const b = await req.body
+    const body = await req.json()
 
     console.log('route post왔슴')
-    console.log(bodyFormdata)
-
-    console.log(bodyFormdata.get('review'), '폼데이터!')
-    console.log(bodyFormdata.getAll('reviewImages'), '폼데이터!')
-    console.log(cookies().has('AUTH_TOKEN'), '쿠키')
-    console.log(requestHeaders, '리퀴스트 헤에에엥더')
 
     const res = await fetch(`${baseURL}/reviews/create`, {
       method: 'POST',
-      headers: { Authorization: `Bearer ${cookies().get('AUTH_TOKEN')?.value}` },
-      body: bodyFormdata,
+      headers: { Authorization: `Bearer ${cookies().get('AUTH_TOKEN')?.value}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
     })
-    const resoense = await res.json()
-    console.log('review 등록 성공', resoense)
-    console.log('review 등록 성공', resoense)
+    if (!res.ok) {
+      console.log('Failed to get review', res.status)
+      const msg = await res.json()
+      return NextResponse.json({ msg })
+    }
+    const response = await res.json()
+    console.log(response)
+    console.log('토큰', cookies().get('AUTH_TOKEN')?.value)
+    console.log(body)
+    console.log('바디', JSON.stringify(body))
+    console.log('review 등록 성공', response)
 
-    return NextResponse.json(resoense)
+    return NextResponse.json(response)
   } catch (error) {
     console.log('review 등록 에러', error)
     return NextResponse.json({ errorMessage: '리뷰등록 실패' })
