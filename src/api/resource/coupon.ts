@@ -16,3 +16,22 @@ export async function fetchCouponList() {
   console.log('응답은', response)
   return response
 }
+
+
+
+
+export async function  fetchDownloadCoupon() {
+  const res = await fetch(`${basePath}/api/items/coupon/add`, {
+    method: 'POST',
+    headers: commonHeader,
+  })
+
+  if (res.status !== 200) {
+    const errorMsg = await res.json()
+    return errorMsg
+  }
+
+  const response = await res.json()
+  return response.msg
+}
+

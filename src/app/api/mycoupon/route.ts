@@ -29,6 +29,3 @@ export async function GET(req: NextRequest) {
   }
 }
 
-// export const GET = async () => {
-//   return NextResponse.json({ message: 'Hello, Next.js Version 13!' }, { status: 200 })
-// }

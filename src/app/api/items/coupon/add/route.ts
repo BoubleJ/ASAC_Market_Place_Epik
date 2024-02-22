@@ -7,28 +7,30 @@ export async function POST(req: NextRequest) {
   const authToken = cookies().get('AUTH_TOKEN')?.value
   const hasCookies = cookies().has('AUTH_TOKEN')
   try {
-    const requestHeaders = new Headers(req.headers)
-    // console.log('cookie', cookies().getAll())
+    // const requestHeaders = new Headers(req.headers)
+    const requestHeaders = new Headers()
+
     if (hasCookies) {
       requestHeaders.set('Authorization', `Bearer ${authToken}`)
     }
-    console.log('쿠폰 다운로드! Authorization', requestHeaders)
 
-    const res = await fetch(`${baseURL}/`, {
-      method: 'GET',
+    const res = await fetch(`${baseURL}/items/coupon`, {
+      method: 'POST',
       headers: requestHeaders,
-      // headers: commonHeader,
     })
-    const response = await res.json()
-    return NextResponse.json(response)
 
-    // return res
+    if (!res.ok) {
+      // throw new Error('Failed to login authenticate')
+      console.log('Failed to download coupon', res.status)
+      const response = await res.json()
+      return NextResponse.json(response)
+    }
+
+    const response = await res.json()
+    console.log(response)
+    return NextResponse.json(response)
   } catch (error) {
-    console.log('wishlist에러', error)
-    return NextResponse.json({ msg: 'error' })
+    console.log('coupon download error :', error)
+    return NextResponse
   }
 }
-
-// export const GET = async () => {
-//   return NextResponse.json({ message: 'Hello, Next.js Version 13!' }, { status: 200 })
-// }

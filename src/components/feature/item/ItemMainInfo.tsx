@@ -3,15 +3,22 @@ import Image from 'next/image'
 import { useSearchParams } from 'next/navigation'
 import React from 'react'
 
+import { fetchDownloadCoupon } from '@/api/resource/coupon'
 import SvgShare from '@/components/icons/share'
+import { Button } from '@/components/ui/button'
+import { ToastAction } from '@/components/ui/toast'
+import { useToast } from '@/components/ui/use-toast'
 
 export default function ItemMainInfo({ itemId, itemData }: { itemId: number; itemData: any }) {
+  const { toast } = useToast()
   const itemDetails = itemData.data
   console.log(itemDetails.data, '!!')
   const tab = useSearchParams().get('tab')
 
- 
-
+  const renderToastWithAddCoupon = async () => {
+    const msg = await fetchDownloadCoupon()
+    console.log(msg)
+  }
 
   return (
     <>
@@ -48,9 +55,17 @@ export default function ItemMainInfo({ itemId, itemData }: { itemId: number; ite
             </div>
             <div className=" text-body-mini text-brand-primary-500">{itemDetails.notes}</div>
             {/* {itemDetails.couponId && <div>{itemDetails.coupon.discountType}</div>} */}
-            <button className="my-3 rounded-md border border-brand-primary-500 p-2 text-sm text-brand-primary-500" onClick={()=>{
-              console.log('hi')
-            }}>
+            <button
+              className="my-3 rounded-md border border-brand-primary-500 p-2 text-sm text-brand-primary-500"
+              onClick={()=>{
+                renderToastWithAddCoupon()
+                toast({
+                  title: 'Uh oh! Something went wrong.',
+                  description: 'There was a problem with your request.',
+                  action: <ToastAction altText="Try again">Try again</ToastAction>,
+                })
+              }}
+            >
               10% 쿠폰 받기
             </button>
             {/* modal  */}
@@ -62,6 +77,7 @@ export default function ItemMainInfo({ itemId, itemData }: { itemId: number; ite
               <div className=" col-span-3 text-left">{itemDetails.sellerInfo}</div>
             </div>
           </div>
+         
         </div>
       )}
     </>
