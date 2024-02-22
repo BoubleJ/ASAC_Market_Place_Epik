@@ -3,8 +3,8 @@ import React from 'react'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import { Body, List, ListProps } from '@/types/faq'
 
-export default function FAQItemList({ list, slug }: { list: List; slug: string }) {
-  const result = list.find((item: ListProps) => item.title == slug)
+export default function FAQItemList({ list, FAQId }: { list: List; FAQId: string }) {
+  const result = list.find((item: ListProps) => item.title == FAQId)
   const body = result?.body
 
   return (

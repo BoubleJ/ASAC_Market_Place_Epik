@@ -41,7 +41,7 @@ export default function page() {
       //presignedURLs라는 배열 내부 요소들을 presignedURL이라 지정하고 그 주소에 put 요청을 보낸다. body에 file을 imageFile이라는 이름으로 담고
       console.log(fileUpload, '!!!!!!!!')
     } catch (error) {
-      console.error(error, '이미지 업로드 실팽이팽이')
+      console.error(error, '이미지 업로드 실패')
     }
   }
 
@@ -62,7 +62,7 @@ export default function page() {
         return res
       }
 
-      console.log('!!!방금 업로드된 이미징', e.target.files.item(0)?.name)
+      console.log('이미지 업로드, S3에 올라간건 X', e.target.files.item(0)?.name)
 
       const fileName = e.target.files.item(0)!.name
       //업로드한 이미지의 파일 이름만 따로 뽑음

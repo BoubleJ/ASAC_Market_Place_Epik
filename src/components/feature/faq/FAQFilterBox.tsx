@@ -6,17 +6,17 @@ import { List, ListProps } from '@/types/faq'
 export default function FAQFilterBox({
   setIsBottomSheetOpen,
   list,
-  slug,
+  FAQId,
 }: {
   setIsBottomSheetOpen: React.Dispatch<React.SetStateAction<boolean>>
   list: List
-  slug: string
+  FAQId: string
 }) {
   const bottomSheetHandler = () => {
     setIsBottomSheetOpen(true)
   }
 
-  const result = list.find((item: ListProps) => item.title == slug)
+  const result = list.find((item: ListProps) => item.title == FAQId)
   return (
     <>
       <div

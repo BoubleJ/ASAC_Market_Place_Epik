@@ -33,6 +33,18 @@ export default function MyMenus() {
     router.replace('/registration')
   }
 
+
+  async function getCoupon () {
+    const res = await fetch(`/api/mycoupon`, {
+      method: 'GET',
+      headers: commonHeader,
+    })
+    const msg = await res.json()
+    console.log(msg)
+    
+
+  }
+
   return (
     <MyMenuContainer>
       <div className="border-4 border-grayscale-50" />
