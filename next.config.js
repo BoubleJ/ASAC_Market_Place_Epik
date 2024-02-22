@@ -7,6 +7,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 })
 
 const nextConfig = withBundleAnalyzer({
+  reactStrictMode: false,
   webpack: (config) => {
     config.module.rules.push({
       test: /\.svg$/i,
@@ -60,6 +61,10 @@ const nextConfig = withBundleAnalyzer({
       {
         protocol: 'http',
         hostname: 'sales.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'asac-marketplace-s3.s3.ap-northeast-2.amazonaws.com',
       },
     ],
   },
