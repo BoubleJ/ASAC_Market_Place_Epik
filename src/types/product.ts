@@ -8,6 +8,7 @@ export interface ProductType {
   promotionUrl: string
   reviewCount: number
 }
+export type ContentType = ProductType[]
 
 export interface CartItem {
   id: number
