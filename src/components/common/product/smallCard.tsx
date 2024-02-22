@@ -3,8 +3,8 @@ import { useRouter } from 'next//navigation'
 import Image from 'next/image'
 import React from 'react'
 import { BiMessageRoundedDots } from 'react-icons/bi'
-import { PiHandbagSimple } from 'react-icons/pi'
 
+// import SvgBag from '@/components/icons/bag'
 import { ProductType } from '@/types/product'
 
 interface SmallCardProps {
@@ -20,16 +20,16 @@ export default function SmallCard({ product }: SmallCardProps) {
     >
       <div className="relative w-full h-4/6">
         <Image
-          // src={product.promotionUrl}
+          // src={ decodeURIComponent(product.promotionUrl)}
           src={'/images/hotdog.svg'}
           alt={product.name}
           width={300}
           height={300}
           className="w-full h-full object-cover"
         />
-        <div className="w-8 h-8 right-[6%] bottom-[6%] absolute bg-gray-700 bg-opacity-50 text-white rounded-[70px] justify-center items-center flex">
-          <PiHandbagSimple />
-        </div>
+        {/* <div className="w-8 h-8 right-[6%] bottom-[6%] absolute bg-gray-700 bg-opacity-50 text-white rounded-[70px] justify-center items-center flex">
+          <SvgBag width={'1.0rem'} fill="transparent" />
+        </div> */}
       </div>
       <div className="flex-col w-full items-start flex text-left">
         <div className="w-full text-neutral-600 text-body-xs font-medium truncate">
@@ -49,6 +49,7 @@ export default function SmallCard({ product }: SmallCardProps) {
         <BiMessageRoundedDots />
         <div>후기 {product.reviewCount}개</div>
       </div>
+      <button className="border border-grayscale-200 w-full rounded-md text-xs py-1">담기</button>
     </button>
   )
 }
