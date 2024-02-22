@@ -45,6 +45,12 @@ export default function page() {
     }
   }
 
+
+
+
+
+
+
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
       if (images.length + e.target.files.length > 5) {
@@ -52,6 +58,22 @@ export default function page() {
         return
       }
       //이미지 업로드 개수 제한있으니까 if문을 통해 이미지 개수 제한을 걸어둠
+
+
+
+      
+      //서버에서 presignURL을 받아오는 코드
+      const getPresignedURL = async (fileName: { name: string | number | boolean }) => {
+        let filename = encodeURIComponent(fileName)
+        let res = await fetch(`${baseURL}/reviews/generate-presigned-url?fileName=${filename}&contentType=image/jpg`)
+        res = await res.json()
+        console.log(res)
+        return res
+       
+      }
+  
+
+
 
       console.log('!!!방금 업로드된 이미징', e.target.files.item(0)?.name)
 
@@ -62,19 +84,44 @@ export default function page() {
       const newImages = Array.from(e.target.files)
       //업로드하는 이미지 파일 자체들을 배열형태로 저장
 
-      //서버에서 presignURL을 받아오는 코드
-      const presignedURL = async (fileName: { name: string | number | boolean }) => {
-        let filename = encodeURIComponent(fileName.name)
-        let res = await fetch(`${baseURL}/reviews/generate-presigned-url?fileName=${filename}&contentType=image/jpg`)
-        res = await res.json()
-        console.log(res)
-      }
+
+   const presignedURL = await getPresignedURL(fileName)
+
+
+
+
+      // let file = e.target.files[0]
+      // let filename = encodeURIComponent(file.name)
+      // let res = await fetch(
+      //   `${baseURL}/api/reviews/generate-presigned-url?fileName=${filename}&contentType=image/jpeg`,
+      // )
+      // res = await res.json()
+      // console.log(res)
+
+
+
+
+
+
 
       console.log(presignedURL.msg, fileName)
       //실제 백엔드 API CALL 시에 넣어줄 링크 만드는 코드
       const imageURL = `https://asac-marketplace-s3.s3.ap-northeast-2.amazonaws.com/${fileName}`
 
       console.log('!!!!!!!!!!!!!!!!!rrrrr', encodeURI(imageURL))
+
+
+
+
+
+
+
+
+
+
+
+
+
 
       // SETSTATE 함수 함수형 업데이트 활용
       // prevURLs은 PresignedURLs를 의미하고 전개연산자를 활용해서  presignedURL의 msg 프로퍼티를 PresignedURLs라는 배열내부에 삽입해줌.
@@ -101,6 +148,11 @@ export default function page() {
     setImagePreviews(imagePreviews.filter((_: any, i: number) => i !== index))
   }
 
+
+
+
+
+
   //문의 등록 클릭 시 s3 에 실제로 업로드되는 코드 리액트 훅 폼의 속성을 이용해서 send를 콜백함수로 호출하는 듯 하다.
   const send = async (data: Record<string, any>) => {
     //form 요청 시 받아오는 data 기반으로 foreach 반복문 돌려서 uploadImage 함수 실행
@@ -110,6 +162,12 @@ export default function page() {
       uploadImage(presignedURLs[index], file)
     })
     // prevURLs은 PresignedURLs를 의미하고 전개연산자를 활용해서  presignedURL의 msg 프로퍼티를 PresignedURLs라는 배열내부에 삽입해줌 이라고 설명하는 PresignedURLs 배열을 인덱스 돌려서 각각 uploadImage 함수를 실행해줌
+
+
+
+
+
+
 
     //post 요청 시 body에 넣을 데이터를 변수에 저장
     const reviewData = JSON.stringify({

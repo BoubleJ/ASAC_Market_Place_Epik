@@ -24,7 +24,7 @@ export async function POST(req: NextRequest) {
     console.log(cookies().has('AUTH_TOKEN'), '쿠키')
     console.log(requestHeaders, '리퀴스트 헤에에엥더')
 
-    const res = await fetch(`${baseURL}/reviews/create`, {
+    const res = await fetch(`${baseURL}/inquiry/create`, {
       method: 'POST',
       headers: { Authorization: `Bearer ${cookies().get('AUTH_TOKEN')?.value}` },
       body: bodyFormdata,
