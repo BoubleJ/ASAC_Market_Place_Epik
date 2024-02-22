@@ -230,7 +230,7 @@ export default function page() {
           <div className="text-xs text-grayscale-300">
             <p>30MB 이하의 이미지만 업로드 가능합니다.</p>
             <p>상품과 무관한 내용이거나 음란 및 불법적인 내용은 통보없이 삭제 될 수 있습니다.</p>
-            <p>사진은 최대 8장 등록 가능합니다.</p>
+            <p>사진은 최대 5장 등록 가능합니다.</p>
           </div>
 
           <div className="fixed bottom-0 left-1/2 h-20 w-96 -translate-x-1/2 bg-white p-4">

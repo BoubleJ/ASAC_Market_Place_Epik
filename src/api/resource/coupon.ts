@@ -10,10 +10,10 @@ export async function fetchCouponList() {
 
 
   if (!res.ok) {
-    throw new Error('Failed!!!!!!!')
+    throw new Error('Failed')
   }
   const response = await res.json()
-  console.log('응답은', response)
+  console.log('응답은', response.path)
   return response
 }
 
@@ -32,6 +32,7 @@ export async function  fetchDownloadCoupon() {
   }
 
   const response = await res.json()
+  console.log(response)
   return response.msg
 }
 

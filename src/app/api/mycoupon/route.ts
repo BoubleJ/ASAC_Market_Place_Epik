@@ -14,7 +14,7 @@ export async function GET(req: NextRequest) {
     }
     console.log('쿠폰 목록 !! Authorization', requestHeaders)
 
-    const res = await fetch(`${baseURL}/items/getcouponList`, {
+    const res = await fetch(`${baseURL}/members/mypage/coupons`, {
       method: 'GET',
       headers: requestHeaders,
       // headers: commonHeader,
@@ -24,8 +24,7 @@ export async function GET(req: NextRequest) {
 
     // return res
   } catch (error) {
-    console.log('couponList에러', error)
+    console.log('couponList 에러', error)
     return NextResponse.json({ msg: 'error' })
   }
 }
-

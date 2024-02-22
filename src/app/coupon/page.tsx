@@ -7,8 +7,7 @@ export default function page() {
     <div className="w-full h-full p-4">
       <div className=" text-title-sm">
         <CouponBox />
-        <CouponBox />
-        <CouponBox />
+     
       </div>
     </div>
   )

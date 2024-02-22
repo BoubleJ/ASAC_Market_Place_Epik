@@ -5,7 +5,6 @@ import React from 'react'
 
 import { fetchDownloadCoupon } from '@/api/resource/coupon'
 import SvgShare from '@/components/icons/share'
-import { Button } from '@/components/ui/button'
 import { ToastAction } from '@/components/ui/toast'
 import { useToast } from '@/components/ui/use-toast'
 
@@ -57,7 +56,7 @@ export default function ItemMainInfo({ itemId, itemData }: { itemId: number; ite
             {/* {itemDetails.couponId && <div>{itemDetails.coupon.discountType}</div>} */}
             <button
               className="my-3 rounded-md border border-brand-primary-500 p-2 text-sm text-brand-primary-500"
-              onClick={()=>{
+              onClick={() => {
                 renderToastWithAddCoupon()
                 toast({
                   title: 'Uh oh! Something went wrong.',
@@ -77,7 +76,6 @@ export default function ItemMainInfo({ itemId, itemData }: { itemId: number; ite
               <div className=" col-span-3 text-left">{itemDetails.sellerInfo}</div>
             </div>
           </div>
-         
         </div>
       )}
     </>
