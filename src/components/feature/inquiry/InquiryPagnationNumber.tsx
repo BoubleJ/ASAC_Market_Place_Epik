@@ -18,23 +18,21 @@ export default function InquiryPagnationNumber({
 
   return (
     <div className="pt-6">
-      <nav className="flex justify-center items-center gap-4 m-16">
+      <nav className="m-16 flex items-center justify-center gap-4">
         <button className="" onClick={() => setPage(page - 1)} disabled={page === 1}>
           <ChevronLeft className=" fill-transparent" width={'1.5rem'} height={'1.5rem'} />
         </button>
-        {Array(numPages)
-          .fill()
-          .map((item, i) => (
-            <button
-              className=""
-              key={i + 1}
-              onClick={() => setPage(i + 1)}
-              aria-current={page === i + 1 ? 'page' : undefined}
-            >
-              {i + 1}
-            </button>
-          ))}
-        <button className="" onClick={() => setPage(page + 1)} disabled={page === numPages}>
+        {Array.from({ length: numPages }, (_, i) => (
+          <button
+          
+            key={i + 1}
+            onClick={() => setPage(i + 1)}
+            aria-current={page === i + 1 ? 'page' : undefined}
+          >
+            {i + 1}
+          </button>
+        ))}
+        <button  onClick={() => setPage(page + 1)} disabled={page === numPages}>
           <ChevronRight className=" fill-transparent" width={'1.5rem'} height={'1.5rem'} />
         </button>
       </nav>

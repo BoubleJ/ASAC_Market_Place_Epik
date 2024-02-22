@@ -26,7 +26,7 @@ export default function FAQFilterBox({
         }}
       >
         <div className=" text-body-base pl-5 py-3">
-          {result.filterTitle}
+          {result?.filterTitle}
           <div className="float-right pt-0.5 pb-3 pr-2.5">
             <SvgTriangleDown />
           </div>

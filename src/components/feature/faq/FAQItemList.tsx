@@ -5,10 +5,11 @@ import { Body, List, ListProps } from '@/types/faq'
 
 export default function FAQItemList({ list, slug }: { list: List; slug: string }) {
   const result = list.find((item: ListProps) => item.title == slug)
+  const body = result?.body
 
   return (
     <>
-      {result.body.map((item: Body) => {
+      {body?.map((item: Body) => {
         return (
           <Accordion type="single" collapsible className="w-full" key={item.Id}>
             <AccordionItem value="item-1">
