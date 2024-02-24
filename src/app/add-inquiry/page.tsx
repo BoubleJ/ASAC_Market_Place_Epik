@@ -75,7 +75,7 @@ export default function page() {
 
    
 
-      console.log(presignedURL.msg, fileName)
+      console.log(presignedURL?.msg, fileName)
       //실제 백엔드 API CALL 시에 넣어줄 링크 만드는 코드
       const imageURL = `https://asac-marketplace-s3.s3.ap-northeast-2.amazonaws.com/${fileName}`
 
