@@ -36,30 +36,36 @@ export default function CategoryItemsPage({
       .then(({ content, totalPages }) => {
         // console.log('뭐가 바뀜??', searchword, categoryParams, brandParams, priceParams, page)
         console.log('콘텐트임ㅁㅁ!!!!!!!', content)
-        // 왜 같은거 두번????????/
         setProductList((prevProductList) => [...prevProductList, ...content])
 
         // console.log()
         setTotalPages(totalPages)
         // setIsLoading(false)
       })
-      //   setProductList((prevProductList) => {
-      //     const newProductList = [...prevProductList]
-      //     content.forEach((item: any) => {
-      //       if (!newProductList.find((product) => product.id === item.id)) {
-      //         console.log('같은거 : ', item)
-      //         newProductList.push(item)
-      //       }
-      //     })
-      //     return newProductList
-      //   })
-      //   setTotalPages(totalPages)
-      //   console.log('!!!!!!!!패치', totalPages)
-      // })
+
       .catch((error) => {
         console.error('data fetch 실패', error)
       })
-  }, [categoryNameParam, brandParams, priceParams, page])
+  }, [page])
+
+  useEffect(() => {
+    setPage(0)
+    fetchCategoryItems(categoryNameParam, brandParams, priceParams, page)
+      .then(({ content, totalPages }) => {
+        // console.log('뭐가 바뀜??', searchword, categoryParams, brandParams, priceParams, page)
+        console.log('콘텐트임ㅁㅁ!!!!!!!', content)
+        // 왜 같은거 두번????????/
+        setProductList(content)
+
+        // console.log()
+        setTotalPages(totalPages)
+        // setIsLoading(false)
+      })
+      .catch((error) => {
+        console.error('data fetch 실패', error)
+      })
+  }, [categoryNameParam, brandParams, priceParams])
+
   const loadMore = () => {
     if (page < totalPages - 1) {
       console.log(page, totalPages, '!!!!!!!!!!!!')

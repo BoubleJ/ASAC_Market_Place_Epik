@@ -12,14 +12,13 @@ export default function CommonProductList({ productList, loadMore }: CommonProdu
   const observer = useRef<IntersectionObserver | null>(null)
   const lastProductElementRef = useCallback(
     (node: HTMLElement | null) => {
-      if (observer.current) {
-        console.log('원래꺼 disconnect')
-        console.log('node', node)
-        observer.current.disconnect()
-      }
+      // if (observer.current) {
+      //   console.log('원래꺼 disconnect')
+      //   console.log('node', node)
+      //   // observer.current.disconnect()
+      // }
       observer.current = new IntersectionObserver(
         (entries) => {
-          console.log('entries', entries)
           if (entries[0].isIntersecting) {
             console.log(entries[0].target, 'sdfsdfsdfds')
             loadMore()

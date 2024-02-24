@@ -23,6 +23,7 @@ export default function SearchedItemList({}) {
       .then(({ content, totalPages }) => {
         console.log('뭐가 바뀜??', searchword, categoryParams, brandParams, priceParams, page)
         console.log('콘텐트임ㅁㅁ!!!!!!!', content)
+        console.log('콘텐트임ㅁㅁ!!!!!!!', totalPages)
         // 왜 같은거 두번????????/
         setProductList((prevProductList) => [...prevProductList, ...content])
 
@@ -30,23 +31,31 @@ export default function SearchedItemList({}) {
         setTotalPages(totalPages)
         // setIsLoading(false)
       })
-      //   setProductList((prevProductList) => {
-      //     const newProductList = [...prevProductList]
-      //     content.forEach((item: any) => {
-      //       if (!newProductList.find((product) => product.id === item.id)) {
-      //         console.log('같은거 제거!ㅎㅎㅎ: ', item)
-      //         newProductList.push(item)
-      //       }
-      //     })
-      //     return newProductList
-      //   })
-      //   setTotalPages(totalPages)
-      //   console.log('!!!!!!!!패치', totalPages)
-      // })
+
       .catch((error) => {
         console.error('data fetch 실패', error)
       })
-  }, [categoryParams, brandParams, priceParams, searchword, page])
+  }, [page])
+
+  useEffect(() => {
+    setPage(0)
+    fetchSearchItemsData(searchword, categoryParams, brandParams, priceParams, page)
+      .then(({ content, totalPages }) => {
+        console.log('뭐가 바뀜??', searchword, categoryParams, brandParams, priceParams, page)
+        console.log('콘텐트임ㅁㅁ!!!!!!!', content)
+        console.log('콘텐트임ㅁㅁ!!!!!!!', totalPages)
+        // 왜 같은거 두번????????/
+        setProductList(content)
+
+        // console.log()
+        setTotalPages(totalPages)
+        // setIsLoading(false)
+      })
+
+      .catch((error) => {
+        console.error('data fetch 실패', error)
+      })
+  }, [categoryParams, brandParams, priceParams, searchword])
 
   const loadMore = () => {
     console.log('????????????엥loadmore')
@@ -61,6 +70,7 @@ export default function SearchedItemList({}) {
     <>
       <div className="text-lg">
         {page}
+        ㄴㅇㄹ
         {totalPages}
       </div>
       <CommonProductList productList={productList} loadMore={loadMore} />
