@@ -5,19 +5,55 @@ import React, { useEffect, useState } from 'react'
 import AutoComplete from '@/components/feature/search/AutoComplete'
 import SearchBar from '@/components/feature/search/SearchBar'
 import SearchHeader from '@/components/feature/search/SearchHeader'
+import RecentSearches from '@/components/feature/search/searchResult/RecentSearches'
 import SuggestedSearches from '@/components/feature/search/SuggestedSearches'
 import TopSearches from '@/components/feature/search/TopSearches'
 import { ChevronLeft } from '@/components/icons'
 
+export interface recentWordInterface {
+  id: number
+  word: string
+}
+
 export default function SearchPage() {
   const router = useRouter()
   const [isBarClicked, setIsBarClicked] = useState(false)
-  const [searchWord, setSearchWord] = useState('')
+  // const [searchWord, setSearchWord] = useState('')
   const [searchingWord, setSearchingWord] = useState('')
+  const [recentWords, setRecentWords] = useState<recentWordInterface[]>([])
 
   useEffect(() => {
+    const result = localStorage.getItem('keywords') || '[]'
+    setRecentWords(JSON.parse(result))
+  }, [])
+
+  useEffect(() => {
+    localStorage.setItem('keywords', JSON.stringify(recentWords))
+  }, [recentWords])
+
+  const handleSearch = (searchWord: string) => {
+    handleAddKeyword(searchWord)
     router.push(`/search/${searchWord}`)
-  }, [router, searchWord])
+  }
+
+  const handleAddKeyword = (searchWord: string) => {
+    const isKeywordExists = recentWords.some((keyword) => keyword.word === searchWord)
+
+    if (!isKeywordExists) {
+      const newKeyword = {
+        id: Date.now(),
+        word: searchWord,
+      }
+      setRecentWords([newKeyword, ...recentWords])
+    }
+  }
+
+  const handleRemoveKeyword = (id: number) => {
+    const newRecentWords = recentWords.filter((recentWord) => {
+      return recentWord.id !== id
+    })
+    setRecentWords(newRecentWords)
+  }
 
   return (
     <>
@@ -29,20 +65,16 @@ export default function SearchPage() {
               <ChevronLeft width={'1.5rem'} height={'1.5rem'} fill="transparent" />
             </button>
           )}
-          <SearchBar
-            setSearchingWord={setSearchingWord}
-            setIsBarClicked={setIsBarClicked}
-            searchedWord={searchWord}
-            setSearchWord={setSearchWord}
-          />
+          <SearchBar setSearchingWord={setSearchingWord} setIsBarClicked={setIsBarClicked} handleEnter={handleSearch} />
         </div>
       </div>
       {/* 자동완성  */}
       {isBarClicked && searchingWord && <AutoComplete searchingWord={searchingWord} />}
-
+      {/* ---------------------------최근검색어 */}
       <div className="w-full py-2 px-4 flex flex-col gap-8">
-        <SuggestedSearches setSearchWord={setSearchWord} />
-        <TopSearches setSearchWord={setSearchWord} />
+        <RecentSearches handleClick={handleSearch} recentWords={recentWords} handleRemove={handleRemoveKeyword} />
+        <SuggestedSearches handleClick={handleSearch} />
+        <TopSearches handleClick={handleSearch} />
       </div>
     </>
   )

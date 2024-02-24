@@ -8,17 +8,39 @@ import { Bag, ChevronLeft } from '@/components/icons'
 
 import AutoComplete from '../AutoComplete'
 
+interface recentWordInterface {
+  id: number
+  word: string
+}
+
 export default function SearchResultHeader({ searchedWord }: { searchedWord: string }) {
   const [isBarClicked, setIsBarClicked] = useState(false)
-  const [searchWord, setSearchWord] = useState(searchedWord)
   const [searchingWord, setSearchingWord] = useState(searchedWord)
   const router = useRouter()
+  const [recentWords, setRecentWords] = useState<recentWordInterface[]>([])
 
   useEffect(() => {
+    const result = localStorage.getItem('keywords') || '[]'
+    setRecentWords(JSON.parse(result))
+  }, [])
+
+  const handleSearch = (searchWord) => {
+    handleAddKeyword(searchWord)
+
     router.push(`/search/${searchWord}`)
-    console.log('검색!', searchWord)
-    console.log(searchWord)
-  }, [searchWord])
+  }
+
+  useEffect(() => {
+    localStorage.setItem('keywords', JSON.stringify(recentWords))
+  }, [recentWords])
+
+  const handleAddKeyword = (searchWord: string) => {
+    const newKeyword = {
+      id: Date.now(),
+      word: searchWord,
+    }
+    setRecentWords([newKeyword, ...recentWords])
+  }
 
   return (
     <>
@@ -31,7 +53,7 @@ export default function SearchResultHeader({ searchedWord }: { searchedWord: str
             setSearchingWord={setSearchingWord}
             setIsBarClicked={setIsBarClicked}
             searchedWord={searchedWord}
-            setSearchWord={setSearchWord}
+            handleEnter={handleSearch}
           />
           <button className="font-bold">
             <Link href={`/cart`}>

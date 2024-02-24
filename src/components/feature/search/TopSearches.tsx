@@ -13,7 +13,7 @@ const topKeywords = [
   '훠궈',
 ]
 
-export default function TopSearches({ setSearchWord }: { setSearchWord: (searchWord: string) => void }) {
+export default function TopSearches({ handleClick }: { handleClick: (clickedWord: string) => void }) {
   return (
     <div className="flex flex-col gap-6">
       <div className="flex flex-col gap-1">
@@ -23,7 +23,7 @@ export default function TopSearches({ setSearchWord }: { setSearchWord: (searchW
       <div className="flex flex-col gap-3 px-1">
         {topKeywords.map((topKeyword, index) => (
           <div key={index}>
-            <button className="flex gap-4" onClick={() => setSearchWord(topKeyword)}>
+            <button className="flex gap-4" onClick={() => handleClick(topKeyword)}>
               <span className=" text-title-md text-brand-primary-500">{index + 1}</span>{' '}
               <span className="text-body-md font-normal">{topKeyword}</span>
             </button>

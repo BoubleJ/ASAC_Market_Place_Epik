@@ -8,21 +8,23 @@ export default function SearchBar({
   setSearchingWord,
   setIsBarClicked,
   searchedWord,
-  setSearchWord,
+  handleEnter,
 }: {
   setSearchingWord: (searchingWorld: string) => void
   setIsBarClicked: (isBarClicked: boolean) => void
-  searchedWord: string
-  setSearchWord: (searchWord: string) => void
+  searchedWord?: string
+  handleEnter: (searchWord: string) => void
 }) {
   const inputRef = useRef<HTMLInputElement | null>(null) // Ref 생성
 
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+
     if (inputRef.current) {
-      setSearchWord(inputRef.current.value)
+      handleEnter(inputRef.current.value)
     }
   }
+
   const onChange = (event: React.FormEvent<HTMLInputElement>) => {
     if (inputRef.current) {
       setSearchingWord(inputRef.current.value)
