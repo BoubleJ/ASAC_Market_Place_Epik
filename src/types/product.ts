@@ -5,7 +5,7 @@ export interface ProductType {
   discountRate: number
   discountedPrice: number
   itemPrice: number
-  promotionUrl: string
+  promotionImageUrl: string
   reviewCount: number
 }
 export type ContentType = ProductType[]

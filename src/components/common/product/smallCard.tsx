@@ -19,7 +19,7 @@ export default function SmallCard({ product }: SmallCardProps) {
         onClick={() => router.push(`/items/${product.id}`)}
         className="h-full w-full justify-start items-start gap-1 flex flex-col"
       >
-        <div className="relative w-full h-40">
+        <div className="relative w-full h-48">
           <Image
             // src={ decodeURIComponent(product.promotionUrl)}
             src={'/images/hotdog.svg'}
