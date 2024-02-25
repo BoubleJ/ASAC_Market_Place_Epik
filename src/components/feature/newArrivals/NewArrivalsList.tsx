@@ -21,5 +21,6 @@ export default function NewArrivalsList() {
         console.error('data fetch 실패', error)
       })
   }, [categoryParams, brandParams, priceParams])
-  return <CommonProductList productList={productList} />
+  const loadMore = () => {}
+  return <CommonProductList productList={productList} loadMore={loadMore} />
 }
