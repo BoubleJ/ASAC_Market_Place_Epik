@@ -25,7 +25,7 @@ export class PaymentParamCreator implements IPaymentParamCreator {
       orderId: this.orders.orderId,
       totalPrice: this.orders.totalAmount,
       paymentMethod: this.data.payment_method,
-      couponId: !this.data.coupon ? null : this.data.coupon,
+    //  couponId: !this.data.coupon ? null : this.data.coupon,
       // couponId: !this.data.coupon ? null : this.data.coupon,
     }
   }
