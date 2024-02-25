@@ -13,7 +13,7 @@ export async function fetchCouponList() {
     throw new Error('Failed')
   }
   const response = await res.json()
-  console.log('응답은', response.path)
+  console.log('fetchCouponList 응답', response)
   return response
 }
 

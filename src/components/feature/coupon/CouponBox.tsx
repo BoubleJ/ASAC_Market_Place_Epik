@@ -12,21 +12,22 @@ interface Coupon {
 
 export default function CouponBox() {
   const [couponList, setCouponList] = useState<Coupon[]>([])
+  const [errorMsg, setErrorMsg] = useState<string | null>(null)
 
   useEffect(() => {
-    async function getCouponList() {
-      const res = await fetchCouponList()
-      console.log(res)
-   
-      setCouponList(res.data)
-    }
-    getCouponList()
+    fetchCouponList().then((res) => {
+      console.log('res출력', res)
+      if (res.msg) {
+        setErrorMsg(res.msg)
+        return
+      }
+      setCouponList(res)
+    })
   }, [])
-
-  console.log('쿠폰리스트', couponList)
 
   return (
     <>
+      {errorMsg && <span>{errorMsg}</span>}
       {couponList.map((item, idx) => {
         return (
           <div key={idx} className="mb-5 h-40 w-full rounded-md border-2 border-solid border-grayscale-100 p-5">

@@ -8,6 +8,7 @@ export interface IPaymentParams {
   orderId: number
   totalPrice: number
   paymentMethod: PaymentMethodType
+  couponId?: number | null
 }
 
 export interface PaymentVerifyParams {
