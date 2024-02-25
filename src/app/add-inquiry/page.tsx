@@ -11,6 +11,8 @@ import AddInquiryTypeBox from '@/components/feature/addInquiry/AddInquiryTypeBox
 import SvgIconPlusMono from '@/components/icons/icon-plus-mono'
 import { Button } from '@/components/ui/button'
 
+type PresignedURL = {msg : string}
+
 export default function page() {
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false)
   const list = ['불만', '가득', '이게 나라냐 ']
@@ -54,12 +56,12 @@ export default function page() {
       //이미지 업로드 개수 제한있으니까 if문을 통해 이미지 개수 제한을 걸어둠
 
       //서버에서 presignURL을 받아오는 코드
-      const getPresignedURL = async (fileName : string) => {
+      const getPresignedURL = async (fileName : string):Promise<PresignedURL> => {
         let filename = encodeURIComponent(fileName)
         let res = await fetch(`${baseURL}/reviews/generate-presigned-url?fileName=${filename}&contentType=image/jpg`)
-        res = await res.json()
-        console.log(res)
-        return res
+        const url = await res.json()
+      
+        return url
       }
 
       console.log('이미지 업로드, S3에 올라간건 X', e.target.files.item(0)?.name)
@@ -71,11 +73,11 @@ export default function page() {
       const newImages = Array.from(e.target.files)
       //업로드하는 이미지 파일 자체들을 배열형태로 저장
 
-      const presignedURL = await getPresignedURL(fileName)
+      const res = await getPresignedURL(fileName)
 
-   
+      const presignedURL : string = res.msg
 
-      console.log(presignedURL?.msg, fileName)
+      console.log(presignedURL, fileName)
       //실제 백엔드 API CALL 시에 넣어줄 링크 만드는 코드
       const imageURL = `https://asac-marketplace-s3.s3.ap-northeast-2.amazonaws.com/${fileName}`
 
@@ -83,7 +85,7 @@ export default function page() {
 
       // SETSTATE 함수 함수형 업데이트 활용
       // prevURLs은 PresignedURLs를 의미하고 전개연산자를 활용해서  presignedURL의 msg 프로퍼티를 PresignedURLs라는 배열내부에 삽입해줌.
-      setPresignedURLs((prevURLs) => [...prevURLs, presignedURL.msg])
+      setPresignedURLs((prevURLs) => [...prevURLs, presignedURL])
       // prevURLs은 PresignedURLs를 의미하고 전개연산자를 활용해서  인코딩한  imageURL 객체를 ImageURLs라는 배열내부에 삽입해줌.
       //그리고 이 ImageURLs이라는 배열 데이터를  post 요청 시 body 에 넣어주는 것
       setImageURLs((prevURLs) => [...prevURLs, encodeURI(imageURL)])
