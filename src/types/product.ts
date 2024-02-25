@@ -10,6 +10,11 @@ export interface ProductType {
 }
 export type ContentType = ProductType[]
 
+export interface CartItemCheckParam {
+  itemId: number
+  checked: boolean
+}
+
 export interface CartItem {
   id: number
   name: string
@@ -32,6 +37,7 @@ export interface CartItemDto {
   salePrice: number
   discountRate: number
   promotionImageUrl: string
+  checked: boolean
 }
 
 export interface Cart {

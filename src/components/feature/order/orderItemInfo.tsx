@@ -3,11 +3,12 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 import { useOrderStore } from '@/store/client/orderSlice'
 
 export default function OrderItemInfo() {
-  const { orders, isEmpty } = useOrderStore.getState()
+  const { orders, isEmpty, setOrderName } = useOrderStore.getState()
   const isOrderEmpty = isEmpty()
   const headItemNamePrefix = isOrderEmpty ? '' : orders?.orderItemDtos[0].itemName.substring(0, 12)
   const orderProductCount = isOrderEmpty ? 0 : orders?.orderItemDtos.length
   const headItemName = isOrderEmpty ? '선택된 상품이 없습니다' : `${headItemNamePrefix}...외${orderProductCount}건`
+  setOrderName(headItemName)
   return (
     <Accordion type="single" collapsible className="w-full">
       <AccordionItem value="item-1">

@@ -3,12 +3,12 @@ import React from 'react'
 import { convertNumberFormat } from '@/lib/utils'
 import { useOrderStore } from '@/store/client/orderSlice'
 import { IOrder } from '@/types/order'
+import { DELIVERY_CHARGE } from '@/types/payment'
 
 export default function OrderBill() {
   const { amount, totalAmount, salesTotalAmount } = useOrderStore.getState().orders as IOrder
-  const deliveryCharge = 3000
   return (
-    <section className="flex flex-col items-center gap-4 w-full px-5 py-[18px] py-[30px]">
+    <div className="flex flex-col items-center gap-4">
       <div className="flex justify-between text-body-md w-full">
         <span>상품금액</span>
         <div className="space-x-2">
@@ -26,7 +26,7 @@ export default function OrderBill() {
       <div className="flex justify-between text-body-md w-full">
         <span>배송비</span>
         <div className="space-x-2">
-          <span>+{deliveryCharge}</span>
+          <span>+{DELIVERY_CHARGE}</span>
           <span>원</span>
         </div>
       </div>
@@ -35,14 +35,14 @@ export default function OrderBill() {
         <span className="text-body-md">결제예정금액</span>
         <div className="space-x-2">
           {/* {paymentScheduledItems.length ? (
-            <span className="text-body-xl">{convertNumberFormat(price() + deliveryCharge)}</span>
+            <span className="text-body-xl">{convertNumberFormat(price() + DELIVERY_CHARGE)}</span>
             ) : (
               <span className="text-body-xl">0</span>
             )} */}
-          <span className="text-body-xl">{convertNumberFormat(totalAmount + deliveryCharge)}</span>
+          <span className="text-body-xl">{convertNumberFormat(totalAmount + DELIVERY_CHARGE)}</span>
           <span>원</span>
         </div>
       </div>
-    </section>
+    </div>
   )
 }

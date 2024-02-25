@@ -1,4 +1,5 @@
 import { basePath, commonHeader } from '@/api/util/instance'
+import { CartItemCheckParam } from '@/types/product'
 
 export async function fetchGetCartItem() {
   const res = await fetch(`${basePath}/api/cart`, {
@@ -63,6 +64,22 @@ export async function fetchDecreaseCartItemById(cartId: number, itemId: number) 
   const res = await fetch(`${basePath}/api/cart/item/minus?cartId=${cartId}&itemId=${itemId}`, {
     method: 'POST',
     headers: commonHeader,
+  })
+
+  if (res.status !== 200) {
+    const errorMsg = await res.json()
+    return errorMsg
+  }
+
+  const response = await res.json()
+  return response.msg
+}
+
+export async function fetchSelectCartItem(body: CartItemCheckParam) {
+  const res = await fetch(`${basePath}/api/cart/check`, {
+    method: 'PATCH',
+    headers: commonHeader,
+    body: JSON.stringify(body),
   })
 
   if (res.status !== 200) {

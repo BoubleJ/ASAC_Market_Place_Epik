@@ -3,17 +3,15 @@
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 
-import { fetchInsertCartItemById } from '@/api/resource/cart'
 import { addToWishList, deleteFromWishList } from '@/api/resource/items'
-import { basePath } from '@/api/util/instance'
 import { itemIdParam } from '@/app/items/[itemId]/layout'
 import CheckModal from '@/components/common/modal/checkModal'
-import SelectModal from '@/components/common/modal/selectModal'
 import SvgHeart from '@/components/icons/heart'
 import { useModalState } from '@/components/provider/modalProvider'
 import { Button } from '@/components/ui/button'
-import { useCartStore } from '@/store/client/cartSlice'
 import { Product } from '@/types/item'
+
+import { CartItemInsertButton } from '../cart/CartButtons'
 
 interface IBottomTab {
   wished: boolean
@@ -28,31 +26,11 @@ export default function BottomTab({ wished, itemId, product }: IBottomTab) {
   }
   const state = useModalState()
   const [isWished, setIsWished] = useState(wished)
-  const { add } = useCartStore()
   const router = useRouter()
 
   const openCheckModal = (content: string) => {
     state.setModal(<CheckModal content={content} />)
     state.modalRef.current?.showModal()
-  }
-
-  const openSelectModal = (content: string, onCheck?: () => void, onCancel?: () => void) => {
-    state.setModal(<SelectModal content={content} onCheck={onCheck} onCancel={onCancel} />)
-    state.modalRef.current?.showModal()
-  }
-
-  const handlePushToCart = async () => {
-    return router.push(`${basePath}/cart`)
-  }
-
-  const handleMoModalWithAddToCart = async () => {
-    const msg = await fetchInsertCartItemById(product.id)
-    if (!msg.startsWith('장바구니')) {
-      return openSelectModal(`${msg}`)
-    } else {
-      add(product)
-      return openSelectModal(`장바구니에 상품을 추가하였습니다. 장바구니로 이동하시겠습니까`, handlePushToCart)
-    }
   }
 
   async function handleWish(body: itemIdParam) {
@@ -79,9 +57,10 @@ export default function BottomTab({ wished, itemId, product }: IBottomTab) {
       >
         <SvgHeart fill={isWished ? 'currentColor' : 'transparent'} width={'1.5rem'} height={'1.5rem'} />
       </Button>
-      <Button variant={'primary'} size={'sm'} className="h-full w-4/5" onClick={handleMoModalWithAddToCart}>
+      {/* <Button variant={'primary'} size={'sm'} className="h-full w-4/5" onClick={handleMoModalWithAddToCart}>
         <span className=" text-button-base">구매하기{wished}</span>
-      </Button>
+      </Button> */}
+      <CartItemInsertButton product={product} />
     </div>
   )
 }
