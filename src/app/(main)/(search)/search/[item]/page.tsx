@@ -34,7 +34,7 @@ export default function SearchResultPage({
 }) {
   // const page = searchParams?.['page']
   const [productList, setProductList] = useState<ContentType>([])
-  const [totalPage, setTotalPage] = useState<number>()
+  const [totalPage, setTotalPage] = useState<number>(0)
 
   const decodedItem = decodeURIComponent(params.item)
   //

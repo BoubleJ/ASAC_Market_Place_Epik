@@ -6,7 +6,17 @@ import { fetchSearchItemsData } from '@/api/resource/search'
 import SmallCard from '@/components/common/product/smallCard'
 import { ContentType, ProductType } from '@/types/product'
 
-export default function SearchedItemList({ initialProductList, params, totalPage }) {
+interface ISearchedItemList{
+  initialProductList:ProductType[], 
+  params:{  categoryParams:string | null,
+              brandParams:string | null,
+              priceParams:string | null,
+              searchword:string
+            }, 
+  totalPage:number
+}
+
+export default function SearchedItemList({ initialProductList, params, totalPage }:ISearchedItemList) {
   const [productList, setProductList] = useState<ContentType>([])
   const [page, setPage] = useState(0)
 

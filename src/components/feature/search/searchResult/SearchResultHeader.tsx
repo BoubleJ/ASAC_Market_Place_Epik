@@ -24,7 +24,7 @@ export default function SearchResultHeader({ searchedWord }: { searchedWord: str
     setRecentWords(JSON.parse(result))
   }, [])
 
-  const handleSearch = (searchWord) => {
+  const handleSearch = (searchWord: string) => {
     handleAddKeyword(searchWord)
 
     router.push(`/search/${searchWord}`)
