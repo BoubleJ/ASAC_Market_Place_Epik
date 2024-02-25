@@ -1,35 +1,27 @@
 'use client'
-import { usePathname, useSearchParams } from 'next/navigation'
-import React, { useEffect, useState } from 'react'
+
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 
 import { fetchSearchItemsData } from '@/api/resource/search'
-import CommonProductList from '@/components/common/product/commonProductList'
-import { ContentType } from '@/types/product'
+import SmallCard from '@/components/common/product/smallCard'
+import { ContentType, ProductType } from '@/types/product'
 
-export default function SearchedItemList({}) {
-  const searchParams = useSearchParams()
-  const [productList, setProductList] = useState<ContentType>([])
+export default function SearchedItemList({
+  initialProductList,
+  categoryParams,
+  brandParams,
+  priceParams,
+  searchword,
+  totalPage,
+  fetchlist,
+}) {
+  const [productList, setProductList] = useState<ContentType>(initialProductList)
   const [page, setPage] = useState(0)
-  const [totalPages, setTotalPages] = useState(0)
-
-  const categoryParams = searchParams.get('카테고리')
-  const brandParams = searchParams.get('브랜드')
-  const priceParams = searchParams.get('가격')
-  const searchword = decodeURIComponent(usePathname().split('/')[2])
-  console.log(searchword)
 
   useEffect(() => {
     fetchSearchItemsData(searchword, categoryParams, brandParams, priceParams, page)
       .then(({ content, totalPages }) => {
-        console.log('뭐가 바뀜??', searchword, categoryParams, brandParams, priceParams, page)
-        console.log('콘텐트임ㅁㅁ!!!!!!!', content)
-        console.log('콘텐트임ㅁㅁ!!!!!!!', totalPages)
-        // 왜 같은거 두번????????/
         setProductList((prevProductList) => [...prevProductList, ...content])
-
-        // console.log()
-        setTotalPages(totalPages)
-        // setIsLoading(false)
       })
 
       .catch((error) => {
@@ -37,43 +29,60 @@ export default function SearchedItemList({}) {
       })
   }, [page])
 
-  useEffect(() => {
-    setPage(0)
-    fetchSearchItemsData(searchword, categoryParams, brandParams, priceParams, page)
-      .then(({ content, totalPages }) => {
-        console.log('뭐가 바뀜??', searchword, categoryParams, brandParams, priceParams, page)
-        console.log('콘텐트임ㅁㅁ!!!!!!!', content)
-        console.log('콘텐트임ㅁㅁ!!!!!!!', totalPages)
-        // 왜 같은거 두번????????/
-        setProductList(content)
-
-        // console.log()
-        setTotalPages(totalPages)
-        // setIsLoading(false)
-      })
-
-      .catch((error) => {
-        console.error('data fetch 실패', error)
-      })
-  }, [categoryParams, brandParams, priceParams, searchword])
-
   const loadMore = () => {
     console.log('????????????엥loadmore')
-    console.log(page, totalPages, '!!!!!!!!!')
+    console.log(page, totalPage, '!!!!!!!!!')
 
-    if (page < totalPages - 1) {
-      console.log(page, totalPages, '!!!!!!!!!!!!')
+    if (page < totalPage - 1) {
+      console.log(page, totalPage, '!!!!!!!!!!!!')
       setPage((prevPage) => prevPage + 1)
     }
   }
+
+  const observer = useRef<IntersectionObserver | null>(null)
+  const lastProductElementRef = useCallback(
+    (node: HTMLElement | null) => {
+      // if (observer.current) {
+      //   console.log('원래꺼 disconnect')
+      //   console.log('node', node)
+      //   // observer.current.disconnect()
+      // }
+      observer.current = new IntersectionObserver(
+        (entries) => {
+          if (entries[0].isIntersecting) {
+            console.log(entries[0].target, 'sdfsdfsdfds')
+            loadMore()
+          }
+        },
+        {
+          threshold: [0.5], //  교차 영역에 타켓 엘리먼트의 100%가 있을 때 observe가 반응.
+        },
+      )
+      if (node) observer.current.observe(node)
+    },
+    [loadMore],
+  )
+
   return (
     <>
       <div className="text-lg">
-        {page}
-        ㄴㅇㄹ
-        {totalPages}
+        {/* {page}
+        {totalPages} */}
       </div>
-      <CommonProductList productList={productList} loadMore={loadMore} />
+      <div className="grid grid-cols-2 justify-items-center gap-3 px-5 pt-4">
+        {/* {productList.map((product: ProductType, index: number) => (
+        <div key={index}>{product.id}</div>
+      ))} */}
+        {productList.map((product: ProductType, index: number) => (
+          <div
+            ref={productList.length === index + 1 ? lastProductElementRef : null}
+            key={product.id}
+            className={`w-full px-1 ${productList.length === index + 1 ? 'bg-slate-400' : ''}`}
+          >
+            <SmallCard product={product} />
+          </div>
+        ))}
+      </div>
     </>
   )
 }

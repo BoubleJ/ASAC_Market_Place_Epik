@@ -1,5 +1,7 @@
+'use client'
+
 import dynamic from 'next/dynamic'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 // import { fetchSearchItemsData } from '@/api/resource/search'
 import { fetchIsEmpty, fetchSearchItemsData } from '@/api/resource/search'
@@ -7,6 +9,8 @@ import FilterLoading from '@/components/common/loading/FilterLoading'
 import ItemListLoading from '@/components/common/loading/ItemListLoading'
 // import SearchFilter from '@/components/feature/search/SearchFilter'
 import EmptySearchResult from '@/components/feature/search/searchResult/EmptySearchResult'
+import { usePathname } from 'next/navigation'
+import { ContentType } from '@/types/product'
 // import SearchedItemList from '@/components/feature/search/searchResult/SearchedItemList'
 
 const SearchFilter = dynamic(() => import('@/components/feature/search/SearchFilter'), {
@@ -16,7 +20,7 @@ const SearchedItemList = dynamic(() => import('@/components/feature/search/searc
   loading: () => <ItemListLoading />,
 })
 
-export default async function SearchResultPage({
+export default function SearchResultPage({
   params,
   searchParams,
 }: {
@@ -28,16 +32,15 @@ export default async function SearchResultPage({
     ['page']: number | null
   }
 }) {
+  // const page = searchParams?.['page']
+  const [productList, setProductList] = useState<ContentType>([])
+
   const decodedItem = decodeURIComponent(params.item)
-
-  // const [isSearchResultEmpty, setIsSearchResultEmpty] = useState(false)
-
-  // --------------------------
-
+  //
   const brandParams = searchParams?.['브랜드']
   const priceParams = searchParams?.['가격']
   const categoryParams = searchParams?.['카테고리']
-  const page = searchParams?.['page']
+  const searchword = decodeURIComponent(usePathname().split('/')[2])
 
   // useEffect(() => {
   //   fetchSearchItemsData(searchword, categoryParams, brandParams, priceParams)
@@ -51,18 +54,40 @@ export default async function SearchResultPage({
   // -----------------------------
   // let isSearchResultEmpty = false
 
-  const isSearchResultEmpty = await fetchIsEmpty(decodedItem)
-  const searchedItems = await fetchSearchItemsData(decodedItem, categoryParams, brandParams, priceParams, page)
+  // const isSearchResultEmpty = await fetchIsEmpty(decodedItem)
+  // const searchedItems = await fetchSearchItemsData(decodedItem, categoryParams, brandParams, priceParams, page)
+
+  useEffect(() => {
+    fetchSearchItemsData(searchword, categoryParams, brandParams, priceParams, 0)
+      .then(({ content, totalPages }) => {
+        setProductList(content)
+
+        // setIsLoading(false)
+      })
+
+      .catch((error) => {
+        console.error('data fetch 실패', error)
+      })
+  }, [categoryParams, brandParams, priceParams, searchword])
 
   return (
     <>
-      {!isSearchResultEmpty && (
+      {productList.length === 0 ? (
+        <EmptySearchResult />
+      ) : (
         <div>
-          <SearchFilter itemLength={searchedItems.content.length} searchWord={decodedItem} />
-          <SearchedItemList />
+          <SearchFilter itemLength={productList.length} searchWord={decodedItem} />
+          <SearchedItemList
+            item={productList}
+            params={{
+              categoryParams,
+              brandParams,
+              priceParams,
+              searchword,
+            }}
+          />
         </div>
       )}
-      {isSearchResultEmpty && <EmptySearchResult />}
     </>
   )
 }
