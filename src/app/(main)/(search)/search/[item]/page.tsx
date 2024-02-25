@@ -1,15 +1,15 @@
 'use client'
 
 import dynamic from 'next/dynamic'
+import { usePathname } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 
 // import { fetchSearchItemsData } from '@/api/resource/search'
-import { fetchIsEmpty, fetchSearchItemsData } from '@/api/resource/search'
+import { fetchSearchItemsData } from '@/api/resource/search'
 import FilterLoading from '@/components/common/loading/FilterLoading'
 import ItemListLoading from '@/components/common/loading/ItemListLoading'
 // import SearchFilter from '@/components/feature/search/SearchFilter'
 import EmptySearchResult from '@/components/feature/search/searchResult/EmptySearchResult'
-import { usePathname } from 'next/navigation'
 import { ContentType } from '@/types/product'
 // import SearchedItemList from '@/components/feature/search/searchResult/SearchedItemList'
 
@@ -34,6 +34,7 @@ export default function SearchResultPage({
 }) {
   // const page = searchParams?.['page']
   const [productList, setProductList] = useState<ContentType>([])
+  const [totalPage, setTotalPage] = useState<number>()
 
   const decodedItem = decodeURIComponent(params.item)
   //
@@ -58,9 +59,11 @@ export default function SearchResultPage({
   // const searchedItems = await fetchSearchItemsData(decodedItem, categoryParams, brandParams, priceParams, page)
 
   useEffect(() => {
+    console.log(categoryParams, '카테고리 파람 change -> 리패치')
     fetchSearchItemsData(searchword, categoryParams, brandParams, priceParams, 0)
       .then(({ content, totalPages }) => {
         setProductList(content)
+        setTotalPage(totalPages)
 
         // setIsLoading(false)
       })
@@ -78,13 +81,14 @@ export default function SearchResultPage({
         <div>
           <SearchFilter itemLength={productList.length} searchWord={decodedItem} />
           <SearchedItemList
-            item={productList}
+            initialProductList={productList}
             params={{
               categoryParams,
               brandParams,
               priceParams,
               searchword,
             }}
+            totalPage={totalPage}
           />
         </div>
       )}

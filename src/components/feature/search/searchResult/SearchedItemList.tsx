@@ -6,30 +6,28 @@ import { fetchSearchItemsData } from '@/api/resource/search'
 import SmallCard from '@/components/common/product/smallCard'
 import { ContentType, ProductType } from '@/types/product'
 
-export default function SearchedItemList({
-  initialProductList,
-  categoryParams,
-  brandParams,
-  priceParams,
-  searchword,
-  totalPage,
-  fetchlist,
-}) {
-  const [productList, setProductList] = useState<ContentType>(initialProductList)
+export default function SearchedItemList({ initialProductList, params, totalPage }) {
+  const [productList, setProductList] = useState<ContentType>([])
   const [page, setPage] = useState(0)
 
   useEffect(() => {
-    fetchSearchItemsData(searchword, categoryParams, brandParams, priceParams, page)
-      .then(({ content, totalPages }) => {
-        setProductList((prevProductList) => [...prevProductList, ...content])
-      })
+    setProductList(initialProductList)
+  }, [initialProductList])
 
-      .catch((error) => {
-        console.error('data fetch 실패', error)
-      })
+  useEffect(() => {
+    if (page !== 0) {
+      fetchSearchItemsData(params.searchword, params.categoryParams, params.brandParams, params.priceParams, page)
+        .then(({ content, totalPages }) => {
+          setProductList((prevProductList) => [...prevProductList, ...content])
+        })
+
+        .catch((error) => {
+          console.error('data fetch 실패', error)
+        })
+    }
   }, [page])
 
-  const loadMore = () => {
+  const loadMore = useCallback(() => {
     console.log('????????????엥loadmore')
     console.log(page, totalPage, '!!!!!!!!!')
 
@@ -37,7 +35,7 @@ export default function SearchedItemList({
       console.log(page, totalPage, '!!!!!!!!!!!!')
       setPage((prevPage) => prevPage + 1)
     }
-  }
+  }, [])
 
   const observer = useRef<IntersectionObserver | null>(null)
   const lastProductElementRef = useCallback(
@@ -66,8 +64,8 @@ export default function SearchedItemList({
   return (
     <>
       <div className="text-lg">
-        {/* {page}
-        {totalPages} */}
+        {page}
+        {totalPage}
       </div>
       <div className="grid grid-cols-2 justify-items-center gap-3 px-5 pt-4">
         {/* {productList.map((product: ProductType, index: number) => (

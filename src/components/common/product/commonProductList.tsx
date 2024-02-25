@@ -7,16 +7,11 @@ interface CommonProductListProps {
   productList: ProductType[]
   loadMore: () => void
 }
-
+// 리팩토링 필요 (searchedItemList랑 공통화)
 export default function CommonProductList({ productList, loadMore }: CommonProductListProps) {
   const observer = useRef<IntersectionObserver | null>(null)
   const lastProductElementRef = useCallback(
     (node: HTMLElement | null) => {
-      // if (observer.current) {
-      //   console.log('원래꺼 disconnect')
-      //   console.log('node', node)
-      //   // observer.current.disconnect()
-      // }
       observer.current = new IntersectionObserver(
         (entries) => {
           if (entries[0].isIntersecting) {
