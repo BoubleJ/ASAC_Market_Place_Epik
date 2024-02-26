@@ -11,15 +11,10 @@ interface FilterBottomSheetProps {
   filters: FilterType
   appliedFilters: AppliedFilterType
   clickedFilter: keyof FilterType
-  setIsBottomSheetOpen: (value: React.SetStateAction<boolean>) => void
+  onClose: () => void
 }
 
-export default function FilterBottomSheet({
-  filters,
-  appliedFilters,
-  clickedFilter,
-  setIsBottomSheetOpen,
-}: FilterBottomSheetProps) {
+export default function FilterBottomSheet({ filters, appliedFilters, clickedFilter, onClose }: FilterBottomSheetProps) {
   const router = useRouter()
   const pathname = usePathname()
   const [selectedFilter, setSelectedFilter] = useState<keyof FilterType>(clickedFilter)
@@ -59,7 +54,7 @@ export default function FilterBottomSheet({
   }
 
   const handleApplyFilter = () => {
-    setIsBottomSheetOpen(false)
+    onClose()
 
     const queryParams = Object.entries(selectedFilters)
       .filter(([filter, selectedOptions]) => selectedOptions && selectedOptions.length > 0)
@@ -73,7 +68,7 @@ export default function FilterBottomSheet({
 
   return (
     <div>
-      <div className="fixed w-96 h-96 bottom-0 z-40 rounded-t-lg overflow-scroll bg-white pb-4 no-scrollbar">
+      <div className="no-scrollbar fixed bottom-0 z-40 h-96 w-96 overflow-scroll rounded-t-lg bg-white pb-4">
         <div className="relative">
           <FilterBottomSheetHeader
             filters={filters}
@@ -86,7 +81,7 @@ export default function FilterBottomSheet({
             handleCheckboxChange={handleCheckboxChange}
           />
 
-          <div className="fixed bottom-0 w-96 bg-white p-4 flex justify-center gap-8">
+          <div className="fixed bottom-0 flex w-96 justify-center gap-8 bg-white p-4">
             <button onClick={() => handleApplyFilter()} className="h-12 text-sm font-medium">
               초기화
             </button>

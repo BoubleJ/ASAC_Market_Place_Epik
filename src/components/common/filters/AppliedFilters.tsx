@@ -7,7 +7,7 @@ export default function AppliedFilters({ prevAppliedFilters }: { prevAppliedFilt
   const router = useRouter()
   const pathname = usePathname()
 
-  const removeFilterOption = (filterName: keyof AppliedFilterType, option: string) => {
+  const removeFilterOption = (filterName: keyof AppliedFilterType) => (option: string) => {
     const updatedOptions = prevAppliedFilters[filterName].filter((item) => item !== option)
     applyURL({ ...prevAppliedFilters, [filterName]: updatedOptions })
   }
@@ -26,26 +26,39 @@ export default function AppliedFilters({ prevAppliedFilters }: { prevAppliedFilt
   }
 
   return (
-    <div className="flex px-4 py-1 text-body-sm overflow-x-scroll whitespace-nowrap no-scrollbar">
-      {Object.keys(prevAppliedFilters).map((filterName) => {
-        const filterOption = prevAppliedFilters[filterName as keyof AppliedFilterType]
-
+    <div className="no-scrollbar flex overflow-x-scroll whitespace-nowrap px-4 py-1 text-body-sm">
+      {Object.keys(prevAppliedFilters).map((filterName, index) => {
         return (
-          <div className="flex" key={filterName}>
-            {filterOption &&
-              filterOption.map((option: string) => (
-                <button
-                  key={`${filterName}-${option}`}
-                  onClick={() => removeFilterOption(filterName as keyof AppliedFilterType, option)}
-                  className="pr-4 flex gap-1"
-                >
-                  <span className="text-brand-primary-500">{option}</span>
-                  <span className="text-grayscale-300">x</span>
-                </button>
-              ))}
-          </div>
+          <FilterBadge
+            key={index}
+            filterName={filterName}
+            filterOptions={prevAppliedFilters[filterName as keyof AppliedFilterType]}
+            onRemoveClick={removeFilterOption(filterName)}
+          />
         )
       })}
+    </div>
+  )
+}
+
+function FilterBadge({
+  filterName,
+  filterOptions,
+  onRemoveClick,
+}: {
+  filterName: string
+  filterOptions: string[]
+  onRemoveClick: (option: string) => void
+}) {
+  return (
+    <div className="flex" key={filterName}>
+      {filterOptions &&
+        filterOptions.map((option: string) => (
+          <button key={`${filterName}-${option}`} onClick={() => onRemoveClick(option)} className="flex gap-1 pr-4">
+            <span className="text-brand-primary-500">{option}</span>
+            <span className="text-grayscale-300">x</span>
+          </button>
+        ))}
     </div>
   )
 }

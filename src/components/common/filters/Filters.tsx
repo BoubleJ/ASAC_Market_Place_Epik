@@ -14,12 +14,12 @@ export interface FilterType {
   브랜드: object
   가격: object
 }
+
 export interface AppliedFilterType {
-  카테고리: string[]
-  브랜드: string[]
-  가격: string[]
+  [key: string]: string[]
 }
-export default function Filter({
+
+export default function Filters({
   totalEliments,
   categoryCounts,
   brandCounts,
@@ -45,8 +45,6 @@ export default function Filter({
     가격: searchParams.get('가격')?.split(',') ?? [],
   }
 
-  console.log(appliedFilters)
-
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false)
   const [clickedFilter, setClickedFilter] = useState<keyof FilterType>('카테고리')
 
@@ -55,30 +53,26 @@ export default function Filter({
     setIsBottomSheetOpen(true)
   }
 
-  const closeFilterBottomSheet = () => {
-    setIsBottomSheetOpen(false)
-  }
-
   return (
     <>
       <div
-        className={`bg-white sticky ${stickyLocation} py-2 px-4 flex justify-between z-10 text-body-xs text-gray-600`}
+        className={`sticky bg-white ${stickyLocation} z-10 flex justify-between px-4 py-2 text-body-xs text-gray-600`}
       >
         <div>총 {totalEliments}개</div>
         <div className="flex gap-3">
           <SortButton />
-          <FilterButton openFilterBottomSheet={openFilterBottomSheet} />
+          <FilterButton onClick={() => openFilterBottomSheet('카테고리')} />
         </div>
       </div>
 
       {isBottomSheetOpen && (
         <>
-          <div className="fixed inset-0 bg-black opacity-40 z-30" onClick={closeFilterBottomSheet}></div>
+          <div className="fixed inset-0 z-30 bg-black opacity-40" onClick={() => setIsBottomSheetOpen(false)}></div>
           <FilterBottomSheet
             filters={filters}
             appliedFilters={appliedFilters}
             clickedFilter={clickedFilter}
-            setIsBottomSheetOpen={setIsBottomSheetOpen}
+            onClose={() => setIsBottomSheetOpen(false)}
           />
         </>
       )}
