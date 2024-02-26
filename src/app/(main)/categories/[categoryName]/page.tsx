@@ -20,6 +20,7 @@ export default function CategoryItemsPage({
   const [productList, setProductList] = useState<ContentType>([])
   const [page, setPage] = useState(0)
   const [totalPages, setTotalPages] = useState(0)
+  const [isLoading, setIsLoading] = useState<boolean>(true)
   console.log('Aarooooooooon  : in page', searchParams)
   const decodedcategoryName = decodeURIComponent(params.categoryName)
 
@@ -40,7 +41,7 @@ export default function CategoryItemsPage({
 
         // console.log()
         setTotalPages(totalPages)
-        // setIsLoading(false)
+        setIsLoading(false)
       })
 
       .catch((error) => {

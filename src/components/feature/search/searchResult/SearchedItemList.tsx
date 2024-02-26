@@ -6,17 +6,13 @@ import { fetchSearchItemsData } from '@/api/resource/search'
 import SmallCard from '@/components/common/product/smallCard'
 import { ContentType, ProductType } from '@/types/product'
 
-interface ISearchedItemList{
-  initialProductList:ProductType[], 
-  params:{  categoryParams:string | null,
-              brandParams:string | null,
-              priceParams:string | null,
-              searchword:string
-            }, 
-  totalPage:number
+interface ISearchedItemList {
+  initialProductList: ProductType[]
+  params: { categoryParams: string | null; brandParams: string | null; priceParams: string | null; searchword: string }
+  totalPage: number
 }
 
-export default function SearchedItemList({ initialProductList, params, totalPage }:ISearchedItemList) {
+export default function SearchedItemList({ initialProductList, params, totalPage }: ISearchedItemList) {
   const [productList, setProductList] = useState<ContentType>([])
   const [page, setPage] = useState(0)
 
@@ -72,14 +68,8 @@ export default function SearchedItemList({ initialProductList, params, totalPage
 
   return (
     <>
-      <div className="text-lg">
-        {page}
-        {totalPage}
-      </div>
+      <div className="text-lg"></div>
       <div className="grid grid-cols-2 justify-items-center gap-3 px-5 pt-4">
-        {/* {productList.map((product: ProductType, index: number) => (
-        <div key={index}>{product.id}</div>
-      ))} */}
         {productList.map((product: ProductType, index: number) => (
           <div
             ref={productList.length === index + 1 ? lastProductElementRef : null}
