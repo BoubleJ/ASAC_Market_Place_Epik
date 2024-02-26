@@ -38,7 +38,6 @@ export default function SearchedItemList({ initialProductList, params, totalPage
   }, [page])
 
   const loadMore = useCallback(() => {
-    console.log('????????????엥loadmore')
     console.log(page, totalPage, '!!!!!!!!!')
 
     if (page < totalPage - 1) {
@@ -63,7 +62,7 @@ export default function SearchedItemList({ initialProductList, params, totalPage
           }
         },
         {
-          threshold: [0.5], //  교차 영역에 타켓 엘리먼트의 100%가 있을 때 observe가 반응.
+          threshold: [0.5], //  교차 영역에 타켓 엘리먼트의 50%가 있을 때 observe가 반응.
         },
       )
       if (node) observer.current.observe(node)

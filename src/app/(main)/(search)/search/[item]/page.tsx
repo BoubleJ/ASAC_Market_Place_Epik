@@ -43,20 +43,6 @@ export default function SearchResultPage({
   const categoryParams = searchParams?.['카테고리']
   const searchword = decodeURIComponent(usePathname().split('/')[2])
 
-  // useEffect(() => {
-  //   fetchSearchItemsData(searchword, categoryParams, brandParams, priceParams)
-  //     .then((data) => {
-  //       setProductList(data.items.content.length)
-  //     })
-  //     .catch((error) => {
-  //       console.error('data fetch 실패', error)
-  //     })
-  // }, [categoryParams, brandParams, priceParams, searchword])
-  // -----------------------------
-  // let isSearchResultEmpty = false
-
-  // const isSearchResultEmpty = await fetchIsEmpty(decodedItem)
-  // const searchedItems = await fetchSearchItemsData(decodedItem, categoryParams, brandParams, priceParams, page)
 
   useEffect(() => {
     console.log(categoryParams, '카테고리 파람 change -> 리패치')
