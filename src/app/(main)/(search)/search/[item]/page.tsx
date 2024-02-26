@@ -4,14 +4,12 @@ import dynamic from 'next/dynamic'
 import { usePathname } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 
-// import { fetchSearchItemsData } from '@/api/resource/search'
 import { fetchSearchItemsData } from '@/api/resource/search'
 import FilterLoading from '@/components/common/loading/FilterLoading'
 import ItemListLoading from '@/components/common/loading/ItemListLoading'
-// import SearchFilter from '@/components/feature/search/SearchFilter'
+import Spinner from '@/components/common/loading/Spinner'
 import EmptySearchResult from '@/components/feature/search/searchResult/EmptySearchResult'
 import { ContentType } from '@/types/product'
-// import SearchedItemList from '@/components/feature/search/searchResult/SearchedItemList'
 
 const SearchFilter = dynamic(() => import('@/components/feature/search/SearchFilter'), {
   loading: () => <FilterLoading />,
@@ -35,6 +33,7 @@ export default function SearchResultPage({
   // const page = searchParams?.['page']
   const [productList, setProductList] = useState<ContentType>([])
   const [totalPage, setTotalPage] = useState<number>(0)
+  const [isLoading, setIsLoading] = useState<boolean>(true)
 
   const decodedItem = decodeURIComponent(params.item)
   //
@@ -43,7 +42,6 @@ export default function SearchResultPage({
   const categoryParams = searchParams?.['카테고리']
   const searchword = decodeURIComponent(usePathname().split('/')[2])
 
-
   useEffect(() => {
     console.log(categoryParams, '카테고리 파람 change -> 리패치')
     fetchSearchItemsData(searchword, categoryParams, brandParams, priceParams, 0)
@@ -51,7 +49,7 @@ export default function SearchResultPage({
         setProductList(content)
         setTotalPage(totalPages)
 
-        // setIsLoading(false)
+        setIsLoading(false)
       })
 
       .catch((error) => {
@@ -61,7 +59,9 @@ export default function SearchResultPage({
 
   return (
     <>
-      {productList.length === 0 ? (
+      {isLoading ? (
+        <Spinner />
+      ) : productList.length === 0 ? (
         <EmptySearchResult />
       ) : (
         <div>
