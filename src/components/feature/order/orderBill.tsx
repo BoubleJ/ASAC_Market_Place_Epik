@@ -1,48 +1,55 @@
+'use client'
+
 import React from 'react'
 
+import OrderContainer from '@/components/feature/order/orderContainer'
+import { useOrderStore } from '@/components/provider/OrderStoreProvider'
 import { convertNumberFormat } from '@/lib/utils'
-import { useOrderStore } from '@/store/client/orderSlice'
-import { IOrder } from '@/types/order'
 import { DELIVERY_CHARGE } from '@/types/payment'
 
-export default function OrderBill() {
-  const { amount, totalAmount, salesTotalAmount } = useOrderStore.getState().orders as IOrder
+function OrderBill() {
+  const { totalAmount, salesTotalAmount } = useOrderStore((state) => state.orders)
+
   return (
-    <div className="flex flex-col items-center gap-4">
-      <div className="flex justify-between text-body-md w-full">
-        <span>상품금액</span>
-        <div className="space-x-2">
-          <span>{amount}</span>
-          <span>원</span>
+    <OrderContainer className="py-0 pb-[30px] pt-[18px]">
+      <div className="flex flex-col items-center gap-4">
+        <div className="flex w-full justify-between text-body-md">
+          <span>상품금액</span>
+          <div className="space-x-2">
+            <span>{totalAmount}</span>
+            <span>원</span>
+          </div>
         </div>
-      </div>
-      <div className="flex justify-between text-body-md w-full">
-        <span>상품할인금액</span>
-        <div className="space-x-2">
-          <span>{salesTotalAmount}</span>
-          <span>원</span>
+        <div className="flex w-full justify-between text-body-md">
+          <span>상품할인금액</span>
+          <div className="space-x-2">
+            <span>{salesTotalAmount}</span>
+            <span>원</span>
+          </div>
         </div>
-      </div>
-      <div className="flex justify-between text-body-md w-full">
-        <span>배송비</span>
-        <div className="space-x-2">
-          <span>+{DELIVERY_CHARGE}</span>
-          <span>원</span>
+        <div className="flex w-full justify-between text-body-md">
+          <span>배송비</span>
+          <div className="space-x-2">
+            {totalAmount !== 0 ? <span>+{DELIVERY_CHARGE}</span> : <span className="text-body-md">0</span>}
+            <span>원</span>
+          </div>
         </div>
-      </div>
-      <div className="w-11/12 h-px bg-gray-100" />
-      <div className="flex justify-between w-full mb-6">
-        <span className="text-body-md">결제예정금액</span>
-        <div className="space-x-2">
-          {/* {paymentScheduledItems.length ? (
-            <span className="text-body-xl">{convertNumberFormat(price() + DELIVERY_CHARGE)}</span>
+        <div className="h-px w-11/12 bg-gray-100" />
+        <div className="mb-6 flex w-full justify-between">
+          <span className="text-body-md">결제예정금액</span>
+          <div className="space-x-2">
+            {totalAmount !== 0 ? (
+              <span className="text-body-xl">{convertNumberFormat(totalAmount + DELIVERY_CHARGE)}</span>
             ) : (
               <span className="text-body-xl">0</span>
-            )} */}
-          <span className="text-body-xl">{convertNumberFormat(totalAmount + DELIVERY_CHARGE)}</span>
-          <span>원</span>
+            )}
+            {/* <span className="text-body-xl">{convertNumberFormat(totalAmount + DELIVERY_CHARGE)}</span> */}
+            <span>원</span>
+          </div>
         </div>
       </div>
-    </div>
+    </OrderContainer>
   )
 }
+
+export default React.memo(OrderBill)

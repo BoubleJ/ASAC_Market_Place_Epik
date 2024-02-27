@@ -2,6 +2,7 @@
 
 import { useFormContext } from 'react-hook-form'
 
+import OrderContainer from '@/components/feature/order/orderContainer'
 import { Button } from '@/components/ui/button'
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
@@ -11,7 +12,7 @@ import { OrderFormInterface } from '@/lib/schema/order'
 export default function OrderAddress() {
   const form = useFormContext<OrderFormInterface>()
   return (
-    <>
+    <OrderContainer>
       <FormField
         control={form.control}
         name="delivery_address"
@@ -76,6 +77,6 @@ export default function OrderAddress() {
           </FormItem>
         )}
       />
-    </>
+    </OrderContainer>
   )
 }

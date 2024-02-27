@@ -1,5 +1,8 @@
-import { DELIVERY_CHARGE, IPaymentParams } from '@/types/payment'
+import { IOrder } from '@/types/order'
+import { DELIVERY_CHARGE, IPaymentParams, PaymentResponse } from '@/types/payment'
 import { RequestPayParams, RequestPayResponseCallback } from '@/types/portone'
+
+import { OrderFormInterface } from '../schema/order'
 
 export function initializePaymentModule() {
   if (!window.IMP) return
@@ -8,21 +11,33 @@ export function initializePaymentModule() {
 }
 
 export function getMerchantUID(orderIdfromServer: number) {
-  // mid_1707588675570_202_d47fa79f-ec33-4feb-86d0-8295c8d566e1
   return `mid_${new Date().getTime()}_${orderIdfromServer}_${crypto.randomUUID()}`
 }
 
-export const createPaymentParam = (orderName: string, paymentParams: IPaymentParams): RequestPayParams => {
-  return {
-    pg: String(paymentParams?.paymentMethod),
-    pay_method: 'card',
-    name: `${orderName}`,
-    merchant_uid: getMerchantUID(paymentParams?.orderId!),
-    amount: Number(paymentParams?.totalPrice! + DELIVERY_CHARGE),
-  }
-}
-
 export function requestPayment(body: RequestPayParams, callback: RequestPayResponseCallback) {
+  console.log('portone request', body)
+
   if (!window.IMP) return
   return window.IMP?.request_pay(body, callback)
 }
+
+export const createPaymentParamFactory = (data: OrderFormInterface, orders: IOrder, orderName: string) => ({
+  getPaymentResquestParam: (): IPaymentParams => {
+    return {
+      orderId: orders.orderId,
+      totalPrice: orders.totalAmount,
+      paymentMethod: data.payment_method,
+      couponId: null,
+    }
+  },
+  getProtOneRequestParam: (paymentResponse: PaymentResponse): RequestPayParams => {
+    console.log(paymentResponse)
+    return {
+      pg: String(data.payment_method),
+      pay_method: 'card',
+      name: `${orderName}`,
+      merchant_uid: getMerchantUID(paymentResponse.paymentId),
+      amount: Number(paymentResponse.totalAmount + DELIVERY_CHARGE),
+    }
+  },
+})

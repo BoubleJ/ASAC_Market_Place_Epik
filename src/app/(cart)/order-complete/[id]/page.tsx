@@ -5,12 +5,19 @@ import OrderCompleteNavButton from '@/components/feature/orderComplete/orderComp
 
 // export const runtime = 'edge'
 
-export default async function OrderCompletePage() {
+export default async function OrderCompletePage({
+  param,
+  searchParams,
+}: {
+  param: { id: string }
+  searchParams: { orderName: string; memberName: string; paid_amount: string }
+}) {
+  const { orderName, memberName, paid_amount } = searchParams
   return (
     <section className="w-full px-5">
       <OrderCompleteHeader />
-      <OrderCompleteMessage />
-      <OrderCompleteBill />
+      <OrderCompleteMessage memberName={memberName} orderName={orderName} />
+      <OrderCompleteBill totalAmount={paid_amount} />
       <OrderCompleteNavButton />
     </section>
   )

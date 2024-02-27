@@ -8,7 +8,7 @@ const protectedRoutes = [
   '/order',
   '/order-history',
   '/order-detail',
-  '/order-complete',
+  '/order/order-complete',
   '/myPage',
   '/wish',
   '/add-review',
