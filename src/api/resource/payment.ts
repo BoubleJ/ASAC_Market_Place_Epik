@@ -32,7 +32,5 @@ export async function fetchPaymentVerify(body: PaymentVerifyParams) {
 
   const response = await res.json()
   console.log(response)
-  // const result: PaymentVerifyResponse = response.data
-  const result = response.data
-  return result
+  return response
 }

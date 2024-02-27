@@ -8,12 +8,21 @@ export interface IPaymentParams {
   orderId: number
   totalPrice: number
   paymentMethod: PaymentMethodType
-  couponId?: number | null
+  couponId: number | null
 }
 
 export interface PaymentVerifyParams {
   impUid: string
   paymentId: number
+}
+export interface PaymentResponse {
+  success: boolean
+  transactionId: null
+  paymentStatus: string
+  paymentId: number
+  errorCode: null
+  errorMessage: null
+  totalAmount: number
 }
 
 export interface PaymentVerifyResponse {
