@@ -34,21 +34,25 @@ export default function Review({
   }
   // 파라미터 밖에꺼 참조x 외부참조 x 순수함수성 보장 -> ishelpful
   return (
-    <div className="flex flex-col gap-3 w-full h-full">
-      <div className="flex gap-2 items-center">
-        <span className="border px-1 text-body-sm font-normal text-brand-primary-500 border-brand-primary-500 rounded-lg">
+    <div className="flex h-full w-full flex-col gap-3">
+      <div className="flex items-center gap-2">
+        <span className="rounded-lg border border-brand-primary-500 px-1 text-body-sm font-normal text-brand-primary-500">
           멤버
         </span>
         <span className="text-body-sm font-normal">{review.memberName}</span>
       </div>
       {/* <span className=" text-body-xs font-normal text-grayscale-300">{review.itemName}</span> */}
+      {/* <span className="text-body-xs font-normal">{review.imageUrls[0]}</span> */}
+
       <span className="text-body-xs font-normal text-grayscale-300">{itemName}</span>
-      <div className="aspect-square w-1/4 rounded-lg overflow-hidden relative no-scrollbar">
+      <div className="no-scrollbar relative aspect-square w-1/4 overflow-hidden rounded-lg">
         <Image
           alt="review image"
-          // src={image}
-          src={'/images/ricedog.svg'}
+          // src={'image'}
+
+          src={review.imageUrls[0].startsWith('Review Image URL') ? '/images/ricedog.svg' : review.imageUrls[0]}
           fill
+          sizes="50vw, 100vw"
           className=" object-cover"
         />
       </div>
@@ -62,7 +66,7 @@ export default function Review({
           }}
           className={`${
             isHelpful ? 'text-green-400' : 'text-grayscale-400'
-          } flex items-center gap-2 text-sm font-light text-grayscale-400 border rounded-full px-2 py-1`}
+          } flex items-center gap-2 rounded-full border px-2 py-1 text-sm font-light text-grayscale-400`}
         >
           <SvgThumbsUp width={'1.3rem'} height={'1.3rem'} fill="currentColor" />
           <span className="">도움돼요</span>
@@ -70,7 +74,7 @@ export default function Review({
           <span>{helpfulCount}</span>
         </button>
       </div>
-      <div className="pt-3 border-b border-b-grayscale-100"></div>
+      <div className="border-b border-b-grayscale-100 pt-3"></div>
     </div>
   )
 }
