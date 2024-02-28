@@ -8,17 +8,24 @@ import ItemTabs from '@/components/feature/item/ItemTabs'
 
 export const dynamic = 'force-dynamic'
 
-export default async function ItemPage({ params }: { params: { itemId: number } }) {
+export default async function ItemPage({
+  params,
+  searchParams,
+}: {
+  params: { itemId: number }
+  searchParams: { tab: string | null }
+}) {
   const itemData = await fetchItemDetails(params.itemId)
+  console.log(itemData)
   const reviewData = await fetchReviews(params.itemId)
 
   return (
     <>
       <ItemTabs itemId={params.itemId} />
 
-      {<ItemMainInfo itemId={params.itemId} itemData={itemData} />}
-      {<ItemDetailInfo itemId={params.itemId} itemData={itemData} />}
-      {<ItemReview itemId={params.itemId} reviewData={reviewData} />}
+      {<ItemMainInfo tabParam={searchParams.tab} itemData={itemData} />}
+      {<ItemDetailInfo tabParam={searchParams.tab} itemData={itemData} />}
+      {<ItemReview itemId={params.itemId} tabParam={searchParams.tab} reviewData={reviewData} />}
     </>
   )
 }
