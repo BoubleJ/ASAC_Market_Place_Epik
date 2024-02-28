@@ -12,17 +12,14 @@ export async function GET(req: NextRequest) {
     if (hasCookies) {
       requestHeaders.set('Authorization', `Bearer ${authToken}`)
     }
-    console.log('쿠폰 목록 !! Authorization', requestHeaders)
 
     const res = await fetch(`${baseURL}/items/getcouponList`, {
       method: 'GET',
       headers: requestHeaders,
-     
     })
     const response = await res.json()
+    console.log('쿠폰 목록 !! Authorization', response)    
     return NextResponse.json(response)
-
-  
   } catch (error) {
     console.log('couponList 에러', error)
     return NextResponse.json({ msg: 'error' })

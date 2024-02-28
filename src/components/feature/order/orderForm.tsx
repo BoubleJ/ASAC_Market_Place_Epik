@@ -14,7 +14,7 @@ import OrderBill from '@/components/feature/order/orderBill'
 import OrderContainer from '@/components/feature/order/orderContainer'
 import OrderCoupon from '@/components/feature/order/orderCoupon'
 import OrderPaymentButton from '@/components/feature/order/orderPaymentButton'
-import OrderPaymentMethod from '@/components/feature/order/OrderPaymentMethod'
+import { OrderPaymentMethod } from '@/components/feature/order/OrderPaymentMethod'
 import OrderReserves from '@/components/feature/order/orderReserves'
 import OrderShippingRequirement from '@/components/feature/order/orderShippingRequirement'
 import OrderTerms from '@/components/feature/order/orderTerms'
@@ -84,6 +84,7 @@ function OrderForm() {
 
       const body = paymentParamCreator.createPaymentParam()
       const res = await fetchOrdersPayment(body)
+      //body 쿠폰 id,paymenyId 등 담아서 res에 저장
 
       if (res.data.errorMessage) {
         return openCheckModal(res.data.errorMessage)

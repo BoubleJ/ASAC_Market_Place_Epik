@@ -6,7 +6,7 @@ import { AVAILABLE_PG_TYPE } from '@/types/payment'
 
 export const orderFormSchema = z.object({
   // delivery_request
-  // coupon: z.number().optional(),
+  coupon: z.number().optional(),
   delivery_address: z.object({
     address: z.string(),
     zipcode: z.string(),

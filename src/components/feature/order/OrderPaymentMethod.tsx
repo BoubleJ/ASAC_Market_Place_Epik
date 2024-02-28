@@ -7,7 +7,7 @@ import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/comp
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { AVAILABLE_PG_TYPE } from '@/types/payment'
 
-export default function OrderPaymentMethod() {
+export function OrderPaymentMethod() {
   const form = useFormContext()
 
   return (

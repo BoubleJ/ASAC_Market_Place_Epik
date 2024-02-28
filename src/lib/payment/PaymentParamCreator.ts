@@ -19,6 +19,7 @@ export class PaymentParamCreator implements IPaymentParamCreator {
     this.data = data
     this.orderName = orderName
   }
+  //여기 order는 쿠폰 적용 전 가격
 
   createPaymentParam = (): IPaymentParams => {
     return {
@@ -29,6 +30,9 @@ export class PaymentParamCreator implements IPaymentParamCreator {
       // couponId: !this.data.coupon ? null : this.data.coupon,
     }
   }
+  //장바구니 생성 당시 orders 생성. (백엔드에서)
+
+
 
   createPortOnePaymentParam = (): RequestPayParams => {
     return {
@@ -37,6 +41,6 @@ export class PaymentParamCreator implements IPaymentParamCreator {
       name: `${this.orderName}`,
       merchant_uid: getMerchantUID(this.orders.orderId),
       amount: Number(this.orders.totalAmount! + DELIVERY_CHARGE),
-    }
+    } //paymet amount가 들어가야함 
   }
 }
