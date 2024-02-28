@@ -17,7 +17,6 @@ export default function OrderCoupon() {
 
   useEffect(() => {
     fetchCouponList().then((res) => {
-      console.log('쿠폰 출력', res)
       if (res.msg) {
         setErrorMsg(res.msg)
         return
@@ -27,7 +26,7 @@ export default function OrderCoupon() {
   }, [])
 
   const handleSubmit = (coupon: Coupon) => {
-    console.log(coupon)   
+    console.log(coupon)
     setSelectedCoupon(coupon)
   }
 
@@ -46,9 +45,13 @@ export default function OrderCoupon() {
         onClick={openCouponModal}
       >
         <span className="line-clamp-2 px-4 py-3 text-body-base">
-          {!selectedCoupon ? `사용가능 쿠폰 ${coupons.length}장/전체 ${coupons.length}장` : `${selectedCoupon.couponName}`}
+          {!selectedCoupon
+            ? `사용가능 쿠폰 ${coupons.length}장/전체 ${coupons.length}장`
+            : `${selectedCoupon.couponName}`}
         </span>
       </div>
+
+      
     </>
   )
 }

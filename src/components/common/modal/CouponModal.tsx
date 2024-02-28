@@ -20,7 +20,7 @@ export default function CouponModal({ content, onCheck, onCancel }: ICouponModal
 
   useEffect(() => {
     fetchCouponList().then((res) => {
-      console.log('쿠폰 출력', res)
+     
       if (res.msg) {
         setErrorMsg(res.msg)
         return
