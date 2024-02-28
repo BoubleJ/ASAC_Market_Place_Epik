@@ -76,6 +76,7 @@ function OrderForm() {
   }
 
   const onSubmit = async (data: z.infer<typeof FormSchema>) => {
+    console.log(data)
     try {
       if (orders === null || orderName === null) return
       const paymentParamFactory = createPaymentParamFactory(data, orders, orderName)
