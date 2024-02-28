@@ -4,6 +4,7 @@ import { fetchItemDetails, fetchReviews } from '@/api/resource/items'
 import ItemDetailInfo from '@/components/feature/item/ItemDetailInfo'
 import ItemMainInfo from '@/components/feature/item/ItemMainInfo'
 import ItemReview from '@/components/feature/item/ItemReview'
+import ItemTabs from '@/components/feature/item/ItemTabs'
 
 export const dynamic = 'force-dynamic'
 
@@ -13,6 +14,8 @@ export default async function ItemPage({ params }: { params: { itemId: number } 
 
   return (
     <>
+      <ItemTabs itemId={params.itemId} />
+
       {<ItemMainInfo itemId={params.itemId} itemData={itemData} />}
       {<ItemDetailInfo itemId={params.itemId} itemData={itemData} />}
       {<ItemReview itemId={params.itemId} reviewData={reviewData} />}

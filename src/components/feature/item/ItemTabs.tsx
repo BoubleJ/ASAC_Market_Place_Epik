@@ -13,13 +13,13 @@ export default function ItemTabs({ itemId }: { itemId: number }) {
   const param = useSearchParams()
 
   return (
-    <nav className="sticky top-20 text-body-sm bg-white flex justify-around z-10 border-b border-b-grayscale-50">
+    <nav className="sticky top-16 z-10 flex justify-around border-b  border-b-grayscale-50 bg-white pt-1  text-body-sm">
       {navLinks.map((link, index) => (
         <Link
           key={index}
           className={`pb-1 ${
             param.get('tab') === link.tab
-              ? 'text-brand-primary-500 border-b-2 border-brand-primary-500'
+              ? 'border-b-2 border-brand-primary-500 text-brand-primary-500'
               : 'text-grayscale-400'
           }`}
           href={link.tab === null ? `/items/${itemId}` : `/items/${itemId}?tab=${link.tab}`}
