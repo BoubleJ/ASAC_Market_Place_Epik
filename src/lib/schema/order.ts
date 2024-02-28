@@ -5,8 +5,8 @@ import { AVAILABLE_PG_TYPE } from '@/types/payment'
 // const phoneRegex = new RegExp(/^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/)
 
 export const orderFormSchema = z.object({
-  coupon: z.number().nullable().optional(),
   // delivery_request
+  coupon: z.number().nullable().optional(),
   delivery_address: z.object({
     address: z.string(),
     zipcode: z.string(),
