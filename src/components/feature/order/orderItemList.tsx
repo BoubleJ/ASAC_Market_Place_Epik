@@ -1,11 +1,13 @@
+'use client'
+
 import OrderProduct from '@/components/feature/order/orderProduct'
-import { useOrderStore } from '@/store/client/orderSlice'
+import { useOrderStore } from '@/components/provider/OrderStoreProvider'
 import { OrderItem } from '@/types/order'
 
 export default function OrderItemList() {
-  const ordetItems = useOrderStore.getState().orders?.orderItemDtos
+  const ordetItems = useOrderStore((state) => state.orders).orderItemDtos
   return (
-    <div className="flex flex-col justify-start items-start gap-2">
+    <div className="flex flex-col items-start justify-start gap-2">
       {ordetItems?.map((item: OrderItem) => <OrderProduct key={item.itemId} content={item} />)}
     </div>
   )

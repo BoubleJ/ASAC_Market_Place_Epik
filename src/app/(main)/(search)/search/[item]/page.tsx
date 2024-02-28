@@ -1,7 +1,97 @@
-import React from 'react'
+'use client'
 
-import SearchedItemList from '@/components/feature/search/searchResult/SearchedItemList'
+import dynamic from 'next/dynamic'
+import { usePathname } from 'next/navigation'
+import React, { useEffect, useState } from 'react'
 
-export default async function SearchResultPage() {
-  return <SearchedItemList />
+// import { fetchSearchItemsData } from '@/api/resource/search'
+import { fetchSearchItemsData } from '@/api/resource/search'
+import FilterLoading from '@/components/common/loading/FilterLoading'
+import ItemListLoading from '@/components/common/loading/ItemListLoading'
+// import SearchFilter from '@/components/feature/search/SearchFilter'
+import EmptySearchResult from '@/components/feature/search/searchResult/EmptySearchResult'
+import { ContentType } from '@/types/product'
+// import SearchedItemList from '@/components/feature/search/searchResult/SearchedItemList'
+
+const SearchFilter = dynamic(() => import('@/components/feature/search/SearchFilter'), {
+  loading: () => <FilterLoading />,
+})
+const SearchedItemList = dynamic(() => import('@/components/feature/search/searchResult/SearchedItemList'), {
+  loading: () => <ItemListLoading />,
+})
+
+export default function SearchResultPage({
+  params,
+  searchParams,
+}: {
+  params: { item: string }
+  searchParams: {
+    ['카테고리']: string | null
+    ['브랜드']: string | null
+    ['가격']: string | null
+    ['page']: number | null
+  }
+}) {
+  // const page = searchParams?.['page']
+  const [productList, setProductList] = useState<ContentType>([])
+  const [totalPage, setTotalPage] = useState<number>(0)
+
+  const decodedItem = decodeURIComponent(params.item)
+  //
+  const brandParams = searchParams?.['브랜드']
+  const priceParams = searchParams?.['가격']
+  const categoryParams = searchParams?.['카테고리']
+  const searchword = decodeURIComponent(usePathname().split('/')[2])
+
+  // useEffect(() => {
+  //   fetchSearchItemsData(searchword, categoryParams, brandParams, priceParams)
+  //     .then((data) => {
+  //       setProductList(data.items.content.length)
+  //     })
+  //     .catch((error) => {
+  //       console.error('data fetch 실패', error)
+  //     })
+  // }, [categoryParams, brandParams, priceParams, searchword])
+  // -----------------------------
+  // let isSearchResultEmpty = false
+
+  // const isSearchResultEmpty = await fetchIsEmpty(decodedItem)
+  // const searchedItems = await fetchSearchItemsData(decodedItem, categoryParams, brandParams, priceParams, page)
+
+  useEffect(() => {
+    console.log(categoryParams, '카테고리 파람 change -> 리패치')
+    fetchSearchItemsData(searchword, categoryParams, brandParams, priceParams, 0)
+      .then(({ content, totalPages }) => {
+        setProductList(content)
+        setTotalPage(totalPages)
+
+        // setIsLoading(false)
+      })
+
+      .catch((error) => {
+        console.error('data fetch 실패', error)
+      })
+  }, [categoryParams, brandParams, priceParams, searchword])
+
+  return (
+    <>
+      {productList.length === 0 ? (
+        <EmptySearchResult />
+      ) : (
+        <div>
+          <SearchFilter itemLength={productList.length} searchWord={decodedItem} />
+          <SearchedItemList
+            initialProductList={productList}
+            params={{
+              categoryParams,
+              brandParams,
+              priceParams,
+              searchword,
+            }}
+            totalPage={totalPage}
+          />
+        </div>
+      )}
+    </>
+  )
 }

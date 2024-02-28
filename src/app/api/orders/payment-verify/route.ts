@@ -6,7 +6,6 @@ import { baseURL } from '@/api/util/instance'
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
-    console.log(body)
     const requestHeaders = new Headers(req.headers)
 
     const authToken = cookies().get('AUTH_TOKEN')?.value
@@ -25,7 +24,7 @@ export async function POST(req: NextRequest) {
     if (!res.ok) {
       console.log('Failed to get payment verification', res.status)
       const msg = await res.json()
-      return NextResponse.json({ msg })
+      return NextResponse.json(msg)
     }
 
     const response = await res.json()

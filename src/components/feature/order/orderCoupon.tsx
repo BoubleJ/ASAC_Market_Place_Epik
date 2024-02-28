@@ -2,10 +2,13 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { useFormContext } from 'react-hook-form'
 
 import { fetchCouponList } from '@/api/resource/coupon'
 import CouponModal from '@/components/common/modal/CouponModal'
+import OrderContainer from '@/components/feature/order/orderContainer'
 import { useModalState } from '@/components/provider/modalProvider'
+import { OrderFormInterface } from '@/lib/schema/order'
 import { Coupon } from '@/types/coupon'
 
 export default function OrderCoupon() {
@@ -35,9 +38,11 @@ export default function OrderCoupon() {
     state.modalRef.current?.showModal()
   }
 
+  const form = useFormContext<OrderFormInterface>()
+
   return (
-    <>
-      <div className="mb-[15px]">
+    <OrderContainer>
+      <div className="mb-[15px] ">
         <span className="text-body-base">쿠폰</span>
       </div>
       <div
@@ -50,8 +55,32 @@ export default function OrderCoupon() {
             : `${selectedCoupon.couponName}`}
         </span>
       </div>
-
-      
-    </>
+      {/* <FormField
+        control={form.control}
+        name="coupon"
+        render={({ field }) => (
+          <FormItem className="space-y-3">
+            <FormLabel className="mb-[15px] text-body-base">쿠폰</FormLabel>
+            <FormField
+              control={form.control}
+              name="coupon"
+              render={({ field }) => (
+                <FormItem className="flex items-center justify-between ">
+                  <FormControl>
+                    <Input
+                      type="text"
+                      placeholder={`사용가능 쿠폰 0장/전체 0장`}
+                      className="line-clamp-2 rounded-md border-2 border-gray-200 bg-grayscale-50 px-4 py-3 text-body-base text-grayscale-200"
+                      value={field.value || ''}
+                      onChange={field.onChange}
+                    />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+          </FormItem>
+        )}
+      /> */}
+    </OrderContainer>
   )
 }

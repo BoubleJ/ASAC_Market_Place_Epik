@@ -25,7 +25,7 @@ export async function POST(req: NextRequest) {
     if (!res.ok) {
       console.log('Failed to get payment', res.status)
       const msg = await res.json()
-      return NextResponse.json({ msg })
+      return NextResponse.json(msg)
     }
 
     const response = await res.json()
@@ -33,6 +33,6 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json(response)
   } catch (error) {
-    return NextResponse.json({ msg: '결제 진행을 실패했습니다' })
+    return NextResponse.json('결제 진행을 실패했습니다')
   }
 }

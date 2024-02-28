@@ -12,11 +12,21 @@ export async function fetchCategory() {
   return res.json()
 }
 
-export async function fetchCategoryItems(categoryName: string, brandParams: string | null, priceParams: string | null) {
+export async function fetchCategoryItems(
+  categoryName: string,
+  brandParams: string | null,
+  priceParams: string | null,
+  page: number | null,
+) {
   const res = await fetch(
     `${baseLocalURL}/search/complexitem?categoryName=${categoryName}${brandParams ? `&brand=${brandParams}` : ''}${
       priceParams ? `&priceRange=${priceParams}` : ''
-    }`,
+    }${page ? `&page=${page}` : ''}`,
+  )
+  console.log(
+    `${baseLocalURL}/search/complexitem?categoryName=${categoryName}${brandParams ? `&brand=${brandParams}` : ''}${
+      priceParams ? `&priceRange=${priceParams}` : ''
+    }${page ? `&page=${page}` : ''}`,
   )
 
   // if (!res.ok) {
@@ -26,7 +36,9 @@ export async function fetchCategoryItems(categoryName: string, brandParams: stri
     return { items: { content: [] } }
   }
 
-  return res.json()
+  const data = await res.json()
+
+  return { content: data.items.content, totalPages: data.items.totalPages }
 }
 
 export async function fetchCategoryFilterData(categoryName: string) {

@@ -5,17 +5,26 @@ export async function fetchSearchItemsData(
   categoryParams: string | null,
   brandParams: string | null,
   priceParams: string | null,
+  page: number | null,
 ) {
   const res = await fetch(
     `${baseLocalURL}/search/complexitem?name=${searchWord}${categoryParams ? `&categoryName=${categoryParams}` : ''}${
       brandParams ? `&brand=${brandParams}` : ''
-    }${priceParams ? `&priceRange=${priceParams}` : ''}`,
+    }${priceParams ? `&priceRange=${priceParams}` : ''}${page ? `&page=${page}` : ''}`,
+  )
+  console.log(`&page=${page}`)
+  console.log(
+    `${baseLocalURL}/search/complexitem?name=${searchWord}${categoryParams ? `&categoryName=${categoryParams}` : ''}${
+      brandParams ? `&brand=${brandParams}` : ''
+    }${priceParams ? `&priceRange=${priceParams}` : ''}${`&page=${page}`}`,
   )
 
   if (!res.ok) {
     throw new Error('Failed to fetch data')
   }
-  return await res.json()
+  const data = await res.json()
+
+  return { content: data.items.content, totalPages: data.items.totalPages }
 }
 
 export async function fetchIsEmpty(searchWord: string) {

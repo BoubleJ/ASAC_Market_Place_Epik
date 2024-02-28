@@ -45,3 +45,15 @@ const DUMMY_URL_LIST = ['http://myshop.com', 'http://example.com', 'http://sales
 export function checkDummyImageUrl(url: string) {
   return DUMMY_URL_LIST.some((path) => url.startsWith(path))
 }
+
+export const curry = (fn: (...args: any[]) => any) => {
+  return function curried(...args: any[]): any {
+    if (fn.length !== args.length) {
+      return curried.bind(null, ...args)
+    }
+    return fn(...args)
+  }
+}
+// const total = (x: number, y: number, z: number) => x + y + z
+// const curriedTotal = curry(total)
+// console.log(curriedTotal(10)(20)(30))

@@ -1,9 +1,10 @@
 'use client'
 import Image from 'next/image'
 import { useRouter, useSearchParams } from 'next/navigation'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
+import { getPresignedURL } from '@/api/resource/review'
 import SvgIconPlusMono from '@/components/icons/icon-plus-mono'
 import { Button } from '@/components/ui/button'
 
@@ -12,7 +13,11 @@ export default function AddReviewPage() {
   const params = useSearchParams()
   const itemId = params.get('itemId')
   const itemName = params.get('itemName')
-  const imgRef = useRef<HTMLInputElement>(null)
+  const [imagePreviews, setImagePreviews] = useState<string[]>([])
+  const [presignedURLs, setPresignedURLs] = useState<string[]>([])
+  const [imageURLs, setImageURLs] = useState<string[]>([])
+  const [isLoading, setIsLoading] = useState(false)
+
   const {
     register,
     handleSubmit,
@@ -20,18 +25,38 @@ export default function AddReviewPage() {
     watch,
     formState: { errors },
   } = useForm()
-  const [imagePreviews, setImagePreviews] = useState<string[]>([])
 
   const images = watch('images', [])
 
-  useEffect(() => {
-    setImagePreviews(images.map((file: File) => URL.createObjectURL(file)))
-  }, [images])
+  const uploadImage = async (presignedURL: string, imageFile: File | null) => {
+    try {
+      const fileUpload = await fetch(presignedURL, {
+        method: 'PUT',
+        body: imageFile,
+      })
+      console.log(fileUpload, '!!!!!!!!')
+    } catch (error) {
+      console.error(error, '이미지 업로드 실팽이팽이')
+    }
+  }
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
+      if (images.length + e.target.files.length > 5) {
+        console.log('이미지를 5장 초과하여 업로드할 수 없습니다.')
+        return
+      }
+
+      const fileName = e.target.files.item(0)!.name
       const newImages = Array.from(e.target.files)
+      const presignedURL = await getPresignedURL(fileName)
+      const imageURL = `https://asac-marketplace-s3.s3.ap-northeast-2.amazonaws.com/${fileName}`
+
+      setPresignedURLs((prevURLs) => [...prevURLs, presignedURL.msg])
+      setImageURLs((prevURLs) => [...prevURLs, encodeURI(imageURL)])
+
       setValue('images', [...images, ...newImages])
+      setImagePreviews([...imagePreviews, ...newImages.map((file: File) => URL.createObjectURL(file))])
     }
   }
 
@@ -40,40 +65,35 @@ export default function AddReviewPage() {
       'images',
       images.filter((_: any, i: number) => i !== index),
     )
+    setImagePreviews(imagePreviews.filter((_: any, i: number) => i !== index))
   }
 
   const send = async (data: Record<string, any>) => {
-    const formData = new FormData()
-    console.log(itemId, 'id!!!!!!!!!!!!!!!')
+    setIsLoading(true)
 
-    // 리뷰
-    formData.append(
-      'review',
-      JSON.stringify({
-        memberId: 1,
-        itemId: itemId,
-        comment: data.content,
-        imageUrls: [],
-      }),
-    )
-
-    // 리뷰이미지
-    data.images.forEach((file: File) => {
-      formData.append('reviewImages', file)
+    data.images.forEach((file: File, index: number) => {
+      uploadImage(presignedURLs[index], file)
     })
 
-    console.log('FormData:', formData.getAll('reviewImages'))
-    console.log('FormData:', formData.get('review'))
+    const reviewData = JSON.stringify({
+      memberId: 1,
+      itemId: parseInt(itemId!),
+      comment: data.content,
+      rating: 0,
+      imageUrls: imageURLs,
+    })
 
     try {
       const response = await fetch('/api/addReview', {
         method: 'POST',
-        body: formData,
+        body: reviewData,
       })
       // 에러 처리 추가
       router.push('/myPage')
     } catch (error) {
       console.error('error fetching addreview ', error)
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -131,7 +151,7 @@ export default function AddReviewPage() {
               type="file"
               id="file"
               name="cardImg"
-              ref={imgRef}
+              // ref={imgRef}
               className="opacity-0 h-full w-full border-2"
               onChange={handleFileChange}
               multiple
@@ -148,9 +168,15 @@ export default function AddReviewPage() {
         </div>
 
         <div className="fixed bottom-0 p-4 left-1/2 -translate-x-1/2 w-96 h-20 bg-white">
-          <Button type="submit" variant={'primary'} className="w-full h-full">
-            등록하기
-          </Button>
+          {isLoading ? (
+            <div className="flex items-center justify-center w-full h-full">
+              <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-primary"></div>
+            </div>
+          ) : (
+            <Button type="submit" variant={'primary'} className="w-full h-full">
+              등록하기
+            </Button>
+          )}
         </div>
       </form>
     </div>

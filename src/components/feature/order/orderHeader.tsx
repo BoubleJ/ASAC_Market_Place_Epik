@@ -10,7 +10,7 @@ export default function OrderHeader() {
   return (
     <Header
       left={<ChevronLeft width={'1.5rem'} height={'1.5rem'} onClick={() => router.back()} className="fill-white" />}
-      center={<span className="text-center text-grayscale-800 text-body-lg">주문서</span>}
+      center={<span className="text-center text-body-lg text-grayscale-800">주문서</span>}
     />
   )
 }

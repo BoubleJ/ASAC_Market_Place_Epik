@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import { useFormContext } from 'react-hook-form'
 
+import OrderContainer from '@/components/feature/order/orderContainer'
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { AVAILABLE_PG_TYPE } from '@/types/payment'
@@ -11,7 +12,7 @@ export function OrderPaymentMethod() {
   const form = useFormContext()
 
   return (
-    <>
+    <OrderContainer>
       <FormField
         control={form.control}
         name="payment_method"
@@ -52,7 +53,7 @@ export function OrderPaymentMethod() {
           </FormItem>
         )}
       />
-    </>
+    </OrderContainer>
   )
 }
 
