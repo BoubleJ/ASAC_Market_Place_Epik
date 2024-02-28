@@ -5,22 +5,22 @@ import { Button } from '@/components/ui/button'
 
 import FilterBottomSheetHeader from './FilterBottomSheetHeader'
 import FilterBottomSheetOptions from './FilterBottomSheetOptions'
-import { AppliedFilterType, FilterType } from './Filters'
+import { AppliedFilterType, FilterDataType } from './Filters'
 
 interface FilterBottomSheetProps {
-  filters: FilterType
+  filters: FilterDataType
   appliedFilters: AppliedFilterType
-  clickedFilter: keyof FilterType
+  clickedFilter: keyof FilterDataType
   onClose: () => void
 }
 
 export default function FilterBottomSheet({ filters, appliedFilters, clickedFilter, onClose }: FilterBottomSheetProps) {
   const router = useRouter()
   const pathname = usePathname()
-  const [selectedFilter, setSelectedFilter] = useState<keyof FilterType>(clickedFilter)
+  const [selectedFilter, setSelectedFilter] = useState<keyof FilterDataType>(clickedFilter)
   const [selectedFilters, setSelectedFilters] = useState<AppliedFilterType>(appliedFilters)
 
-  const handleFilterChange = (filterKey: keyof FilterType) => {
+  const handleFilterChange = (filterKey: keyof FilterDataType) => {
     setSelectedFilter(filterKey)
   }
 
@@ -28,16 +28,16 @@ export default function FilterBottomSheet({ filters, appliedFilters, clickedFilt
     console.log(`${option} checked!`)
     const updatedFilters = getUpdatedFilters(selectedFilters, selectedFilter, option)
     setSelectedFilters(updatedFilters)
+    console.log('updateFilters!!!!!!!', updatedFilters)
   }
 
   const getUpdatedFilters = (
     selectedFilters: AppliedFilterType,
-    filterName: keyof FilterType,
+    filterName: keyof FilterDataType,
     option: string,
   ): AppliedFilterType => {
     const filterOptions = selectedFilters[filterName]
-
-    if (filterName === '가격') {
+    if (filterName === 'priceRange') {
       // '가격'인 경우에는 라디오 버튼처럼 작동
       return { ...selectedFilters, [filterName]: [option] }
     }
@@ -61,7 +61,7 @@ export default function FilterBottomSheet({ filters, appliedFilters, clickedFilt
       .map(([filterKey, selectedOptions]) => `${filterKey}=${selectedOptions.join(',')}`)
       .join('&')
     //queryParams is like {카테고리: '소설,태블릿,스마트폰', 브랜드: '구글,애플', 가격: '0~10000'}
-    console.log(queryParams)
+    console.log(queryParams, '쿼리 파라아아아아아ㅏ암ㅈ브')
 
     router.push(`${pathname}?${queryParams}`)
   }

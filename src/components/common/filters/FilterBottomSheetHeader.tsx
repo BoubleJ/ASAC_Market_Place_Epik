@@ -1,31 +1,31 @@
 import React from 'react'
 
-import { FilterType } from './Filters'
+import { FilterDataType, filterName } from './Filters'
 
 export default function FilterBottomSheetHeader({
   filters,
   selectedFilter,
   handleFilterChange,
 }: {
-  filters: FilterType
-  selectedFilter: keyof FilterType
-  handleFilterChange: (filterKey: keyof FilterType) => void
+  filters: FilterDataType
+  selectedFilter: keyof FilterDataType
+  handleFilterChange: (filterKey: keyof FilterDataType) => void
 }) {
   return (
-    <div className="px-6 sticky top-0 bg-white">
+    <div className="sticky top-0 bg-white px-6">
       <div className="pt-5 text-headline3">필터</div>
-      <div className="pt-3 bg-white flex my-3 gap-5 text-sm font-semibold border-b border-gray-200">
-        {Object.keys(filters).map((key) => (
+      <div className="my-3 flex gap-5 border-b border-gray-200 bg-white pt-3 text-sm font-semibold">
+        {(Object.keys(filters) as Array<keyof FilterDataType>).map((key) => (
           <button
             className={`pb-2 ${
               key === selectedFilter
-                ? 'text-brand-primary-500 border-b-2 border-brand-primary-500'
+                ? 'border-b-2 border-brand-primary-500 text-brand-primary-500'
                 : 'text-grayscale-400'
             } `}
             key={key}
-            onClick={() => handleFilterChange(key as keyof FilterType)}
+            onClick={() => handleFilterChange(key as keyof FilterDataType)}
           >
-            {key}
+            {filterName[key]}
           </button>
         ))}
       </div>

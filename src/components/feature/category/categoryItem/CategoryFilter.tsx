@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react'
 
 import { fetchCategoryFilterData } from '@/api/resource/category'
-import Filters from '@/components/common/filters/Filters'
+import Filters, { FilterDataType } from '@/components/common/filters/Filters'
 
 export default function CategoryFilter({
   itemLength,
@@ -12,7 +12,12 @@ export default function CategoryFilter({
   itemLength: number
   categoryNameParam: string
 }) {
-  const [filterData, setFilterData] = useState({ categoryCounts: {}, brandCounts: {}, priceRange: [] })
+  const [filterData, setFilterData] = useState<FilterDataType>({
+    categoryCounts: {},
+    brandCounts: {},
+    promotionCounts: {},
+    priceRange: [],
+  })
 
   useEffect(() => {
     fetchCategoryFilterData(categoryNameParam).then((data) => {
@@ -20,18 +25,9 @@ export default function CategoryFilter({
     })
   }, [categoryNameParam])
 
-  const categoryCounts = filterData.categoryCounts
-  const brandCounts = filterData.brandCounts
-  const priceRange = filterData.priceRange
   return (
     <>
-      <Filters
-        totalEliments={itemLength}
-        categoryCounts={categoryCounts}
-        brandCounts={brandCounts}
-        priceRange={priceRange}
-        stickyLocation={'top-28'}
-      />
+      <Filters totalEliments={itemLength} stickyLocation={'top-28'} filterData={filterData} />
     </>
   )
 }

@@ -24,10 +24,9 @@ export default function SearchResultPage({
 }: {
   params: { item: string }
   searchParams: {
-    ['카테고리']: string | null
-    ['브랜드']: string | null
-    ['가격']: string | null
-    ['page']: number | null
+    ['categoryCounts']: string | null
+    ['brandCounts']: string | null
+    ['priceRange']: string | null
   }
 }) {
   // const page = searchParams?.['page']
@@ -37,9 +36,9 @@ export default function SearchResultPage({
 
   const decodedItem = decodeURIComponent(params.item)
   //
-  const brandParams = searchParams?.['브랜드']
-  const priceParams = searchParams?.['가격']
-  const categoryParams = searchParams?.['카테고리']
+  const brandParams = searchParams?.['brandCounts']
+  const priceParams = searchParams?.['priceRange']
+  const categoryParams = searchParams?.['categoryCounts']
   const searchword = decodeURIComponent(usePathname().split('/')[2])
 
   useEffect(() => {

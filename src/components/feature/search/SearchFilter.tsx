@@ -3,29 +3,24 @@
 import React, { useEffect, useState } from 'react'
 
 import { fetchFilterData } from '@/api/resource/search'
-import Filters from '@/components/common/filters/Filters'
+import Filters, { FilterDataType } from '@/components/common/filters/Filters'
 
-export default function CategoryFilter({ itemLength, searchWord }: { itemLength: number; searchWord: string }) {
-  const [filterData, setFilterData] = useState({ categoryCounts: {}, brandCounts: {}, priceRange: [] })
-
+export default function SearchFilter({ itemLength, searchWord }: { itemLength: number; searchWord: string }) {
+  const [filterData, setFilterData] = useState<FilterDataType>({
+    categoryCounts: {},
+    brandCounts: {},
+    promotionCounts: {},
+    priceRange: [],
+  })
   useEffect(() => {
     fetchFilterData(searchWord).then((data) => {
       setFilterData(data)
     })
   }, [searchWord])
 
-  const categoryCounts = filterData.categoryCounts
-  const brandCounts = filterData.brandCounts
-  const priceRange = filterData.priceRange
   return (
     <>
-      <Filters
-        totalEliments={itemLength}
-        categoryCounts={categoryCounts}
-        brandCounts={brandCounts}
-        priceRange={priceRange}
-        stickyLocation={'top-16'}
-      />
+      <Filters totalEliments={itemLength} stickyLocation={'top-16'} filterData={filterData} />
     </>
   )
 }

@@ -23,7 +23,7 @@ export default function SearchedItemList({ initialProductList, params, totalPage
   useEffect(() => {
     if (page !== 0) {
       fetchSearchItemsData(params.searchword, params.categoryParams, params.brandParams, params.priceParams, page)
-        .then(({ content, totalPages }) => {
+        .then(({ content }) => {
           setProductList((prevProductList) => [...prevProductList, ...content])
         })
 
@@ -40,8 +40,7 @@ export default function SearchedItemList({ initialProductList, params, totalPage
       console.log(page, totalPage, '!!!!!!!!!!!!')
       setPage((prevPage) => prevPage + 1)
     }
-  }, [])
-
+  }, [page, totalPage])
   const observer = useRef<IntersectionObserver | null>(null)
   const lastProductElementRef = useCallback(
     (node: HTMLElement | null) => {

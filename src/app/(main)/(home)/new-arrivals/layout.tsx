@@ -7,20 +7,12 @@ import NewArrivalButton from '@/components/feature/newArrivals/NewArrivalButton'
 
 export default async function NewArrivalsLayout({ children }: { children: React.ReactNode }) {
   const filterData = await fetchNewArrivalsFilterData()
-  const categoryCounts = filterData.categoryCounts
-  const brandCounts = filterData.brandCounts
-  const priceRange = filterData.priceRange
+
   return (
     <div className="relative flex flex-col">
       <EventBanner />
       <NewArrivalButton />
-      <Filters
-        totalEliments={0}
-        categoryCounts={categoryCounts}
-        brandCounts={brandCounts}
-        priceRange={priceRange}
-        stickyLocation={'top-24'}
-      />
+      <Filters totalEliments={0} stickyLocation={'top-24'} filterData={filterData} />
       {children}
     </div>
   )
