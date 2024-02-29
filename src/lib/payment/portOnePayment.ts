@@ -27,7 +27,7 @@ export const createPaymentParamFactory = (data: OrderFormInterface, orders: IOrd
       orderId: orders.orderId,
       totalPrice: orders.totalAmount,
       paymentMethod: data.payment_method,
-      couponId: null,
+      couponId: !data.coupon ? null : Number(data.coupon),
     }
   },
   getProtOneRequestParam: (paymentResponse: PaymentResponse): RequestPayParams => {
