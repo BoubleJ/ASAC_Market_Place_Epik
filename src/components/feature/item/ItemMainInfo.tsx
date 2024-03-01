@@ -67,7 +67,7 @@ export default function ItemMainInfo({ itemId, itemData }: { itemId: number; ite
             >
               10% 쿠폰 받기
             </button>
-            {/* modal  */}
+         
             <div className="border-b border-gray-200 py-1" id="seller"></div>
             <div className="grid grid-cols-4 place-content-start gap-y-1 pt-4 text-body-xs text-grayscale-400">
               <div className="col-span-1 text-left">배송</div>
