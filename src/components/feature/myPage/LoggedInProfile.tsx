@@ -4,8 +4,7 @@ import { memberType } from '@/app/(main)/(myPage)/myPage/page'
 import { Button } from '@/components/ui/button'
 
 export default function LoggedInProfile({ member }: { member: memberType }) {
-  console.log(member.memberGrade === 'BRONZE')
-
+ 
   return (
     <div>
       <div className="flex items-center gap-4 ">

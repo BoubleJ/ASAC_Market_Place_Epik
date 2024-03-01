@@ -3,14 +3,30 @@
     "title": "notice",
     "filterTitle": "TOP공지",
     "body": [
-      { "Id": 0, "Question": "교환(반품) 진행 시, 배송비가 부과되나요?", "Answer": "네" },
-      { "Id": 1, "Question": "선물하기 주문을 취소하고 싶어요", "Answer": "아니오" },
-      { "Id": 2, "Question": "포장재를 회수하기도 하나요?", "Answer": "네" },
-      { "Id": 3, "Question": "아이디, 비밀번호를 잊어버렸습니다", "Answer": "네" },
-      { "Id": 4, "Question": "적립금은 언제 지급되나요?", "Answer": "아니오" },
-      { "Id": 5, "Question": "컬리앱이 켜지지 않아요", "Answer": "아니오" },
-      { "Id": 6, "Question": "이벤트 문자는 오는데, 배송완료 문자만 오지 않습니다", "Answer": "아니오" },
-      { "Id": 7, "Question": "상품 불량인 경우, 교환(반품) 기준이 궁금합니다", "Answer": "아니오" }
+      {
+        "Id": 0,
+        "Question": "교환(반품) 진행 시, 배송비가 부과되나요?",
+        "Answer": "단순변심에 의한 교환/반품 시 배송비 6,000원을 고객님께서 부담하셔야합니다."
+      },
+      { "Id": 1, "Question": "선물하기 주문을 취소하고 싶어요", "Answer": "고객센터 문의 바랍니다." },
+      {
+        "Id": 2,
+        "Question": "포장재를 회수하기도 하나요?",
+        "Answer": "수도권 샛별배송지역에 한해서 일부 포장재의 회수 서비스를 진행하고 있습니다."
+      },
+      { "Id": 3, "Question": "아이디, 비밀번호를 잊어버렸습니다", "Answer": "아이디, 비밀번호 찾기 안내" },
+      { "Id": 4, "Question": "적립금은 언제 지급되나요?", "Answer": "상품 수령 후 약 3일 소요될 예정입니다." },
+      { "Id": 5, "Question": "컬리앱이 켜지지 않아요", "Answer": "앱 삭제 후 다시 설치해보시길 바랍니다." },
+      {
+        "Id": 6,
+        "Question": "이벤트 문자는 오는데, 배송완료 문자만 오지 않습니다",
+        "Answer": "앱 삭제 후 다시 설치해보시길 바랍니다."
+      },
+      {
+        "Id": 7,
+        "Question": "상품 불량인 경우, 교환(반품) 기준이 궁금합니다",
+        "Answer": "제품 개봉 시 교환(반품)이 어렵습니다."
+      }
     ]
   },
 
@@ -18,84 +34,82 @@
     "title": "member",
     "filterTitle": "회원",
     "body": [
-      { "Id": 0, "Question": "부과되나멤버멤ㅁ버송흔멍요?", "Answer": "네" },
-      { "Id": 1, "Question": "선물하기 주문을 취소하고 싶어요", "Answer": "아니오" },
-      { "Id": 2, "Question": "하나요?", "Answer": "네" },
-      { "Id": 3, "Question": "아이디, 비밀번호를 잊어버렸습니다", "Answer": "네" },
-      { "Id": 4, "Question": "적립되나요?", "Answer": "아니오" },
-      { "Id": 5, "Question": "컬리앱이 켜지지 않아요", "Answer": "아니오" },
-      { "Id": 6, "Question": "이벤트 문자는 오는데, 배송완료 문자만 오지 않습니다", "Answer": "아니오" },
-      { "Id": 7, "Question": "상품 불량인 경우, 교환(반품) 기준이 궁금합니다", "Answer": "아니오" }
+      { "Id": 0, "Question": "아이디, 비밀번호를 잊어버렸습니다", "Answer": "네" },
+      {
+        "Id": 1,
+        "Question": "다시 휴면 계정으로 전환은 불가한가요?",
+        "Answer": "아니오"
+      },
+      { "Id": 2, "Question": "개명을 하여 회원정보의 이름을 바꾸고 싶습니다.", "Answer": "네" },
+      { "Id": 3, "Question": "회원정보를 바꾸고 싶습니다.", "Answer": "네" },
+      { "Id": 4, "Question": "회원 가입시 어떠한 혜택이 있나요?", "Answer": "아니오" },
+      { "Id": 5, "Question": "회원가입에 제한이 있나요?", "Answer": "아니오" },
+      {
+        "Id": 6,
+        "Question": "회원 탈퇴를 하고 싶습니다.",
+        "Answer": "아니오"
+      },
+      { "Id": 7, "Question": "회원 탈퇴 후, 재가입이 가능한가요?", "Answer": "아니오" }
     ]
   },
   {
     "title": "item",
     "filterTitle": "상품",
     "body": [
-      { "Id": 0, "Question": "부과아이템 상품백택배요?", "Answer": "네" },
-      { "Id": 1, "Question": "선물하기 주 싶어요", "Answer": "아니오" },
-      { "Id": 2, "Question": "하나요?", "Answer": "네" },
-      { "Id": 3, "Question": "fsdaf버렸습니다", "Answer": "네" },
-      { "Id": 4, "Question": "적립되나요?", "Answer": "아니오" },
-      { "Id": 5, "Question": "컬리앱 않아요", "Answer": "아니오" },
-      { "Id": 6, "Question": "이벤fsaf 오는데, 배송fds만 오지 않습니다", "Answer": "아니오" },
-      { "Id": 7, "Question": "상fdsa교환(반품) 기준이 궁금합니다", "Answer": "아니오" }
+      { "Id": 0, "Question": "(주류) 성인인증이 자꾸 실패합니다.", "Answer": "네" },
+      { "Id": 1, "Question": "친환경/유기농/무농약이 어떻게 다른가요?", "Answer": "아니오" },
+      { "Id": 2, "Question": "예약 상품은 어떻게 구매가 진행되나요?", "Answer": "네" },
+      { "Id": 3, "Question": "호텔/리조트 예약 상품은 어떻게 이용하나요?", "Answer": "네" },
+      { "Id": 4, "Question": "대형/설치 가전은 어떻게 구매하나요?", "Answer": "아니오" },
+      { "Id": 5, "Question": "(주류) 개인정보가 왜 관할 세무서에 제공되나요?", "Answer": "아니오" },
+      { "Id": 6, "Question": "(주류) 막걸리가 약간 새어나옵니다.", "Answer": "아니오" },
+      { "Id": 7, "Question": "(주류) 주류 상품은 어디서 찾을 수 있나요?", "Answer": "아니오" }
     ]
   },
   {
     "title": "order",
     "filterTitle": "주문/결제/대량주문",
     "body": [
-      { "Id": 0, "Question": "부과fsdfa 주문결제여ㅑㅇㄹㅇs요?", "Answer": "네" },
-      { "Id": 1, "Question": "선물하dfsf기 주 싶어요", "Answer": "아니오" },
-      { "Id": 2, "Question": "하나요?", "Answer": "네" },
-      { "Id": 3, "Question": "fsdafaaa버렸습니다", "Answer": "네" },
-      { "Id": 4, "Question": "적립sss되나요?", "Answer": "아니오" },
-      { "Id": 5, "Question": "컬리앱 dfasf않아요", "Answer": "아니오" },
-      { "Id": 6, "Question": "이벤fsaf 오는데, 배송fds만 오지 않습니다", "Answer": "아니오" },
-      { "Id": 7, "Question": "상fdsa교환(반품) 기준이 궁금합니다", "Answer": "아니오" }
+      { "Id": 0, "Question": "주문 시 배송비가 부과되나요?", "Answer": "네" },
+      { "Id": 1, "Question": "전화로 주문 할 수 있나요?", "Answer": "아니오" },
+      { "Id": 2, "Question": "조금전 구매한 주문건의 수령자 정보를 바꾸고 싶어요.", "Answer": "네" },
+      { "Id": 3, "Question": "주문이 안됩니다.", "Answer": "네" },
+      { "Id": 4, "Question": "대량주문은 어떤 식으로 주문하나요?", "Answer": "아니오" },
+      { "Id": 5, "Question": "주문 완료 후에 문자로 알람이 오나요?", "Answer": "아니오" },
+      { "Id": 6, "Question": "제가 해외에 살고 있는데 주문 가능하나요?", "Answer": "아니오" },
+      { "Id": 7, "Question": "대량주문은 무엇인가요?", "Answer": "아니오" }
     ]
   },
   {
     "title": "delivery",
     "filterTitle": "배송",
     "body": [
-      { "Id": 0, "Question": "부과되나요>???요?", "Answer": "네" },
-      { "Id": 1, "Question": "선물하기 주 싶어요", "Answer": "아니오" },
-      { "Id": 2, "Question": "하나요캬캬캬캬캬캬컄?", "Answer": "네" },
-      { "Id": 3, "Question": "fsdaf버렸습니다", "Answer": "네" },
-      { "Id": 4, "Question": "적립되나요?", "Answer": "아니오" },
-      { "Id": 5, "Question": "컬리앱 않아어림너라ㅣ너ㅣㅏ요", "Answer": "아니오" },
-      { "Id": 6, "Question": "이벤fsaf 오는데, 배송fds만 오지 않습니다", "Answer": "아니오" },
-      { "Id": 7, "Question": "상fdsa교환(반품) 기준이 궁금합니다", "Answer": "아니오" }
+      { "Id": 0, "Question": "샛별/하루배송(택배)이 무엇인가요?", "Answer": "네" },
+      { "Id": 1, "Question": "오늘 주문한 상품은 언제 배송 되나요?", "Answer": "아니오" },
+      { "Id": 2, "Question": "공동현관이 있는데 어떻게 배송기사님이 출입하나요?", "Answer": "네" },
+      { "Id": 3, "Question": "이 주소지가 배송 가능한지 궁금합니다.", "Answer": "네" },
+      {
+        "Id": 4,
+        "Question": "판매자 배송이 무엇이죠?",
+        "Answer": "아니오"
+      },
+      { "Id": 5, "Question": "새벽에 배송 후에 배송완료 문자를 주나요?", "Answer": "아니오" },
+      { "Id": 6, "Question": "배송지역 검색 시, 배송 불가지역으로 조회 됩니다.", "Answer": "아니오" },
+      { "Id": 7, "Question": "택배배송 주문마감 시간이 변동 될 수 있나요?", "Answer": "아니오" }
     ]
   },
   {
     "title": "packing",
     "filterTitle": "포장",
     "body": [
-      { "Id": 0, "Question": "부과하뇽어라엉요?", "Answer": "네" },
-      { "Id": 1, "Question": "선물하ㄹㅇㄴㅁ라주고기 주 싶어요", "Answer": "아니오" },
-      { "Id": 2, "Question": "하나요?", "Answer": "네" },
-      { "Id": 3, "Question": "fsdaf버렸습니다", "Answer": "네" },
-      { "Id": 4, "Question": "적립되나요?", "Answer": "아니오" },
-      { "Id": 5, "Question": "컬리앱안ㄷㄻㄴ러ㅏㅣㅇㄴ머루 않아요", "Answer": "아니오" },
-      { "Id": 6, "Question": "이벤fsaf 오는데, 배송fds만 오지 않습니다", "Answer": "아니오" },
-      { "Id": 7, "Question": "상fdsa교환(반품) 기준이 궁금합니다", "Answer": "아니오" }
-    ]
-  },
-  {
-    "title": "event",
-    "filterTitle": "이벤트/쿠폰/적립",
-    "body": [
-      { "Id": 0, "Question": "dsfadfs부과요?", "Answer": "네" },
-      { "Id": 1, "Question": "선물하일머나럼ㄴ기 주 싶어요", "Answer": "아니오" },
-      { "Id": 2, "Question": "하나요?", "Answer": "네" },
-      { "Id": 3, "Question": "fsdaf버렸습니다", "Answer": "네" },
-      { "Id": 4, "Question": "적립되나요?", "Answer": "아니오" },
-      { "Id": 5, "Question": "컬리앱 않아요", "Answer": "아니오" },
-      { "Id": 6, "Question": "이벤fsaf 오는데, 배송fds만 오지 않습니다", "Answer": "아니오" },
-      { "Id": 7, "Question": "상fdsa교ㄻㄼㅇㄹㄴㅁ환(반품) 기준이 궁금합니다", "Answer": "아니오" }
+      { "Id": 0, "Question": "포장재를 회수하기도 하나요?", "Answer": "네" },
+      { "Id": 1, "Question": "상품은 어떻게 포장되나요?", "Answer": "아니오" },
+      { "Id": 2, "Question": "퍼플박스 비닐도 회수한다는데 어떻게 요청하나요?", "Answer": "네" },
+      { "Id": 3, "Question": "다른 포장방법은 없나요?", "Answer": "네" },
+      { "Id": 4, "Question": "배송 될 때는 어떻게 포장되어서 오나요?", "Answer": "아니오" },
+      { "Id": 5, "Question": "퍼플박스 외에 다른 재사용 포장재도 사용해도 되나요?", "Answer": "아니오" },
+      { "Id": 6, "Question": "포장재는 어떤 소재로 만들어졌나요?", "Answer": "아니오" },
+      { "Id": 7, "Question": "포장재 처리는 어떻게 하나요?", "Answer": "아니오" }
     ]
   }
 ]
