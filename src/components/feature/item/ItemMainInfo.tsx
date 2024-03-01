@@ -59,9 +59,9 @@ export default function ItemMainInfo({ itemId, itemData }: { itemId: number; ite
               onClick={() => {
                 renderToastWithAddCoupon()
                 toast({
-                  title: 'Uh oh! Something went wrong.',
-                  description: 'There was a problem with your request.',
-                  action: <ToastAction altText="Try again">Try again</ToastAction>,
+                  title: '쿠폰 발급 성공',
+                  description: '쿠폰이 정상적으로 발급되었습니다.',
+                  action: <ToastAction altText="Try again">닫기</ToastAction>,
                 })
               }}
             >
