@@ -33,3 +33,15 @@ export interface PaymentVerifyResponse {
   errorCode: null
   errorMessage: null
 }
+
+export type PortOneResponseDTO = {
+  modal_statement?: string
+  error_msg?: string
+  redirect_path: string
+  query_params?: PaymentSuccessQueryParams
+}
+
+export type PaymentSuccessQueryParams = {
+  name: string
+  paid_amount: number
+}
