@@ -27,7 +27,7 @@ export default function FQABottomSeat({
               closeBottomSheetHandler()
             }}
           ></div>
-          <div className="fixed left-[576px] bottom-0 w-96 h-2/3 border-solid border-black border-2 bg-white rounded-t-xl z-30">
+          <div className="fixed mx-auto left-0 right-0 bottom-0 w-96 h-2/3 border-solid border-black border-2 bg-white rounded-t-xl z-30">
             <div className="h-2 w-6  mx-auto mt-2.5 bg-gray-100 rounded-md"></div>
 
             <div className="relative">

@@ -11,11 +11,11 @@ import AddInquiryTypeBox from '@/components/feature/addInquiry/AddInquiryTypeBox
 import SvgIconPlusMono from '@/components/icons/icon-plus-mono'
 import { Button } from '@/components/ui/button'
 
-type PresignedURL = {msg : string}
+type PresignedURL = { msg: string }
 
 export default function page() {
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false)
-  const list = ['불만', '가득', '이게 나라냐 ']
+  const list = ['회원', '상품', '주문/결제/대량상품', '배송', '포장']
   const [inquiryType, setInquiryType] = useState(list[0])
   const router = useRouter()
   const [isImage, setIsImage] = useState(false)
@@ -56,11 +56,13 @@ export default function page() {
       //이미지 업로드 개수 제한있으니까 if문을 통해 이미지 개수 제한을 걸어둠
 
       //서버에서 presignURL을 받아오는 코드
-      const getPresignedURL = async (fileName : string):Promise<PresignedURL> => {
+      const getPresignedURL = async (fileName: string): Promise<PresignedURL> => {
         let filename = encodeURIComponent(fileName)
-        let res = await fetch(`${baseURL}/reviews/generate-presigned-url?fileName=${filename}&contentType=image/jpg`)
+        const contentType = filename.split('.').pop();
+        console.log('filename', filename)
+        let res = await fetch(`${baseURL}/reviews/generate-presigned-url?fileName=${filename}&contentType=image/${contentType}`)
         const url = await res.json()
-      
+
         return url
       }
 
@@ -75,7 +77,7 @@ export default function page() {
 
       const res = await getPresignedURL(fileName)
 
-      const presignedURL : string = res.msg
+      const presignedURL: string = res.msg
 
       console.log(presignedURL, fileName)
       //실제 백엔드 API CALL 시에 넣어줄 링크 만드는 코드

@@ -59,15 +59,15 @@ export default function ItemMainInfo({ itemId, itemData }: { itemId: number; ite
               onClick={() => {
                 renderToastWithAddCoupon()
                 toast({
-                  title: 'Uh oh! Something went wrong.',
-                  description: 'There was a problem with your request.',
-                  action: <ToastAction altText="Try again">Try again</ToastAction>,
+                  title: '쿠폰 발급 성공',
+                  description: '쿠폰이 정상적으로 발급되었습니다.',
+                  action: <ToastAction altText="Try again">닫기</ToastAction>,
                 })
               }}
             >
               10% 쿠폰 받기
             </button>
-            {/* modal  */}
+         
             <div className="border-b border-gray-200 py-1" id="seller"></div>
             <div className="grid grid-cols-4 place-content-start gap-y-1 pt-4 text-body-xs text-grayscale-400">
               <div className="col-span-1 text-left">배송</div>

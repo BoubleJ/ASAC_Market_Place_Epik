@@ -15,7 +15,7 @@ export default function FAQItemList({ list, FAQId }: { list: List; FAQId: string
             <AccordionItem value="item-1">
               <AccordionTrigger className=" text-body-base">
                 <div>
-                  <span className="py-1 px-2  bg-brand-primary-500 rounded-3xl text-body-base text-white">Q</span>
+                  <span className="rounded-3xl bg-brand-primary-500  px-2 py-1 text-body-base text-white">Q</span>
                   <span className="pl-3">{item.Question}</span>
                 </div>
               </AccordionTrigger>
