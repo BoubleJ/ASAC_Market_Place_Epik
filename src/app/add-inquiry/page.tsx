@@ -58,7 +58,9 @@ export default function page() {
       //서버에서 presignURL을 받아오는 코드
       const getPresignedURL = async (fileName: string): Promise<PresignedURL> => {
         let filename = encodeURIComponent(fileName)
-        let res = await fetch(`${baseURL}/reviews/generate-presigned-url?fileName=${filename}&contentType=image/jpg`)
+        const contentType = filename.split('.').pop();
+        console.log('filename', filename)
+        let res = await fetch(`${baseURL}/reviews/generate-presigned-url?fileName=${filename}&contentType=image/${contentType}`)
         const url = await res.json()
 
         return url
