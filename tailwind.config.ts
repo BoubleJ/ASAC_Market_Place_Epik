@@ -63,6 +63,13 @@ module.exports = {
           900: '#191919',
           black: '#000',
         },
+        'tier-color': {
+          BRONZE: '#5B3E38',
+          SILVER: '#4D5B66',
+          GOLD: '#C1AE7B',
+          PLATINUM: '#BBE8E7',
+          DIAMOND: '#146994',
+        },
         'brand-primary': {
           100: '#F2F9F7',
           200: '#EAF8F4',
@@ -73,6 +80,12 @@ module.exports = {
         'brand-error': 'DA3A44',
         'brand-success': '1D62EC',
         'brand-warning': 'F3CB3C',
+      },
+      flex: {
+        2: '2 2 0%',
+      },
+      inset: {
+        '576px': '576px',
       },
     },
   },

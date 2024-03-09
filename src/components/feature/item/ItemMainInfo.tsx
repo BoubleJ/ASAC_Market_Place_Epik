@@ -1,11 +1,20 @@
 import Image from 'next/image'
 import React from 'react'
 
+import { fetchDownloadCoupon } from '@/api/resource/coupon'
 import SvgShare from '@/components/icons/share'
+import { ToastAction } from '@/components/ui/toast'
+import { useToast } from '@/components/ui/use-toast'
 
 export default function ItemMainInfo({ tabParam, itemData }: { tabParam: string | null; itemData: any }) {
+  const { toast } = useToast()
   const itemDetails = itemData.data
   console.log(tabParam)
+
+  const renderToastWithAddCoupon = async () => {
+    const msg = await fetchDownloadCoupon()
+    console.log(msg)
+  }
 
   return (
     <>
@@ -42,10 +51,21 @@ export default function ItemMainInfo({ tabParam, itemData }: { tabParam: string 
             </div>
             <div className=" text-body-mini text-brand-primary-500">{itemDetails.notes}</div>
             {/* {itemDetails.couponId && <div>{itemDetails.coupon.discountType}</div>} */}
-            <button className="my-3 rounded-md border border-brand-primary-500 p-2 text-sm text-brand-primary-500">
+
+            <button
+              className="my-3 rounded-md border border-brand-primary-500 p-2 text-sm text-brand-primary-500"
+              onClick={() => {
+                renderToastWithAddCoupon()
+                toast({
+                  title: '쿠폰 발급 성공',
+                  description: '쿠폰이 정상적으로 발급되었습니다.',
+                  action: <ToastAction altText="Try again">닫기</ToastAction>,
+                })
+              }}
+            >
               10% 쿠폰 받기
             </button>
-            {/* modal  */}
+         
             <div className="border-b border-gray-200 py-1" id="seller"></div>
             <div className="grid grid-cols-4 place-content-start gap-y-1 pt-4 text-body-xs text-grayscale-400">
               <div className="col-span-1 text-left">배송</div>

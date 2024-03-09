@@ -1,6 +1,6 @@
 import { cookies } from 'next/headers'
 
-import { baseURL, commonHeader } from '@/api/util/instance'
+import { baseURL } from '@/api/util/instance'
 import OrderHistoryHeader from '@/components/feature/orderHistory/orderHistoryHeader'
 import OrderHistorylist from '@/components/feature/orderHistory/orderHistorylist'
 import OrderHistoryTab from '@/components/feature/orderHistory/orderHistoryTab'
@@ -9,7 +9,8 @@ export const dynamic = 'force-dynamic'
 
 const getOrderList = async (month: number) => {
   try {
-    const requestHeaders = new Headers(commonHeader)
+    const requestHeaders = new Headers()
+    console.log(month)
 
     const authToken = cookies().get('AUTH_TOKEN')?.value
     const hasCookies = cookies().has('AUTH_TOKEN')
@@ -17,7 +18,6 @@ const getOrderList = async (month: number) => {
     if (hasCookies) {
       requestHeaders.set('Authorization', `Bearer ${authToken}`)
     }
-
     const res = await fetch(`${baseURL}/members/mypage/orderlist?month=${month}`, {
       headers: requestHeaders,
     })
@@ -36,11 +36,11 @@ const getOrderList = async (month: number) => {
 }
 
 export default async function OrderHistoryePage({ searchParams }: { searchParams: { duration: string } }) {
-  const qs = searchParams
-  const isEmptySearchParams = Object.keys(qs).length === 0
-  const month = isEmptySearchParams ? 3 : parseInt(qs.duration)
+  const { duration } = searchParams
+  const isEmptySearchParams = duration === undefined
+  const month = isEmptySearchParams ? 3 : parseInt(duration)
   const initialIOrderList = await getOrderList(month)
-
+  console.log(initialIOrderList)
   return (
     <section className="w-full px-5">
       <OrderHistoryHeader />

@@ -1,18 +1,19 @@
 'use client'
 
 import { convertNumberFormat } from '@/lib/utils'
-import { useOrderStore } from '@/store/client/orderSlice'
 
-export default function OrderCompleteBill() {
-  const { orders } = useOrderStore()
+interface IOrderCompleteBill {
+  totalAmount: string
+}
 
+export default function OrderCompleteBill({ totalAmount }: IOrderCompleteBill) {
   return (
-    <section className="flex flex-col items-center w-full px-5 py-[23px] mb-[19px]">
-      <div className="flex justify-between w-full mb-3">
-        <span className="text-body-md">결제금액</span>
-        <div className="space-x-2">
-          <span>{convertNumberFormat(orders?.totalAmount!)}</span>
-          <span>원</span>
+    <section className="mb-[19px] flex w-full flex-col items-center px-5 py-[23px]">
+      <div className="mb-3 flex w-full items-center justify-between">
+        <span className="text-body-xl">결제금액</span>
+        <div className="flex items-center space-x-2">
+          <span className="text-body-xl">{convertNumberFormat(parseInt(totalAmount))}</span>
+          <span className="text-body-xl">원</span>
         </div>
       </div>
     </section>
