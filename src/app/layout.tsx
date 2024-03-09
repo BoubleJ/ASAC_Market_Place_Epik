@@ -21,8 +21,8 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ko-KR" className={pretendard.className}>
-      <body className={`${pretendard.className} bg-fixed flex items-center justify-center h-full`}>
-        <div className="fixed bg-white overflow-auto overflow-x-hidden w-96 h-full no-scrollbar">
+      <body className={`${pretendard.className} flex h-full items-center justify-center bg-fixed`}>
+        <div className="no-scrollbar fixed h-full w-96 overflow-auto overflow-x-hidden bg-white">
           <Provider>{children}</Provider>
         </div>
         <Script src="https://cdn.iamport.kr/v1/iamport.js" />

@@ -1,9 +1,12 @@
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
-import { useOrderStore } from '@/store/client/orderSlice'
-import { IOrder } from '@/types/order'
+'use client'
 
-export default function OrderUserInfo() {
-  const { memberName } = useOrderStore.getState().orders as IOrder
+import React from 'react'
+
+import { useOrderStore } from '@/components/provider/OrderStoreProvider'
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
+
+function OrderUserInfo() {
+  const { memberName } = useOrderStore((state) => state.orders)
 
   return (
     <Accordion type="single" collapsible className="w-full">
@@ -13,7 +16,7 @@ export default function OrderUserInfo() {
           <span className="ml-auto pr-[9px]">{memberName}</span>
         </AccordionTrigger>
         <AccordionContent>
-          <div className="flex text-body-base text-grayscale-700 w-full justify-between">
+          <div className="flex w-full justify-between text-body-base text-grayscale-700">
             <div className="flex flex-col items-start">
               <span className="">보내는 분</span>
               <span className="">휴대폰</span>
@@ -28,3 +31,5 @@ export default function OrderUserInfo() {
     </Accordion>
   )
 }
+
+export default React.memo(OrderUserInfo)
