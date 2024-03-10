@@ -44,7 +44,6 @@ export default async function Itemlayout({
   // 수정 필요!! 정리
   // const itemDetails = await fetchItemDetails(params.itemId)
   const itemDetails = await fetchItemDetail(params.itemId)
-
   const convertedItem: Product = convertItemDetailToProduct(itemDetails)
 
   return (

@@ -2,12 +2,13 @@
 import { useRouter } from 'next/navigation'
 import React from 'react'
 
+import { useCartStore } from '@/components/provider/CartStoreProvider'
 import { Button } from '@/components/ui/button'
 import { convertNumberFormat } from '@/lib/utils'
-import { useCartStore } from '@/store/client/cartSlice'
 
 export default function CartPaymentButton() {
-  const { price, cart } = useCartStore()
+  const cart = useCartStore((state) => state.cart)
+  const { price } = useCartStore((state) => state.actions)
   const router = useRouter()
 
   const isEmpty = () => {
@@ -21,7 +22,7 @@ export default function CartPaymentButton() {
 
   return (
     <Button variant={'primary'} size={'lg'} onClick={handleCartValidation} disabled={isEmpty()}>
-      <span>{convertNumberFormat(price() + 3000)}원 결제하기</span>
+      <span>{isEmpty() ? 0 : convertNumberFormat(price() + 3000)}원 결제하기</span>
     </Button>
   )
 }

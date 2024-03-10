@@ -13,6 +13,7 @@ const protectedRoutes = [
   '/wish',
   '/add-review',
   '/edit-info',
+  '/cart',
 ]
 
 export async function middleware(request: NextRequest) {

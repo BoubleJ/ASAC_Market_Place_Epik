@@ -4,18 +4,28 @@ import React from 'react'
 import { fetchInsertCartItemById } from '@/api/resource/cart'
 import { basePath } from '@/api/util/instance'
 import SelectModal from '@/components/common/modal/selectModal'
+import { useCartStore } from '@/components/provider/CartStoreProvider'
 import { useModalState } from '@/components/provider/modalProvider'
-import { Button } from '@/components/ui/button'
-import { useCartStore } from '@/store/client/cartSlice'
+import { Button, ButtonProps } from '@/components/ui/button'
+import useDebounce from '@/lib/hooks/useDebounce'
+import { cn } from '@/lib/utils'
 import { Product } from '@/types/item'
 
 interface ICartItemInsertButton {
+  variant?: ButtonProps['variant']
   product: Product
+  children: React.ReactNode
+  className?: string
 }
 
-export default function CartItemInsertButton({ product }: ICartItemInsertButton) {
+export default function CartItemInsertButton({
+  variant = 'primary',
+  product,
+  children,
+  className = '',
+}: ICartItemInsertButton) {
   const state = useModalState()
-  const { add } = useCartStore()
+  const { add } = useCartStore((state) => state.actions)
   const router = useRouter()
 
   const openSelectModal = (content: string, onCheck?: () => void, onCancel?: () => void) => {
@@ -27,7 +37,6 @@ export default function CartItemInsertButton({ product }: ICartItemInsertButton)
     return (window.location.href = `${basePath}/cart`)
     // return router.push(`/cart`)
   }
-
   const handleMoModalWithAddToCart = async () => {
     const msg = await fetchInsertCartItemById(product.id)
     if (!msg.startsWith('장바구니')) {
@@ -38,9 +47,18 @@ export default function CartItemInsertButton({ product }: ICartItemInsertButton)
     }
   }
 
+  const debouncedHandleModalWithAddToCart = useDebounce(handleMoModalWithAddToCart, 500)
+
   return (
-    <Button variant={'primary'} size={'sm'} className="h-full w-4/5" onClick={handleMoModalWithAddToCart}>
-      <span className=" text-button-base">장바구니에 추가</span>
+    // <Button variant={'primary'} size={'sm'} className="h-full w-4/5" onClick={handleMoModalWithAddToCart}>
+    <Button
+      variant={variant}
+      size={'sm'}
+      className={cn('h-full w-4/5', className)}
+      onClick={debouncedHandleModalWithAddToCart}
+    >
+      {/* <span className=" text-button-base">장바구니에 추가</span> */}
+      {children}
     </Button>
   )
 }

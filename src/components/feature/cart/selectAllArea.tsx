@@ -4,42 +4,36 @@ import { fetchDeleteCartItemById, fetchSelectCartItem } from '@/api/resource/car
 import { encodeCartItemCheckParam } from '@/api/service/cart'
 import SelectModal from '@/components/common/modal/selectModal'
 import CheckCircle from '@/components/icons/check-circle'
+import { useCartStore } from '@/components/provider/CartStoreProvider'
 import { useModalState } from '@/components/provider/modalProvider'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
-import { useCartStore } from '@/store/client/cartSlice'
 
 export default function SelectAllArea() {
-  const { cart, selectedCount, selectAll, removeSelectedItem, selectedItems, unSelectAll, price } = useCartStore()
+  const cart = useCartStore((state) => state.cart)
+  const { count, selectedCount, selectAll, removeSelectedItem, selectedItems, unSelectAll, isAllChecked, isEmpty } =
+    useCartStore((state) => state.actions)
   const state = useModalState()
-
-  const isEmpty = () => {
-    return cart.length === 0 || price() === 0
-  }
 
   const openSelectModal = (content: string, onCheck?: () => void, onCancel?: () => void) => {
     state.setModal(<SelectModal content={content} onCheck={onCheck} onCancel={onCancel} />)
     state.modalRef.current?.showModal()
   }
 
-  const isAllChecked = () => {
-    return cart.length ? !cart.some((item) => item.selected === false) : false
-  }
-
-  const handleSelectAllProduct = () => {
+  const handleSelectAllProduct = async () => {
     if (isAllChecked()) {
-      // all checked so unselect all
-      selectedItems().map(async (item) => {
+      const promises: Promise<void>[] = selectedItems().map((item) => {
         const body = encodeCartItemCheckParam(item)
-        await fetchSelectCartItem(body)
+        return fetchSelectCartItem(body)
       })
+      await Promise.all(promises)
       unSelectAll()
     } else {
-      // all unchecked so select all
-      cart.map(async (item) => {
+      const promises: Promise<void>[] = cart.map(async (item) => {
         const body = encodeCartItemCheckParam(item)
-        await fetchSelectCartItem(body)
+        return fetchSelectCartItem(body)
       })
+      await Promise.all(promises)
       selectAll()
     }
   }
@@ -54,20 +48,20 @@ export default function SelectAllArea() {
   }
 
   return (
-    <section className="flex justify-between items-center px-5 w-full">
+    <section className="flex w-full items-center justify-between px-5">
       <div className="flex items-center text-body-sm">
         <Button variant={'none'} size={'checkbox'} className="mr-2" onClick={handleSelectAllProduct}>
           <CheckCircle
             width={'1.375rem'}
             height={'1.375rem'}
-            className={cn('text-grayscale-200 fill-white', {
+            className={cn('fill-white text-grayscale-200', {
               'fill-brand-primary-500 text-white': isAllChecked(),
             })}
           />
         </Button>
         <span>전체선택</span>
         <span>
-          ({selectedCount()}/{cart.length})
+          ({selectedCount()}/{count()})
         </span>
       </div>
       <Button variant={'none'} className="" onClick={handleModalWithDeleteSelectedProduct} disabled={isEmpty()}>
