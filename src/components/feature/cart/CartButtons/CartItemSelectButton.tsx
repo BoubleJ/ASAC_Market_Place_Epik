@@ -2,10 +2,11 @@ import { fetchSelectCartItem } from '@/api/resource/cart'
 import { encodeCartItemCheckParam } from '@/api/service/cart'
 import SelectModal from '@/components/common/modal/selectModal'
 import { CheckCircle } from '@/components/icons'
+import { useCartStore } from '@/components/provider/CartStoreProvider'
 import { useModalState } from '@/components/provider/modalProvider'
 import { Button } from '@/components/ui/button'
+import useDebounce from '@/lib/hooks/useDebounce'
 import { cn } from '@/lib/utils'
-import { useCartStore } from '@/store/client/cartSlice'
 import { CartItem } from '@/types/product'
 
 interface ICartItemSelectButton {
@@ -13,7 +14,7 @@ interface ICartItemSelectButton {
 }
 
 export default function CartItemSelectButton({ product }: ICartItemSelectButton) {
-  const { select, unSelect, selectedItems } = useCartStore()
+  const { select, unSelect, selectedItems } = useCartStore((state) => state.actions)
 
   const state = useModalState()
 
@@ -46,12 +47,14 @@ export default function CartItemSelectButton({ product }: ICartItemSelectButton)
     }
   }
 
+  const debouncedHandleModalWithItemSelect = useDebounce(handleModalWithItemSelect, 500)
+
   return (
-    <Button variant={'none'} size={'checkbox'} className="mr-2 col-span-1" onClick={handleModalWithItemSelect}>
+    <Button variant={'none'} size={'checkbox'} className="col-span-1 mr-2" onClick={debouncedHandleModalWithItemSelect}>
       <CheckCircle
         width={'1.375rem'}
         height={'1.375rem'}
-        className={cn('text-grayscale-200 fill-white', {
+        className={cn('fill-white text-grayscale-200', {
           'fill-brand-primary-500 text-white': product.selected,
         })}
       />

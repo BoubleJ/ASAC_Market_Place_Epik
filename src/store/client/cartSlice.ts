@@ -5,217 +5,237 @@ import { convertCartitemDtosToCartItem } from '@/api/service/cart'
 import { Product } from '@/types/item'
 import { CartItem, CartItemDto } from '@/types/product'
 
-type CartStore = {
-  // cartInfo: Omit<Cart, 'cartItemDtos'>
+type CartState = {
   cartId: number
   cart: CartItem[]
-  setCartId: (id: number) => void
-  setCart: (cartDtos: CartItemDto[]) => void
-  selectedItems: () => CartItem[]
-  unSelectedItems: () => CartItem[]
-  price: () => number
-  discountPrice: () => number
-  count: () => number
-  selectedCount: () => number
-  add: (product: Product) => void
-  select: (ProductId: number) => void
-  unSelect: (ProductId: number) => void
-  selectAll: () => void
-  unSelectAll: () => void
-  decrease: (ProductId: number) => void
-  removeSelectedItem: () => void
-  removeItem: (ProductId: number) => void
-  removeAll: () => void
 }
 
-const DUMMY_CART_ITEMS: CartItem[] = [
-  {
-    id: 1,
-    name: '[누터스가든] CAT 누터스픽 짜먹는 간식 2종',
-    brand: '누터스가든',
-    discountRate: 35,
-    discountedPrice: 4485,
-    itemPrice: 6900,
-    promotionUrl: '/images/hotdog.svg',
-    reviewCount: 80,
-    count: 2,
-    selected: true,
-  },
-  {
-    id: 2,
-    name: '[누터스가든] DOG 누터스픽 짜먹는 간식 2종',
-    promotionUrl: '/images/ricedog.svg',
-    discountRate: 35,
-    discountedPrice: 4485,
-    itemPrice: 6900,
-    reviewCount: 80,
-    brand: '누터스가든',
-    count: 1,
-    selected: false,
-  },
-]
-
-export const useCartStore = create<CartStore>()(
-  devtools((set, get) => ({
-    // cart: [...DUMMY_CART_ITEMS],
-    // cartInfo: { cartId: 0, amount: 0, salesTotalAmount: 0, totalAmount: 0 },
-    cartId: 0,
-    cart: [],
-    setCartId(id: number) {
-      set({ cartId: id })
-    },
-    setCart: async (cartItemList: CartItemDto[]) => {
-      const cartItems: CartItem[] = convertCartitemDtosToCartItem(cartItemList)
-      set({ cart: cartItems })
-    },
-    selectedItems: () => {
-      const { cart } = get()
-      if (cart.length) return cart.filter((item) => item.selected === true)
-      return []
-    },
-    unSelectedItems: () => {
-      const { cart } = get()
-      if (cart.length) return cart.filter((item) => item.selected === false)
-      return []
-    },
-    price() {
-      const { cart } = get()
-      const items = cart.filter((item) => item.selected === true)
-      if (items.length)
-        return (
-          items
-            .map((item) => Math.floor((item.itemPrice - item.discountedPrice) * item.count))
-            // .map((item) => Math.floor(item.itemPrice - item.itemPrice * (item.discountRate / 100)) * item.count)
-            .reduce((prev, curr) => prev + curr)
-        )
-      return 0
-    },
-    discountPrice() {
-      const { cart } = get()
-      const items = cart.filter((item) => item.selected === true)
-      if (items.length)
-        return (
-          items
-            .map((item) => Math.floor(item.discountedPrice * item.count))
-            // .map((item) => Math.floor(item.itemPrice * (item.discountRate / 100)) * item.count)
-            .reduce((prev, curr) => prev + curr)
-        )
-      return 0
-    },
-    count: () => {
-      const { cart } = get()
-      if (cart.length) return cart.map((item) => item.count).reduce((prev, curr) => prev + curr)
-      return 0
-    },
-    selectedCount() {
-      const { cart } = get()
-      if (cart.length) return cart.filter((item) => item.selected === true).length
-      return 0
-    },
-    add: (product: Product) => {
-      const { cart } = get()
-      const updatedCart = updateCart(product, cart)
-      set({ cart: updatedCart })
-    },
-    select(ProductId: number) {
-      const { cart } = get()
-      const updatedCart = updateSelectfield(ProductId, cart)
-      set({ cart: updatedCart })
-    },
-    unSelect(ProductId: number) {
-      const { cart } = get()
-      const updatedCart = updateSelectfield(ProductId, cart)
-      set({ cart: updatedCart })
-    },
-    selectAll() {
-      const { cart } = get()
-      const updatedCart = selectAllCartItem(cart)
-      set({ cart: updatedCart })
-    },
-    unSelectAll() {
-      const { cart } = get()
-      const updatedCart = unSelectAllCartItem(cart)
-      set({ cart: updatedCart })
-    },
-    decrease: (ProductId: number) => {
-      const { cart } = get()
-      const updatedCart = removeCart(ProductId, cart)
-      set({ cart: updatedCart })
-    },
-    removeSelectedItem() {
-      const { cart } = get()
-      const updatedCart = removeSelected(cart)
-      set({ cart: updatedCart })
-    },
-    removeItem(ProductId: number) {
-      const { cart } = get()
-      const updatedCart = removeFromCart(ProductId, cart)
-      set({ cart: updatedCart })
-    },
-    removeAll: () => set({ cart: [] }),
-  })),
-)
-
-function updateCart(product: Product, cart: CartItem[]): CartItem[] {
-  const cartItem = { ...product, count: 1, selected: true } as CartItem
-  const productOnCart = cart.map((item) => item.id).includes(product.id)
-
-  if (!productOnCart) {
-    cart.push(cartItem)
-  } else {
-    return cart.map((item) => {
-      if (item.id === product.id) return { ...item, count: item.count + 1 } as CartItem
-      return item
-    })
+type CartAction = {
+  actions: {
+    setCartId: (id: number) => void
+    setCart: (cartDtos: CartItemDto[]) => void
+    selectedItems: () => CartItem[]
+    price: () => number
+    discountPrice: () => number
+    count: () => number
+    selectedCount: () => number
+    add: (product: Product) => void
+    select: (ProductId: number) => void
+    unSelect: (ProductId: number) => void
+    selectAll: () => void
+    unSelectAll: () => void
+    increase: (ProductId: number) => void
+    decrease: (ProductId: number) => void
+    removeSelectedItem: () => void
+    removeItem: (ProductId: number) => void
+    removeAll: () => void
+    isAllChecked: () => boolean
+    isEmpty: () => boolean
   }
-
-  return cart
 }
 
-function updateSelectfield(ProductId: number, cart: CartItem[]) {
-  return cart.map((item) => {
-    if (item.id === ProductId) {
-      if (item.selected === true) {
-        return { ...item, selected: false }
-      } else {
-        return { ...item, selected: true }
-      }
+export type CartStore = CartState & CartAction
+
+export const defaultCartInitialState: CartState = {
+  cartId: 0,
+  cart: [],
+}
+
+export const createCartStore = (initialState: CartState = defaultCartInitialState) => {
+  return create<CartStore>()(
+    devtools((set, get) => ({
+      ...initialState,
+      actions: {
+        setCartId(id: number) {
+          set({ cartId: id })
+        },
+        setCart: async (cartItemList: CartItemDto[]) => {
+          const cartItems: CartItem[] = convertCartitemDtosToCartItem(cartItemList)
+          set({ cart: cartItems })
+        },
+        selectedItems: () => {
+          const { cart } = get()
+          return CartController(cart).selectedItems().getCart()
+        },
+        price() {
+          const { cart } = get()
+          return CartController(cart).selectedItems().price()
+        },
+        discountPrice() {
+          const { cart } = get()
+          return CartController(cart).selectedItems().discountPrice()
+        },
+        count: () => {
+          const { cart } = get()
+          return CartController(cart).count()
+        },
+        selectedCount() {
+          const { cart } = get()
+          return CartController(cart).selectedItems().count()
+        },
+        add: (product: Product) => {
+          const { cart } = get()
+          const updatedCart = CartController(cart).add(product).getCart()
+          set({ cart: updatedCart })
+        },
+        select(ProductId: number) {
+          const { cart } = get()
+          const updatedCart = CartController(cart).select(ProductId).getCart()
+          set({ cart: updatedCart })
+        },
+        unSelect(ProductId: number) {
+          const { cart } = get()
+          const updatedCart = CartController(cart).unSelect(ProductId).getCart()
+          set({ cart: updatedCart })
+        },
+        selectAll() {
+          const { cart } = get()
+          const updatedCart = CartController(cart).selectAll().getCart()
+          set({ cart: updatedCart })
+        },
+        unSelectAll() {
+          const { cart } = get()
+          const updatedCart = CartController(cart).unSelectAll().getCart()
+          set({ cart: updatedCart })
+        },
+        increase: (ProductId: number) => {
+          const { cart } = get()
+          const updatedCart = CartController(cart).increase(ProductId).getCart()
+          set({ cart: updatedCart })
+        },
+        decrease: (ProductId: number) => {
+          const { cart } = get()
+          const updatedCart = CartController(cart).decrease(ProductId).getCart()
+          set({ cart: updatedCart })
+        },
+        removeSelectedItem() {
+          const { cart } = get()
+          const updatedCart = CartController(cart).removeSelectedItem().getCart()
+          set({ cart: updatedCart })
+        },
+        removeItem(ProductId: number) {
+          const { cart } = get()
+          const updatedCart = CartController(cart).removeItem(ProductId).getCart()
+          set({ cart: updatedCart })
+        },
+        removeAll: () => {
+          const { cart } = get()
+          const updatedCart = CartController(cart).removeAll().getCart()
+          set({ cart: updatedCart })
+        },
+        isAllChecked: () => {
+          const { cart } = get()
+          return CartController(cart).isAllChecked()
+        },
+        isEmpty: () => {
+          const { cart } = get()
+          return CartController(cart).isEmpty() || CartController(cart).selectedItems().price() === 0
+        },
+      },
+    })),
+  )
+}
+
+const CartController = (cart: CartItem[]) => ({
+  add: (product: Product) => {
+    //action
+    const isExistInCart = cart.map((item) => item.id).includes(product.id)
+    return CartController(!isExistInCart ? [...cart, { ...product, count: 1, selected: true } as CartItem] : cart)
+  },
+  select(ProductId: number) {
+    if (cart.length) {
+      return CartController(
+        cart.map((item) => {
+          return item.id === ProductId && !item.selected ? { ...item, selected: true } : item
+        }),
+      )
     }
-    return item
-  })
-}
-
-function selectAllCartItem(cart: CartItem[]) {
-  return cart.map((item) => {
-    return { ...item, selected: true }
-    return item
-  })
-}
-function unSelectAllCartItem(cart: CartItem[]) {
-  return cart.map((item) => {
-    return { ...item, selected: false }
-    return item
-  })
-}
-function removeCart(ProductId: number, cart: CartItem[]): CartItem[] {
-  return cart
-    .map((item) => {
-      if (item.id === ProductId) return { ...item, count: item.count - 1 }
-      return item
-    })
-    .filter((item) => {
-      return item.count
-    })
-}
-
-function removeFromCart(ProductId: number, cart: CartItem[]): CartItem[] {
-  return cart.filter((item) => {
-    return item.id !== ProductId
-  })
-}
-
-function removeSelected(cart: CartItem[]) {
-  return cart.filter((item) => {
-    return item.selected !== true
-  })
-}
+    return CartController([])
+  },
+  unSelect(ProductId: number) {
+    if (cart.length) {
+      return CartController(
+        cart.map((item) => {
+          return item.id === ProductId && item.selected ? { ...item, selected: false } : item
+        }),
+      )
+    }
+    return CartController([])
+  },
+  selectAll() {
+    return CartController(
+      cart.map((item) => {
+        return { ...item, selected: true }
+      }),
+    )
+  },
+  unSelectAll() {
+    return CartController(
+      cart.map((item) => {
+        return { ...item, selected: false }
+      }),
+    )
+  },
+  selectedItems: () => {
+    if (cart.length) return CartController(cart.filter((item) => item.selected === true))
+    return CartController([])
+  },
+  increase: (ProductId: number) => {
+    return CartController(
+      cart.map((item) => {
+        return item.id === ProductId ? { ...item, count: item.count + 1 } : item
+      }),
+    )
+  },
+  decrease: (ProductId: number) => {
+    return CartController(
+      cart.map((item) => {
+        return item.id === ProductId ? { ...item, count: item.count - 1 } : item
+      }),
+    )
+  },
+  removeSelectedItem() {
+    return CartController(
+      cart.filter((item) => {
+        return item.selected === false
+      }),
+    )
+  },
+  removeItem(ProductId: number) {
+    return CartController(
+      cart.filter((item) => {
+        return item.id !== ProductId
+      }),
+    )
+  },
+  removeAll: () => {
+    return CartController([])
+  },
+  count: () => {
+    if (cart.length) return cart.map((item) => item.count).reduce((prev, curr) => prev + curr)
+    return 0
+  },
+  selectedCount() {
+    if (cart.length) return cart.filter((item) => item.selected === true).length
+    return 0
+  },
+  price: () => {
+    if (cart.length)
+      return cart
+        .map((item) => Math.floor((item.itemPrice - item.discountedPrice) * item.count))
+        .reduce((prev, curr) => prev + curr)
+    return 0
+  },
+  discountPrice() {
+    if (cart.length)
+      return cart.map((item) => Math.floor(item.discountedPrice * item.count)).reduce((prev, curr) => prev + curr)
+    return 0
+  },
+  isAllChecked: () => {
+    return cart.length ? !cart.some((item) => item.selected === false) : false
+  },
+  isEmpty: () => {
+    return cart.length === 0
+  },
+  getCart: () => cart,
+})

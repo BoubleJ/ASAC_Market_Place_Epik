@@ -3,9 +3,9 @@ import { useRouter } from 'next/navigation'
 import { fetchDeleteCartItemById } from '@/api/resource/cart'
 import SelectModal from '@/components/common/modal/selectModal'
 import { IconXMono } from '@/components/icons'
+import { useCartStore } from '@/components/provider/CartStoreProvider'
 import { useModalState } from '@/components/provider/modalProvider'
 import { Button } from '@/components/ui/button'
-import { useCartStore } from '@/store/client/cartSlice'
 import { CartItem } from '@/types/product'
 
 interface ICartItemDeleteButton {
@@ -14,7 +14,7 @@ interface ICartItemDeleteButton {
 export default function CartItemDeleteButton({ product }: ICartItemDeleteButton) {
   const router = useRouter()
 
-  const { removeItem } = useCartStore()
+  const { removeItem } = useCartStore((state) => state.actions)
 
   const state = useModalState()
 

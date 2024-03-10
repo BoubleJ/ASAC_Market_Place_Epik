@@ -1,9 +1,10 @@
 import { fetchIncreaseCartItemById } from '@/api/resource/cart'
 import SelectModal from '@/components/common/modal/selectModal'
 import { IconPlusMono } from '@/components/icons'
+import { useCartStore } from '@/components/provider/CartStoreProvider'
 import { useModalState } from '@/components/provider/modalProvider'
 import { Button } from '@/components/ui/button'
-import { useCartStore } from '@/store/client/cartSlice'
+import useDebounce from '@/lib/hooks/useDebounce'
 import { CartItem } from '@/types/product'
 
 interface ICartItemIncreaseButton {
@@ -11,7 +12,7 @@ interface ICartItemIncreaseButton {
 }
 
 export default function CartItemIncreaseButton({ product }: ICartItemIncreaseButton) {
-  const { add } = useCartStore()
+  const { increase } = useCartStore((state) => state.actions)
 
   const state = useModalState()
 
@@ -25,11 +26,13 @@ export default function CartItemIncreaseButton({ product }: ICartItemIncreaseBut
     if (!msg.startsWith('아이템')) {
       return openSelectModal(`${msg}`)
     }
-    add(product)
+    increase(product.id)
   }
 
+  const debouncedHandleIncreaseItemCount = useDebounce(handleIncreaseItemCount, 500)
+
   return (
-    <Button variant={'none'} className="px-2 py-2 h-fit" onClick={handleIncreaseItemCount}>
+    <Button variant={'none'} className="h-fit px-2 py-2" onClick={debouncedHandleIncreaseItemCount}>
       <IconPlusMono width={'1rem'} height={'1rem'} className="text-grayscale-400 hover:text-grayscale-900" />
     </Button>
   )

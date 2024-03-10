@@ -1,9 +1,11 @@
 'use server'
+import { revalidateTag } from 'next/cache'
 import { cookies } from 'next/headers'
 
 import { baseURL, commonHeader } from '@/api/util/instance'
 import { Cart } from '@/types/product'
 export const getCart = async () => {
+  revalidateTag('cart')
   const requestHeaders = new Headers(commonHeader)
   const authToken = cookies().get('AUTH_TOKEN')?.value
   const hasCookies = cookies().has('AUTH_TOKEN')
@@ -15,6 +17,9 @@ export const getCart = async () => {
   const res = await fetch(`${baseURL}/cart`, {
     headers: requestHeaders,
     cache: 'no-store',
+    next: {
+      tags: ['cart'],
+    },
   })
 
   if (!res.ok) {

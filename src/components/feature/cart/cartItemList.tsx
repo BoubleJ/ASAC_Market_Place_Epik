@@ -3,15 +3,12 @@
 // import { useEffect } from 'react'
 
 import CartItemCard from '@/components/feature/cart/cartItemCard'
-import { useCartStore } from '@/store/client/cartSlice'
-import { Cart, CartItem } from '@/types/product'
+import { useCartStore } from '@/components/provider/CartStoreProvider'
+import { CartItem } from '@/types/product'
 
-interface ICartItemList {
-  content?: Cart
-}
-
-export default function CartItemList({ content }: ICartItemList) {
-  const { cart, cartId, setCart, setCartId } = useCartStore()
+export default function CartItemList() {
+  const cart = useCartStore((state) => state.cart)
+  console.log(cart)
   // const { cartItemDtos, cartId } = content
   // useEffect(() => {
   //   setCart(cartItemDtos)
@@ -19,7 +16,7 @@ export default function CartItemList({ content }: ICartItemList) {
   // }, [cartItemDtos, cartId, setCartId, setCart])
 
   return (
-    <section className="flex flex-col gap-2 w-full px-5 py-[18px]">
+    <section className="flex w-full flex-col gap-2 px-5 py-[18px]">
       {cart.map((product: CartItem) => (
         <CartItemCard key={product.id} product={product} />
       ))}
