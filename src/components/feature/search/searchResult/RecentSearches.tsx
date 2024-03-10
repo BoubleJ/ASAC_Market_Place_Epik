@@ -14,11 +14,11 @@ export default function RecentSearches({
   return (
     <div className="flex flex-col gap-3">
       <header className=" text-headline3">추천검색어</header>
-      <div className="flex gap-2 flex-wrap text-gray-500 text-body-sm ">
+      <div className="flex flex-wrap gap-2 text-body-sm text-gray-500 ">
         {recentWords.length ? (
           recentWords.map((recentWord) => (
-            <div key={recentWord.id} className="flex gap-2 mr-3 my-2 bg-gray-100 py-1 px-4 rounded-full">
-              <button onClick={() => handleClick(recentWord.word)}>{recentWord.word}</button>
+            <div key={recentWord.id} className="my-2 mr-3 flex gap-2 rounded-full bg-gray-100 px-4 py-1">
+              <button onClick={() => handleClick(recentWord.word!)}>{recentWord.word}</button>
               <button className="mr-auto" type="button" onClick={() => handleRemove(recentWord.id)}>
                 x
               </button>

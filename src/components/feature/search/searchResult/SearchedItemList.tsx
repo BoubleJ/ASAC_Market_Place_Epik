@@ -6,17 +6,13 @@ import { fetchSearchItemsData } from '@/api/resource/search'
 import SmallCard from '@/components/common/product/smallCard'
 import { ContentType, ProductType } from '@/types/product'
 
-interface ISearchedItemList{
-  initialProductList:ProductType[], 
-  params:{  categoryParams:string | null,
-              brandParams:string | null,
-              priceParams:string | null,
-              searchword:string
-            }, 
-  totalPage:number
+interface ISearchedItemList {
+  initialProductList: ProductType[]
+  params: { categoryParams: string | null; brandParams: string | null; priceParams: string | null; searchword: string }
+  totalPage: number
 }
 
-export default function SearchedItemList({ initialProductList, params, totalPage }:ISearchedItemList) {
+export default function SearchedItemList({ initialProductList, params, totalPage }: ISearchedItemList) {
   const [productList, setProductList] = useState<ContentType>([])
   const [page, setPage] = useState(0)
 
@@ -27,7 +23,7 @@ export default function SearchedItemList({ initialProductList, params, totalPage
   useEffect(() => {
     if (page !== 0) {
       fetchSearchItemsData(params.searchword, params.categoryParams, params.brandParams, params.priceParams, page)
-        .then(({ content, totalPages }) => {
+        .then(({ content }) => {
           setProductList((prevProductList) => [...prevProductList, ...content])
         })
 
@@ -38,15 +34,13 @@ export default function SearchedItemList({ initialProductList, params, totalPage
   }, [page])
 
   const loadMore = useCallback(() => {
-    console.log('????????????엥loadmore')
     console.log(page, totalPage, '!!!!!!!!!')
 
     if (page < totalPage - 1) {
       console.log(page, totalPage, '!!!!!!!!!!!!')
       setPage((prevPage) => prevPage + 1)
     }
-  }, [])
-
+  }, [page, totalPage])
   const observer = useRef<IntersectionObserver | null>(null)
   const lastProductElementRef = useCallback(
     (node: HTMLElement | null) => {
@@ -63,7 +57,7 @@ export default function SearchedItemList({ initialProductList, params, totalPage
           }
         },
         {
-          threshold: [0.5], //  교차 영역에 타켓 엘리먼트의 100%가 있을 때 observe가 반응.
+          threshold: [0.5], //  교차 영역에 타켓 엘리먼트의 50%가 있을 때 observe가 반응.
         },
       )
       if (node) observer.current.observe(node)
@@ -73,14 +67,8 @@ export default function SearchedItemList({ initialProductList, params, totalPage
 
   return (
     <>
-      <div className="text-lg">
-        {page}
-        {totalPage}
-      </div>
+      <div className="text-lg"></div>
       <div className="grid grid-cols-2 justify-items-center gap-3 px-5 pt-4">
-        {/* {productList.map((product: ProductType, index: number) => (
-        <div key={index}>{product.id}</div>
-      ))} */}
         {productList.map((product: ProductType, index: number) => (
           <div
             ref={productList.length === index + 1 ? lastProductElementRef : null}

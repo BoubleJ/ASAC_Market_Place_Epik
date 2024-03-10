@@ -14,75 +14,74 @@ export interface FilterType {
   브랜드: object
   가격: object
 }
-export interface AppliedFilterType {
-  카테고리: string[]
-  브랜드: string[]
-  가격: string[]
-}
-export default function Filter({
-  totalEliments,
-  categoryCounts,
-  brandCounts,
-  priceRange,
-  stickyLocation,
-}: {
-  totalEliments: number
+export interface FilterDataType {
   categoryCounts: object
   brandCounts: object
-  priceRange: object
+  promotionCounts: object
+  priceRange: string[]
+}
+
+export interface AppliedFilterType {
+  [key: string]: string[]
+}
+
+export const filterName = {
+  categoryCounts: '카테고리',
+  brandCounts: '브랜드',
+  priceRange: '가격',
+  promotionCounts: '프로모션',
+} as const
+
+export default function Filters({
+  totalEliments,
+  stickyLocation,
+  filterData,
+}: {
+  totalEliments: number
   stickyLocation: string
+  filterData: FilterDataType
 }) {
-  const filters: FilterType = {
-    카테고리: categoryCounts,
-    브랜드: brandCounts,
-    가격: priceRange,
-  }
   const searchParams = useSearchParams()
 
   const appliedFilters: AppliedFilterType = {
-    카테고리: searchParams.get('카테고리')?.split(',') ?? [],
-    브랜드: searchParams.get('브랜드')?.split(',') ?? [],
-    가격: searchParams.get('가격')?.split(',') ?? [],
+    categoryCounts: searchParams.get('categoryCounts')?.split(',') ?? [],
+    brandCounts: searchParams.get('brandCounts')?.split(',') ?? [],
+    promotionCounts: searchParams.get('promotionCounts')?.split(',') ?? [],
+    priceRange: searchParams.get('priceRange')?.split(',') ?? [],
   }
-
-  console.log(appliedFilters)
 
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false)
-  const [clickedFilter, setClickedFilter] = useState<keyof FilterType>('카테고리')
+  const [clickedFilter, setClickedFilter] = useState<keyof FilterDataType>('categoryCounts')
 
-  const openFilterBottomSheet = (clickedFilter: keyof FilterType) => {
+  const openFilterBottomSheet = (clickedFilter: keyof FilterDataType) => {
     setClickedFilter(clickedFilter)
     setIsBottomSheetOpen(true)
-  }
-
-  const closeFilterBottomSheet = () => {
-    setIsBottomSheetOpen(false)
   }
 
   return (
     <>
       <div
-        className={`bg-white sticky ${stickyLocation} py-2 px-4 flex justify-between z-10 text-body-xs text-gray-600`}
+        className={`sticky bg-white ${stickyLocation} z-10 flex justify-between px-4 py-2 text-body-xs text-gray-600`}
       >
         <div>총 {totalEliments}개</div>
         <div className="flex gap-3">
           <SortButton />
-          <FilterButton openFilterBottomSheet={openFilterBottomSheet} />
+          <FilterButton onClick={() => openFilterBottomSheet('categoryCounts')} />
         </div>
       </div>
 
       {isBottomSheetOpen && (
         <>
-          <div className="fixed inset-0 bg-black opacity-40 z-30" onClick={closeFilterBottomSheet}></div>
+          <div className="fixed inset-0 z-30 bg-black opacity-40" onClick={() => setIsBottomSheetOpen(false)}></div>
           <FilterBottomSheet
-            filters={filters}
+            filters={filterData}
             appliedFilters={appliedFilters}
             clickedFilter={clickedFilter}
-            setIsBottomSheetOpen={setIsBottomSheetOpen}
+            onClose={() => setIsBottomSheetOpen(false)}
           />
         </>
       )}
-      <FilterButtons filters={filters} openFilterBottomSheet={openFilterBottomSheet} />
+      <FilterButtons filters={filterData} openFilterBottomSheet={openFilterBottomSheet} />
       <AppliedFilters prevAppliedFilters={appliedFilters} />
     </>
   )

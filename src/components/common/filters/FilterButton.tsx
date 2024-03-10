@@ -2,15 +2,9 @@ import React from 'react'
 
 import { OptionsIcon } from '@/lib/icons'
 
-import { FilterType } from './Filters'
-
-export default function FilterButton({
-  openFilterBottomSheet,
-}: {
-  openFilterBottomSheet: (clickedFilter: keyof FilterType) => void
-}) {
+export default function FilterButton({ onClick }: { onClick: () => void }) {
   return (
-    <button className="flex items-center gap-1" onClick={() => openFilterBottomSheet('카테고리')}>
+    <button className="flex items-center gap-1" onClick={onClick}>
       필터
       <OptionsIcon />
     </button>

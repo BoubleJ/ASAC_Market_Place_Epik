@@ -5,8 +5,7 @@ import { convertItemDetailToProduct } from '@/api/service/item'
 import { baseLocalURL, commonHeader } from '@/api/util/instance'
 import BottomTab from '@/components/feature/item/BottomTab'
 import ItemHeader from '@/components/feature/item/ItemHeader'
-import ItemTabs from '@/components/feature/item/ItemTabs'
-import { Toaster } from "@/components/ui/toaster"
+import { Toaster } from '@/components/ui/toaster'
 import { Product } from '@/types/item'
 
 export const dynamic = 'force-dynamic'
@@ -50,11 +49,11 @@ export default async function Itemlayout({
 
   return (
     <>
-      <div className="fixed top-0 bg-white w-96 flex flex-col gap-2 z-10">
+      <div className="fixed top-0 z-10 h-16  w-96 bg-white">
         <ItemHeader itemName={itemDetails.data.itemName} />
-        <ItemTabs itemId={params.itemId} />
+        {/* <ItemTabs itemId={params.itemId} /> */}
       </div>
-      <div className="pt-28 py-20 min-h-screen">{children}</div>
+      <div className="min-h-screen py-16">{children}</div>
       <div className="fixed bottom-0 h-20 w-96">
         <BottomTab wished={itemDetails.data.wished} itemId={params.itemId} product={convertedItem} />
       </div>

@@ -12,15 +12,16 @@ export default function CategoryItemsPage({
 }: {
   params: { categoryName: string }
   searchParams: {
-    ['브랜드']: string | null
-    ['가격']: string | null
+    ['brandCounts']: string | null
+    ['priceRange']: string | null
     ['page']: number | null
   }
 }) {
   const [productList, setProductList] = useState<ContentType>([])
-  const [page, setPage] = useState(0)
   const [totalPages, setTotalPages] = useState(0)
-  console.log('Aarooooooooon  : in page', searchParams)
+  const [totalElements, setTotalElements] = useState(0)
+  const [isLoading, setIsLoading] = useState<boolean>(true)
+
   const decodedcategoryName = decodeURIComponent(params.categoryName)
 
   const decodeCategoryName = decodedcategoryName.split('-')
@@ -28,37 +29,21 @@ export default function CategoryItemsPage({
   const subCategory = decodeCategoryName[1]
 
   const categoryNameParam = subCategory === '전체보기' ? mainCategory : subCategory
-  const brandParams = searchParams?.['브랜드']
-  const priceParams = searchParams?.['가격']
+  const brandParams = searchParams?.['brandCounts']
+  const priceParams = searchParams?.['priceRange']
   // --------------------------
-  useEffect(() => {
-    fetchCategoryItems(categoryNameParam, brandParams, priceParams, page)
-      .then(({ content, totalPages }) => {
-        // console.log('뭐가 바뀜??', searchword, categoryParams, brandParams, priceParams, page)
-        console.log('콘텐트임ㅁㅁ!!!!!!!', content)
-        setProductList((prevProductList) => [...prevProductList, ...content])
-
-        // console.log()
-        setTotalPages(totalPages)
-        // setIsLoading(false)
-      })
-
-      .catch((error) => {
-        console.error('data fetch 실패', error)
-      })
-  }, [page])
 
   useEffect(() => {
-    setPage(0)
-    fetchCategoryItems(categoryNameParam, brandParams, priceParams, page)
-      .then(({ content, totalPages }) => {
-        // console.log('뭐가 바뀜??', searchword, categoryParams, brandParams, priceParams, page)
+    fetchCategoryItems(categoryNameParam, brandParams, priceParams, 0)
+      .then(({ content, totalPages, totalElements }) => {
         console.log('콘텐트임ㅁㅁ!!!!!!!', content)
+        console.log('콘텐트임ㅁㅁ!!!!!!!', totalPages)
+        console.log('콘텐트임ㅁㅁ!!!!!!!', totalElements)
+
         // 왜 같은거 두번????????/
         setProductList(content)
-
-        // console.log()
         setTotalPages(totalPages)
+        setTotalElements(totalElements)
         // setIsLoading(false)
       })
       .catch((error) => {
@@ -66,21 +51,24 @@ export default function CategoryItemsPage({
       })
   }, [categoryNameParam, brandParams, priceParams])
 
-  const loadMore = () => {
-    if (page < totalPages - 1) {
-      console.log(page, totalPages, '!!!!!!!!!!!!')
-      setPage((prevPage) => prevPage + 1)
-    }
-  }
   // ----------------------------------------
   // const categoryItem = await fetchCategoryItems(categoryNameParam, brandParams, priceParams)
   // console.log(categoryItem.items.content.length)
 
   return (
     <div className="pt-28">
-      <CategoryFilter itemLength={productList.length} categoryNameParam={categoryNameParam} />
+      <CategoryFilter itemLength={totalElements} categoryNameParam={categoryNameParam} />
       <div>
-        <CategoryItemsList categoryItems={productList} loadMore={loadMore} />
+        <div>{totalPages}</div>
+        <CategoryItemsList
+          initialProductList={productList}
+          params={{
+            categoryNameParam,
+            brandParams,
+            priceParams,
+          }}
+          totalPage={totalPages}
+        />
       </div>
     </div>
   )
