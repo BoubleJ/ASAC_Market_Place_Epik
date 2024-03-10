@@ -38,7 +38,7 @@ export async function fetchCategoryItems(
 
   const data = await res.json()
 
-  return { content: data.items.content, totalPages: data.items.totalPages }
+  return { content: data.items.content, totalPages: data.items.totalPages, totalElements: data.items.totalElements }
 }
 
 export async function fetchCategoryFilterData(categoryName: string) {

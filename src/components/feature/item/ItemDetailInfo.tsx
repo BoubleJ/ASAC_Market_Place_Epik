@@ -1,24 +1,20 @@
-'use client'
-
 import Image from 'next/image'
-import { useSearchParams } from 'next/navigation'
 import React from 'react'
 
-export default function ItemReview({ itemId, itemData }: { itemId: number; itemData: any }) {
+export default function ItemReview({ tabParam, itemData }: { tabParam: string | null; itemData: any }) {
   const itemDetails = itemData.data
-  const tab = useSearchParams().get('tab')
 
   return (
     <>
-      {tab === 'detail' && (
+      {tabParam === 'detail' && (
         <div className=" flex flex-col px-4">
           <div className="pt-4 text-body-md font-semibold">상품정보</div>
 
-          <div className="pt-4 grid grid-cols-4 text-body-xs gap-y-3 text-grayscale-400 place-content-start">
-            <div className="text-left col-span-1">배송</div>
-            <div className=" col-span-3 text-left text-gray-600 font-normal">{itemDetails.deliveryMethod}</div>
+          <div className="grid grid-cols-4 place-content-start gap-y-3 pt-4 text-body-xs text-grayscale-400">
+            <div className="col-span-1 text-left">배송</div>
+            <div className=" col-span-3 text-left font-normal text-gray-600">{itemDetails.deliveryMethod}</div>
             <div className=" col-span-1 text-left">판매자</div>
-            <div className=" col-span-3 text-left text-gray-600 font-normal">{itemDetails.sellerInfo}</div>
+            <div className=" col-span-3 text-left font-normal text-gray-600">{itemDetails.sellerInfo}</div>
           </div>
           <div
             className="pt-10"
@@ -44,7 +40,7 @@ export default function ItemReview({ itemId, itemData }: { itemId: number; itemD
               </div>
             ))}
           </div>
-          <div className="pt-7 flex flex-col gap-5 text-body-sm">
+          <div className="flex flex-col gap-5 pt-7 text-body-sm">
             <span className=" text-purple-900">{itemDetails.itemName} 한눈에 보기 </span>
             <div className="flex flex-col text-grayscale-500">
               <span className=" ">타입</span>

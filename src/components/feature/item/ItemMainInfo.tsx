@@ -1,6 +1,5 @@
 'use client'
 import Image from 'next/image'
-import { useSearchParams } from 'next/navigation'
 import React from 'react'
 
 import { fetchDownloadCoupon } from '@/api/resource/coupon'
@@ -8,11 +7,10 @@ import SvgShare from '@/components/icons/share'
 import { ToastAction } from '@/components/ui/toast'
 import { useToast } from '@/components/ui/use-toast'
 
-export default function ItemMainInfo({ itemId, itemData }: { itemId: number; itemData: any }) {
+export default function ItemMainInfo({ tabParam, itemData }: { tabParam: string | null; itemData: any }) {
   const { toast } = useToast()
   const itemDetails = itemData.data
-  console.log(itemDetails.data, '!!')
-  const tab = useSearchParams().get('tab')
+  console.log(tabParam)
 
   const renderToastWithAddCoupon = async () => {
     const msg = await fetchDownloadCoupon()
@@ -21,7 +19,7 @@ export default function ItemMainInfo({ itemId, itemData }: { itemId: number; ite
 
   return (
     <>
-      {tab === null && (
+      {tabParam === undefined && (
         <div className="h-screen">
           <div className="h-1/2 w-full">
             <Image
@@ -54,6 +52,7 @@ export default function ItemMainInfo({ itemId, itemData }: { itemId: number; ite
             </div>
             <div className=" text-body-mini text-brand-primary-500">{itemDetails.notes}</div>
             {/* {itemDetails.couponId && <div>{itemDetails.coupon.discountType}</div>} */}
+
             <button
               className="my-3 rounded-md border border-brand-primary-500 p-2 text-sm text-brand-primary-500"
               onClick={() => {
@@ -67,7 +66,6 @@ export default function ItemMainInfo({ itemId, itemData }: { itemId: number; ite
             >
               10% 쿠폰 받기
             </button>
-         
             <div className="border-b border-gray-200 py-1" id="seller"></div>
             <div className="grid grid-cols-4 place-content-start gap-y-1 pt-4 text-body-xs text-grayscale-400">
               <div className="col-span-1 text-left">배송</div>

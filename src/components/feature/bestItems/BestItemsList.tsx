@@ -8,9 +8,9 @@ import CommonProductList from '@/components/common/product/commonProductList'
 export default function BestItemsList() {
   const searchParams = useSearchParams()
   const [productList, setProductList] = useState([])
-  const categoryParams = searchParams.get('카테고리')
-  const brandParams = searchParams.get('브랜드')
-  const priceParams = searchParams.get('가격')
+  const categoryParams = searchParams.get('categoryCounts')
+  const brandParams = searchParams.get('brandCounts')
+  const priceParams = searchParams.get('priceRange')
   // const filterParam = useSearchParams().get('filter')
 
   useEffect(() => {
@@ -22,7 +22,7 @@ export default function BestItemsList() {
         console.error('data fetch 실패', error)
       })
   }, [categoryParams, brandParams, priceParams])
-    const loadMore = () => {}
+  const loadMore = () => {}
 
-  return <CommonProductList productList={productList} loadMore={loadMore}/>
+  return <CommonProductList productList={productList} loadMore={loadMore} />
 }
