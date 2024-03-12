@@ -10,10 +10,18 @@ export const getCart = async () => {
   const authToken = cookies().get('AUTH_TOKEN')?.value
   const hasCookies = cookies().has('AUTH_TOKEN')
 
-  if (hasCookies) {
-    requestHeaders.set('Authorization', `Bearer ${authToken}`)
+  if (!hasCookies) {
+    console.log('no cookies to fetch cart')
+    return {
+      cartId: 0,
+      amount: 0,
+      salesTotalAmount: 0,
+      totalAmount: 0,
+      cartItemDtos: [],
+    }
   }
 
+  requestHeaders.set('Authorization', `Bearer ${authToken}`)
   const res = await fetch(`${baseURL}/cart`, {
     headers: requestHeaders,
     cache: 'no-store',

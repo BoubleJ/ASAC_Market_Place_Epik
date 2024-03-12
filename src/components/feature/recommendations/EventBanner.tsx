@@ -7,12 +7,12 @@ import React, { Component } from 'react'
 import Slider from 'react-slick'
 
 const eventImages = [
-  '/images/vegetables.avif',
-  '/images/ice-cream.avif',
-  '/images/raspberries.avif',
-  // 'https://cdn.pixabay.com/photo/2015/05/04/10/16/vegetables-752153_1280.jpg',
-  // 'https://cdn.pixabay.com/photo/2016/03/23/15/00/ice-cream-1274894_1280.jpg',
-  // 'https://cdn.pixabay.com/photo/2017/01/31/09/30/raspberries-2023404_1280.jpg',
+  // '/images/vegetables.avif',
+  // '/images/ice-cream.avif',
+  // '/images/raspberries.avif',
+  'https://cdn.pixabay.com/photo/2015/05/04/10/16/vegetables-752153_1280.jpg',
+  'https://cdn.pixabay.com/photo/2016/03/23/15/00/ice-cream-1274894_1280.jpg',
+  'https://cdn.pixabay.com/photo/2017/01/31/09/30/raspberries-2023404_1280.jpg',
 ]
 
 export default class EventBanner extends Component {
@@ -39,8 +39,8 @@ export default class EventBanner extends Component {
               alt="event banner image"
               width={300}
               height={300}
-              priority={index === 0}
-              placeholder="blur"
+              // priority={index === 0}
+              // placeholder="blur"
               className="h-80 w-full object-fill"
             />
           ))}

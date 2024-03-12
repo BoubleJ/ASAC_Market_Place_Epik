@@ -4,6 +4,7 @@ import { IconPlusMono } from '@/components/icons'
 import { useCartStore } from '@/components/provider/CartStoreProvider'
 import { useModalState } from '@/components/provider/modalProvider'
 import { Button } from '@/components/ui/button'
+import useBlockAsync from '@/lib/hooks/useBlockFunction'
 import useDebounce from '@/lib/hooks/useDebounce'
 import { CartItem } from '@/types/product'
 
@@ -13,6 +14,7 @@ interface ICartItemIncreaseButton {
 
 export default function CartItemIncreaseButton({ product }: ICartItemIncreaseButton) {
   const { increase } = useCartStore((state) => state.actions)
+  const { isLoading, blockedAsyncFn } = useBlockAsync()
 
   const state = useModalState()
 
@@ -21,18 +23,23 @@ export default function CartItemIncreaseButton({ product }: ICartItemIncreaseBut
     state.modalRef.current?.showModal()
   }
 
-  const handleIncreaseItemCount = async () => {
+  const handleIncreaseItemCount = blockedAsyncFn(async () => {
     const msg = await fetchIncreaseCartItemById(product.id)
     if (!msg.startsWith('아이템')) {
       return openSelectModal(`${msg}`)
     }
     increase(product.id)
-  }
+  })
 
   const debouncedHandleIncreaseItemCount = useDebounce(handleIncreaseItemCount, 500)
 
   return (
-    <Button variant={'none'} className="h-fit px-2 py-2" onClick={debouncedHandleIncreaseItemCount}>
+    <Button
+      variant={'none'}
+      className="h-fit px-2 py-2"
+      onClick={debouncedHandleIncreaseItemCount}
+      disabled={isLoading}
+    >
       <IconPlusMono width={'1rem'} height={'1rem'} className="text-grayscale-400 hover:text-grayscale-900" />
     </Button>
   )
