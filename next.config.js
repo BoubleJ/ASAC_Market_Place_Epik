@@ -1,12 +1,11 @@
 /** @type {import('next').NextConfig} */
 
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
-  // enabled: true,
-  enabled: false,
+  enabled: process.env.ANALYZE === 'true',
   openAnalyzer: true,
 })
 
-const nextConfig = withBundleAnalyzer({
+const nextConfig = {
   reactStrictMode: false,
   webpack: (config) => {
     config.module.rules.push({
@@ -29,7 +28,8 @@ const nextConfig = withBundleAnalyzer({
     return [
       {
         source: '/local/api/:path*',
-        destination: 'http://43.201.51.181:8080/api/:path*',
+        destination: `${process.env.NEXT_PUBLIC_BASE_API_PATH}/:path*`,
+        // destination: 'http://43.201.51.181:8080/api/:path*',
         // destination: 'http://localhost:8080/api/:path*',
       },
     ]
@@ -44,6 +44,7 @@ const nextConfig = withBundleAnalyzer({
     ]
   },
   images: {
+    formats: ['image/avif', 'image/webp'],
     remotePatterns: [
       {
         protocol: 'https',
@@ -67,6 +68,6 @@ const nextConfig = withBundleAnalyzer({
       },
     ],
   },
-})
+}
 
-module.exports = nextConfig
+module.exports = withBundleAnalyzer(nextConfig)
