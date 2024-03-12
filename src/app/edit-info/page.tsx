@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { fetchMember, fetchMemberInfo } from '@/api/resource/member'
 import EditInfoForm from '@/components/feature/editInfo/EditInfoForm'
 
@@ -9,6 +7,7 @@ export type currentMemberInfoType = {
   email: string
   phoneNumber: string
 }
+export const dynamic = 'force-dynamic'
 
 export default async function EditMemberPage() {
   const member = await fetchMember()

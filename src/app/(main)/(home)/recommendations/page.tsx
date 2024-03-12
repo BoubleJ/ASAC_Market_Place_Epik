@@ -12,7 +12,7 @@ export default function RecommendationsPage() {
   return (
     <div className="flex flex-col">
       <EventBanner />
-      <div className="px-5 py-7 gap-14 flex flex-col">
+      <div className="flex flex-col gap-14 px-5 py-7">
         <Suspense fallback={<p>Loading feed...</p>}>
           <LastSale />
         </Suspense>
