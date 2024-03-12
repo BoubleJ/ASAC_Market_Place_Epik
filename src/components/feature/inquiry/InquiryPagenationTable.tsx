@@ -1,13 +1,11 @@
 'use client'
 import React, { useState } from 'react'
 
-import { InquiryList  } from '@/types/inquiry'
+import { InquiryList } from '@/types/inquiry'
 
 import InquiryBox from './InquiryBox'
 import InquiryEmpty from './InquiryEmpty'
 import InquiryPagnationNumber from './InquiryPagnationNumber'
-
-
 
 export default function InquiryPagenationTable() {
   const [isInquiryListOpen, setIsInquiryListOpen] = useState(true)

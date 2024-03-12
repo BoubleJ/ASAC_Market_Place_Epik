@@ -5,7 +5,13 @@ import LoggedInProfile from '@/components/feature/myPage/LoggedInProfile'
 import MyMenus from '@/components/feature/myPage/MyMenus'
 import NotLoggedInPeofile from '@/components/feature/myPage/NotLoggedInPeofile'
 
-export type memberType = { loginId: string; memberName: string; couponCount: number; wishListCount: number; memberGrade:string }
+export type memberType = {
+  loginId: string
+  memberName: string
+  couponCount: number
+  wishListCount: number
+  memberGrade: string
+}
 
 export default async function page() {
   const member = await fetchMember()

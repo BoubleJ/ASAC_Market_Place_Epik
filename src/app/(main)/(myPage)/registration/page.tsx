@@ -2,7 +2,6 @@ import React from 'react'
 
 import NotLoggedInPeofile from '@/components/feature/myPage/NotLoggedInPeofile'
 
-
 export default function RegistrationPage() {
   return (
     <>
@@ -13,4 +12,3 @@ export default function RegistrationPage() {
     </>
   )
 }
-
