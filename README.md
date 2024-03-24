@@ -3,7 +3,7 @@
 
 <img src="https://github.com/BoubleJ/ASAC_Market_Place_Epik/assets/122145341/d3600fc0-15c6-4e01-b3be-f0e702eb4c74" width="40%" height="500px" alt="RubberDuck"></img>
 
-[서비스 링크](https://marketplace-asac-3rd.vercel.app/recommendations)
+🔗 [서비스 링크](https://marketplace-asac-3rd.vercel.app/recommendations)
 
 ## 프로젝트 소개
 - 모바일 화면 기반 식품 및 생활용품 이커머스 플랫폼입니다. 
