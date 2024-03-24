@@ -24,15 +24,34 @@
 백엔드 : 
 
 
-<img src="https://github.com/BoubleJ/ASAC_Market_Place_Epik/assets/122145341/9985c37f-586e-414a-b647-0bf72df42b4a" width="40%" height="500px" alt="RubberDuck"></img>
-
-
 
 
 
 ## 화면 구성 및 동작 프로세스
 ### 회원가입 및 로그인
-
-
 ![회원가입 및 로그인 구현 gif](https://github.com/BoubleJ/ASAC_Market_Place_Epik/assets/122145341/53173050-4fc2-4d36-901c-80a7033680f4)
+
+
+### 개인정보 수정
+![개인정보 수정 gif](https://github.com/BoubleJ/ASAC_Market_Place_Epik/assets/122145341/016699a9-ba5a-497b-8a7f-379593bad625)
+
+
+### 상품 상세페이지 및 찜, 장바구니 추가
+![상품 상세 페이지 접속 및 찜 장바구니 추가 gif](https://github.com/BoubleJ/ASAC_Market_Place_Epik/assets/122145341/d5b53c3c-3f0a-4283-9c2d-52d3b233d01f)
+
+
+### 상품리스트 필터링 조회
+![상품리스트 필터링 gif](https://github.com/BoubleJ/ASAC_Market_Place_Epik/assets/122145341/382b3b75-c880-410b-9585-15bd1c233e56)
+
+
+### 상품 검색 조회, 제품 후기
+![검색 후 상품접속, 후기 gif](https://github.com/BoubleJ/ASAC_Market_Place_Epik/assets/122145341/dd3639d9-cf14-4477-91b3-b1dd6536f59b)
+
+
+### 찜목록 -> 장바구니 이동 및 삭제
+![찜에서 장바구니로 이동 및 삭제 gif](https://github.com/BoubleJ/ASAC_Market_Place_Epik/assets/122145341/74e39074-f7c1-4621-8722-2e9d362de68b)
+
+
+
+
 
