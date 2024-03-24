@@ -35,49 +35,57 @@
 ### 회원가입 및 로그인
 - 설명설명
 
-![회원가입 및 로그인 구현 gif](https://github.com/BoubleJ/ASAC_Market_Place_Epik/assets/122145341/53173050-4fc2-4d36-901c-80a7033680f4)
+![회원가입 및 로그인 구현 gif](https://github.com/BoubleJ/ASAC_Market_Place_Epik/assets/122145341/ce7a8022-7fd3-43ac-865d-c5e5ed3b7d6d)
 
-### SNS 로그인 (kakao)
+
+### SNS 로그인 
 - 설명설명
 
+![카카오 로그인 gif](https://github.com/BoubleJ/ASAC_Market_Place_Epik/assets/122145341/ce647a09-e28c-4a19-86b9-99bedd8e1624)
 
-![카카오 로그인 gif](https://github.com/BoubleJ/ASAC_Market_Place_Epik/assets/122145341/5ac1d2d0-9845-46be-9dcb-ac76a2b49334)
+
 
 
 ### 개인정보 수정
 
 - 설명설명
   
-![개인정보 수정 gif](https://github.com/BoubleJ/ASAC_Market_Place_Epik/assets/122145341/016699a9-ba5a-497b-8a7f-379593bad625)
+  ![개인정보 수정 gif](https://github.com/BoubleJ/ASAC_Market_Place_Epik/assets/122145341/d9f44be0-78db-4f65-8b42-8f700fd4c38f)
+
 
 
 ### 상품 상세페이지 및 찜, 장바구니 추가
 - 설명설명
   
-![상품 상세 페이지 접속 및 찜 장바구니 추가 gif](https://github.com/BoubleJ/ASAC_Market_Place_Epik/assets/122145341/d5b53c3c-3f0a-4283-9c2d-52d3b233d01f)
+![상품 상세 페이지 접속 및 찜 장바구니 추가 gif](https://github.com/BoubleJ/ASAC_Market_Place_Epik/assets/122145341/54b932cb-785f-446e-b751-e911b006fc7f)
 
 
 ### 상품리스트 필터링 조회
 - 설명설명
   
-![상품리스트 필터링 gif](https://github.com/BoubleJ/ASAC_Market_Place_Epik/assets/122145341/382b3b75-c880-410b-9585-15bd1c233e56)
+![상품리스트 필터링 gif](https://github.com/BoubleJ/ASAC_Market_Place_Epik/assets/122145341/c0562d84-ca03-4552-857e-01b74f7566f2)
+
 
 
 ### 상품 검색 조회, 제품 후기
 - 설명설명
   
-![검색 후 상품접속, 후기 gif](https://github.com/BoubleJ/ASAC_Market_Place_Epik/assets/122145341/dd3639d9-cf14-4477-91b3-b1dd6536f59b)
+![검색 후 상품접속, 후기 gif](https://github.com/BoubleJ/ASAC_Market_Place_Epik/assets/122145341/34a53826-0f9f-4522-8e82-2e2cb6ab2efa)
+
 
 
 ### 찜목록 -> 장바구니 이동 및 삭제
 - 설명설명
   
-![찜에서 장바구니로 이동 및 삭제 gif](https://github.com/BoubleJ/ASAC_Market_Place_Epik/assets/122145341/74e39074-f7c1-4621-8722-2e9d362de68b)
+  ![찜에서 장바구니로 이동 및 삭제 gif](https://github.com/BoubleJ/ASAC_Market_Place_Epik/assets/122145341/2b215c31-5ad7-4b23-b56a-a0646ffc283d)
+
+
 
 ### 주소입력 및 결제
 - 설명설명
   
-![결제 프로세스 gif](https://github.com/BoubleJ/ASAC_Market_Place_Epik/assets/122145341/82f1cae8-4e1f-4b10-9c45-ae9726f56bea)
+![결제 프로세스 gif](https://github.com/BoubleJ/ASAC_Market_Place_Epik/assets/122145341/5f62b81a-1c18-4806-941f-86ecd8898cf4)
+
 
 
 
