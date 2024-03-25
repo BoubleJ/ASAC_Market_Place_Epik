@@ -100,6 +100,7 @@
 - 디자인 시스템 및 Typography 글자 및 배경 색깔, 모달, 글씨 크기 등 → CSS 공통화 작업
 - 화면설계서를 통한 Userflow 정의
 
+<br><br>
 
 <details>
 
@@ -119,6 +120,17 @@
 **화면설계서 : Userflow 정의**
 <br>
 ![image](https://github.com/BoubleJ/ASAC_Market_Place_Epik/assets/122145341/60079642-6e34-4ed3-a41b-b4a06d3966f5)
+
+
+<br>
+
+![image](https://github.com/BoubleJ/ASAC_Market_Place_Epik/assets/122145341/2aa89cbf-9c21-45fb-8e58-cc17308c70f6)
+
+
+
+<br>
+
+
 </div>
 
 </details>
@@ -143,7 +155,7 @@
 
 
 
-![image](https://github.com/BoubleJ/ASAC_Market_Place_Epik/assets/122145341/36658425-768e-4a5c-9e53-49f0164cfeaf)
+
 
 <br>
 
