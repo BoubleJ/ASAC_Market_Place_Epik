@@ -50,7 +50,13 @@
 - CSR SSR ISR SSG등 다양한 rendering 패턴을 제공하는 React framework로 프로젝트 협업에 적합
 - 폴더 기반 라우팅, SEO, 확장된 fetch caching, Middleware Cookie 등 다양한 기능 지원
 
- 
+
+ `Typescript`
+
+ - 안정적인 개발과 높은 수준의 코드 품질을 유지
+ - 손쉽게 버그를 예방할 수 있는 
+ - 강력한 타입 시스템 기반 컴파일, 버그 예방 및 손쉬운 디버깅
+ - 높은 생산성과 호환성
 
 
 `Shadcn/ui`
