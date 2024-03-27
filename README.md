@@ -8,6 +8,9 @@
 <br>
 <br>
 
+
+
+
 ## 프로젝트 소개
 - 모바일 화면 기반 식품 및 생활용품 이커머스 플랫폼입니다. 
 - 마켓 컬리를 표본으로 삼고 실제 플랫폼과 유사한 기능 구현을 목적으로 제작했습니다.
@@ -212,7 +215,9 @@
 - 네비게이터 : 추천, 신상품, 베스트 상품으로 바로 이동 가능한 메뉴 나열 (레이아웃과 페이지를 분리)
 - *Next.js - App Routing (Layout / Page) 활용*
 - 이벤트 배너 및 가로 스크롤을 통해 **다양한 상품 큐레이션**
-![image](https://github.com/BoubleJ/ASAC_Market_Place_Epik/assets/122145341/d46901ff-e451-4a35-84b8-78b0f2aae878)
+- **Intersection Observer** 를 통한 **Viewport 위치를 추적**하여 상품 리스트 검색 결과를 **무한 스크롤**로 구현
+![Marketplace-feature2online-video-cutter com-ezgif com-video-to-gif-converter](https://github.com/BoubleJ/ASAC_Market_Place/assets/122145341/44920fd0-8255-4da5-8f16-f0c637eae60b)
+
 
 
 
@@ -224,7 +229,8 @@
 - *shadcn/ui - Accordion 컴포넌트 및 Next.js - Dynamic Routes 활용*
 - 하단 메뉴 이동 탭 내 useSelectedLayout 로 App Route Group 값 기반의 현재 위치한 메뉴 아이콘 표기
 
-![image](https://github.com/BoubleJ/ASAC_Market_Place_Epik/assets/122145341/ae51528e-ad0e-4775-a0f7-364e973a4d03)
+![Marketplace-feature3online-video-cutter com-ezgif com-video-to-gif-converter](https://github.com/BoubleJ/ASAC_Market_Place/assets/122145341/e81d0b81-7a91-48dd-a6bc-c854e00080a1)
+
 
 
 
@@ -239,7 +245,8 @@
 - 개인화된 작업 수행의 경우 쿠키 내 인증 토큰을 활용하여, 회원에 한하여 기능 사용 가능하도록 제약
 - *Next.js - App Routing (Layout / Page) 및 HTTP Cookie 활용*
 
-![image](https://github.com/BoubleJ/ASAC_Market_Place_Epik/assets/122145341/30b14021-d3c4-4eff-bb71-ddb6af2ee826)
+![Marketplace-feature6online-video-cutter com-ezgif com-video-to-gif-converter](https://github.com/BoubleJ/ASAC_Market_Place/assets/122145341/7fc84db6-17bb-4495-9a39-5b9ec9081d20)
+
 
 
 
@@ -269,7 +276,8 @@
 - **추천 검색어 & 급상승 검색어**를 통해 많은 사람들이 찾는 상품에 대한 접근 가능
 - *Next.js - Dynamic Routes 활용 (**검색어에 따른 URL 변경** → 예시를 통해 확인 가능)*
   
-![image](https://github.com/BoubleJ/ASAC_Market_Place_Epik/assets/122145341/a351b35b-1bb2-4509-a6a8-513b272499ce)
+
+![Marketplace-feature4online-video-cutter com-ezgif com-video-to-gif-converter](https://github.com/BoubleJ/ASAC_Market_Place/assets/122145341/b348b5c9-109c-4aa7-a8ff-d9b0ed24ff8b)
 
 
 
@@ -291,7 +299,8 @@
 - 주문내역 내 특정 주문한 상품에 대해 **이미지 및 글 작성을 통해 리뷰 작성 가능**
 - *AJAX 호출 시 Formdata 활용*
  
- ![image](https://github.com/BoubleJ/ASAC_Market_Place_Epik/assets/122145341/ad418349-7f80-4397-8543-4c82425eaa1d)
+![Marketplace-feature8online-video-cutter com-ezgif com-video-to-gif-converter](https://github.com/BoubleJ/ASAC_Market_Place/assets/122145341/d78eb393-a2d3-41de-9186-3595f9673b3c)
+
 
  <br>
 
