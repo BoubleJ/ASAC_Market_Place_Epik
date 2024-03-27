@@ -49,7 +49,7 @@
 ### Stacks(프론트엔드)
 `Next.JS`
 
-- 다양한 rendering 패턴을 제공하며 프로젝트 협업에 적합
+- 다양한 rendering 패턴(CSR, SSR, ISR, SSG)을 제공하며 프로젝트 협업에 적합
 - CSR SSR ISR SSG등 다양한 rendering 패턴을 제공하는 React framework로 프로젝트 협업에 적합
 - 폴더 기반 라우팅, SEO, 확장된 fetch caching, Middleware Cookie 등 다양한 기능 지원
 
