@@ -314,8 +314,8 @@
 
 ## 트러블 슈팅
 - 아이콘 사용시 react icon을 사용했으나 **번들사이즈 축소**를 위해 **svgr로 마이그레이션**
-  ** 8.15 MB (react-icons)  334.5KB (svgr)의 번들링 사이즈 개선**을 달성
-- 렌딩 페이지 배너 이미지를 lazy-loading 방식에서** preload 방식**으로 변경
+  **8.15 MB (react-icons)  334.5KB (svgr)의 번들링 사이즈 개선**을 달성
+- 렌딩 페이지 배너 이미지를 lazy-loading 방식에서 **preload 방식**으로 변경
    **라이트하우스 성능 메트릭 78점 -> 97점 개선 달성**
 - [트러블 슈팅 과정 기록 노션 링크](https://supreme-gram-307.notion.site/b609d241afe34994b9776ed29b7db2d3)
 
