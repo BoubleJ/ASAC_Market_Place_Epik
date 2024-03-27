@@ -193,7 +193,8 @@
 
 ### 회원가입 및 로그인
 - 일반 이메일 회원가입
-- React Hook Form + Zod 통한 유효성 검사
+- 회원가입 시 많은 입력 폼에 React Hook Form 비제어 컴포넌트로 리렌더 감소, Zod 통한 런타임 타입 검증
+- 로그인이 필요한 페이지 및 API 사용 시 Middleware 를 통해 쿠키 내 로그인 토큰 존재여부로 접근 제한
 
 ![회원가입 및 로그인 구현 gif](https://github.com/BoubleJ/ASAC_Market_Place_Epik/assets/122145341/ce7a8022-7fd3-43ac-865d-c5e5ed3b7d6d)
 
@@ -204,6 +205,7 @@
 ### SNS 로그인 
 - OAuth2 인증을 통한 카카오 계정 로그인 구현
 - OAuth2 인증 및 추가 정보만으로, 일반 이메일 계정을 카카오 계정과 바로 연동 가능
+- **OAuth Cookie 설정** : 일반 로그인 시 백엔드가 프론트엔드한테 JWT를 QueryString 으로 넘긴 다음에 프론트엔드 미들웨어에서 QueryString으로 전달된 JWT를 추출하고 브라우저 Cookie 에 저장하여 “인증이 필요한 API” 호출 시 해당 JWT값 제공.
 
 ![카카오 로그인 gif](https://github.com/BoubleJ/ASAC_Market_Place_Epik/assets/122145341/ce647a09-e28c-4a19-86b9-99bedd8e1624)
 
